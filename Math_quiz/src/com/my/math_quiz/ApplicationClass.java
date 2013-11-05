@@ -23,7 +23,7 @@ public class ApplicationClass extends Application{
 		}
 	}
 	public static int getNumberOfGamesInOneRound(){
-		return 20;
+		return 10;
 	}
 	public static int getMaximumNumberOfGamesInOneRound(){
 		return 50;

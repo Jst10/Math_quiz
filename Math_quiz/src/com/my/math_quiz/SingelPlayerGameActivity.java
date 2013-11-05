@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.my.math_quiz.utilist.LevelData;
@@ -44,7 +45,10 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	Bitmap taskIndicatorNotSelectedAnswer;
 	Bitmap taskIndicatorCurrent;
 	
-	boolean wasIAlreadyAccountScrolling=false;
+	
+	MyAdapterForSingelPLayerGameActivity adapterForViewPager;
+	/**additionalPage mean number of pages after last test, that we have for displaying scores if user answer to all tasks in one group of them*/
+	int additionalPage=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,16 +71,16 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		titleBar.setTitle(1+"/"+numberOfTasksInRound);
 		
 		pager=(ViewPager)findViewById(R.id.ASPGViewPager);
-		pager.setAdapter(new MyAdapterForSingelPLayerGameActivity(numberOfTasksInRound));
+		adapterForViewPager=new MyAdapterForSingelPLayerGameActivity(numberOfTasksInRound);
+		pager.setAdapter(adapterForViewPager);
 		
 		pager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
-				wasIAlreadyAccountScrolling=true;
-				titleBar.setTitle((position+1)+"/"+numberOfTasksInRound);
-				imageViews[position].setImageBitmap(taskIndicatorCurrent);
-				
-				
+				if(position<numberOfTasksInRound){
+					titleBar.setTitle((position+1)+"/"+numberOfTasksInRound);
+					imageViews[position].setImageBitmap(taskIndicatorCurrent);
+				}
 				Task t;
 				if(position>0){
 					t=tasks.get(position-1);
@@ -96,8 +100,8 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 						imageViews[position+1].setImageBitmap(taskIndicatorCorrectAnswer);
 					else
 						imageViews[position+1].setImageBitmap(taskIndicatorWrongAnswer);
-				}
 				
+				}
 			}
 			
 			@Override
@@ -163,7 +167,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		}
 		@Override
 		public int getCount() {
-			return numbrOfTests;
+			return numbrOfTests+additionalPage;
 		}
 
 		@Override
@@ -174,18 +178,27 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 //			return super.instantiateItem(container, position);
-			View v = inflater.inflate(R.layout.view_single_player_game_one_page, null);
-			TextView text=(TextView)v.findViewById(R.id.VSPGOPtextView);
-			Task currentTask=tasks.get(position);
-			
-			text.setText(currentTask.getText());
-			BottomButtoms buttoms;
-			buttoms=(BottomButtoms)v.findViewById(R.id.BBBottomBUttons);
-			buttoms.seButtontTexts(currentTask.getAnswers());
-			buttoms.setListener(SingelPlayerGameActivity.this);
-			buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer());
-			pager.addView(v);
-			return v;
+			if(position<numberOfTasksInRound){
+				View v = inflater.inflate(R.layout.view_single_player_game_one_page, null);
+				TextView text=(TextView)v.findViewById(R.id.VSPGOPtextView);
+				Task currentTask=tasks.get(position);
+				
+				text.setText(currentTask.getText());
+				BottomButtoms buttoms;
+				buttoms=(BottomButtoms)v.findViewById(R.id.BBBottomBUttons);
+				buttoms.seButtontTexts(currentTask.getAnswers());
+				buttoms.setListener(SingelPlayerGameActivity.this);
+				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer());
+				pager.addView(v);
+				return v;
+			}
+			else{
+				RelativeLayout layoutTest=new RelativeLayout(SingelPlayerGameActivity.this);
+				layoutTest.setBackgroundColor(0xF0F0F0);
+				layoutTest.addView(new TextView(SingelPlayerGameActivity.this));
+				pager.addView(layoutTest);
+				return layoutTest;
+			}
 		}
 		 @Override
 		 public void destroyItem(View collection, int position, Object view) {
@@ -198,7 +211,13 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		Task t=tasks.get( pager.getCurrentItem());
 		if(t.setSelectedAnswer(position)){
 			buttoms.setCollors(t.getSelectedAnswer(), t.getCorrectAnswer());
-			if(t.getSelectedAnswer()==t.getCorrectAnswer()){
+			if(additionalPage==0&&levelData.getNumberOfUnsolvedTests()==0){
+				
+				additionalPage=1;
+				adapterForViewPager.notifyDataSetChanged();
+				pager.setCurrentItem(numberOfTasksInRound,true);
+				
+			}else if(t.getSelectedAnswer()==t.getCorrectAnswer()){
 				pager.setCurrentItem(pager.getCurrentItem()+1,true);
 			}
 		}

@@ -53,6 +53,17 @@ public class LevelData{
 		return tasks;
 	}
 	
+	public  int getNumberOfUnsolvedTests(){
+		int numberOfUnsolved=0;
+		for(Task task:tasks){
+			if(task.getSelectedAnswer()==-1){
+				numberOfUnsolved++;
+			}
+		}
+		return numberOfUnsolved;
+	}
+	
+	
 	public void startTimingLevel(){
 		length=0;
 		startTime=System.currentTimeMillis();
