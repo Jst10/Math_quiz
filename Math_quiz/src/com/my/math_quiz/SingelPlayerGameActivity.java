@@ -34,6 +34,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	ArrayList<Task> tasks;
 	LayoutInflater inflater;
 	
+	
 	ImageView[] imageViews;
 	int numberOfTasksInRound;
 	TitleBar titleBar=null;

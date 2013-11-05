@@ -132,6 +132,8 @@ public  class Generator {
 		Equations equation=new Equations(firstNumber+" - "+secondNUmber, firstNumber-secondNUmber);
 		return equation;
 	}
+	
+	
 	public static Equations getSubEquation(Equations equation,int toNumber){
 		int secondNUmber=getRandomInArea(0,toNumber);
 		equation=new Equations(equation.getText()+" - "+secondNUmber, equation.getValue()-secondNUmber);
