@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+
 import com.my.math_quiz.utilist.LevelData;
 
 public class ApplicationClass extends Application{
