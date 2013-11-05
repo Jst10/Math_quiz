@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.my.math_quiz.views.TitleBar 
+     	xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/TBtitleBar"
+	    android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        >
+        <ImageButton 
+            android:id="@+id/TBleftButton"
+            android:layout_height="50dp"
+        	android:layout_width="50dp"
+        	android:padding="10dp"
+        	android:scaleType="fitXY"
+			android:src="@drawable/navigation_previous_item"
+			android:background="@android:color/transparent"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/TBmiddleText"
+            android:layout_height="wrap_content"
+        	android:layout_width="wrap_content"
+        	android:text="Multy player"
+        	android:textSize="20sp"
+        	android:layout_centerHorizontal="true"
+        	android:layout_centerVertical="true"
+        	android:paddingLeft="20dp"
+        />
+        <ImageButton 
+             android:id="@+id/TBRightButton"
+            android:layout_height="50dp"
+        	android:layout_width="50dp"
+        	android:padding="10dp"
+        	android:scaleType="fitXY"
+			android:src="@drawable/action_settings"
+			android:background="@android:color/transparent"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+            />
+	</com.my.math_quiz.views.TitleBar>
