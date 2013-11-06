@@ -136,7 +136,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		}
 		imageViews[pager.getCurrentItem()].setImageBitmap(taskIndicatorCurrent);
 		
-		
+		levelData.startTimingLevel();
 	}
 	
 	@Override

@@ -63,21 +63,47 @@ public class LevelData{
 		return numberOfUnsolved;
 	}
 	
-	
+	private boolean isTiming=false;
+	private boolean isStopTiming=true;
+	/**startTimingLevel start timing time from zero. The start timer will only star 
+	 * if clocked is stopped previous or. isen't start already. 
+	 * The time will be set to zero*/
 	public void startTimingLevel(){
-		length=0;
-		startTime=System.currentTimeMillis();
+		if(isStopTiming==true){
+			length=0;
+			startTime=System.currentTimeMillis();
+			isTiming=true;
+			isStopTiming=false;
+		}
 	}
+	/**pauseTimingLevel stop clock, and save current length for continue timing,
+	 *  clock must already run else is no effect from this method (start should be called before)*/
 	public void pauseTimingLevel(){
-		endTime=System.currentTimeMillis();
-		length+=endTime-startTime;
+		if(isTiming&&isStopTiming==false){
+			endTime=System.currentTimeMillis();
+			length+=endTime-startTime;
+			isTiming=false;
+		}
 	}
+	
+	/**resumTimingLevel  continue timing form last saved time,
+	 *  clock must already run else is no effect from this method (start should be called before)*/
 	public void resumTimingLevel(){
-		startTime=System.currentTimeMillis();
+		if(isTiming==false&&isStopTiming==false){
+			startTime=System.currentTimeMillis();
+			isTiming=true;
+		}
 	}
+	
+	/**stopTimingLevel if timer is running we now stop timer and we can continue him only with method start
+	 * clock must already run else is no effect from this method (start should be called before)*/
 	public void stopTimingLevel(){
-		endTime=System.currentTimeMillis();
-		length+=endTime-startTime;
+		if(isTiming==true&&isStopTiming==false){
+			endTime=System.currentTimeMillis();
+			length+=endTime-startTime;
+			isTiming=false;
+			isStopTiming=true;
+		}
 	}
 	
 	
