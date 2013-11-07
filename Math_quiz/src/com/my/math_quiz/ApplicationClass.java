@@ -5,14 +5,19 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 
-import com.my.math_quiz.utilist.LevelData;
+import com.my.math_quiz.utils.LevelData;
 
 public class ApplicationClass extends Application{
 
 	private static LevelData[]levels=new LevelData[20];
 	private static Point displaySize=null;
-	public static final int SINGLE_PLAYER_TIME_CORRECT=0;
+	public static final int SINGLE_PLAYER_TIME_CORRECT=2;
 	public static final int SINGLE_PLAYER_TIME_WRONG=5;
+	
+	
+	public static final int NUMBER_TASK_LEVEL_MINIMUM=10;
+	public static final int NUMBER_TASK_LEVEL_MEDINUM=20;
+	public static final int NUMBER_TASK_LEVEL_MAXIMUM=30;
 	
 	@Override
 	public void onCreate() {
@@ -23,10 +28,10 @@ public class ApplicationClass extends Application{
 		}
 	}
 	public static int getNumberOfGamesInOneRound(){
-		return 10;
+		return NUMBER_TASK_LEVEL_MINIMUM;
 	}
 	public static int getMaximumNumberOfGamesInOneRound(){
-		return 50;
+		return NUMBER_TASK_LEVEL_MAXIMUM;
 	}
 	public static LevelData[] getLevelData() {
 //		Long now=System.currentTimeMillis();

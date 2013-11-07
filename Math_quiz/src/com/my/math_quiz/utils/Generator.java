@@ -1,8 +1,8 @@
-package com.my.math_quiz.utilist;
+package com.my.math_quiz.utils;
 
 import java.util.Random;
 
-import com.my.math_quiz.utilist.Generator.SolutionGeneratorInterface;
+import com.my.math_quiz.utils.Generator.SolutionGeneratorInterface;
 
 public  class Generator {
 

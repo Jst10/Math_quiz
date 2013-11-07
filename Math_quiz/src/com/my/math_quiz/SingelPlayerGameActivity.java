@@ -21,8 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.my.math_quiz.utilist.LevelData;
-import com.my.math_quiz.utilist.Task;
+import com.my.math_quiz.utils.LevelData;
+import com.my.math_quiz.utils.Task;
 import com.my.math_quiz.views.BottomButtoms;
 import com.my.math_quiz.views.BottomButtoms.BottomButtonListener;
 import com.my.math_quiz.views.TitleBar;
@@ -77,11 +77,11 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		pager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
+				Task t;
 				if(position<numberOfTasksInRound){
 					titleBar.setTitle((position+1)+"/"+numberOfTasksInRound);
 					imageViews[position].setImageBitmap(taskIndicatorCurrent);
 				}
-				Task t;
 				if(position>0){
 					t=tasks.get(position-1);
 					if(t.getSelectedAnswer()==-1)
@@ -90,7 +90,6 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 						imageViews[position-1].setImageBitmap(taskIndicatorCorrectAnswer);
 					else
 						imageViews[position-1].setImageBitmap(taskIndicatorWrongAnswer);
-					
 				}
 				if(position<numberOfTasksInRound-1){
 					t=tasks.get(position+1);
@@ -100,7 +99,6 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 						imageViews[position+1].setImageBitmap(taskIndicatorCorrectAnswer);
 					else
 						imageViews[position+1].setImageBitmap(taskIndicatorWrongAnswer);
-				
 				}
 			}
 			
@@ -141,27 +139,28 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		levelData.stopTimingLevel();
+		super.onDestroy();
 	}
 	@Override
 	protected void onPause() {
-		super.onPause();
 		levelData.pauseTimingLevel();
+		super.onPause();
 	}
 	@Override
 	protected void onPostResume() {
+		levelData.resumTimingLevel();
 		super.onPostResume();
 	}
 	@Override
 	protected void onResume() {
-		super.onResume();
 		levelData.resumTimingLevel();
+		super.onResume();
 	}
 
 	class MyAdapterForSingelPLayerGameActivity extends PagerAdapter{
-
 		int numbrOfTests;
+		View resultPage=null;
 		public MyAdapterForSingelPLayerGameActivity(int numberOfTests){
 			this.numbrOfTests=numberOfTests;
 		}
@@ -193,11 +192,17 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				return v;
 			}
 			else{
-				RelativeLayout layoutTest=new RelativeLayout(SingelPlayerGameActivity.this);
-				layoutTest.setBackgroundColor(0xF0F0F0);
-				layoutTest.addView(new TextView(SingelPlayerGameActivity.this));
-				pager.addView(layoutTest);
-				return layoutTest;
+				if(resultPage==null){
+					
+					resultPage=new RelativeLayout(SingelPlayerGameActivity.this);
+					resultPage.setBackgroundColor(0xF0F0F0);
+					TextView t=new TextView(SingelPlayerGameActivity.this);
+					t.setText(levelData.get)
+					((RelativeLayout)resultPage).addView(t);
+				
+				}
+				pager.addView(resultPage);
+				return resultPage;
 			}
 		}
 		 @Override
@@ -212,25 +217,34 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		if(t.setSelectedAnswer(position)){
 			buttoms.setCollors(t.getSelectedAnswer(), t.getCorrectAnswer());
 			if(additionalPage==0&&levelData.getNumberOfUnsolvedTests()==0){
-				
+				//now we finish all tasks in that level so we can calculate results
+				levelData.stopTimingLevel();
 				additionalPage=1;
 				adapterForViewPager.notifyDataSetChanged();
 				pager.setCurrentItem(numberOfTasksInRound,true);
 				
 			}else if(t.getSelectedAnswer()==t.getCorrectAnswer()){
+				//we answer correct to answer an we move forward to next task  or back to previous if isn't solved already
 				pager.setCurrentItem(pager.getCurrentItem()+1,true);
 			}
 		}
 	}
 	@Override
 	public void onLeftButtonClick() {
-		// TODO Auto-generated method stub
+		// we finish this activity
+		SingelPlayerGameActivity.this.finish();
 		
 	}
+	
+	@Override
+	public void finish() {
+		levelData.stopTimingLevel();
+		super.finish();
+	}
+
 	@Override
 	public void onRightButtonClick() {
-		// TODO Auto-generated method stub
-		
+		//TODO we must do smth. don't know yet	
 	}
 
 	

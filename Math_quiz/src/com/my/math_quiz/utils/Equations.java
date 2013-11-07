@@ -1,4 +1,4 @@
-package com.my.math_quiz.utilist;
+package com.my.math_quiz.utils;
 
 public class Equations {
 	String text;

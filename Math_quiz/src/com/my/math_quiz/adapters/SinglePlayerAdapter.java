@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.my.math_quiz.R;
-import com.my.math_quiz.utilist.LevelData;
+import com.my.math_quiz.utils.LevelData;
 
 public class SinglePlayerAdapter extends ArrayAdapter<LevelData>{
 	LayoutInflater inflater;
