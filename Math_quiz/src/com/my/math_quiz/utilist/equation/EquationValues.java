@@ -1,6 +1,5 @@
 package com.my.math_quiz.utilist.equation;
 
-import java.util.Random;
 
 public class EquationValues extends Equation{
 

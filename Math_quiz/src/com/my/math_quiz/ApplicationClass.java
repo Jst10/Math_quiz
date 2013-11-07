@@ -30,6 +30,7 @@ public class ApplicationClass extends Application{
 			levelsDescriptions[i]=new LevelDescripction(i);
 		}
 	}
+	
 	public static int getCurrentNumberOfGamesInOneRound(){
 		return NUMBER_TASK_LEVEL_MINIMUM;
 	}
