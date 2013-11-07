@@ -1,7 +1,6 @@
 package com.my.math_quiz.database;
 
 
-
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
