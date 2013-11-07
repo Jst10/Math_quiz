@@ -31,7 +31,7 @@ public class SinglePlayerActivity  extends Activity implements TitleBarListener{
 		
 		list=(ListView)findViewById(R.id.SPlistView);
 		
-		SinglePlayerAdapter adapter=new SinglePlayerAdapter(this,0,ApplicationClass.getLevelData());
+		SinglePlayerAdapter adapter=new SinglePlayerAdapter(this,0,ApplicationClass.getLevelDescriptions());
 		list.setAdapter(adapter);
 	
 		list.setOnItemClickListener(onItemClickListene);

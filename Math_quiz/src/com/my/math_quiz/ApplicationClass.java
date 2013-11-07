@@ -1,15 +1,16 @@
 package com.my.math_quiz;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 
-import com.my.math_quiz.utils.LevelData;
+import com.my.math_quiz.utils.LevelDescripction;
 
 public class ApplicationClass extends Application{
 
-	private static LevelData[]levels=new LevelData[20];
+	private static LevelDescripction[] levelsDescriptions=new LevelDescripction[20];
 	private static Point displaySize=null;
 	public static final int SINGLE_PLAYER_TIME_CORRECT=2;
 	public static final int SINGLE_PLAYER_TIME_WRONG=5;
@@ -19,25 +20,27 @@ public class ApplicationClass extends Application{
 	public static final int NUMBER_TASK_LEVEL_MEDINUM=20;
 	public static final int NUMBER_TASK_LEVEL_MAXIMUM=30;
 	
+	public static Context applicationContext;
 	@Override
 	public void onCreate() {
 		super.onCreate();
-	
+		
+		applicationContext = getApplicationContext();
 		for(int i=0; i<20; i++){
-			levels[i]=new LevelData(i);
+			levelsDescriptions[i]=new LevelDescripction(i);
 		}
 	}
-	public static int getNumberOfGamesInOneRound(){
+	public static int getCurrentNumberOfGamesInOneRound(){
 		return NUMBER_TASK_LEVEL_MINIMUM;
 	}
 	public static int getMaximumNumberOfGamesInOneRound(){
 		return NUMBER_TASK_LEVEL_MAXIMUM;
 	}
-	public static LevelData[] getLevelData() {
+	public static LevelDescripction[] getLevelDescriptions() {
 //		Long now=System.currentTimeMillis();
 //		levels[19].generateTask(20, 50);
 //		Log.d("timing","time is: "+(System.currentTimeMillis()-now)+"");
-		return levels;
+		return levelsDescriptions;
 	}
 	
 	public static Point getDisplaySize(){
@@ -47,8 +50,8 @@ public class ApplicationClass extends Application{
 		}
 		return displaySize;
 	}
-	public static LevelData getLevelData(int level) {
-		return levels[level];
+	public static LevelDescripction getLevelDescription(int level) {
+		return levelsDescriptions[level];
 	}
 	
 	

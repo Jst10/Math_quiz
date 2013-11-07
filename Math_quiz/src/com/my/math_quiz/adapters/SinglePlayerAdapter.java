@@ -1,6 +1,5 @@
 package com.my.math_quiz.adapters;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +7,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.my.math_quiz.R;
-import com.my.math_quiz.utils.LevelData;
+import com.my.math_quiz.utils.LevelDescripction;
 
-public class SinglePlayerAdapter extends ArrayAdapter<LevelData>{
+public class SinglePlayerAdapter extends ArrayAdapter<LevelDescripction>{
 	LayoutInflater inflater;
-	public SinglePlayerAdapter(Context context, int resource, LevelData[] objects) {
+	public SinglePlayerAdapter(Context context, int resource, LevelDescripction[] objects) {
 		super(context, resource, objects);
 		inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 	}
@@ -20,7 +19,7 @@ public class SinglePlayerAdapter extends ArrayAdapter<LevelData>{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ItemHolder holder=null;
-		LevelData info=getItem(position);
+		LevelDescripction info=getItem(position);
 		
 		if(convertView==null){
 			convertView=inflater.inflate(R.layout.element_single_player, null);
@@ -56,7 +55,7 @@ public class SinglePlayerAdapter extends ArrayAdapter<LevelData>{
 	
 	
 	@Override
-	public LevelData getItem(int position) {
+	public LevelDescripction getItem(int position) {
 		return super.getItem(position);
 	}
 

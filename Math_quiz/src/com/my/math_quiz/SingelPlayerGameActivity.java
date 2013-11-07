@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.my.math_quiz.utils.LevelData;
+import com.my.math_quiz.interfaces.LevelDataIN;
+import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.utils.Task;
 import com.my.math_quiz.views.BottomButtoms;
 import com.my.math_quiz.views.BottomButtoms.BottomButtonListener;
@@ -31,7 +31,8 @@ import com.my.math_quiz.views.TitleBar.TitleBarListener;
 public class SingelPlayerGameActivity extends Activity implements BottomButtonListener,TitleBarListener{
 
 	ViewPager pager;
-	LevelData levelData;
+	LevelDescripction levelDescripction;
+	LevelDataIN levelData;
 	ArrayList<Task> tasks;
 	LayoutInflater inflater;
 	
@@ -56,10 +57,11 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		
 		Intent myIntent = getIntent();
 		int selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
-		numberOfTasksInRound=ApplicationClass.getNumberOfGamesInOneRound();
+		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
 		
 		
-		levelData= ApplicationClass.getLevelData(selectedLevel);
+		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
+		levelData=levelDescripction.getLevelData();
 		levelData.startTimingLevel();
 		tasks=	levelData.getTests(numberOfTasksInRound);
 		
@@ -121,7 +123,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		
 		LinearLayout layoutForIndicators=(LinearLayout)findViewById(R.id.ASPGRlayoutBelowTitleBar);
 		imageViews=new ImageView[numberOfTasksInRound];
-		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/ApplicationClass.getNumberOfGamesInOneRound();
+		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/ApplicationClass.getCurrentNumberOfGamesInOneRound();
 		int oneIndicatorHeight=ApplicationClass.getDisplaySize().x/ApplicationClass.getMaximumNumberOfGamesInOneRound();
 		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(oneIndicatorWidth,oneIndicatorHeight);
 		
@@ -197,7 +199,8 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 					resultPage=new RelativeLayout(SingelPlayerGameActivity.this);
 					resultPage.setBackgroundColor(0xF0F0F0);
 					TextView t=new TextView(SingelPlayerGameActivity.this);
-					t.setText(levelData.get)
+					t.setText(levelData.getDurationOfLevel()+"");
+			
 					((RelativeLayout)resultPage).addView(t);
 				
 				}
@@ -238,7 +241,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	
 	@Override
 	public void finish() {
-		levelData.stopTimingLevel();
+		levelData.clearLevelData();
 		super.finish();
 	}
 
