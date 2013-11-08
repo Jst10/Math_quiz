@@ -175,44 +175,44 @@ public  class Generator {
 		}
 	}
 	public static final String textAfterLevelNumber=" stopnja";
-	public static String get1levelName(){return "1."+textAfterLevelNumber;}
-	public static String get1levelDescription(){return "Seštevanje do 10";}
-	public static Task get1levelTask(){
+	public static String get0levelName(){return "1."+textAfterLevelNumber;}
+	public static String get0levelDescription(){return "Seštevanje do 10";}
+	public static Task get0levelTask(){
 		Equations equation=getSumEquation(10);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
 	
-	public static String get2levelName(){return "2."+textAfterLevelNumber;}
-	public static String get2levelDescription(){return "Seštevanje do 50";}
-	public static Task get2levelTask(){
+	public static String get1levelName(){return "2."+textAfterLevelNumber;}
+	public static String get1levelDescription(){return "Seštevanje do 50";}
+	public static Task get1levelTask(){
 		Equations equation=getSumEquation(50);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel2()));
 	}
-	public static String get3levelName(){return "3."+textAfterLevelNumber;}
-	public static String get3levelDescription(){return "Seštevanje do 100";}
-	public static Task get3levelTask(){
+	public static String get2levelName(){return "3."+textAfterLevelNumber;}
+	public static String get2levelDescription(){return "Seštevanje do 100";}
+	public static Task get2levelTask(){
 		Equations equation=getSumEquation(100);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel3()));
 	}
-	public static String get4levelName(){return "4."+textAfterLevelNumber;}
-	public static String get4levelDescription(){return "Odštevanje do 20";}
-	public static Task get4levelTask(){
+	public static String get3levelName(){return "4."+textAfterLevelNumber;}
+	public static String get3levelDescription(){return "Odštevanje do 20";}
+	public static Task get3levelTask(){
 		//here I don't have negative results so I don atomatic generate numbers but I check first
 		int firstNumber=getRandomInArea(0,20);
 		int secondNUmber=getRandomInArea(firstNumber,20);
 		Equations equation=new Equations(firstNumber+" - "+secondNUmber, firstNumber-secondNUmber);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel4()));
 	}
-	public static String get5levelName(){return "5."+textAfterLevelNumber;}
-	public static String get5levelDescription(){return "Odštevanje do 50";}
-	public static Task get5levelTask(){
+	public static String get4levelName(){return "5."+textAfterLevelNumber;}
+	public static String get4levelDescription(){return "Odštevanje do 50";}
+	public static Task get4levelTask(){
 		Equations equation=getSubEquation(50);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel5()));
 	}
-	public static String get6levelName(){return "6."+textAfterLevelNumber;}
-	public static String get6levelDescription(){return "Seštevanje in odštevanje do 50";}
+	public static String get5levelName(){return "6."+textAfterLevelNumber;}
+	public static String get5levelDescription(){return "Seštevanje in odštevanje do 50";}
 	
-	public static Task get6levelTask(){
+	public static Task get5levelTask(){
 		Equations equation=getSumOrSub(50);
 		if(Math.random()<0.25){
 			//from three parts equation 
@@ -220,9 +220,9 @@ public  class Generator {
 		}
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get7levelName(){return "7."+textAfterLevelNumber;}
-	public static String get7levelDescription(){return "Seštevanje in odštevanje z oklepaji od 50";}
-	public static Task get7levelTask(){
+	public static String get6levelName(){return "7."+textAfterLevelNumber;}
+	public static String get6levelDescription(){return "Seštevanje in odštevanje z oklepaji od 50";}
+	public static Task get6levelTask(){
 		Equations equation=getSumOrSub(50);
 		double randVal=Math.random();
 		if(randVal<0.2){
@@ -245,21 +245,21 @@ public  class Generator {
 		}
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get8levelName(){return "8."+textAfterLevelNumber;}
-	public static String get8levelDescription(){return "Množenje do 10";}
-	public static Task get8levelTask(){
+	public static String get7levelName(){return "8."+textAfterLevelNumber;}
+	public static String get7levelDescription(){return "Množenje do 10";}
+	public static Task get7levelTask(){
 		Equations equation=getMulEquation(10);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get9levelName(){return "9."+textAfterLevelNumber;}
-	public static String get9levelDescription(){return "Množenje do 20";}
-	public static Task get9levelTask(){
+	public static String get8levelName(){return "9."+textAfterLevelNumber;}
+	public static String get8levelDescription(){return "Množenje do 20";}
+	public static Task get8levelTask(){
 		Equations equation=getMulEquation(20);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get10levelName(){return "10."+textAfterLevelNumber;}
-	public static String get10levelDescription(){return "Operacije (+,-,*) do 20";}
-	public static Task get10levelTask(){
+	public static String get9levelName(){return "10."+textAfterLevelNumber;}
+	public static String get9levelDescription(){return "Operacije (+,-,*) do 20";}
+	public static Task get9levelTask(){
 		
 		
 		Equations equation=getMulEquation(10);
@@ -289,21 +289,21 @@ public  class Generator {
 		}
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get11levelName(){return "11."+textAfterLevelNumber;}
-	public static String get11levelDescription(){return "Celoštevilsko delenje do 100";}
-	public static Task get11levelTask(){
+	public static String get10levelName(){return "11."+textAfterLevelNumber;}
+	public static String get10levelDescription(){return "Celoštevilsko delenje do 100";}
+	public static Task get10levelTask(){
 		Equations equation=getDivEquation(10);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get12levelName(){return "12."+textAfterLevelNumber;}
-	public static String get12levelDescription(){return "Operacij (*,/) do 100";}
-	public static Task get12levelTask(){
+	public static String get11levelName(){return "12."+textAfterLevelNumber;}
+	public static String get11levelDescription(){return "Operacij (*,/) do 100";}
+	public static Task get11levelTask(){
 		Equations equation=getMulOrDiv(10);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get13levelName(){return "13."+textAfterLevelNumber;}
-	public static String get13levelDescription(){return "Operacije (+,-,*,/) z oklepaji 20";}
-	public static Task get13levelTask(){
+	public static String get12levelName(){return "13."+textAfterLevelNumber;}
+	public static String get12levelDescription(){return "Operacije (+,-,*,/) z oklepaji 20";}
+	public static Task get12levelTask(){
 		Equations equation=null;
 		double randVal=Math.random();
 		if(randVal<0.25){
@@ -350,9 +350,9 @@ public  class Generator {
 		}
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get14levelName(){return "14."+textAfterLevelNumber;}
-	public static String get14levelDescription(){return "Operacije (+,-,*,/) z oklepaji 20";}
-	public static Task get14levelTask(){
+	public static String get13levelName(){return "14."+textAfterLevelNumber;}
+	public static String get13levelDescription(){return "Operacije (+,-,*,/) z oklepaji 20";}
+	public static Task get13levelTask(){
 		Equations equation=null;
 		double randVal=Math.random();
 		if(randVal<0.25){
@@ -399,39 +399,39 @@ public  class Generator {
 		}
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get15levelName(){return "15."+textAfterLevelNumber;}
-	public static String get15levelDescription(){return "Kvadrati do 10";}
-	public static Task get15levelTask(){
+	public static String get14levelName(){return "15."+textAfterLevelNumber;}
+	public static String get14levelDescription(){return "Kvadrati do 10";}
+	public static Task get14levelTask(){
 		Equations equation=getPowerTwoEquation(10);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get16levelName(){return "16."+textAfterLevelNumber;}
-	public static String get16levelDescription(){return "Kvadrati do 20";}
-	public static Task get16levelTask(){
+	public static String get15levelName(){return "16."+textAfterLevelNumber;}
+	public static String get15levelDescription(){return "Kvadrati do 20";}
+	public static Task get15levelTask(){
 		Equations equation=getPowerTwoEquation(20);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get17levelName(){return "17."+textAfterLevelNumber;}
-	public static String get17levelDescription(){return "Koreni do 100";}
-	public static Task get17levelTask(){
+	public static String get16levelName(){return "17."+textAfterLevelNumber;}
+	public static String get16levelDescription(){return "Koreni do 100";}
+	public static Task get16levelTask(){
 		Equations equation=getSqrtEquation(10);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get18levelName(){return "18."+textAfterLevelNumber;}
-	public static String get18levelDescription(){return "Koreni do 400";}
-	public static Task get18levelTask(){
+	public static String get17levelName(){return "18."+textAfterLevelNumber;}
+	public static String get17levelDescription(){return "Koreni do 400";}
+	public static Task get17levelTask(){
 		Equations equation=getSqrtEquation(20);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get19levelName(){return "19."+textAfterLevelNumber;}
-	public static String get19levelDescription(){return "Kvadrati in koreni";}
-	public static Task get19levelTask(){
+	public static String get18levelName(){return "19."+textAfterLevelNumber;}
+	public static String get18levelDescription(){return "Kvadrati in koreni";}
+	public static Task get18levelTask(){
 		Equations equation=getPowOrSqrt(20);
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
-	public static String get20levelName(){return "20."+textAfterLevelNumber;}
-	public static String get20levelDescription(){return "Mešane operacije bolj napredno";}
-	public static Task get20levelTask(){
+	public static String get19levelName(){return "20."+textAfterLevelNumber;}
+	public static String get19levelDescription(){return "Mešane operacije bolj napredno";}
+	public static Task get19levelTask(){
 		// here I have +-*/ ^2 and sqrt ()
 		Equations equation=null;
 		double randVal=Math.random();

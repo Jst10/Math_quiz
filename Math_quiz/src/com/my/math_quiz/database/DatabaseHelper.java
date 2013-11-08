@@ -2,36 +2,49 @@ package com.my.math_quiz.database;
 
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import com.my.math_quiz.ApplicationClass;
 
 public class DatabaseHelper  extends SQLiteOpenHelper {
 
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 10;
 	public static final String DATABASE_NAME = "math_quiz.db";
 
 	private SQLiteDatabase db; 
 	private SQLiteStatement stmtInsertScoreData;
 	private SQLiteStatement stmtInsertLevelData;
 	
+	private boolean wasDatabaseJustCreated=false;
 	public DatabaseHelper() {
 		super(ApplicationClass.applicationContext, DATABASE_NAME, null, DATABASE_VERSION);
 		db=this.getWritableDatabase();
-		
 		stmtInsertScoreData=db.compileStatement(QUERY_FOR_INSER_SCORE_DATA);
 		stmtInsertLevelData=db.compileStatement(QUERY_FOR_INSER_LEVEL_DATA);
+
+		
+		if(wasDatabaseJustCreated){
+			setAllLevelsToNotOpend();
+		}
 	}
-	
+	private void setAllLevelsToNotOpend(){
+		//I insert into new DB false for all 20 levels (if one level was already opened I marked false) 
+		Log.d("savingDB","adding to db0");
+		 for(int i=0; i<ApplicationClass.NUMBER_OF_LEVELS; i++){
+			 insertLevelDataToDatabase(i);
+		 }
+	}
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		 db.execSQL(QUERY_FOR_INSER_SCORE_DATA);
-		 db.execSQL(QUERY_FOR_INSER_LEVEL_DATA);
-
-
+		 db.execSQL(SQL_CREATE_LEVEL_DATA);
+		 db.execSQL(SQL_CREATE_SCORE_DATA);
+		 wasDatabaseJustCreated=true;
+		
 	}
 
 	@Override
@@ -55,13 +68,13 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
 	
 	public abstract class FeedLevelData implements BaseColumns{
-		public static final String TABLE_NAME="score";
+		public static final String TABLE_NAME="leveldata";
 		public static final String COLUMN_LEVEL_ID="levelid";
 		public static final String COLUMN_WAS_LEVEL_ALREADY_OPEND="wasopend";
 	}
 	
 	public abstract class FeedScoreData implements BaseColumns{
-		public static final String TABLE_NAME="score";
+		public static final String TABLE_NAME="scoredata";
 		public static final String COLUMN_SCORE_ID="scoreid";
 		public static final String COLUMN_LEVEL_ID="levelid";		
 		public static final String COLUMN_NUMBER_OF_TESTS="numberoftests";
@@ -86,8 +99,8 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 		    FeedScoreData.COLUMN_PLAYING_DATE+NUMERIC_TYPE+
 		    " )";
 	
-	public static final String QUERY_FOR_INSER_LEVEL_DATA="INSERT INTO "+FeedScoreData.TABLE_NAME+" ("+
-			FeedLevelData.COLUMN_LEVEL_ID+", "+
+	public static final String QUERY_FOR_INSER_LEVEL_DATA="INSERT INTO "+FeedLevelData.TABLE_NAME+" ("+
+			FeedLevelData.COLUMN_LEVEL_ID+
 			" ) VALUES (?)";
 	
 	
@@ -96,18 +109,19 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 			FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
 			FeedScoreData.COLUMN_TIME_SPENT+", "+
 			FeedScoreData.COLUMN_SCORE_ACHIVED+", "+
-			FeedScoreData.COLUMN_PLAYING_DATE+", "+
+			FeedScoreData.COLUMN_PLAYING_DATE+
 			" ) VALUES (?,?,?,?,?)";
 	
 	
 	private void insertLevelDataToDatabase(int level){
+		Log.d("whatNull","isS:"+stmtInsertLevelData);
 		 stmtInsertLevelData.bindString(1, level+"");
 		 stmtInsertLevelData.execute();
 		 stmtInsertLevelData.clearBindings();
 	}
 	
 	
-	private void insertScoreData(LevelEntity entity){
+	public void insertScoreData(LevelEntity entity){
 		stmtInsertScoreData.bindString(1, entity.getLevel()+"");
 		stmtInsertScoreData.bindString(2, entity.getNumberOfGames()+"");
 		stmtInsertScoreData.bindString(3, entity.getTimeInMIliseconds()+"");
@@ -118,14 +132,30 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 	}
 	
 	
-	private static final String SQL_DELETE_LEVEL_DATA = "DROP TABLE IF EXISTS " + FeedScoreData.TABLE_NAME;
-	private static final String SQL_DELETE_SCORE_DATA = "DROP TABLE IF EXISTS " + FeedLevelData.TABLE_NAME;
+	private static final String SQL_DELETE_LEVEL_DATA = "DROP TABLE IF EXISTS " + FeedLevelData.TABLE_NAME;
+	private static final String SQL_DELETE_SCORE_DATA = "DROP TABLE IF EXISTS " + FeedScoreData.TABLE_NAME;
 	
-	public static final String QUERY_FOR_ALL_SCORE_DATAS="SELECT * FROM "+FeedLevelData.TABLE_NAME;
-	public static final String QUERY_FOR_ALL_LEVELDATAS="SELECT * FROM "+FeedScoreData.TABLE_NAME;
+	public static final String QUERY_FOR_ALL_LEVELDATAS="SELECT * FROM "+FeedLevelData.TABLE_NAME+" ORDER BY "+FeedLevelData.COLUMN_LEVEL_ID;;
+	public static final String QUERY_FOR_BEST_SCORE_AT_ALL_LEVELS="SELECT "+
+			FeedScoreData.COLUMN_LEVEL_ID+", "+
+			FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
+			FeedScoreData.COLUMN_SCORE_ACHIVED+", "+
+			FeedScoreData.COLUMN_TIME_SPENT+" "
+				+"* FROM "+FeedScoreData.TABLE_NAME+" GROUP BY "+
+					FeedScoreData.COLUMN_LEVEL_ID+", "+
+					FeedScoreData.COLUMN_NUMBER_OF_TESTS
+						+" HAVING MAX("+FeedScoreData.COLUMN_SCORE_ACHIVED+") " +
+			"ORDER BY "+FeedScoreData.COLUMN_LEVEL_ID;
 	
+	public Cursor getCursorFromAllLevelDatas(){
+		checkIfIsNDBull();
+		return db.rawQuery(DatabaseHelper.QUERY_FOR_ALL_LEVELDATAS,null);
+	}
 	
-	
+	public Cursor getCursorFromBestScoresFromAllLevels(){
+		checkIfIsNDBull();
+		return db.rawQuery(DatabaseHelper.QUERY_FOR_ALL_LEVELDATAS,null);
+	}
 	public void setLevelDataToAlreadyOpend(int level){
 		ContentValues values = new ContentValues();
 		values.put(FeedLevelData.COLUMN_WAS_LEVEL_ALREADY_OPEND, 1);
