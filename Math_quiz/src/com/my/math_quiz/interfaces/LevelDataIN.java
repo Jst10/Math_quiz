@@ -16,6 +16,10 @@ public interface LevelDataIN {
 	/**@return the number of tests in this level which are unsolved*/
 	public  int getNumberOfUnsolvedTests();
 	
+	
+	/**@return the score from this level (probably is just number of correct answers in level)*/
+	public  int getScoreAchived();
+	
 	/**This method start timing time from zero. The start timer will only star 
 	 * if clocked is stopped previous or. isen't start already. 
 	 * The time will be set to zero*/

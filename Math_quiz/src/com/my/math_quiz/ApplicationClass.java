@@ -22,7 +22,7 @@ public class ApplicationClass extends Application{
 	public static final int SINGLE_PLAYER_TIME_WRONG=5;
 	
 	
-	public static final int NUMBER_TASK_LEVEL_MINIMUM=10;
+	public static final int NUMBER_TASK_LEVEL_MINIMUM=5;
 	public static final int NUMBER_TASK_LEVEL_MEDINUM=20;
 	public static final int NUMBER_TASK_LEVEL_MAXIMUM=30;
 	

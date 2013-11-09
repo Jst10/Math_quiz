@@ -13,11 +13,10 @@ public class LevelDescripction {
 	private int level;
 	public String levelDescription;
 	/**Here I have times and best scores for each number of test in round seperate like for 20 for 30 for 50 test in round*/
-	public float[] levelTimes=new float[3];
+	public int[] levelTimes=new int[3];
 	public int[] levelScores=new int[3];
 	/**This I have to know if I should show tutorial or not*/
 	private boolean wasAlreadyOpend;
-	
 	
 	public LevelDescripction(int level,boolean wasAlreadyOpend){
 		this.wasAlreadyOpend=wasAlreadyOpend;
@@ -46,6 +45,11 @@ public class LevelDescripction {
 		default:break;
 		}
 	}
+	
+	public int getLevel(){
+		return level;
+	}
+	
 	/**@return true if user already opened this level else false (we have this to show tutorial at first time)*/
 	public boolean wasAlreadyOpend(){
 		return wasAlreadyOpend;
@@ -115,7 +119,20 @@ public class LevelDescripction {
 			return numberOfUnsolved;
 		}
 		
-
+		@Override
+		public int getScoreAchived() {
+			int score=0;
+			if(tasks==null){
+				Log.d("exceptionMY","we request the numnber of unsoved test bu the tasks are set to null");
+				return -1;
+			}
+			for(Task task:tasks){
+				if(task.getSelectedAnswer()==task.getCorrectAnswer()){
+					score++;
+				}
+			}
+			return score;
+		}
 		/**This method start timing time from zero. The start timer will only star 
 		 * if clocked is stopped previous or. isen't start already. 
 		 * The time will be set to zero*/
@@ -201,6 +218,35 @@ public class LevelDescripction {
 			}
 			return tasks;
 		}
+
+	}
+
+
+
+	/**This method set to this description recived time and score as best one at specific task
+	 *@param numberOfTess 
+	 *@param scoreAchived 
+	 *@param timeSpend 
+	 * */
+	public void setBestTimeScore(int numberOfTest, int scoreAchived, int timeSpend) {
+		switch(numberOfTest){
+			case ApplicationClass.NUMBER_TASK_LEVEL_MINIMUM:
+					levelTimes[0]=timeSpend;
+					levelScores[0]=scoreAchived;
+				break;
+			case ApplicationClass.NUMBER_TASK_LEVEL_MEDINUM:
+					levelTimes[1]=timeSpend;
+					levelScores[1]=scoreAchived;
+				break;
+			case ApplicationClass.NUMBER_TASK_LEVEL_MAXIMUM:
+					levelTimes[2]=timeSpend;
+					levelScores[2]=scoreAchived;
+				break;
+		}
+	}
+	
+	public void updateMaximumScores(){
+		ApplicationClass.dao.updateSpecificLevelDescriptionWithScore(this);
 	}
 		
 }

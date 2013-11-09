@@ -121,31 +121,51 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 	}
 	
 	
-	public void insertScoreData(LevelEntity entity){
+	public long insertScoreData(LevelEntity entity){
+		Log.d("inserting","inserting score data in helper");
 		stmtInsertScoreData.bindString(1, entity.getLevel()+"");
 		stmtInsertScoreData.bindString(2, entity.getNumberOfGames()+"");
 		stmtInsertScoreData.bindString(3, entity.getTimeInMIliseconds()+"");
 		stmtInsertScoreData.bindString(4, entity.getScore()+"");
 		stmtInsertScoreData.bindString(5, entity.getDate().getTime()+"");
-		stmtInsertScoreData.execute();
+		long id=stmtInsertScoreData.executeInsert();
 		stmtInsertScoreData.clearBindings();
+		return id;
 	}
 	
 	
 	private static final String SQL_DELETE_LEVEL_DATA = "DROP TABLE IF EXISTS " + FeedLevelData.TABLE_NAME;
 	private static final String SQL_DELETE_SCORE_DATA = "DROP TABLE IF EXISTS " + FeedScoreData.TABLE_NAME;
 	
-	public static final String QUERY_FOR_ALL_LEVELDATAS="SELECT * FROM "+FeedLevelData.TABLE_NAME+" ORDER BY "+FeedLevelData.COLUMN_LEVEL_ID;;
-	public static final String QUERY_FOR_BEST_SCORE_AT_ALL_LEVELS="SELECT "+
-			FeedScoreData.COLUMN_LEVEL_ID+", "+
-			FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
-			FeedScoreData.COLUMN_SCORE_ACHIVED+", "+
-			FeedScoreData.COLUMN_TIME_SPENT+" "
-				+"* FROM "+FeedScoreData.TABLE_NAME+" GROUP BY "+
-					FeedScoreData.COLUMN_LEVEL_ID+", "+
-					FeedScoreData.COLUMN_NUMBER_OF_TESTS
-						+" HAVING MAX("+FeedScoreData.COLUMN_SCORE_ACHIVED+") " +
-			"ORDER BY "+FeedScoreData.COLUMN_LEVEL_ID;
+	public static final String QUERY_FOR_ALL_LEVELDATAS="SELECT * FROM "+FeedLevelData.TABLE_NAME+" ORDER BY "+FeedLevelData.COLUMN_LEVEL_ID;
+//	//TODO
+//	public static final String QUERY_FOR_BEST_SCORE_AT_ALL_LEVELS="SELECT * FROM "+FeedScoreData.TABLE_NAME+" ORDER BY "+FeedScoreData.COLUMN_LEVEL_ID;
+	public static final String QUERY_FOR_BEST_SCORE_AT_ALL_LEVELS=
+		"SELECT "+
+			"s."+FeedScoreData.COLUMN_LEVEL_ID+", "+	
+			"s."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+	
+			"s."+FeedScoreData.COLUMN_SCORE_ACHIVED+", "+
+			"MIN("+"t."+FeedScoreData.COLUMN_TIME_SPENT+") AS "+FeedScoreData.COLUMN_TIME_SPENT+" "+
+		"FROM ( "+					
+			"SELECT "+
+				"tt."+FeedScoreData.COLUMN_LEVEL_ID+", "+	
+				"tt."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
+				"MAX("+"tt."+FeedScoreData.COLUMN_SCORE_ACHIVED+") AS "+FeedScoreData.COLUMN_SCORE_ACHIVED+" "+
+			"FROM "+FeedScoreData.TABLE_NAME +" tt "+
+				"GROUP BY "+
+					"tt."+FeedScoreData.COLUMN_LEVEL_ID+", "+
+					"tt."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+" "+
+			  ") s "+
+		"INNER JOIN "+FeedScoreData.TABLE_NAME +" t ON "+
+			"s."+FeedScoreData.COLUMN_LEVEL_ID+"="+"t."+FeedScoreData.COLUMN_LEVEL_ID+" AND " +
+			"s."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+"="+"t."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+" AND "+
+			"s."+FeedScoreData.COLUMN_SCORE_ACHIVED+"="+"t."+FeedScoreData.COLUMN_SCORE_ACHIVED+" "+
+		"GROUP BY "+
+			"s."+FeedScoreData.COLUMN_LEVEL_ID+", "+
+			"s."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
+			"s."+FeedScoreData.COLUMN_SCORE_ACHIVED
+	;
+
 	
 	public Cursor getCursorFromAllLevelDatas(){
 		checkIfIsNDBull();
@@ -154,7 +174,36 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 	
 	public Cursor getCursorFromBestScoresFromAllLevels(){
 		checkIfIsNDBull();
-		return db.rawQuery(DatabaseHelper.QUERY_FOR_ALL_LEVELDATAS,null);
+		return db.rawQuery(DatabaseHelper.QUERY_FOR_BEST_SCORE_AT_ALL_LEVELS,null);
+	}
+	public Cursor getCursorFromBestScoresFromSpecificLevel(int level) {
+		checkIfIsNDBull();
+		return db.rawQuery(
+		"SELECT "+
+			"s."+FeedScoreData.COLUMN_LEVEL_ID+", "+	
+			"s."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+	
+			"s."+FeedScoreData.COLUMN_SCORE_ACHIVED+", "+
+			"MIN("+"t."+FeedScoreData.COLUMN_TIME_SPENT+") AS "+FeedScoreData.COLUMN_TIME_SPENT+" "+
+		"FROM ( "+					
+			"SELECT "+
+				"tt."+FeedScoreData.COLUMN_LEVEL_ID+", "+	
+				"tt."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
+				"MAX("+"tt."+FeedScoreData.COLUMN_SCORE_ACHIVED+") AS "+FeedScoreData.COLUMN_SCORE_ACHIVED+" "+
+			"FROM "+FeedScoreData.TABLE_NAME +" tt "+
+				"GROUP BY "+
+					"tt."+FeedScoreData.COLUMN_LEVEL_ID+", "+
+					"tt."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+" "+
+			  ") s "+
+		"INNER JOIN "+FeedScoreData.TABLE_NAME +" t ON "+
+			"s."+FeedScoreData.COLUMN_LEVEL_ID+"="+"t."+FeedScoreData.COLUMN_LEVEL_ID+" AND " +
+			"s."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+"="+"t."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+" AND "+
+			"s."+FeedScoreData.COLUMN_SCORE_ACHIVED+"="+"t."+FeedScoreData.COLUMN_SCORE_ACHIVED+" "+
+		"WHERE s."+FeedScoreData.COLUMN_LEVEL_ID+ "="+level+" "+
+		"GROUP BY "+
+			"s."+FeedScoreData.COLUMN_LEVEL_ID+", "+
+			"s."+FeedScoreData.COLUMN_NUMBER_OF_TESTS+", "+
+			"s."+FeedScoreData.COLUMN_SCORE_ACHIVED
+				,null);
 	}
 	public void setLevelDataToAlreadyOpend(int level){
 		ContentValues values = new ContentValues();
@@ -190,5 +239,6 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 			db=this.getWritableDatabase();
 		}
 	}
+
 	
 }

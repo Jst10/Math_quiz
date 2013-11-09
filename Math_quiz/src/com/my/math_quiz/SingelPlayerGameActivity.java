@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.my.math_quiz.database.LevelEntity;
 import com.my.math_quiz.interfaces.LevelDataIN;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.utils.Task;
@@ -39,6 +40,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	
 	ImageView[] imageViews;
 	int numberOfTasksInRound;
+	int selectedLevel;
 	TitleBar titleBar=null;
 	
 	Bitmap taskIndicatorCorrectAnswer;
@@ -46,7 +48,8 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	Bitmap taskIndicatorNotSelectedAnswer;
 	Bitmap taskIndicatorCurrent;
 	
-	
+
+	LevelEntity levelEntiyFromThesGame=null;
 	MyAdapterForSingelPLayerGameActivity adapterForViewPager;
 	/**additionalPage mean number of pages after last test, that we have for displaying scores if user answer to all tasks in one group of them*/
 	int additionalPage=0;
@@ -56,7 +59,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		setContentView(R.layout.activity_single_player_game);
 		
 		Intent myIntent = getIntent();
-		int selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
+		selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
 		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
 		
 		
@@ -123,7 +126,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		
 		LinearLayout layoutForIndicators=(LinearLayout)findViewById(R.id.ASPGRlayoutBelowTitleBar);
 		imageViews=new ImageView[numberOfTasksInRound];
-		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/ApplicationClass.getCurrentNumberOfGamesInOneRound();
+		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/numberOfTasksInRound;
 		int oneIndicatorHeight=ApplicationClass.getDisplaySize().x/ApplicationClass.getMaximumNumberOfGamesInOneRound();
 		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(oneIndicatorWidth,oneIndicatorHeight);
 		
@@ -222,6 +225,8 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			if(additionalPage==0&&levelData.getNumberOfUnsolvedTests()==0){
 				//now we finish all tasks in that level so we can calculate results
 				levelData.stopTimingLevel();
+				levelEntiyFromThesGame=new LevelEntity(selectedLevel,numberOfTasksInRound, (int)levelData.getDurationOfLevel(),levelData.getScoreAchived());
+				levelEntiyFromThesGame.saveToDB();
 				additionalPage=1;
 				adapterForViewPager.notifyDataSetChanged();
 				pager.setCurrentItem(numberOfTasksInRound,true);
@@ -242,6 +247,15 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	@Override
 	public void finish() {
 		levelData.clearLevelData();
+		//user didn0t finished game so we don0t need to update datas
+		if(additionalPage==0){
+			Intent returnIntent = new Intent();
+			setResult(RESULT_CANCELED, returnIntent);        
+		}else{
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(SinglePlayerActivity.KEY_FOR_RESULT,selectedLevel);
+			setResult(RESULT_OK,returnIntent);  
+		}
 		super.finish();
 	}
 

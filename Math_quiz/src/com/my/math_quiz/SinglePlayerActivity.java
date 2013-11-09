@@ -19,6 +19,8 @@ public class SinglePlayerActivity  extends Activity implements TitleBarListener{
 	
 	TitleBar titleBar=null;
 	ListView list=null;
+	
+	SinglePlayerAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,10 +33,11 @@ public class SinglePlayerActivity  extends Activity implements TitleBarListener{
 		
 		list=(ListView)findViewById(R.id.SPlistView);
 		
-		SinglePlayerAdapter adapter=new SinglePlayerAdapter(this,0,ApplicationClass.getLevelDescriptions());
+		adapter=new SinglePlayerAdapter(this,0,ApplicationClass.getLevelDescriptions());
 		list.setAdapter(adapter);
 	
 		list.setOnItemClickListener(onItemClickListene);
+		ApplicationClass.dao.fealLevelsDescriptionsWithScores();
 	}
 	
 	OnItemClickListener onItemClickListene=new OnItemClickListener() {
@@ -43,9 +46,26 @@ public class SinglePlayerActivity  extends Activity implements TitleBarListener{
 		public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
 			Intent intent = new Intent(SinglePlayerActivity.this, SingelPlayerGameActivity.class);
 			intent.putExtra("EXTRA_SELECTED_LEVEL", position);
-			startActivity(intent);
+			startActivityForResult(intent,55);
 		}
 	};
+	public static final String KEY_FOR_RESULT="finishdLevel";
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 55) {
+		     if(resultCode == RESULT_OK){      
+		         int result=data.getIntExtra(KEY_FOR_RESULT,-1);
+		         if(result!=-1){
+		        	 ApplicationClass.getLevelDescription(result).updateMaximumScores();
+		        	 adapter.notifyDataSetChanged();
+		         }
+		     }
+		     if (resultCode == RESULT_CANCELED) {    
+		         //Write your code if there's no result
+		     }
+		  }
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
