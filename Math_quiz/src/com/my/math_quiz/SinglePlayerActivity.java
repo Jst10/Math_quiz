@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.my.math_quiz.adapters.SinglePlayerAdapter;
+import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
@@ -44,9 +45,18 @@ public class SinglePlayerActivity  extends Activity implements TitleBarListener{
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
-			Intent intent = new Intent(SinglePlayerActivity.this, SingelPlayerGameActivity.class);
-			intent.putExtra("EXTRA_SELECTED_LEVEL", position);
-			startActivityForResult(intent,55);
+			
+			LevelDescripction lds=ApplicationClass.getLevelDescription(position);
+//			if(lds.wasAlreadyOpend()==true){
+				Intent intent = new Intent(SinglePlayerActivity.this, SingelPlayerGameActivity.class);
+				intent.putExtra("EXTRA_SELECTED_LEVEL", position);
+				startActivityForResult(intent,55);
+//			}
+//			else{
+//				//we must show tutorial
+//				
+//				
+//			}
 		}
 	};
 	public static final String KEY_FOR_RESULT="finishdLevel";

@@ -56,8 +56,10 @@ public class LevelDescripction {
 	}
 	/**This method set varible wasAlreadyOpend to true and also save changes to DB*/
 	public void setWasAlreadyOpendOnTrue(){
-		wasAlreadyOpend=true;
-		ApplicationClass.dao.markLevelAsOpend(level);
+		if(wasAlreadyOpend==false){
+			wasAlreadyOpend=true;
+			ApplicationClass.dao.markLevelAsOpend(level);
+		}
 	}
 	
 	/**This method create new instance of method for level data so task will be new and everything else
@@ -170,7 +172,7 @@ public class LevelDescripction {
 		 * clock must already run else is no effect from this method (start should be called before)*/
 		@Override
 		public void stopTimingLevel(){
-			if(isTiming==true&&isStopTiming==false){
+			if(isStopTiming==false){
 				endTime=System.currentTimeMillis();
 				length+=endTime-startTime;
 				isTiming=false;

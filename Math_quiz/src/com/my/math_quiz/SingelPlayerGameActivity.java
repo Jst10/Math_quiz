@@ -64,6 +64,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		
 		
 		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
+		levelDescripction.setWasAlreadyOpendOnTrue();
 		levelData=levelDescripction.getLevelData();
 		levelData.startTimingLevel();
 		tasks=	levelData.getTests(numberOfTasksInRound);
@@ -86,6 +87,12 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				if(position<numberOfTasksInRound){
 					titleBar.setTitle((position+1)+"/"+numberOfTasksInRound);
 					imageViews[position].setImageBitmap(taskIndicatorCurrent);
+					t=tasks.get(position);
+					if(t.getSelectedAnswer()==-1)
+						levelData.resumTimingLevel();
+				}else{
+					//last page
+					titleBar.setTitle("Dosežki");
 				}
 				if(position>0){
 					t=tasks.get(position-1);
@@ -198,13 +205,26 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			}
 			else{
 				if(resultPage==null){
+					resultPage=inflater.inflate(R.layout.last_page_sp_result, null);
+				
+					((TextView)resultPage.findViewById(R.id.LPscore2)).setText(levelEntiyFromThesGame.getScore()+"");
+					((TextView)resultPage.findViewById(R.id.LPtime2)).setText(levelEntiyFromThesGame.getTimeInMIliseconds()+"");
+					((TextView)resultPage.findViewById(R.id.LPtasks2)).setText(numberOfTasksInRound+"");
 					
-					resultPage=new RelativeLayout(SingelPlayerGameActivity.this);
-					resultPage.setBackgroundColor(0xF0F0F0);
-					TextView t=new TextView(SingelPlayerGameActivity.this);
-					t.setText(levelData.getDurationOfLevel()+"");
+					
+					((TextView)resultPage.findViewById(R.id.ESPtimeL)).setText(levelDescripction.levelTimes[0]+"");
+					((TextView)resultPage.findViewById(R.id.ESPtimeM)).setText(levelDescripction.levelTimes[1]+"");
+					((TextView)resultPage.findViewById(R.id.ESPtimeH)).setText(levelDescripction.levelTimes[2]+"");
+					((TextView)resultPage.findViewById(R.id.ESPscoreL)).setText(levelDescripction.levelScores[0]+"");
+					((TextView)resultPage.findViewById(R.id.ESPscoreM)).setText(levelDescripction.levelScores[1]+"");
+					((TextView)resultPage.findViewById(R.id.ESPscoreH)).setText(levelDescripction.levelScores[2]+"");
+					
+					//resultPage=new RelativeLayout(SingelPlayerGameActivity.this);
+					//resultPage.setBackgroundColor(0xF0F0F0);
+					//TextView t=new TextView(SingelPlayerGameActivity.this);
+					//t.setText(levelData.getDurationOfLevel()+"");
 			
-					((RelativeLayout)resultPage).addView(t);
+					//((RelativeLayout)resultPage).addView(t);
 				
 				}
 				pager.addView(resultPage);
@@ -220,6 +240,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	@Override
 	public void onButtonClick(BottomButtoms buttoms,int position) {
 		Task t=tasks.get( pager.getCurrentItem());
+		levelData.pauseTimingLevel();
 		if(t.setSelectedAnswer(position)){
 			buttoms.setCollors(t.getSelectedAnswer(), t.getCorrectAnswer());
 			if(additionalPage==0&&levelData.getNumberOfUnsolvedTests()==0){
