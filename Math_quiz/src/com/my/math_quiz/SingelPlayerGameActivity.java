@@ -11,13 +11,13 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.my.math_quiz.database.LevelEntity;
@@ -210,7 +210,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 					((TextView)resultPage.findViewById(R.id.LPscore2)).setText(levelEntiyFromThesGame.getScore()+"");
 					((TextView)resultPage.findViewById(R.id.LPtime2)).setText(levelEntiyFromThesGame.getTimeInMIliseconds()+"");
 					((TextView)resultPage.findViewById(R.id.LPtasks2)).setText(numberOfTasksInRound+"");
-					
+//					Log.d("score:","score:"+levelEntiyFromThesGame.getScore()+"/"+levelEntiyFromThesGame.getTimeInMIliseconds());
 					
 					((TextView)resultPage.findViewById(R.id.ESPtimeL)).setText(levelDescripction.levelTimes[0]+"");
 					((TextView)resultPage.findViewById(R.id.ESPtimeM)).setText(levelDescripction.levelTimes[1]+"");

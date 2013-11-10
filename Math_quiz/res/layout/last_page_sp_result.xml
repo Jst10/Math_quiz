@@ -41,27 +41,12 @@
             android:textSize="20sp"
             android:text="20" />
  		 
-        <TextView
-            android:id="@+id/LPscore1"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/LPtasks1"
-            android:layout_height="30sp"
-            android:textSize="20sp"
-            android:layout_width="105sp"
-            android:text="Točke:" />
-         <TextView
-            android:id="@+id/LPscore2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/LPscore1"
-            android:layout_below="@+id/LPtasks1"
-            android:textSize="20sp"
-            android:text="12" />
+      
 
         <TextView
             android:id="@+id/LPtime1"
             android:layout_alignParentLeft="true"
-           	android:layout_below="@+id/LPscore1"
+           	android:layout_below="@+id/LPtasks1"
            	android:layout_height="30sp"
             android:textSize="20sp"
             android:layout_width="105sp"
@@ -71,10 +56,28 @@
             android:id="@+id/LPtime2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           	android:layout_below="@+id/LPscore1"
+           	android:layout_below="@+id/LPtasks1"
             android:layout_toRightOf="@+id/LPtime1"
             android:textSize="20sp"
             android:text="30" />
+        
+          <TextView
+            android:id="@+id/LPscore1"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/LPtime1"
+            android:layout_height="30sp"
+            android:textSize="20sp"
+            android:layout_width="105sp"
+            android:text="Točke:" />
+          
+         <TextView
+            android:id="@+id/LPscore2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/LPscore1"
+            android:layout_below="@+id/LPtime1"
+            android:textSize="20sp"
+            android:text="12" />
 
     </RelativeLayout>
      <View
@@ -91,8 +94,8 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentLeft="true"
-	    android:layout_below="@+id/relativeLayout1"
-	    android:layout_marginTop="123dp"
+	    android:layout_below="@+id/LPtitle2"
+	    android:layout_marginLeft="20dp"
 	    android:textAlignment="center" >
 
 	    <TableRow
@@ -188,7 +191,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentLeft="true"
 	    android:layout_below="@+id/relativeLayout1"
-	    android:layout_marginTop="74dp"
+	    android:layout_marginTop="40dp"
 	    android:text="Do sedaj:"
 	    android:textSize="30sp" />
 	
