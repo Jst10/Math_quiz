@@ -160,6 +160,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		levelData.startTimingLevel();
 	}
 	
+	
 	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
