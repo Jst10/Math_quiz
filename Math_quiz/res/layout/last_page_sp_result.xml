@@ -195,39 +195,6 @@
 	    android:text="Do sedaj:"
 	    android:textSize="30sp" />
 	
-	
-		<LinearLayout
-		    android:layout_height="50dp"
-		    android:layout_width="match_parent"
-		    android:weightSum="3"
-		    android:orientation="horizontal"
-		    android:layout_alignParentBottom="true"
-	    >
-        <Button 
-            android:id="@+id/LPbuttonAgain"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Ponovno"
-            android:gravity="center"
-            />
-       <Button 
-            android:id="@+id/LPbuttonShare"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Deli"
-             android:gravity="center"
-            />
-        <Button 
-            android:id="@+id/LPbuttonFinish"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="Končaj"
-             android:gravity="center"
-            />
-     </LinearLayout>
-	
+	<include layout="@layout/p_result_bottom_buttons"/>
 
 </RelativeLayout>

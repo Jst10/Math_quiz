@@ -53,7 +53,12 @@ public class ApplicationClass extends Application{
 	public static LevelDescripction[] getLevelDescriptions() {
 		return levelsDescriptions;
 	}
-	
+	public static int getDelayOnCorrectAnswerInMiliS(){
+		return 1000;
+	}
+	public static int getDelayOnWrongAnswerInMiliS(){
+		return 2000;
+	}
 	public static Point getDisplaySize(){
 		if(displaySize==null){
 			DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();

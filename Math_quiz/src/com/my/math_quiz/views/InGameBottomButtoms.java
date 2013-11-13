@@ -9,9 +9,9 @@ import android.widget.LinearLayout;
 
 import com.my.math_quiz.R;
 
-public class BottomButtoms extends LinearLayout{
+public class InGameBottomButtoms extends LinearLayout{
 	public interface BottomButtonListener{
-		public void onButtonClick(BottomButtoms buttoms,int position);
+		public void onButtonClick(InGameBottomButtoms buttoms,int position);
 	}
 	
 	
@@ -26,19 +26,19 @@ public class BottomButtoms extends LinearLayout{
 	Drawable button_correct_background;
 	Drawable button_wrong_background;
 	
-	public BottomButtoms(Context context) {
+	public InGameBottomButtoms(Context context) {
 		super(context);
 		init();
 
 	}
 
-	public BottomButtoms(Context context, AttributeSet attrs) {
+	public InGameBottomButtoms(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 
 	}
 
-	public BottomButtoms(Context context, AttributeSet attrs, int defStyle) {
+	public InGameBottomButtoms(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
@@ -82,13 +82,13 @@ public class BottomButtoms extends LinearLayout{
 		public void onClick(View v) {
 			if(listener!=null){
 				if(v.getId()==R.id.BBbutton1){
-					listener.onButtonClick(BottomButtoms.this,0);
+					listener.onButtonClick(InGameBottomButtoms.this,0);
 				}else if(v.getId()==R.id.BBbutton2){
-					listener.onButtonClick(BottomButtoms.this,1);
+					listener.onButtonClick(InGameBottomButtoms.this,1);
 				}else if(v.getId()==R.id.BBbutton3){
-					listener.onButtonClick(BottomButtoms.this,2);
+					listener.onButtonClick(InGameBottomButtoms.this,2);
 				}else if(v.getId()==R.id.BBbutton4){
-					listener.onButtonClick(BottomButtoms.this,3);
+					listener.onButtonClick(InGameBottomButtoms.this,3);
 				}
 				
 				

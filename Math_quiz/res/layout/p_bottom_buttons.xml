@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.my.math_quiz.views.BottomButtoms xmlns:android="http://schemas.android.com/apk/res/android"
+<com.my.math_quiz.views.InGameBottomButtoms xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:id="@+id/BBBottomBUttons"
     android:layout_height="50dp"
@@ -40,4 +40,4 @@
         android:text="Button" 
         android:background="@drawable/button_background_normal"/>
 
-</com.my.math_quiz.views.BottomButtoms>
+</com.my.math_quiz.views.InGameBottomButtoms>

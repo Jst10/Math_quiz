@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +23,14 @@ import com.my.math_quiz.database.LevelEntity;
 import com.my.math_quiz.interfaces.LevelDataIN;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.utils.Task;
-import com.my.math_quiz.views.BottomButtoms;
-import com.my.math_quiz.views.BottomButtoms.BottomButtonListener;
+import com.my.math_quiz.views.InGameBottomButtoms;
+import com.my.math_quiz.views.InGameBottomButtoms.BottomButtonListener;
+import com.my.math_quiz.views.ResultBottomButtoms;
+import com.my.math_quiz.views.ResultBottomButtoms.ResultBottomButtonListener;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
-public class SingelPlayerGameActivity extends Activity implements BottomButtonListener,TitleBarListener{
+public class SingelPlayerGameActivity extends Activity implements BottomButtonListener,TitleBarListener,ResultBottomButtonListener{
 
 	ViewPager pager;
 	LevelDescripction levelDescripction;
@@ -66,8 +67,6 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
 		levelDescripction.setWasAlreadyOpendOnTrue();
 		levelData=levelDescripction.getLevelData();
-		levelData.startTimingLevel();
-		tasks=	levelData.getTests(numberOfTasksInRound);
 		
 		inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
@@ -77,9 +76,6 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		titleBar.setTitle(1+"/"+numberOfTasksInRound);
 		
 		pager=(ViewPager)findViewById(R.id.ASPGViewPager);
-		adapterForViewPager=new MyAdapterForSingelPLayerGameActivity(numberOfTasksInRound);
-		pager.setAdapter(adapterForViewPager);
-		
 		pager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -146,9 +142,54 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		}
 		imageViews[pager.getCurrentItem()].setImageBitmap(taskIndicatorCurrent);
 		
+		restartLevel();
+	}
+	private void restartLevel(){
+		additionalPage=0;
+		for(int i=0; i<imageViews.length; i++){
+			imageViews[i].setImageBitmap(taskIndicatorNotSelectedAnswer);
+		}
+		imageViews[0].setImageBitmap(taskIndicatorCurrent);
+		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
+		levelData.clearLevelData();
+		tasks=	levelData.getTests(numberOfTasksInRound);
+		adapterForViewPager=new MyAdapterForSingelPLayerGameActivity(numberOfTasksInRound);
+		pager.setAdapter(adapterForViewPager);
 		levelData.startTimingLevel();
 	}
 	
+	/**BEGIN the title bar listener methods*/
+	@Override
+	public void onLeftButtonClick() {
+		// we finish this activity
+		SingelPlayerGameActivity.this.finish();
+		
+	}
+		
+	@Override
+	public void onRightButtonClick() {
+		//TODO we must do smth. don't know yet	
+	}
+	/**END the title bar listener methods*/
+
+	/**BEGIN the ResultBotomButton listener methods*/
+	@Override
+	public void onAgainButtonClicked() {
+		restartLevel();
+	}
+
+	@Override
+	public void onFinishButtonClicked() {
+		this.finish();
+	}
+
+	@Override
+	public void onShareButtonClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**END the ResultBotomButton listener methods*/
+
 	@Override
 	protected void onDestroy() {
 		levelData.stopTimingLevel();
@@ -195,8 +236,8 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				Task currentTask=tasks.get(position);
 				
 				text.setText(currentTask.getText());
-				BottomButtoms buttoms;
-				buttoms=(BottomButtoms)v.findViewById(R.id.BBBottomBUttons);
+				InGameBottomButtoms buttoms;
+				buttoms=(InGameBottomButtoms)v.findViewById(R.id.BBBottomBUttons);
 				buttoms.seButtontTexts(currentTask.getAnswers());
 				buttoms.setListener(SingelPlayerGameActivity.this);
 				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer());
@@ -225,6 +266,9 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 					//t.setText(levelData.getDurationOfLevel()+"");
 			
 					//((RelativeLayout)resultPage).addView(t);
+//					((Button)resultPage.findViewById(R.id))
+					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).setListener(SingelPlayerGameActivity.this);
+					
 				
 				}
 				pager.addView(resultPage);
@@ -236,9 +280,12 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		           ((ViewPager) collection).removeView((View) view);
 		 }
 	}
+	
+
+	/**This is single method from bottButton listener*/
 	/**@param position the position of button on which user clicked*/
 	@Override
-	public void onButtonClick(BottomButtoms buttoms,int position) {
+	public void onButtonClick(InGameBottomButtoms buttoms,int position) {
 		Task t=tasks.get( pager.getCurrentItem());
 		levelData.pauseTimingLevel();
 		if(t.setSelectedAnswer(position)){
@@ -258,12 +305,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			}
 		}
 	}
-	@Override
-	public void onLeftButtonClick() {
-		// we finish this activity
-		SingelPlayerGameActivity.this.finish();
-		
-	}
+	
 	
 	@Override
 	public void finish() {
@@ -274,15 +316,10 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			setResult(RESULT_CANCELED, returnIntent);        
 		}else{
 			Intent returnIntent = new Intent();
-			returnIntent.putExtra(SinglePlayerActivity.KEY_FOR_RESULT,selectedLevel);
+			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_SINGLE_PLAYER_RESULT,selectedLevel);
 			setResult(RESULT_OK,returnIntent);  
 		}
 		super.finish();
-	}
-
-	@Override
-	public void onRightButtonClick() {
-		//TODO we must do smth. don't know yet	
 	}
 
 	
