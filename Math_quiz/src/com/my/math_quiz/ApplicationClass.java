@@ -54,10 +54,10 @@ public class ApplicationClass extends Application{
 		return levelsDescriptions;
 	}
 	public static int getDelayOnCorrectAnswerInMiliS(){
-		return 1000;
+		return 0;
 	}
 	public static int getDelayOnWrongAnswerInMiliS(){
-		return 2000;
+		return 1000;
 	}
 	public static Point getDisplaySize(){
 		if(displaySize==null){

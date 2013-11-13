@@ -15,12 +15,12 @@
 	    
 	</LinearLayout>
 	  
-	<android.support.v4.view.ViewPager
+	<com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages
 	     android:id="@+id/ASPGViewPager"
 	     android:layout_width="fill_parent"
    		 android:layout_height="fill_parent"
    		 android:layout_below="@+id/ASPGRlayoutBelowTitleBar"
 	    >
-	   </android.support.v4.view.ViewPager>
+	   </com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages>
 </RelativeLayout>
 

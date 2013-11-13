@@ -29,10 +29,11 @@ import com.my.math_quiz.views.ResultBottomButtoms;
 import com.my.math_quiz.views.ResultBottomButtoms.ResultBottomButtonListener;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
+import com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages;
 
 public class SingelPlayerGameActivity extends Activity implements BottomButtonListener,TitleBarListener,ResultBottomButtonListener{
 
-	ViewPager pager;
+	ViewPagerWithCustomSpeedOfSwitchingPages pager;
 	LevelDescripction levelDescripction;
 	LevelDataIN levelData;
 	ArrayList<Task> tasks;
@@ -75,7 +76,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		titleBar.setTitle(1+"/"+numberOfTasksInRound);
 		
-		pager=(ViewPager)findViewById(R.id.ASPGViewPager);
+		pager=(ViewPagerWithCustomSpeedOfSwitchingPages)findViewById(R.id.ASPGViewPager);
 		pager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -301,6 +302,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				
 			}else if(t.getSelectedAnswer()==t.getCorrectAnswer()){
 				//we answer correct to answer an we move forward to next task  or back to previous if isn't solved already
+				pager.setSlowSpeed();
 				pager.setCurrentItem(pager.getCurrentItem()+1,true);
 			}
 		}
