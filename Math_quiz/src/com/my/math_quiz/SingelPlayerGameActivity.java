@@ -150,6 +150,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		for(int i=0; i<imageViews.length; i++){
 			imageViews[i].setImageBitmap(taskIndicatorNotSelectedAnswer);
 		}
+		titleBar.setTitle(1+"/"+numberOfTasksInRound);
 		imageViews[0].setImageBitmap(taskIndicatorCurrent);
 		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
 		levelData.clearLevelData();

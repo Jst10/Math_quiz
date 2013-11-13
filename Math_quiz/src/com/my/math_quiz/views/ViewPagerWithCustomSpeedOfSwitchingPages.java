@@ -13,7 +13,8 @@ import android.widget.Scroller;
 public class ViewPagerWithCustomSpeedOfSwitchingPages extends ViewPager {
 
 	
-	private int mDuration = 140;
+	private final int fastSpeed=80;
+	private int mDuration = fastSpeed;
 	public void setSlowSpeed(){
 		mDuration = 200;
 	}
@@ -55,14 +56,14 @@ public class ViewPagerWithCustomSpeedOfSwitchingPages extends ViewPager {
 	    public void startScroll(int startX, int startY, int dx, int dy, int duration) {
 	        // Ignore received duration, use fixed one instead
 	        super.startScroll(startX, startY, dx, dy, mDuration);
-	        mDuration=140;
+	        mDuration=fastSpeed;
 	    }
 	
 	    @Override
 	    public void startScroll(int startX, int startY, int dx, int dy) {
 	        // Ignore received duration, use fixed one instead
 	        super.startScroll(startX, startY, dx, dy, mDuration);
-	        mDuration=140;
+	        mDuration=fastSpeed;
 	    }
 	}
 
