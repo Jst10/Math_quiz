@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -118,7 +119,9 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 
 	@Override
 	public void onRightButtonClick() {
-		// TODO Auto-generated method stub
+		Log.d("starting","start preference activity");
+		Intent intent = new Intent(LevelsDisplayedActivity.this, PreferenceActivity.class);
+		startActivity(intent);
 		
 	}
 

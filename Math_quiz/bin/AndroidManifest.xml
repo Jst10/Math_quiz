@@ -29,6 +29,7 @@
         <activity android:name="com.my.math_quiz.TutorialActivity"></activity>
         <activity android:name="com.my.math_quiz.ClassActivity"></activity>
         <activity android:name="com.my.math_quiz.SingelPlayerGameActivity"></activity>
+         <activity android:name="com.my.math_quiz.PreferenceActivity"></activity>
     </application>
 
 </manifest>

@@ -173,7 +173,8 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		
 	@Override
 	public void onRightButtonClick() {
-		//TODO we must do smth. don't know yet	
+		Intent intent = new Intent(SingelPlayerGameActivity.this, PreferenceActivity.class);
+		startActivity(intent);
 	}
 	/**END the title bar listener methods*/
 

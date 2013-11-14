@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+     <PreferenceCategory 
+        android:key="pref_key_single_player_category"
+        android:title="Eno igralske nastavitve">
+            <ListPreference
+            android:key="pref_key_delay_correct"
+            android:title="Zakasnitve pravilnega"
+            android:summary="Čas preden se prestavi na naslednji test po pravilnem odgovoru"
+            android:defaultValue="0"
+            android:entries="@array/deleyBeforeSwitch"
+            android:entryValues="@array/deleyBeforeSwitchValues"
+     	   />   
+           <ListPreference
+            android:key="pref_key_delay_wrong"
+            android:title="Zakasnitve napačnega"
+            android:summary="Čas preden se prestavi na naslednji test po napačnem odgovoru"
+            android:defaultValue="500"
+            android:entries="@array/deleyBeforeSwitch"
+            android:entryValues="@array/deleyBeforeSwitchValues"
+     	   />
+            <ListPreference
+            android:key="pref_key_number_of_test"
+            android:title="Število testov"
+            android:defaultValue="10"
+            android:summary="Število testo v enem sklopu igre"
+            android:entries="@array/numberOfGamesInRound"
+            android:entryValues="@array/numberOfGamesInRoundValue"
+     	   />
+    </PreferenceCategory>
+    <PreferenceCategory 
+        android:key="pref_key_multi_player_category"
+        android:title="Več igralske nastavitve">
+        
+        <EditTextPreference
+            android:key="pref_key_nickname"
+            android:title="Vzdevek"
+            android:summary="Vzdevek pod katerem bote prikazani"
+            android:dialogTitle="Vzdevek"
+            android:dialogMessage="Izberite si vzdevek"   
+            android:defaultValue="neznan" />
+    
+	</PreferenceCategory>
+	
+<!--      <PreferenceCategory  -->
+<!--         android:key="pref_key_" -->
+<!--         android:title="Več igralske nastavitve"> -->
+   
+        
+<!--         <CheckBoxPreference -->
+<!--             android:key="perform_updates" -->
+<!--             android:summary="Uporabi na zadnje uporabljen IP naslov in PORT za povezavo" -->
+<!--             android:title="Dinamični podatki" -->
+<!--             android:defaultValue="true" -->
+<!--         /> -->
+<!--   		<CheckBoxPreference -->
+<!--             android:key="pref_key_auto_delete" -->
+<!--             android:summary="@string/pref_summary_auto_delete" -->
+<!--             android:title="@string/pref_title_auto_delete" -->
+<!--             android:defaultValue="false"/> -->
+<!-- 	</PreferenceCategory> -->
+</PreferenceScreen>

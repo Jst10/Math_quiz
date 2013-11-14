@@ -3,8 +3,11 @@ package com.my.math_quiz;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 
 public class LaunchActivity extends Activity {
 
@@ -13,6 +16,16 @@ public class LaunchActivity extends Activity {
 //		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_launch);
+		
+		((ImageButton)findViewById(R.id.ALsettingsButton)).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(LaunchActivity.this, PreferenceActivity.class);
+				startActivity(intent);
+				
+			}
+		});
 	}
 
 	@Override
@@ -38,7 +51,7 @@ public class LaunchActivity extends Activity {
 			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_TUTORIAL_SELECTION);
 			startActivity(intent);
 		}
-		
+
 	}
 
 }

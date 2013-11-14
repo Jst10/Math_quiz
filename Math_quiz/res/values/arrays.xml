@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="deleyBeforeSwitch">
+        <item name="0">0s</item>
+        <item name="100">0.1s</item>
+        <item name="200">0.2s</item>
+        <item name="500">0.5s</item>
+        <item name="1000">1s</item>
+        <item name="3000">3s</item>
+        <item name="5000">5s</item>
+    </string-array>
+    
+    <string-array name="deleyBeforeSwitchValues">
+        <item name="0">0</item>
+        <item name="100">100</item>
+        <item name="200">200</item>
+        <item name="500">500</item>
+        <item name="1000">1000</item>
+        <item name="3000">3000</item>
+        <item name="5000">300000</item>
+    </string-array>
+
+    
+    
+     <string-array name="numberOfGamesInRound">
+        <item name="10">10</item>
+        <item name="20">20</item>
+        <item name="30">30</item>
+        
+    </string-array>
+    
+    <string-array name="numberOfGamesInRoundValue">
+        <item name="10">10</item>
+        <item name="20">20</item>
+        <item name="30">30</item>
+    </string-array>
+</resources>
