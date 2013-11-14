@@ -41,6 +41,10 @@ public interface LevelDataIN {
 	 * if level is not previous stopped method will return -1 */
 	public long getDurationOfLevel();
 	
-	
+	/**this method return next not solved test position 
+	 * @param currentPosition position from where it method will look for not solved test
+	 * @return the position of next not solved test, from currentPosition, if is no more test for solve 
+	 * from currentPosition it return test before currentPostion and if event ther is no more test it retun -1 */
+	public int getNextNotSolvedTestPosition(int currentPosition);
 
 }

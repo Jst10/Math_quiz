@@ -57,7 +57,7 @@ public class ApplicationClass extends Application{
 		return 0;
 	}
 	public static int getDelayOnWrongAnswerInMiliS(){
-		return 1000;
+		return 500;
 	}
 	public static Point getDisplaySize(){
 		if(displaySize==null){

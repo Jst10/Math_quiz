@@ -121,6 +121,27 @@ public class LevelDescripction {
 			return numberOfUnsolved;
 		}
 		
+		/**this method return next not solved test position 
+		 * @param currentPosition position from where it method will look for not solved test
+		 * @return the position of next not solved test, from currentPosition, if is no more test for solve 
+		 * from currentPosition it return test before currentPostion and if event ther is no more test it retun -1 */
+		@Override
+		public int getNextNotSolvedTestPosition(int currentPosition){
+			
+			for(int i=currentPosition+1; i<tasks.size(); i++){
+				if(tasks.get(i).getSelectedAnswer()==-1){
+					return i;
+				}
+			}
+			
+			for(int i=currentPosition-1; i>=0; i--){
+				if(tasks.get(i).getSelectedAnswer()==-1){
+					return i;
+				}
+			}
+			return -1;
+		}
+		
 		@Override
 		public int getScoreAchived() {
 			int score=0;

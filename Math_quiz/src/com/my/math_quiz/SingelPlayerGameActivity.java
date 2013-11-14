@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -118,6 +119,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			
 			@Override
 			public void onPageScrollStateChanged(int state) {
+				handler.removeCallbacks(runablePageSwitching);
 			}
 		});
 		
@@ -302,15 +304,41 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				adapterForViewPager.notifyDataSetChanged();
 				pager.setCurrentItem(numberOfTasksInRound,true);
 				
-			}else if(t.getSelectedAnswer()==t.getCorrectAnswer()){
-				//we answer correct to answer an we move forward to next task  or back to previous if isn't solved already
-				pager.setSlowSpeed();
-				pager.setCurrentItem(pager.getCurrentItem()+1,true);
+			}else {
+				int delay=0;
+				if(t.getSelectedAnswer()==t.getCorrectAnswer()){
+					//we answer correct to answer an we move forward to next task  or back to previous if isn't solved already
+					delay=ApplicationClass.getDelayOnCorrectAnswerInMiliS();
+				}else{
+					//we answer wrong and it is other delay sett
+					delay=ApplicationClass.getDelayOnWrongAnswerInMiliS();
+				}
+				moveDelayToPage(delay);
 			}
 		}
+		//timer.
 	}
-	
-	
+	final Handler handler = new Handler();
+	private void moveDelayToPage(int delay){
+		handler.postDelayed(runablePageSwitching, delay);
+	}
+	final Runnable runablePageSwitching=new Runnable() {
+		  @Override
+		  public void run() {
+			pager.setSlowSpeed();
+			pager.setCurrentItem(levelData.getNextNotSolvedTestPosition(pager.getCurrentItem()),true);
+		  }
+	};
+//	CountDownTimer timer=new CountDownTimer(5000,5000) {
+//		@Override
+//		public void onTick(long millisUntilFinished) {}
+//		
+//		@Override
+//		public void onFinish() {
+//			
+//			
+//		}
+//	};
 	@Override
 	public void finish() {
 		levelData.clearLevelData();
