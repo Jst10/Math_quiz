@@ -13,7 +13,18 @@
        android:layout_weight="50"
        android:rotation="180"
         >
-
+		<ProgressBar 
+		    android:id="@+id/progressBar1"
+		    style="?android:attr/progressBarStyleHorizontal"
+		    android:max="100"
+		    android:progress="20"
+		    android:layout_width="wrap_content"
+		    android:layout_height="20dp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentTop="true"
+		    android:progressDrawable="@drawable/progess_drawable_blue"
+		    />
        <TextView
            android:id="@+id/textView1"
            android:layout_width="wrap_content"
@@ -26,11 +37,12 @@
        
        
        	<include layout="@layout/p_bottom_buttons"
+       	    android:id="@+id/bootomButtons1"
        	    android:layout_alignParentBottom="true"
-       	    android:layout_height="50dp"
-       	    android:layout_width="match_parent"/> 
+       	  /> 
        
    </RelativeLayout>
+   
    
    <RelativeLayout
        android:id="@+id/MPGOPmiddleSeperator"
@@ -41,13 +53,27 @@
      >
       
    </RelativeLayout>
+   
+   
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="0px"
        android:layout_weight="50"
         >
-
-       <TextView
+		<ProgressBar 
+		    android:id="@+id/progressBar2"
+		    style="?android:attr/progressBarStyleHorizontal"
+		    android:max="100"
+		    android:progress="20"
+		    android:layout_width="wrap_content"
+		    android:layout_height="20dp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentTop="true"
+		    android:progressDrawable="@drawable/progess_drawable_blue"
+		    />
+    
+		<TextView
            android:id="@+id/textView2"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -59,11 +85,10 @@
        
        
        	<include layout="@layout/p_bottom_buttons"
-       	    android:layout_alignParentBottom="true"
-       	    android:layout_height="50dp"
-       	    android:layout_width="match_parent"/> 
+       	    android:id="@+id/bootomButtons2"
+       	   />
 
-
+      
    </RelativeLayout>
    
 <!--      <RelativeLayout -->
