@@ -17,8 +17,8 @@
 	  
 	<com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages
 	     android:id="@+id/ASPGViewPager"
-	     android:layout_width="match_parent"
-   		 android:layout_height="match_parent"
+	     android:layout_width="fill_parent"
+   		 android:layout_height="fill_parent"
    		 android:layout_below="@+id/ASPGRlayoutBelowTitleBar"
 	    >
 	   </com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages>

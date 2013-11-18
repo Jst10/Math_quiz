@@ -1,6 +1,7 @@
 package com.my.math_quiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,8 +40,9 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 //			Intent intent = new Intent(this, SinglePlayerActivity.class);
 //			startActivity(intent);
 		} else if(v.getId()==R.id.MPOneDevice){
-//			Intent intent = new Intent(this, ClassActivity.class);
-//			startActivity(intent);
+			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
+			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_MULTIPLAYER_SELECTION_ONE_DEVICE);
+			startActivity(intent);
 		}
 		
 	}

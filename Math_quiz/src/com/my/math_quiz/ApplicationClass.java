@@ -28,7 +28,7 @@ public class ApplicationClass extends Application{
 	private static LevelDescripction[] levelsDescriptions=new LevelDescripction[NUMBER_OF_LEVELS];
 	private static Point displaySize=null;
 
-	public static final int NUMBER_TASK_LEVEL_MINIMUM=5;
+	public static final int NUMBER_TASK_LEVEL_MINIMUM=10;
 	public static final int NUMBER_TASK_LEVEL_MEDINUM=20;
 	public static final int NUMBER_TASK_LEVEL_MAXIMUM=30;
 	
@@ -52,7 +52,7 @@ public class ApplicationClass extends Application{
 	}
 	
 	public static int getCurrentNumberOfGamesInOneRound(){
-		return NUMBER_TASK_LEVEL_MINIMUM;
+		return MyPreferences.numberOfGames;
 	}
 	public static int getMaximumNumberOfGamesInOneRound(){
 		return NUMBER_TASK_LEVEL_MAXIMUM;

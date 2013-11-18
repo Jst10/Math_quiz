@@ -32,7 +32,7 @@ import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 import com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages;
 
-public class SingelPlayerGameActivity extends Activity implements BottomButtonListener,TitleBarListener,ResultBottomButtonListener{
+public class MultiPlayerOneDeviceGameActivity extends Activity implements BottomButtonListener,TitleBarListener,ResultBottomButtonListener{
 
 	ViewPagerWithCustomSpeedOfSwitchingPages pager;
 	LevelDescripction levelDescripction;
@@ -60,80 +60,80 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_single_player_game);
-		
-		Intent myIntent = getIntent();
-		selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
-		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
-		
-		
-		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
-		levelDescripction.setWasAlreadyOpendOnTrue();
-		levelData=levelDescripction.getLevelData();
-		
-		inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
-		titleBar.setTitleBarListener(this);
-		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
-		titleBar.setTitle(1+"/"+numberOfTasksInRound);
-		
-		pager=(ViewPagerWithCustomSpeedOfSwitchingPages)findViewById(R.id.ASPGViewPager);
-		pager.setOnPageChangeListener(new OnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				Task t;
-				if(position<numberOfTasksInRound){
-					titleBar.setTitle((position+1)+"/"+numberOfTasksInRound);
-					imageViews[position].setImageBitmap(taskIndicatorCurrent);
-					t=tasks.get(position);
-					if(t.getSelectedAnswer()==-1)
-						levelData.resumTimingLevel();
-				}else{
-					//last page
-					titleBar.setTitle("Dosežki");
-				}
-				if(position>0){
-					t=tasks.get(position-1);
-					if(t.getSelectedAnswer()==-1)
-						imageViews[position-1].setImageBitmap(taskIndicatorNotSelectedAnswer);
-					else if(t.getSelectedAnswer()==t.getCorrectAnswer())
-						imageViews[position-1].setImageBitmap(taskIndicatorCorrectAnswer);
-					else
-						imageViews[position-1].setImageBitmap(taskIndicatorWrongAnswer);
-				}
-				if(position<numberOfTasksInRound-1){
-					t=tasks.get(position+1);
-					if(t.getSelectedAnswer()==-1)
-						imageViews[position+1].setImageBitmap(taskIndicatorNotSelectedAnswer);
-					else if(t.getSelectedAnswer()==t.getCorrectAnswer())
-						imageViews[position+1].setImageBitmap(taskIndicatorCorrectAnswer);
-					else
-						imageViews[position+1].setImageBitmap(taskIndicatorWrongAnswer);
-				}
-			}
-			
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-				
-			}
-			
-			@Override
-			public void onPageScrollStateChanged(int state) {
-				handler.removeCallbacks(runablePageSwitching);
-			}
-		});
-		
-		
-		
-		taskIndicatorCorrectAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_correct_answer);
-		taskIndicatorWrongAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_wrong_answer);
-		taskIndicatorNotSelectedAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_not_selected);
-		taskIndicatorCurrent=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_current);
-		
-		layoutForIndicators=(LinearLayout)findViewById(R.id.ASPGRlayoutBelowTitleBar);
-		
-		restartLevel();
+//		setContentView(R.layout.activity_multi_player_one_device_game);
+		setContentView(R.layout.view_multi_player_game_one_device_one_page);
+//		Intent myIntent = getIntent();
+//		selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
+//		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
+//		
+//		
+//		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
+//		levelDescripction.setWasAlreadyOpendOnTrue();
+//		levelData=levelDescripction.getLevelData();
+//		
+//		inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//		
+//		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
+//		titleBar.setTitleBarListener(this);
+//		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
+//		titleBar.setTitle(1+"/"+numberOfTasksInRound);
+//		
+//		pager=(ViewPagerWithCustomSpeedOfSwitchingPages)findViewById(R.id.ASPGViewPager);
+//		pager.setOnPageChangeListener(new OnPageChangeListener() {
+//			@Override
+//			public void onPageSelected(int position) {
+//				Task t;
+//				if(position<numberOfTasksInRound){
+//					titleBar.setTitle((position+1)+"/"+numberOfTasksInRound);
+//					imageViews[position].setImageBitmap(taskIndicatorCurrent);
+//					t=tasks.get(position);
+//					if(t.getSelectedAnswer()==-1)
+//						levelData.resumTimingLevel();
+//				}else{
+//					//last page
+//					titleBar.setTitle("Dosežki");
+//				}
+//				if(position>0){
+//					t=tasks.get(position-1);
+//					if(t.getSelectedAnswer()==-1)
+//						imageViews[position-1].setImageBitmap(taskIndicatorNotSelectedAnswer);
+//					else if(t.getSelectedAnswer()==t.getCorrectAnswer())
+//						imageViews[position-1].setImageBitmap(taskIndicatorCorrectAnswer);
+//					else
+//						imageViews[position-1].setImageBitmap(taskIndicatorWrongAnswer);
+//				}
+//				if(position<numberOfTasksInRound-1){
+//					t=tasks.get(position+1);
+//					if(t.getSelectedAnswer()==-1)
+//						imageViews[position+1].setImageBitmap(taskIndicatorNotSelectedAnswer);
+//					else if(t.getSelectedAnswer()==t.getCorrectAnswer())
+//						imageViews[position+1].setImageBitmap(taskIndicatorCorrectAnswer);
+//					else
+//						imageViews[position+1].setImageBitmap(taskIndicatorWrongAnswer);
+//				}
+//			}
+//			
+//			@Override
+//			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//				
+//			}
+//			
+//			@Override
+//			public void onPageScrollStateChanged(int state) {
+//				handler.removeCallbacks(runablePageSwitching);
+//			}
+//		});
+//		
+//		
+//		
+//		taskIndicatorCorrectAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_correct_answer);
+//		taskIndicatorWrongAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_wrong_answer);
+//		taskIndicatorNotSelectedAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_not_selected);
+//		taskIndicatorCurrent=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_current);
+//		
+//		layoutForIndicators=(LinearLayout)findViewById(R.id.ASPGRlayoutBelowTitleBar);
+//		
+//		restartLevel();
 	}
 	private void restartLevel(){
 		additionalPage=0;
@@ -171,13 +171,13 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	@Override
 	public void onLeftButtonClick() {
 		// we finish this activity
-		SingelPlayerGameActivity.this.finish();
+		MultiPlayerOneDeviceGameActivity.this.finish();
 		
 	}
 		
 	@Override
 	public void onRightButtonClick() {
-		Intent intent = new Intent(SingelPlayerGameActivity.this, PreferenceActivity.class);
+		Intent intent = new Intent(MultiPlayerOneDeviceGameActivity.this, PreferenceActivity.class);
 		startActivity(intent);
 	}
 	/**END the title bar listener methods*/
@@ -200,26 +200,26 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	}
 	/**END the ResultBotomButton listener methods*/
 
-	@Override
-	protected void onDestroy() {
-		levelData.stopTimingLevel();
-		super.onDestroy();
-	}
-	@Override
-	protected void onPause() {
-		levelData.pauseTimingLevel();
-		super.onPause();
-	}
-	@Override
-	protected void onPostResume() {
-		levelData.resumTimingLevel();
-		super.onPostResume();
-	}
-	@Override
-	protected void onResume() {
-		levelData.resumTimingLevel();
-		super.onResume();
-	}
+//	@Override
+//	protected void onDestroy() {
+//		levelData.stopTimingLevel();
+//		super.onDestroy();
+//	}
+//	@Override
+//	protected void onPause() {
+//		levelData.pauseTimingLevel();
+//		super.onPause();
+//	}
+//	@Override
+//	protected void onPostResume() {
+//		levelData.resumTimingLevel();
+//		super.onPostResume();
+//	}
+//	@Override
+//	protected void onResume() {
+//		levelData.resumTimingLevel();
+//		super.onResume();
+//	}
 
 	class MyAdapterForSingelPLayerGameActivity extends PagerAdapter{
 		int numbrOfTests;
@@ -241,7 +241,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		public Object instantiateItem(ViewGroup container, int position) {
 //			return super.instantiateItem(container, position);
 			if(position<numberOfTasksInRound){
-				View v = inflater.inflate(R.layout.view_single_player_game_one_page, null);
+				View v = inflater.inflate(R.layout.view_multi_player_game_one_device_one_page, null);
 				TextView text=(TextView)v.findViewById(R.id.VSPGOPtextView);
 				Task currentTask=tasks.get(position);
 				
@@ -249,7 +249,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				InGameBottomButtoms buttoms;
 				buttoms=(InGameBottomButtoms)v.findViewById(R.id.BBBottomBUttons);
 				buttoms.seButtontTexts(currentTask.getAnswers());
-				buttoms.setListener(SingelPlayerGameActivity.this);
+				buttoms.setListener(MultiPlayerOneDeviceGameActivity.this);
 				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer());
 				pager.addView(v);
 				return v;
@@ -277,7 +277,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			
 					//((RelativeLayout)resultPage).addView(t);
 //					((Button)resultPage.findViewById(R.id))
-					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).setListener(SingelPlayerGameActivity.this);
+					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).setListener(MultiPlayerOneDeviceGameActivity.this);
 					
 				
 				}
@@ -344,20 +344,20 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 //			
 //		}
 //	};
-	@Override
-	public void finish() {
-		levelData.clearLevelData();
-		//user didn0t finished game so we don0t need to update datas
-		if(additionalPage==0){
-			Intent returnIntent = new Intent();
-			setResult(RESULT_CANCELED, returnIntent);        
-		}else{
-			Intent returnIntent = new Intent();
-			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_SINGLE_PLAYER_RESULT,selectedLevel);
-			setResult(RESULT_OK,returnIntent);  
-		}
-		super.finish();
-	}
+//	@Override
+//	public void finish() {
+//		levelData.clearLevelData();
+//		//user didn0t finished game so we don0t need to update datas
+//		if(additionalPage==0){
+//			Intent returnIntent = new Intent();
+//			setResult(RESULT_CANCELED, returnIntent);        
+//		}else{
+//			Intent returnIntent = new Intent();
+//			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_SINGLE_PLAYER_RESULT,selectedLevel);
+//			setResult(RESULT_OK,returnIntent);  
+//		}
+//		super.finish();
+//	}
 
 	
 

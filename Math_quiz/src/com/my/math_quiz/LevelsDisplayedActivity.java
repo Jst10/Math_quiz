@@ -63,11 +63,11 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 			LevelDescripction lds=ApplicationClass.getLevelDescription(position);
 			switch (selectedMode) {
 				case MODE_BEFORE_SINGLE_PLAYER_GAME:
-				
+//				TODO you have to count the tutorial if user first time open the level
 //					if(lds.wasAlreadyOpend()==true){
-						Intent intent = new Intent(LevelsDisplayedActivity.this, SingelPlayerGameActivity.class);
-						intent.putExtra("EXTRA_SELECTED_LEVEL", position);
-						startActivityForResult(intent,55);
+						Intent intent1 = new Intent(LevelsDisplayedActivity.this, SingelPlayerGameActivity.class);
+						intent1.putExtra("EXTRA_SELECTED_LEVEL", position);
+						startActivityForResult(intent1,55);
 //					}
 //					else{
 //						//we must show tutorial
@@ -75,7 +75,8 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 					
 				break;
 				case MODE_MULTIPLAYER_SELECTION_ONE_DEVICE:
-				
+					Intent intent2 = new Intent(LevelsDisplayedActivity.this, MultiPlayerOneDeviceGameActivity.class);
+					startActivity(intent2);
 				break;
 				case MODE_MULTIPLAYER_SELECTION_WLAN:
 				

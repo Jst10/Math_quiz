@@ -3,7 +3,8 @@ package com.my.math_quiz.utils;
 import java.util.Random;
 
 import com.my.math_quiz.utils.Generator.SolutionGeneratorInterface;
-
+//TODO look at this link for displaying symbols now I don0t have time
+//	http://stackoverflow.com/questions/14112548/the-cuberoot-symbol-in-java-string
 public  class Generator {
 
 	public static interface SolutionGeneratorInterface{
@@ -11,7 +12,6 @@ public  class Generator {
 		public void setRealSolution(int realSolution);
 		
 	}
-
 	public static Random rnd=new Random(System.currentTimeMillis());
 	public static int getRandomInArea(int from, int to){
 		to=Math.abs(to);
