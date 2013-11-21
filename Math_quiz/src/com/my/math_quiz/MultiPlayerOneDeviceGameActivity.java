@@ -118,9 +118,11 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 		/**@param position the position of button on which user clicked*/
 		@Override
 		public void onButtonClick(InGameBottomButtoms buttoms, int position) {
-			Task t=tasks.get( currentTaskPosition);
-			if(buttoms.setCollors(position, t.getCorrectAnswer())){
-				onAnswer(1,position==t.getCorrectAnswer());
+			if(wasAnswerAnswerCorrectAnswer==false){
+				Task t=tasks.get( currentTaskPosition);
+				if(buttoms.setCollors(position, t.getCorrectAnswer())){
+					onAnswer(1,position==t.getCorrectAnswer());
+				}
 			}
 		}
 	};
@@ -129,9 +131,11 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 		/**@param position the position of button on which user clicked*/
 		@Override
 		public void onButtonClick(InGameBottomButtoms buttoms, int position) {
-			Task t=tasks.get( currentTaskPosition);
-			if(buttoms.setCollors(position, t.getCorrectAnswer())){
-				onAnswer(2,position==t.getCorrectAnswer());
+			if(wasAnswerAnswerCorrectAnswer==false){
+				Task t=tasks.get( currentTaskPosition);
+				if(buttoms.setCollors(position, t.getCorrectAnswer())){
+					onAnswer(2,position==t.getCorrectAnswer());
+				}
 			}
 			
 		}
@@ -139,7 +143,25 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 	
 	private void onAnswer(int player,boolean wasCorrect){
 //		Log.d("onbuttonclick","buttonclickes");
-		displayDataFromSpecificTest(++currentTaskPosition);
+//		displayDataFromSpecificTest(++currentTaskPosition);
+		handler.removeCallbacks(runablePageSwitching);
+		if(wasCorrect){
+			hasAnyoneAnswerAtThisTask=true;
+			wasAnswerAnswerCorrectAnswer=true;
+			//we clicke correct solution and even if we frt clicked or second we go to next round
+			moveDelayToPage(ApplicationClass.getMPDelayOnCorrectAnswerInMiliS());
+			
+		}else if(hasAnyoneAnswerAtThisTask==false){
+			hasAnyoneAnswerAtThisTask=true;
+			wasAnswerAnswerCorrectAnswer=false;
+			//we clicked first and wrong
+			moveDelayToPage(ApplicationClass.getMPRemainTimeToAnswer());
+		}
+		else{
+			wasAnswerAnswerCorrectAnswer=false;
+			//we clicked second and wrong
+			moveDelayToPage(ApplicationClass.getMPDelayOnWrongAnswerInMiliS());
+		}
 		//TODO check if anyone was answerd yet and who is first and that so on
 //		if()
 //		if(levelData.getNumberOfUnsolvedTests()==0){
@@ -168,8 +190,7 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 	final Runnable runablePageSwitching=new Runnable() {
 		  @Override
 		  public void run() {
-//			pager.setSlowSpeed();
-//			pager.setCurrentItem(levelData.getNextNotSolvedTestPosition(pager.getCurrentItem()),true);
+			displayDataFromSpecificTest(++currentTaskPosition);
 		  }
 	};
 
