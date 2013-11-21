@@ -13,18 +13,28 @@
        android:layout_weight="50"
        android:rotation="180"
         >
-		<ProgressBar 
-		    android:id="@+id/MPODGVprogressBar1"
-		    style="?android:attr/progressBarStyleHorizontal"
-		    android:max="100"
-		    android:progress="20"
-		    android:layout_width="wrap_content"
-		    android:layout_height="20dp"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentRight="true"
+<!-- 		<ProgressBar  -->
+<!-- 		    android:id="@+id/MPODGVprogressBar1" -->
+<!-- 		    style="?android:attr/progressBarStyleHorizontal" -->
+<!-- 		    android:max="100" -->
+<!-- 		    android:progress="20" -->
+<!-- 		    android:layout_width="wrap_content" -->
+<!-- 		    android:layout_height="20dp" -->
+<!-- 		    android:layout_alignParentLeft="true" -->
+<!-- 		    android:layout_alignParentRight="true" -->
+<!-- 		    android:layout_alignParentTop="true" -->
+<!-- 		    android:progressDrawable="@drawable/progess_drawable_blue" -->
+<!-- 		    /> -->
+		<LinearLayout
+		    android:id="@+id/MPODGlayoutForIndicator1" 
 		    android:layout_alignParentTop="true"
-		    android:progressDrawable="@drawable/progess_drawable_blue"
-		    />
+		    android:orientation="horizontal"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content">
+		    
+		    
+		</LinearLayout>
+	  
        <TextView
            android:id="@+id/MPODGVtextView1"
            android:layout_width="wrap_content"
@@ -60,19 +70,25 @@
        android:layout_height="0px"
        android:layout_weight="50"
         >
-		<ProgressBar 
-		    android:id="@+id/MPODGVprogressBar2"
-		    style="?android:attr/progressBarStyleHorizontal"
-		    android:max="100"
-		    android:progress="20"
-		    android:layout_width="wrap_content"
-		    android:layout_height="20dp"
-		    android:layout_alignParentLeft="true"
-		    android:layout_alignParentRight="true"
+<!-- 		<ProgressBar  -->
+<!-- 		    android:id="@+id/MPODGVprogressBar2" -->
+<!-- 		    style="?android:attr/progressBarStyleHorizontal" -->
+<!-- 		    android:max="100" -->
+<!-- 		    android:progress="20" -->
+<!-- 		    android:layout_width="wrap_content" -->
+<!-- 		    android:layout_height="20dp" -->
+<!-- 		    android:layout_alignParentLeft="true" -->
+<!-- 		    android:layout_alignParentRight="true" -->
+<!-- 		    android:layout_alignParentTop="true" -->
+<!-- 		    android:progressDrawable="@drawable/progess_drawable_blue" -->
+<!-- 		    /> -->
+    	<LinearLayout
+		    android:id="@+id/MPODGlayoutForIndicator2" 
 		    android:layout_alignParentTop="true"
-		    android:progressDrawable="@drawable/progess_drawable_blue"
-		    />
-    
+		    android:orientation="horizontal"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content">
+	 </LinearLayout>  
 		<TextView
            android:id="@+id/MPODGVtextView2"
            android:layout_width="wrap_content"

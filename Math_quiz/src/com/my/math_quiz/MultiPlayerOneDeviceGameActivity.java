@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,9 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ImageView.ScaleType;
 
 import com.my.math_quiz.interfaces.LevelDataIN;
 import com.my.math_quiz.utils.LevelDescripction;
@@ -34,6 +39,12 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 	
 	RelativeLayout pageContainer=null;
 	int currentTaskPosition;
+	
+	Bitmap taskIndicatorCorrectAnswer;
+	Bitmap taskIndicatorWrongAnswer;
+	Bitmap taskIndicatorNotSelectedAnswer;
+	Bitmap taskIndicatorCurrent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,19 +64,32 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
 		levelData=levelDescripction.getLevelData();
 
+		taskIndicatorCorrectAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_correct_answer);
+		taskIndicatorWrongAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_wrong_answer);
+		taskIndicatorNotSelectedAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_not_selected);
+		taskIndicatorCurrent=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_current);
+		
 		setGameViewToContainerAndRestart();
 	}
 	
-	ProgressBar progressBar1=null;
-	InGameBottomButtoms bottomButtons1=null;
+//	ProgressBar progressBar1=null;
+//	ProgressBar progressBar2=null;
 	TextView texView1=null;
-	
-	ProgressBar progressBar2=null;
-	InGameBottomButtoms bottomButtons2=null;
 	TextView texView2=null;
+	
+	InGameBottomButtoms bottomButtons1=null;
+	InGameBottomButtoms bottomButtons2=null;
 	
 	boolean hasAnyoneAnswerAtThisTask=false;
 	boolean wasAnswerAnswerCorrectAnswer=false;
+	
+	LinearLayout layoutForIndicators1;
+	LinearLayout layoutForIndicators2;
+	
+	ImageView[] imageViews1;
+	ImageView[] imageViews2;
+	
+	
 	private void setGameViewToContainerAndRestart(){
 		pageContainer.removeAllViews();
 		View v = inflater.inflate(R.layout.view_multi_player_game_one_device_one_page, null);
@@ -81,11 +105,39 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 		texView1=(TextView)v.findViewById(R.id.MPODGVtextView1);
 		texView2=(TextView)v.findViewById(R.id.MPODGVtextView2);
 		
-		progressBar1=(ProgressBar)v.findViewById(R.id.MPODGVprogressBar1);
-		progressBar2=(ProgressBar)v.findViewById(R.id.MPODGVprogressBar2);
+//		progressBar1=(ProgressBar)v.findViewById(R.id.MPODGVprogressBar1);
+//		progressBar2=(ProgressBar)v.findViewById(R.id.MPODGVprogressBar2);
 		
-		progressBar1.setMax(numberOfTasksInRound);
-		progressBar2.setMax(numberOfTasksInRound);
+		layoutForIndicators1=(LinearLayout)v.findViewById(R.id.MPODGlayoutForIndicator1);
+		layoutForIndicators2=(LinearLayout)v.findViewById(R.id.MPODGlayoutForIndicator2);
+		
+//		progressBar1.setMax(numberOfTasksInRound);
+//		progressBar2.setMax(numberOfTasksInRound);
+		
+		layoutForIndicators1.removeAllViews();
+		imageViews1=new ImageView[numberOfTasksInRound];
+		layoutForIndicators2.removeAllViews();
+		imageViews2=new ImageView[numberOfTasksInRound];
+		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/numberOfTasksInRound;
+		int oneIndicatorHeight=ApplicationClass.getDisplaySize().x/ApplicationClass.getMaximumNumberOfGamesInOneRound();
+		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(oneIndicatorWidth,oneIndicatorHeight);
+	
+		for(int i=0; i<imageViews1.length; i++){
+			imageViews1[i]=new ImageView(this);
+			imageViews1[i].setLayoutParams(layoutParams);
+			imageViews1[i].setImageBitmap(taskIndicatorNotSelectedAnswer);
+			imageViews1[i].setScaleType(ScaleType.CENTER_INSIDE);
+			layoutForIndicators1.addView(imageViews1[i]);
+			
+			imageViews2[i]=new ImageView(this);
+			imageViews2[i].setLayoutParams(layoutParams);
+			imageViews2[i].setImageBitmap(taskIndicatorNotSelectedAnswer);
+			imageViews2[i].setScaleType(ScaleType.CENTER_INSIDE);
+			layoutForIndicators2.addView(imageViews2[i]);
+		}
+		imageViews1[0].setImageBitmap(taskIndicatorCurrent);
+		imageViews2[0].setImageBitmap(taskIndicatorCurrent);
+		
 		
 		bottomButtons1.setListener(bottomButtonListener1);
 		bottomButtons2.setListener(bottomButtonListener2);
@@ -97,8 +149,8 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  {
 	/**This method display text of task and set answers to buttons and also set progress bars to right position*/
 	private void displayDataFromSpecificTest(int position){
 		currentTaskPosition=position;
-		progressBar1.setProgress(position);
-		progressBar2.setProgress(position);	
+//		progressBar1.setProgress(position);
+//		progressBar2.setProgress(position);	
 		
 		Task currentTask=tasks.get(currentTaskPosition);
 		texView1.setText(currentTask.getText());
