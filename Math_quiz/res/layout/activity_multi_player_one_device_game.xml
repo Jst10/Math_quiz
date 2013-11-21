@@ -3,24 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/MPODGContainer"
     >
-    <include layout="@layout/p_title_bar"/>
-	<LinearLayout
-	    android:id="@+id/ASPGRlayoutBelowTitleBar" 
-	    android:layout_below="@+id/TBtitleBar"
-	    android:orientation="horizontal"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content">
-	    
-	    
-	</LinearLayout>
-	  
-	<com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages
-	     android:id="@+id/ASPGViewPager"
-	     android:layout_width="fill_parent"
-   		 android:layout_height="fill_parent"
-   		 android:layout_below="@+id/ASPGRlayoutBelowTitleBar"
-	    >
-	   </com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages>
+   
 </RelativeLayout>
 

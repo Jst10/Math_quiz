@@ -40,7 +40,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	ArrayList<Task> tasks;
 	LayoutInflater inflater;
 	
-	
+	/**This are indicators images on which task are now which task we answer yet wrong or correct*/
 	ImageView[] imageViews;
 	int numberOfTasksInRound;
 	int selectedLevel;
@@ -64,7 +64,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		
 		Intent myIntent = getIntent();
 		selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
-		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
+		numberOfTasksInRound=ApplicationClass.getSPCurrentNumberOfGamesInOneRound();
 		
 		
 		levelDescripction= ApplicationClass.getLevelDescription(selectedLevel);
@@ -137,7 +137,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	}
 	private void restartLevel(){
 		additionalPage=0;
-		numberOfTasksInRound=ApplicationClass.getCurrentNumberOfGamesInOneRound();
+		numberOfTasksInRound=ApplicationClass.getSPCurrentNumberOfGamesInOneRound();
 		layoutForIndicators.removeAllViews();
 		
 		//TODO move this out of constructor to restart method because if i change the number of 
@@ -313,10 +313,10 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				int delay=0;
 				if(t.getSelectedAnswer()==t.getCorrectAnswer()){
 					//we answer correct to answer an we move forward to next task  or back to previous if isn't solved already
-					delay=ApplicationClass.getDelayOnCorrectAnswerInMiliS();
+					delay=ApplicationClass.getSPDelayOnCorrectAnswerInMiliS();
 				}else{
 					//we answer wrong and it is other delay sett
-					delay=ApplicationClass.getDelayOnWrongAnswerInMiliS();
+					delay=ApplicationClass.getSPDelayOnWrongAnswerInMiliS();
 				}
 				moveDelayToPage(delay);
 			}

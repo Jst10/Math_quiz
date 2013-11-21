@@ -42,7 +42,7 @@ public class Task {
 	public int getCorrectAnswer(){
 		return correctAnswer;
 	}
-	/**Set the selected answer to specific task
+	/**Set the selected answer to specific task for single player only, in multipleyer we save answers to bottom buttons 
 	 * @param selectedAnswer the number of answer which user select from 0 to 4
 	 * @return if previous user didn't already select answer to this task we return true else we return false*/
 	public boolean setSelectedAnswer(int selectedAnswer){
@@ -52,6 +52,9 @@ public class Task {
 		}
 		return false;
 	}
+	/**
+	 * For single player only, in multipleyer we save answers to bottom buttons 
+	 * */
 	public int getSelectedAnswer(){
 		return selectedAnswer;
 	}

@@ -19,10 +19,28 @@
         <item name="500">500</item>
         <item name="1000">1000</item>
         <item name="3000">3000</item>
-        <item name="5000">300000</item>
+        <item name="5000">5000</item>
     </string-array>
 
+     <string-array name="timeToAnswerAfterWrongAnswer">
+        <item name="0">0s</item>
+        <item name="1000">1s</item>
+        <item name="2000">2s</item>
+        <item name="3000">3s</item>
+        <item name="5000">5s</item>
+        <item name="8000">8s</item>
+        <item name="10000">10s</item>
+    </string-array>
     
+    <string-array name="timeToAnswerAfterWrongAnswerValues">
+        <item name="0">0</item>
+        <item name="1000">1000</item>
+        <item name="2000">2000</item>
+        <item name="3000">3000</item>
+        <item name="5000">5000</item>
+        <item name="8000">8000</item>
+        <item name="10000">10000</item>
+    </string-array>
     
      <string-array name="numberOfGamesInRound">
         <item name="10">10</item>

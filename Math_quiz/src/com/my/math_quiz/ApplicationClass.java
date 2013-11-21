@@ -51,24 +51,40 @@ public class ApplicationClass extends Application{
 		
 	}
 	
-	public static int getCurrentNumberOfGamesInOneRound(){
-		return MyPreferences.numberOfGames;
-	}
 	public static int getMaximumNumberOfGamesInOneRound(){
 		return NUMBER_TASK_LEVEL_MAXIMUM;
 	}
+
 	public static LevelDescripction[] getLevelDescriptions() {
 		return levelsDescriptions;
 	}
-	public static int getDelayOnCorrectAnswerInMiliS(){
-		return MyPreferences.dellayCorrect;
+	public static int getSPCurrentNumberOfGamesInOneRound(){
+		return MyPreferences.spNumberOfGames;
 	}
-	public static int getDelayOnWrongAnswerInMiliS(){
-		return MyPreferences.dellayWrong;
+	public static int getSPDelayOnCorrectAnswerInMiliS(){
+		return MyPreferences.spDellayCorrect;
 	}
+	public static int getSPDelayOnWrongAnswerInMiliS(){
+		return MyPreferences.spDellayWrong;
+	}
+	
+	public static int getMPCurrentNumberOfGamesInOneRound(){
+		return MyPreferences.mpNumberOfGames;
+	}
+	public static int getMPDelayOnCorrectAnswerInMiliS(){
+		return MyPreferences.mpDellayCorrect;
+	}
+	public static int getMPDelayOnWrongAnswerInMiliS(){
+		return MyPreferences.mpDellayWrong;
+	}
+	public static int getMPRemainTimeToAnswer(){
+		return MyPreferences.mpRemainTimeToAnswer;
+	}
+	
 	public static String getNickName(){
-		return MyPreferences.nicKName;
+		return MyPreferences.mpNicKName;
 	}
+	
 	public static Point getDisplaySize(){
 		if(displaySize==null){
 			DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
@@ -86,19 +102,28 @@ public class ApplicationClass extends Application{
 	
 	
 	static class MyPreferences{
-		public static int dellayCorrect;
-		public static int dellayWrong;
-		public static int numberOfGames;
-		public static String nicKName="";
+		public static int spDellayCorrect;
+		public static int spDellayWrong;
+		public static int spNumberOfGames;
 		
-	
+		public static int mpDellayCorrect;
+		public static int mpDellayWrong;
+		public static int mpNumberOfGames;
+		public static int mpRemainTimeToAnswer;
+		public static String mpNicKName="";
+		
 		public static void reloadPreferences(){
 			if(applicationContext!=null){
 				SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-				dellayCorrect=Integer.parseInt(sharedPrefs.getString("pref_key_delay_correct","0"));
-				dellayWrong=Integer.parseInt(sharedPrefs.getString("pref_key_delay_wrong","500"));
-				numberOfGames=Integer.parseInt(sharedPrefs.getString("pref_key_number_of_test","10"));
-				nicKName=sharedPrefs.getString("pref_key_nickname", "neznano");
+				spDellayCorrect=Integer.parseInt(sharedPrefs.getString("pref_key_delay_correct","0"));
+				spDellayWrong=Integer.parseInt(sharedPrefs.getString("pref_key_delay_wrong","500"));
+				spNumberOfGames=Integer.parseInt(sharedPrefs.getString("pref_key_number_of_test","10"));
+				
+				mpDellayCorrect=Integer.parseInt(sharedPrefs.getString("pref_key_mp_delay_correct","0"));
+				mpDellayWrong=Integer.parseInt(sharedPrefs.getString("pref_key_mp_delay_wrong","500"));
+				mpNumberOfGames=Integer.parseInt(sharedPrefs.getString("pref_key_mp_number_of_test","10"));
+				mpRemainTimeToAnswer=Integer.parseInt(sharedPrefs.getString("pref_key_mp_time_remain_to_answer","2000"));
+				mpNicKName=sharedPrefs.getString("pref_key_nickname", "neznano");
 			}
 		}
 		

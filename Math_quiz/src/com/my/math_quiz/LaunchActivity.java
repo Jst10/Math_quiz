@@ -43,9 +43,9 @@ public class LaunchActivity extends Activity {
 			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
 			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_BEFORE_SINGLE_PLAYER_GAME);
 			startActivity(intent);
-		} else if(v.getId()==R.id.ALclassMode){
-			Intent intent = new Intent(this, ClassActivity.class);
-			startActivity(intent);
+//		} else if(v.getId()==R.id.ALclassMode){
+//			Intent intent = new Intent(this, ClassActivity.class);
+//			startActivity(intent);
 		}else if(v.getId()==R.id.ALtutorial){
 			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
 			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_TUTORIAL_SELECTION);

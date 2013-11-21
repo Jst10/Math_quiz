@@ -26,6 +26,8 @@ public class InGameBottomButtoms extends LinearLayout{
 	Drawable button_correct_background;
 	Drawable button_wrong_background;
 	
+	int firstSelectedAnswer=-1;
+	
 	public InGameBottomButtoms(Context context) {
 		super(context);
 		init();
@@ -101,12 +103,15 @@ public class InGameBottomButtoms extends LinearLayout{
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 /**
- * Method set right colors to buttons if we have slect one answer before
+ * Method set right colors to buttons if we have select one answer before
  * @selectedAnswer the number from 0 to 4 which tell us which button was clicked, -1 mean that no one button was clicked
  * @correctAnswer tell us which answer is correct the value is from 0 to 4, because we have only four options
+ * @return if this is first time we clicked button it will set, else it won't and will return false, you reset first selected
+ * answer with method resetFirstSelectedAnswer
  * */
-	public void setCollors(int selectedAnswer, int correctAnswer){
-		if(selectedAnswer!=-1){
+	public boolean setCollors(int selectedAnswer, int correctAnswer){
+		if(selectedAnswer!=-1&&firstSelectedAnswer==-1){
+			firstSelectedAnswer=selectedAnswer;
 			if(selectedAnswer!=correctAnswer){
 				buttons[selectedAnswer].setBackgroundDrawable(button_wrong_background);
 				buttons[correctAnswer].setBackgroundDrawable(button_correct_background);
@@ -115,7 +120,17 @@ public class InGameBottomButtoms extends LinearLayout{
 			}else{
 				buttons[correctAnswer].setBackgroundDrawable(button_correct_background);
 			}
+			return true;
 		}
+		return false;
+	}
+	/**This method reset the first selected answer to -1 and set colors to default color not selected*/
+	public void resetFirstSelectedAnswer(){
+		firstSelectedAnswer=-1;
+		buttons[0].setBackgroundDrawable(button_normal_background);
+		buttons[1].setBackgroundDrawable(button_normal_background);
+		buttons[2].setBackgroundDrawable(button_normal_background);
+		buttons[3].setBackgroundDrawable(button_normal_background);
 	}
 	public void seButtontTexts(int[] answers) {
 		initViews();

@@ -37,7 +37,7 @@
 	     android:orientation="vertical"
 	     android:layout_width="match_parent"
 	     android:layout_below="@+id/ALtitleBar"
-	     android:weightSum="84"
+	     android:weightSum="85"
     >
 	    <View 
 	        android:layout_height="0px"
@@ -47,7 +47,7 @@
 	    <RelativeLayout 
 	        android:layout_width="match_parent"
 	        android:layout_height="0px"
-	        android:layout_weight="17"
+	        android:layout_weight="23"
 	        android:layout_gravity="center"
 	     >
 	     <Button
@@ -63,7 +63,7 @@
 	       <RelativeLayout 
 	        android:layout_width="match_parent"
 	        android:layout_height="0px"
-	        android:layout_weight="17"
+	        android:layout_weight="23"
 	        android:layout_gravity="center"
 	     >
 	     <Button
@@ -76,26 +76,11 @@
 	        android:text="Multi player" />
 	        
 	    </RelativeLayout>
+	     
 	       <RelativeLayout 
 	        android:layout_width="match_parent"
 	        android:layout_height="0px"
-	        android:layout_weight="17"
-	        android:layout_gravity="center"
-	     >
-	     <Button
-	        android:id="@+id/ALclassMode"
-	        android:onClick="launcherActivityButtonClick"
-	        android:layout_width="200dp"
-	        android:layout_height="60dp"
-	        android:layout_centerVertical="true"
-	        android:layout_centerHorizontal="true"
-	        android:text="Class mode" />
-	        
-	    </RelativeLayout>
-	       <RelativeLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="0px"
-	        android:layout_weight="17"
+	        android:layout_weight="23"
 	        android:layout_gravity="center"
 	     >
 	     <Button

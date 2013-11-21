@@ -34,13 +34,44 @@
         android:title="Več igralske nastavitve">
         
         <EditTextPreference
-            android:key="pref_key_nickname"
+            android:key="pref_key_mp_nickname"
             android:title="Vzdevek"
             android:summary="Vzdevek pod katerem bote prikazani"
             android:dialogTitle="Vzdevek"
             android:dialogMessage="Izberite si vzdevek"   
             android:defaultValue="neznan" />
-    
+     	 <ListPreference
+            android:key="pref_key_mp_delay_correct"
+            android:title="Zakasnitve pravilnega"
+            android:summary="Čas preden se prestavi na naslednji test po pravilnem odgovoru"
+            android:defaultValue="0"
+            android:entries="@array/deleyBeforeSwitch"
+            android:entryValues="@array/deleyBeforeSwitchValues"
+     	   />   
+         <ListPreference
+            android:key="pref_key_mp_delay_wrong"
+            android:title="Zakasnitve napačnega"
+            android:summary="Čas preden se prestavi na naslednji test če so vsi odgovori napačni"
+            android:defaultValue="500"
+            android:entries="@array/deleyBeforeSwitch"
+            android:entryValues="@array/deleyBeforeSwitchValues"
+     	   />
+          <ListPreference
+            android:key="pref_key_mp_time_remain_to_answer"
+            android:title="Čas za odgovor"
+            android:summary="Čas za odgovor, po prvem napačnem odgovoru"
+            android:defaultValue="2000"
+            android:entries="@array/timeToAnswerAfterWrongAnswer"
+            android:entryValues="@array/timeToAnswerAfterWrongAnswerValues"
+     	   />
+            <ListPreference
+            android:key="pref_key_mp_number_of_test"
+            android:title="Število testov"
+            android:defaultValue="10"
+            android:summary="Število testo v enem sklopu igre"
+            android:entries="@array/numberOfGamesInRound"
+            android:entryValues="@array/numberOfGamesInRoundValue"
+     	   />
 	</PreferenceCategory>
 	
 <!--      <PreferenceCategory  -->
