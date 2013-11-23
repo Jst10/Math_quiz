@@ -126,7 +126,7 @@ public class InGameBottomButtoms extends LinearLayout{
 	}
 	/**This method reset the first selected answer to -1 and set colors to default color not selected*/
 	public void resetFirstSelectedAnswer(){
-		firstSelectedAnswer=-1;
+		firstSelectedAnswer=-1;	
 		buttons[0].setBackgroundDrawable(button_normal_background);
 		buttons[1].setBackgroundDrawable(button_normal_background);
 		buttons[2].setBackgroundDrawable(button_normal_background);

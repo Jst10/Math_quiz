@@ -26,6 +26,7 @@
 <!-- 		    android:progressDrawable="@drawable/progess_drawable_blue" -->
 <!-- 		    /> -->
 		<LinearLayout
+		    android:paddingTop="5dp"
 		    android:id="@+id/MPODGlayoutForIndicator1" 
 		    android:layout_alignParentTop="true"
 		    android:orientation="horizontal"
@@ -35,21 +36,51 @@
 		    
 		</LinearLayout>
 	  
-       <TextView
-           android:id="@+id/MPODGVtextView1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentTop="true"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="70dp"
-           android:textAppearance="?android:attr/textAppearanceLarge"
-           android:text="TextView" />
-       
-       
-       	<include layout="@layout/p_bottom_buttons"
-       	    android:id="@+id/MPODGVbootomButtons1"
-       	    android:layout_alignParentBottom="true"
-       	  /> 
+       <RelativeLayout
+	      android:id="@+id/MPODGgameModeStuff1"
+	      android:layout_height="fill_parent"
+	      android:layout_width="match_parent"
+	      android:layout_alignTop="@+id/MPODGlayoutForIndicator1" >
+	       <TextView
+	           android:id="@+id/MPODGVtextView1"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_alignParentTop="true"
+	           android:layout_centerHorizontal="true"
+	           android:layout_marginTop="50dp"
+	           android:textAppearance="?android:attr/textAppearanceLarge"
+	           android:text="TextView" />
+	       
+	       
+	       	<include layout="@layout/p_bottom_buttons"
+	       	    android:id="@+id/MPODGVbootomButtons1"
+	       	    android:layout_alignParentBottom="true"
+	       	  /> 
+       	  
+       </RelativeLayout>
+        <RelativeLayout
+	      android:id="@+id/MPODScoreModeStuff1"
+	      android:visibility="invisible"
+	      android:layout_height="fill_parent"
+	      android:layout_width="match_parent"
+	      android:layout_alignTop="@+id/MPODGlayoutForIndicator1" >
+	       <TextView
+	           android:id="@+id/MPODGScoretextView1"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_alignParentTop="true"
+	           android:layout_centerHorizontal="true"
+	           android:layout_marginTop="50dp"
+	           android:textAppearance="?android:attr/textAppearanceLarge"
+	           android:text="TextView" />
+	       
+	       
+	       	<include layout="@layout/p_result_bottom_buttons"
+	       	    android:id="@+id/MPODGVscoreButtons1"
+	       	    android:layout_alignParentBottom="true"
+	       	  /> 
+       	  
+       </RelativeLayout>
        
    </RelativeLayout>
    
@@ -83,27 +114,58 @@
 <!-- 		    android:progressDrawable="@drawable/progess_drawable_blue" -->
 <!-- 		    /> -->
     	<LinearLayout
+    	    android:paddingTop="5dp"
 		    android:id="@+id/MPODGlayoutForIndicator2" 
 		    android:layout_alignParentTop="true"
 		    android:orientation="horizontal"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content">
-	 </LinearLayout>  
-		<TextView
-           android:id="@+id/MPODGVtextView2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentTop="true"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="70dp"
-           android:textAppearance="?android:attr/textAppearanceLarge"
-           android:text="TextView" />
-       
-       
-       	<include layout="@layout/p_bottom_buttons"
-       	    android:id="@+id/MPODGVbootomButtons2"
-       	   />
-
+	 	</LinearLayout>  
+		<RelativeLayout
+	     android:id="@+id/MPODGgameModeStuff2"
+	     android:layout_height="fill_parent"
+	     android:layout_width="match_parent"
+	     android:layout_alignTop="@+id/MPODGlayoutForIndicator2" >
+	       <TextView
+	           android:id="@+id/MPODGVtextView2"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_alignParentTop="true"
+	           android:layout_centerHorizontal="true"
+	           android:layout_marginTop="70dp"
+	           android:textAppearance="?android:attr/textAppearanceLarge"
+	           android:text="TextView" />
+	       
+	       
+	       	<include layout="@layout/p_bottom_buttons"
+	       	    android:id="@+id/MPODGVbootomButtons2"
+	       	    android:layout_alignParentBottom="true"
+	       	  /> 
+       	  
+       </RelativeLayout>
+   	 <RelativeLayout
+	      android:id="@+id/MPODScoreModeStuff2"
+	      android:visibility="invisible"
+	      android:layout_height="fill_parent"
+	      android:layout_width="match_parent"
+	      android:layout_alignTop="@+id/MPODGlayoutForIndicator2" >
+	       <TextView
+	           android:id="@+id/MPODGScoretextView2"
+	           android:layout_width="wrap_content"
+	           android:layout_height="wrap_content"
+	           android:layout_alignParentTop="true"
+	           android:layout_centerHorizontal="true"
+	           android:layout_marginTop="70dp"
+	           android:textAppearance="?android:attr/textAppearanceLarge"
+	           android:text="TextView" />
+	       
+	       
+	       	<include layout="@layout/p_result_bottom_buttons"
+	       	    android:id="@+id/MPODGVscoreButtons2"
+	       	    android:layout_alignParentBottom="true"
+	       	  /> 
+       	  
+       </RelativeLayout>
       
    </RelativeLayout>
    

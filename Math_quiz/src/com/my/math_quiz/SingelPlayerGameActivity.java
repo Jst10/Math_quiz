@@ -256,7 +256,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			}
 			else{
 				if(resultPage==null){
-					resultPage=inflater.inflate(R.layout.last_page_sp_result, null);
+					resultPage=inflater.inflate(R.layout.view_single_player_game_end_page, null);
 				
 					((TextView)resultPage.findViewById(R.id.LPscore2)).setText(levelEntiyFromThesGame.getScore()+"");
 					((TextView)resultPage.findViewById(R.id.LPtime2)).setText(levelEntiyFromThesGame.getTimeInMIliseconds()+"");
