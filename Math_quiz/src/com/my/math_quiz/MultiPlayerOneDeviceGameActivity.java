@@ -34,12 +34,10 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 	LevelDescripction levelDescripction;
 	LevelDataIN levelData;
 	ArrayList<Task> tasks;
-	LayoutInflater inflater;
-	
+
 	int numberOfTasksInRound;
 	int selectedLevel;
 	
-	RelativeLayout pageContainer=null;
 	int currentTaskPosition;
 	
 	Bitmap taskIndicatorCorrectAnswer;
@@ -57,9 +55,6 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 
 		
 		setContentView(R.layout.activity_multi_player_one_device_game);
-		pageContainer=(RelativeLayout)this.findViewById(R.id.MPODGContainer);
-		inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
 		
 		Intent myIntent = getIntent();
 		selectedLevel = myIntent.getIntExtra("EXTRA_SELECTED_LEVEL",0);
@@ -71,19 +66,42 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		taskIndicatorNotSelectedAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_not_selected);
 		taskIndicatorCurrent=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_current);
 		
-		setGameViewToContainerAndRestart();
+		
+		
+		
+		bottomButtons1Answer=(InGameBottomButtoms)this.findViewById(R.id.MPODGVbootomButtons1);
+		bottomButtons2Answer=(InGameBottomButtoms)this.findViewById(R.id.MPODGVbootomButtons2);
+		
+		texView1ForTaskText=(TextView)this.findViewById(R.id.MPODGVtextView1);
+		texView2ForTaskText=(TextView)this.findViewById(R.id.MPODGVtextView2);
+
+		layoutForIndicators1=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator1);
+		layoutForIndicators2=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator2);
+		
+		gameViewContainer1=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff1);
+		gameViewContainer2=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff2);
+		scoreViewContainer1=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff1);
+		scoreViewContainer2=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff2);
+		
+		scoreText1=(TextView)this.findViewById(R.id.MPODGScoretextView1);
+		scoreText2=(TextView)this.findViewById(R.id.MPODGScoretextView2);
+		
+		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons1)).setListener(this);
+		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons2)).setListener(this);
+	
+		bottomButtons1Answer.setListener(bottomButtonListener1);
+		bottomButtons2Answer.setListener(bottomButtonListener2);
+		
+		
+		restartGame();
 	}
 	
-//	ProgressBar progressBar1=null;
-//	ProgressBar progressBar2=null;
 	TextView texView1ForTaskText=null;
 	TextView texView2ForTaskText=null;
 	
 	InGameBottomButtoms bottomButtons1Answer=null;
 	InGameBottomButtoms bottomButtons2Answer=null;
 	
-//	boolean hasAnyoneAnswerAtThisTask=false;
-//	boolean wasAnswerAnswerCorrectAnswer=false;
 //	
 	LinearLayout layoutForIndicators1;
 	LinearLayout layoutForIndicators2;
@@ -98,8 +116,6 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 	RelativeLayout scoreViewContainer2;
 	TextView scoreText1;
 	TextView scoreText2;
-	ResultBottomButtoms resultButtons1;
-	ResultBottomButtoms resultButtons2;
 	
 	/**
 	 * score two dimension table for two player 
@@ -108,43 +124,19 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 	 * 1 correct answer
 	 * */
 	int[][] score;
-	private void setGameViewToContainerAndRestart(){
-		/**
-		 * I'm adding dinamicly view because I was thinking to have multiple screens even for score, not all in one like I have now maybe I will change this someday 
-		 * */
-		pageContainer.removeAllViews();
-		View v = inflater.inflate(R.layout.view_multi_player_game_one_device_one_page, null);
-		pageContainer.addView(v);
+	private void restartGame(){
+		
+		gameViewContainer1.setVisibility(View.VISIBLE);
+		gameViewContainer2.setVisibility(View.VISIBLE);
+		scoreViewContainer1.setVisibility(View.INVISIBLE);
+		scoreViewContainer2.setVisibility(View.INVISIBLE);
+		
 		numberOfTasksInRound=ApplicationClass.getMPCurrentNumberOfGamesInOneRound();
 		score=new int[2][numberOfTasksInRound];
 		levelData.clearLevelData();
 		tasks=	levelData.getTests(numberOfTasksInRound);
 		
 		
-		bottomButtons1Answer=(InGameBottomButtoms)v.findViewById(R.id.MPODGVbootomButtons1);
-		bottomButtons2Answer=(InGameBottomButtoms)v.findViewById(R.id.MPODGVbootomButtons2);
-		
-		texView1ForTaskText=(TextView)v.findViewById(R.id.MPODGVtextView1);
-		texView2ForTaskText=(TextView)v.findViewById(R.id.MPODGVtextView2);
-
-		layoutForIndicators1=(LinearLayout)v.findViewById(R.id.MPODGlayoutForIndicator1);
-		layoutForIndicators2=(LinearLayout)v.findViewById(R.id.MPODGlayoutForIndicator2);
-		
-//		progressBar1.setMax(numberOfTasksInRound);
-//		progressBar2.setMax(numberOfTasksInRound);
-		gameViewContainer1=(RelativeLayout)v.findViewById(R.id.MPODGgameModeStuff1);
-		gameViewContainer2=(RelativeLayout)v.findViewById(R.id.MPODGgameModeStuff2);
-		scoreViewContainer1=(RelativeLayout)v.findViewById(R.id.MPODScoreModeStuff1);
-		scoreViewContainer2=(RelativeLayout)v.findViewById(R.id.MPODScoreModeStuff2);
-		
-		scoreText1=(TextView)v.findViewById(R.id.MPODGScoretextView1);
-		scoreText2=(TextView)v.findViewById(R.id.MPODGScoretextView2);
-		
-		resultButtons1=(ResultBottomButtoms)v.findViewById(R.id.MPODGVscoreButtons1);
-		resultButtons2=(ResultBottomButtoms)v.findViewById(R.id.MPODGVscoreButtons2);
-	
-		resultButtons1.setListener(this);
-		resultButtons2.setListener(this);
 		
 		layoutForIndicators1.removeAllViews();
 		imageViews1=new ImageView[numberOfTasksInRound];
@@ -170,9 +162,6 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		imageViews1[0].setImageBitmap(taskIndicatorCurrent);
 		imageViews2[0].setImageBitmap(taskIndicatorCurrent);
 		
-		
-		bottomButtons1Answer.setListener(bottomButtonListener1);
-		bottomButtons2Answer.setListener(bottomButtonListener2);
 		
 		displayDataFromSpecificTest(0);
 	}
@@ -306,7 +295,7 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 	 * */
 	@Override
 	public void onAgainButtonClicked() {
-		setGameViewToContainerAndRestart();
+		restartGame();
 	}
 
 
