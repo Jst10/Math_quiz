@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.my.math_quiz.adapters.LevelsDisplayedAdapter;
+import com.my.math_quiz.tutorial.TutorialLevel0;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -82,7 +83,8 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				
 				break;
 				case MODE_TUTORIAL_SELECTION:
-					
+					Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
+					startActivity(intent3);
 				break;	
 			default:
 				break;

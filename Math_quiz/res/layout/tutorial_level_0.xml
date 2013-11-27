@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+     <RelativeLayout 
+	        android:layout_above="@+id/TL0middleSeperator"
+         	android:layout_height="wrap_content"
+         	android:layout_width="wrap_content"
+         	 android:layout_centerHorizontal="true"
+       >
+		    <RelativeLayout
+		        android:id="@+id/TL0layout0"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        >
+		        <ImageView
+		            android:id="@+id/TL0apple0"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple"  
+		        
+		        />
+		        
+		        <ImageView
+		            android:id="@+id/TL0apple1"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple" 
+		         	android:layout_below="@id/TL0apple0"  
+		        
+		        
+		        />
+		        <ImageView
+		            android:id="@+id/TL0apple2"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple"   
+		        	android:layout_toRightOf="@id/TL0apple1"
+		        	android:layout_centerVertical="true"
+		        
+		        />
+		    </RelativeLayout>
+		    <TextView
+		        android:id="@+id/TL0upSumChar"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_toRightOf="@+id/TL0layout0"
+		        android:textSize="20sp"
+		        android:text="+"
+		        />
+		    
+		    <RelativeLayout 
+		        android:id="@+id/TL0layout1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/TL0upSumChar"
+		     >
+		        
+		        
+		        <ImageView
+		            android:id="@+id/TL0apple3"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple"  
+		        
+		        />
+		        
+		        <ImageView
+		            android:id="@+id/TL0apple4"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple" 
+		         	android:layout_below="@id/TL0apple3"  
+		        
+		        
+		        />
+		        
+		        
+		        
+		        
+		        
+		        
+		     </RelativeLayout>
+		      <TextView
+		        android:id="@+id/TL0upEaqChar"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        
+		        android:layout_toRightOf="@+id/TL0layout1"
+		        android:textSize="20sp"
+		        android:text="="
+		        
+		         />
+		    <RelativeLayout 
+		        android:id="@+id/TL0layout2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/TL0upEaqChar"
+		        >
+        	   <ImageView
+		            android:id="@+id/TL0apple6"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple"  
+		        
+		        />
+		        
+		        <ImageView
+		            android:id="@+id/TL0apple7"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple" 
+		         	android:layout_below="@id/TL0apple6"  
+		        
+		        
+		        />
+		         <ImageView
+		            android:id="@+id/TL0apple8"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple"  
+		        	android:layout_toRightOf="@id/TL0apple7"
+		        />
+		        
+		        <ImageView
+		            android:id="@+id/TL0apple9"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple" 
+		         	android:layout_below="@id/TL0apple8"  
+		            android:layout_toRightOf="@id/TL0apple7"
+		        
+		        />
+		          <ImageView
+		            android:id="@+id/TL0apple10"
+		         	android:layout_width="50dp"
+		         	android:layout_height="50dp"
+		         	android:src="@drawable/apple"   
+		        	android:layout_toRightOf="@id/TL0apple8"
+		        	android:layout_centerVertical="true"
+		        
+		        />
+		        
+	    </RelativeLayout>
+	</RelativeLayout>
+    <View 
+        android:id="@+id/TL0middleSeperator"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>

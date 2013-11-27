@@ -30,6 +30,7 @@
         <activity android:name="com.my.math_quiz.SingelPlayerGameActivity"></activity>
          <activity android:name="com.my.math_quiz.PreferenceActivity"></activity>
          <activity android:name="com.my.math_quiz.MultiPlayerOneDeviceGameActivity"></activity>
+         <activity android:name="com.my.math_quiz.tutorial.TutorialLevel0"></activity>
     </application>
 
 </manifest>
