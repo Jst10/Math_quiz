@@ -169,6 +169,10 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 	
 	/**This method display text of task and set answers to buttons and also set progress bars to right position*/
 	private void displayDataFromSpecificTest(int position){
+		if(position>0){
+			imageViews1[position-1].setImageBitmap(score[0][position-1]==-1?taskIndicatorWrongAnswer:(score[0][position-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
+			imageViews2[position-1].setImageBitmap(score[1][position-1]==-1?taskIndicatorWrongAnswer:(score[1][position-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
+		}
 		if(position<numberOfTasksInRound)
 		{
 			currentTaskPosition=position;
@@ -190,11 +194,6 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			imageViews1[position].setImageBitmap(taskIndicatorCurrent);
 			imageViews2[position].setImageBitmap(taskIndicatorCurrent);
 			
-			if(position>0){
-				imageViews1[position-1].setImageBitmap(score[0][position-1]==-1?taskIndicatorWrongAnswer:(score[0][position-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
-				imageViews2[position-1].setImageBitmap(score[1][position-1]==-1?taskIndicatorWrongAnswer:(score[1][position-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
-			}
-			
 			
 //			hasAnyoneAnswerAtThisTask=false;
 //			wasAnswerAnswerCorrectAnswer=false;
@@ -207,11 +206,13 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			
 			int tmp0=0;
 			for(int i=0; i<score[0].length; i++){
-				tmp0+=score[0][i];
+				if(score[0][i]>0)
+					tmp0+=score[0][i];
 			}
 			int tmp1=0;
 			for(int i=0; i<score[0].length; i++){
-				tmp1+=score[1][i];
+				if(score[1][i]>0)
+					tmp1+=score[1][i];
 			}
 			
 			if(tmp0<=tmp1){

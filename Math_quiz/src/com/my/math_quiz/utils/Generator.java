@@ -66,11 +66,11 @@ public  class Generator {
 	}
 	public static Equations getPowerTwoEquation(int toNumber){
 		int firstNumber=getRandomInArea(0,toNumber);
-		Equations equation=new Equations(firstNumber+"^2 ", firstNumber*firstNumber);
+		Equations equation=new Equations(firstNumber+"<sup><small>2</small></sup> ", firstNumber*firstNumber);
 		return equation;
 	}
 	public static Equations getPowerTwoEquation(Equations equation){
-		equation=new Equations(equation.getText()+"^2 ", equation.getValue()*equation.getValue());
+		equation=new Equations(equation.getText()+"<sup><small>2</small></sup> ", equation.getValue()*equation.getValue());
 		return equation;
 	}
 	
@@ -88,16 +88,16 @@ public  class Generator {
 	}
 	public static Equations getDivEquation(int toNumber){
 		int firstNumber=getRandomInArea(0,toNumber);
-		int secondNUmber=getRandomInArea(0,toNumber);
+		int secondNUmber=getRandomInArea(1,toNumber);
 		Equations equation=new Equations((firstNumber*secondNUmber)+" / "+secondNUmber, (firstNumber*secondNUmber)/secondNUmber);
 		return equation;
 	}
 	public static Equations getDivEquation(Equations equation){
 		int leftSide=equation.getValue();
-		int secondNUmber=getRandomInArea(0,(int)leftSide);
+		int secondNUmber=getRandomInArea(1,(int)leftSide);
 		int i=0;
 		while(i<5||leftSide%secondNUmber!=0){
-			secondNUmber=getRandomInArea(0,(int)leftSide);
+			secondNUmber=getRandomInArea(1,(int)leftSide);
 			i++;
 		}
 		if(leftSide%secondNUmber!=0){
@@ -111,7 +111,7 @@ public  class Generator {
 	}
 	public static Equations getSqrtEquation(int toNumber){
 		int firstNumber=getRandomInArea(0,toNumber);
-		Equations equation=new Equations("koren od:"+(firstNumber*firstNumber), firstNumber);
+		Equations equation=new Equations("\u221a<small>"+(firstNumber*firstNumber)+"</small>", firstNumber);
 		return equation;
 	}
 
@@ -351,7 +351,7 @@ public  class Generator {
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
 	public static String get13levelName(){return "14."+textAfterLevelNumber;}
-	public static String get13levelDescription(){return "Operacije (+,-,*,/) z oklepaji 20";}
+	public static String get13levelDescription(){return "Operacije (+,-,*,/) z oklepaji 50";}
 	public static Task get13levelTask(){
 		Equations equation=null;
 		double randVal=Math.random();
@@ -430,7 +430,7 @@ public  class Generator {
 		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
 	public static String get19levelName(){return "20."+textAfterLevelNumber;}
-	public static String get19levelDescription(){return "Mešane operacije bolj napredno";}
+	public static String get19levelDescription(){return "Mešane operacije";}
 	public static Task get19levelTask(){
 		// here I have +-*/ ^2 and sqrt ()
 		Equations equation=null;

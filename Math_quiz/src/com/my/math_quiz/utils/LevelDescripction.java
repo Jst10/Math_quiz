@@ -127,6 +127,8 @@ public class LevelDescripction {
 		 * from currentPosition it return test before currentPostion and if event ther is no more test it retun -1 */
 		@Override
 		public int getNextNotSolvedTestPosition(int currentPosition){
+			if(tasks==null)
+				return -1;
 			
 			for(int i=currentPosition+1; i<tasks.size(); i++){
 				if(tasks.get(i).getSelectedAnswer()==-1){

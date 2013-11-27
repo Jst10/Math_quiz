@@ -1,6 +1,7 @@
 package com.my.math_quiz.utils;
 
-import com.my.math_quiz.utilist.equation.Equation;
+import android.text.Html;
+import android.text.Spanned;
 
 public class Task {
 
@@ -35,8 +36,11 @@ public class Task {
 	public int[] getAnswers(){
 		return answers;
 	}
-	public String getText(){
-		return equation.getText();
+	/**
+	 * @return This method return html style of text 
+	 * */
+	public Spanned getText(){
+		return Html.fromHtml(equation.getText());
 	}
 	
 	public int getCorrectAnswer(){
