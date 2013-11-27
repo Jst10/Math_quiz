@@ -179,20 +179,20 @@ public  class Generator {
 	public static String get0levelDescription(){return "Seštevanje do 10";}
 	public static Task get0levelTask(){
 		Equations equation=getSumEquation(10);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel0()));
 	}
 	
 	public static String get1levelName(){return "2."+textAfterLevelNumber;}
 	public static String get1levelDescription(){return "Seštevanje do 50";}
 	public static Task get1levelTask(){
 		Equations equation=getSumEquation(50);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel2()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
 	}
 	public static String get2levelName(){return "3."+textAfterLevelNumber;}
 	public static String get2levelDescription(){return "Seštevanje do 100";}
 	public static Task get2levelTask(){
 		Equations equation=getSumEquation(100);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel3()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel2()));
 	}
 	public static String get3levelName(){return "4."+textAfterLevelNumber;}
 	public static String get3levelDescription(){return "Odštevanje do 20";}
@@ -201,13 +201,13 @@ public  class Generator {
 		int firstNumber=getRandomInArea(0,20);
 		int secondNUmber=getRandomInArea(firstNumber,20);
 		Equations equation=new Equations(firstNumber+" - "+secondNUmber, firstNumber-secondNUmber);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel4()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel3()));
 	}
 	public static String get4levelName(){return "5."+textAfterLevelNumber;}
 	public static String get4levelDescription(){return "Odštevanje do 50";}
 	public static Task get4levelTask(){
 		Equations equation=getSubEquation(50);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel5()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel4()));
 	}
 	public static String get5levelName(){return "6."+textAfterLevelNumber;}
 	public static String get5levelDescription(){return "Seštevanje in odštevanje do 50";}
@@ -218,7 +218,7 @@ public  class Generator {
 			//from three parts equation 
 			equation=getSumOrSub(equation,50);
 		}
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel5()));
 	}
 	public static String get6levelName(){return "7."+textAfterLevelNumber;}
 	public static String get6levelDescription(){return "Seštevanje in odštevanje z oklepaji od 50";}
@@ -243,19 +243,19 @@ public  class Generator {
 				equation.setData(firstNumber+" - "+equation.getText(), firstNumber-equation.getValue());
 			}
 		}
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel6()));
 	}
 	public static String get7levelName(){return "8."+textAfterLevelNumber;}
 	public static String get7levelDescription(){return "Množenje do 10";}
 	public static Task get7levelTask(){
 		Equations equation=getMulEquation(10);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel7()));
 	}
 	public static String get8levelName(){return "9."+textAfterLevelNumber;}
 	public static String get8levelDescription(){return "Množenje do 20";}
 	public static Task get8levelTask(){
 		Equations equation=getMulEquation(20);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel8()));
 	}
 	public static String get9levelName(){return "10."+textAfterLevelNumber;}
 	public static String get9levelDescription(){return "Operacije (+,-,*) do 20";}
@@ -287,19 +287,19 @@ public  class Generator {
 			//a*b+-c
 			equation=getSumOrSub(equation,50);
 		}
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel9()));
 	}
 	public static String get10levelName(){return "11."+textAfterLevelNumber;}
 	public static String get10levelDescription(){return "Celoštevilsko delenje do 100";}
 	public static Task get10levelTask(){
 		Equations equation=getDivEquation(10);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel10()));
 	}
 	public static String get11levelName(){return "12."+textAfterLevelNumber;}
 	public static String get11levelDescription(){return "Operacij (*,/) do 100";}
 	public static Task get11levelTask(){
 		Equations equation=getMulOrDiv(10);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel11()));
 	}
 	public static String get12levelName(){return "13."+textAfterLevelNumber;}
 	public static String get12levelDescription(){return "Operacije (+,-,*,/) z oklepaji 20";}
@@ -348,7 +348,7 @@ public  class Generator {
 			}
 			
 		}
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel12()));
 	}
 	public static String get13levelName(){return "14."+textAfterLevelNumber;}
 	public static String get13levelDescription(){return "Operacije (+,-,*,/) z oklepaji 50";}
@@ -397,37 +397,37 @@ public  class Generator {
 			}
 			
 		}
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel13()));
 	}
 	public static String get14levelName(){return "15."+textAfterLevelNumber;}
 	public static String get14levelDescription(){return "Kvadrati do 10";}
 	public static Task get14levelTask(){
 		Equations equation=getPowerTwoEquation(10);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel14()));
 	}
 	public static String get15levelName(){return "16."+textAfterLevelNumber;}
 	public static String get15levelDescription(){return "Kvadrati do 20";}
 	public static Task get15levelTask(){
 		Equations equation=getPowerTwoEquation(20);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel15()));
 	}
 	public static String get16levelName(){return "17."+textAfterLevelNumber;}
 	public static String get16levelDescription(){return "Koreni do 100";}
 	public static Task get16levelTask(){
 		Equations equation=getSqrtEquation(10);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel16()));
 	}
 	public static String get17levelName(){return "18."+textAfterLevelNumber;}
 	public static String get17levelDescription(){return "Koreni do 400";}
 	public static Task get17levelTask(){
 		Equations equation=getSqrtEquation(20);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel17()));
 	}
 	public static String get18levelName(){return "19."+textAfterLevelNumber;}
 	public static String get18levelDescription(){return "Kvadrati in koreni";}
 	public static Task get18levelTask(){
 		Equations equation=getPowOrSqrt(20);
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel18()));
 	}
 	public static String get19levelName(){return "20."+textAfterLevelNumber;}
 	public static String get19levelDescription(){return "Mešane operacije";}
@@ -491,10 +491,27 @@ public  class Generator {
 		
 		
 		
-		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel1()));
+		return new Task(equation,getSolutionList(equation.getValue(),new SlutionForLevel19()));
 	}
 }
+
+
+
 /**This is level where: we sum positive number to 10*/
+class SlutionForLevel0 implements  SolutionGeneratorInterface{
+	int realSolution;
+	@Override
+	public void setRealSolution(int realSolution) {
+		this.realSolution=realSolution;
+	}
+	@Override
+	public  int getOneSolution(){
+		return	Generator.getRandomInArea(0, 20);
+	}
+}
+
+
+/**This is level where: we sum positive number to 50*/
 class SlutionForLevel1 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -503,12 +520,11 @@ class SlutionForLevel1 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-10, 10)+realSolution;
 	}
 }
 
-
-/**This is level where: we sum positive number to 50*/
+/**This is level where: we sum positive number to 100*/
 class SlutionForLevel2 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -517,11 +533,11 @@ class SlutionForLevel2 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-20, 20)+realSolution;
 	}
 }
 
-/**This is level where: we sum positive number to 100*/
+/**This is level where: we calculet difference to 20*/
 class SlutionForLevel3 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -530,11 +546,11 @@ class SlutionForLevel3 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-10, 10)+realSolution;
 	}
 }
 
-/**This is level where: we calculet difference to 20*/
+/**This is level where: we calculet difference to 50*/
 class SlutionForLevel4 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -543,11 +559,11 @@ class SlutionForLevel4 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-20, 20)+realSolution;
 	}
 }
 
-/**This is level where: we calculet difference to 50*/
+/**This is level where: we calculet difference and sum to 50*/
 class SlutionForLevel5 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -556,11 +572,11 @@ class SlutionForLevel5 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-20, 20)+realSolution;
 	}
 }
 
-/**This is level where: we calculet difference and sum to 50*/
+/**This is level where: we calculet difference and sum with brackets to 50*/
 class SlutionForLevel6 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -569,11 +585,11 @@ class SlutionForLevel6 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-20, 20)+realSolution;
 	}
 }
 
-/**This is level where: we calculet difference and sum with brackets to 50*/
+/**This is level where: we multiply to 10*/
 class SlutionForLevel7 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -582,11 +598,11 @@ class SlutionForLevel7 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(0, 100);
 	}
 }
 
-/**This is level where: we multiply to 10*/
+/**This is level where: we multiply to 20*/
 class SlutionForLevel8 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -595,11 +611,11 @@ class SlutionForLevel8 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(0, 400);
 	}
 }
 
-/**This is level where: we multiply to 20*/
+/**This is level where: we (+-*)to 20*/
 class SlutionForLevel9 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -608,11 +624,11 @@ class SlutionForLevel9 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-20, 20)+realSolution;
 	}
 }
 
-/**This is level where: we (+-*)to 20*/
+/**This is level where: we devide integer to 100*/
 class SlutionForLevel10 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -621,11 +637,11 @@ class SlutionForLevel10 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-10, 10)+realSolution;
 	}
 }
 
-/**This is level where: we devide integer to 100*/
+/**This is level where: we  (/*) to 100*/
 class SlutionForLevel11 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -634,11 +650,11 @@ class SlutionForLevel11 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-100, 100)+realSolution;
 	}
 }
 
-/**This is level where: we  (/*) to 100*/
+/**This is level where:  we (+-/*) to 20 with brackets*/
 class SlutionForLevel12 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -647,11 +663,11 @@ class SlutionForLevel12 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-100, 100)+realSolution;
 	}
 }
 
-/**This is level where:  we (+-/*) to 20 with brackets*/
+/**This is level where:  we (+-/*) to 100 with brackets*/
 class SlutionForLevel13 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -660,11 +676,11 @@ class SlutionForLevel13 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-100, 100)+realSolution;
 	}
 }
 
-/**This is level where:  we (+-/*) to 100 with brackets*/
+/**This is level where: we pow2 to 10*/
 class SlutionForLevel14 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -673,11 +689,11 @@ class SlutionForLevel14 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(0, 100);
 	}
 }
 
-/**This is level where: we pow2 to 10*/
+/**This is level where: we pow2 to 20*/
 class SlutionForLevel15 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -686,11 +702,11 @@ class SlutionForLevel15 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(0, 400);
 	}
 }
 
-/**This is level where: we pow2 to 20*/
+/**This is level where: we square to 100*/
 class SlutionForLevel16 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -699,11 +715,11 @@ class SlutionForLevel16 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(0, 10);
 	}
 }
 
-/**This is level where: we square to 100*/
+/**This is level where: we square 400*/
 class SlutionForLevel17 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -712,11 +728,11 @@ class SlutionForLevel17 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(0, 20);
 	}
 }
 
-/**This is level where: we square 400*/
+/**This is level where:sqers and powers*/
 class SlutionForLevel18 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -725,11 +741,11 @@ class SlutionForLevel18 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-20, 20)+realSolution;
 	}
 }
 
-/**This is level where:sqers and powers*/
+/**This is level where: mix operations advance*/
 class SlutionForLevel19 implements  SolutionGeneratorInterface{
 	int realSolution;
 	@Override
@@ -738,19 +754,6 @@ class SlutionForLevel19 implements  SolutionGeneratorInterface{
 	}
 	@Override
 	public  int getOneSolution(){
-		return (int)(Math.random()*10);
-	}
-}
-
-/**This is level where: mix operations advance*/
-class SlutionForLevel20 implements  SolutionGeneratorInterface{
-	int realSolution;
-	@Override
-	public void setRealSolution(int realSolution) {
-		this.realSolution=realSolution;
-	}
-	@Override
-	public  int getOneSolution(){
-		return (int)(Math.random()*10);
+		return	Generator.getRandomInArea(-100, 100)+realSolution;
 	}
 }
