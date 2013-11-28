@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+     <include layout="@layout/p_title_bar"/>
+
+
+
+	<RelativeLayout
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:layout_centerVertical="true"
+         android:layout_centerHorizontal="true"
+	     >
+	    
+<!-- 		        android:layout_centerVertical="true" -->
+       <TextView
+	        android:id="@+id/TL1text1"
+	        android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:textSize="30sp"
+	        android:text="15 + 17="
+	        android:paddingLeft="5dp"
+	        android:paddingRight="5dp"
+	        android:visibility="invisible"
+	        />
+	       
+	       
+       	<RelativeLayout
+       	 android:id="@+id/TL1layout2"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:layout_centerVertical="true"
+         android:layout_centerHorizontal="true"
+         android:layout_below="@+id/TL1text1"
+         android:layout_alignEnd="@+id/TL1text1"
+	     >
+	     	<View
+		           android:id="@+id/TL1seperator1"
+		           android:layout_height="10dp"
+			       android:layout_width="10dp"
+		           >
+	       	</View>
+	         <TextView
+		        android:id="@+id/TL1text2"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_below="@+id/TL1seperator1"
+		        android:textSize="30sp"
+		        android:text="\u00A0\u00A0\u00A015"
+		        android:visibility="invisible"
+		        
+		        />
+	           <TextView
+		        android:id="@+id/TL1text3"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_below="@+id/TL1text2"
+		        android:textSize="30sp"
+		        android:text="\u00A0+17"
+		        android:visibility="invisible"
+		        
+		        />
+	              
+		       <View
+		           android:id="@+id/TL1seperator2"
+		           android:layout_height="1dp"
+			       android:layout_width="57sp"
+			       android:background="@android:color/black"
+			       android:layout_below="@+id/TL1text3"
+			       android:visibility="invisible"
+		           >
+		       </View>
+	           
+	           
+		        <TextView
+			        android:id="@+id/TL1text4"
+			        android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        android:textSize="18sp"
+			        android:layout_below="@+id/TL1seperator2"
+			        android:layout_toRightOf="@+id/TL1text7"
+			        android:text="12"
+			        android:visibility="invisible"
+		        />
+		       
+		         <TextView
+			        android:id="@+id/TL1text7"
+			        android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        android:layout_below="@+id/TL1seperator2"
+			        android:textSize="30sp"
+			        android:text="\u00A0\u00A0\u00A03"
+			        android:visibility="invisible"
+		        />
+		         <TextView
+			        android:id="@+id/TL1text5"
+			        android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        android:layout_below="@+id/TL1seperator2"
+				    android:layout_toRightOf="@+id/TL1text7"
+			        android:textSize="30sp"
+			        android:text="2"
+			        android:visibility="invisible"
+		        />
+		       	 <TextView
+			        android:id="@+id/TL1text6"
+			        android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        android:textSize="18sp"
+			        android:layout_alignBottom="@+id/TL1seperator2"
+			        android:layout_alignStart="@+id/TL1text2"
+			        android:layout_marginLeft="23sp"
+			        android:text="1"
+			        android:visibility="invisible"
+		        />
+		       	 
+		       	 
+		    </RelativeLayout>
+	       	 <View
+		           android:id="@+id/TL1seperator3"
+		           android:layout_height="30dp"
+			       android:layout_width="10dp"
+			       android:layout_below="@+id/TL1layout2"
+		           />
+		       	    
+	       	  <TextView
+		        android:id="@+id/TL1text8"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:layout_below="@+id/TL1seperator3"
+		        android:textSize="30sp"
+		        android:visibility="invisible"
+		        android:text="15 + 17=22"
+	        /> 
+	          
+<!-- 		        android:visibility="invisible" -->
+	       
+<!-- 		        android:visibility="invisible" -->
+	</RelativeLayout>
+   
+   <Button 
+       android:id="@+id/TL0doneButton"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:text="OK"
+       android:background="@drawable/button_background_normal"
+       android:layout_alignParentBottom="true"
+       /> 
+</RelativeLayout>

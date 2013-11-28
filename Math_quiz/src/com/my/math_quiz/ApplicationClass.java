@@ -16,6 +16,9 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 
 import com.my.math_quiz.database.DAOImplementation;
 import com.my.math_quiz.utils.LevelDescripction;
@@ -127,6 +130,62 @@ public class ApplicationClass extends Application{
 			}
 		}
 		
+		
+	}
+	
+	private static final int animationDuration=1000;
+	/**
+	 * Method create new instance of fade in animation
+	 * @param listener is the animation listener which will be set to the animation, if you don't want to set listener just place null to this place
+	 * @return new instance of fade in animation
+	 * */
+	public static Animation getFadeInAnimation(AnimationListener listener){
+		Animation fadeIn = new AlphaAnimation(0, 1);
+		fadeIn.setDuration(animationDuration);
+		fadeIn.setFillEnabled(true);
+		fadeIn.setFillAfter(true);
+		if(listener!=null)
+			fadeIn.setAnimationListener(listener);
+		return fadeIn;
+	}
+	
+	/**
+	 * Method create new instance of fade OUT animation
+	 * @param listener is the animation listener which will be set to the animation, if you don't want to set listener just place null to this place
+	 * @return new instance of fade in animation
+	 * */
+	public static Animation getFadeOutAnimation(AnimationListener listener){
+		Animation fadeIn = new AlphaAnimation(1, 0);
+		fadeIn.setDuration(animationDuration);
+		fadeIn.setFillEnabled(true);
+		fadeIn.setFillAfter(true);
+		if(listener!=null)
+			fadeIn.setAnimationListener(listener);
+		return fadeIn;
+	}
+	/**
+	 * Method create new instance of fade in animation which is devided in two parts (which part first or last we wan we chose with @param firstHalf)
+	 * @param firstHalf With this param we chose which part of animation we want, if we set to true we will get first part else it will return the last part
+	 * @param listener is the animation listener which will be set to the animation, if you don't want to set listener just place null to this place
+	 * 
+	 * @return new instance of fade in animation
+	 * */
+	public static Animation getHalfFadeInAnimation(boolean firstHalf,AnimationListener listener){
+		
+		Animation fadeIn;
+		if(firstHalf){
+			fadeIn= new AlphaAnimation(0, 0.7f);
+			fadeIn.setDuration((int)(animationDuration*0.7));
+		}
+		else{
+			fadeIn= new AlphaAnimation(0.7f, 1);
+			fadeIn.setDuration((int)(animationDuration*0.3));
+		}
+		fadeIn.setFillEnabled(true);
+		fadeIn.setFillAfter(true);
+		if(listener!=null)
+			fadeIn.setAnimationListener(listener);
+		return fadeIn;
 		
 	}
 	

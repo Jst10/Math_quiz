@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.my.math_quiz.ApplicationClass;
 import com.my.math_quiz.R;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -104,9 +105,9 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 //		
 //		
 		step=0;
-		firstPartApples[0].startAnimation(getFadeInAnimation(true));
+		firstPartApples[0].startAnimation(ApplicationClass.getFadeInAnimation(this));
 //		firstNumber.setAnimation(animationWithListener);
-		firstNumber.startAnimation(getFadeInAnimation(false));
+		firstNumber.startAnimation(ApplicationClass.getFadeInAnimation(null));
 	}
 //	
 //	Animation getFadeInAnimation(true) = new AlphaAnimation(0, 1);
@@ -126,69 +127,69 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 		switch (step){
 			case 0: 
 //				firstPartApples[1].startAnimation(getFadeInAnimation(true));
-				firstPartApples[1].startAnimation(getHalfFadeInAnimation(true,true));
+				firstPartApples[1].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));
 				step++; break;
 			case 1: 
 				firstNumber.setText("2");
-				firstPartApples[1].startAnimation(getHalfFadeInAnimation(true,false));
+				firstPartApples[1].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,this));
 				step++; break;
 			case 2: 
-				firstPartApples[2].startAnimation(getHalfFadeInAnimation(true,true));
+				firstPartApples[2].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));
 				step++; break;
 			case 3: 
 				firstNumber.setText("3");
-				firstPartApples[2].startAnimation(getHalfFadeInAnimation(true,false));
+				firstPartApples[2].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,this));
 				step++; break;
 			case 4: 
-				sumSign[0].startAnimation(getFadeInAnimation(true));
-				sumSign[1].startAnimation(getFadeInAnimation(false));
+				sumSign[0].startAnimation(ApplicationClass.getFadeInAnimation(this));
+				sumSign[1].startAnimation(ApplicationClass.getFadeInAnimation(null));
 				step++; break;
 			case 5: 
-				secondPartApples[0].startAnimation(getFadeInAnimation(true));
-				secondNumber.startAnimation(getFadeInAnimation(false));
+				secondPartApples[0].startAnimation(ApplicationClass.getFadeInAnimation(this));
+				secondNumber.startAnimation(ApplicationClass.getFadeInAnimation(null));
 				step++; break;
 			case 6: 
-				secondPartApples[1].startAnimation(getHalfFadeInAnimation(true,true));
+				secondPartApples[1].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));
 				step++; break;
 			case 7: 
 				secondNumber.setText("2");
-				secondPartApples[1].startAnimation(getHalfFadeInAnimation(true,false));
+				secondPartApples[1].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,this));
 				step++; break;
 			case 8: 
-				equalSign[0].startAnimation(getFadeInAnimation(true));
-				equalSign[1].startAnimation(getFadeInAnimation(false));
+				equalSign[0].startAnimation(ApplicationClass.getFadeInAnimation(this));
+				equalSign[1].startAnimation(ApplicationClass.getFadeInAnimation(null));
 				step++; break;
 			case 9: 
-				thirdPartApples[0].startAnimation(getFadeInAnimation(true));				
-				thirdNumber.startAnimation(getFadeInAnimation(false));
+				thirdPartApples[0].startAnimation(ApplicationClass.getFadeInAnimation(this));				
+				thirdNumber.startAnimation(ApplicationClass.getFadeInAnimation(null));
 				step++; break;
 			case 10: 
-				thirdPartApples[1].startAnimation(getHalfFadeInAnimation(true,true));				
+				thirdPartApples[1].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));				
 				step++; break;
 			case 11: 
 				thirdNumber.setText("2");
-				thirdPartApples[1].startAnimation(getHalfFadeInAnimation(true,false));				
+				thirdPartApples[1].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,this));				
 				step++; break;
 			case 12: 
-				thirdPartApples[2].startAnimation(getHalfFadeInAnimation(true,true));				
+				thirdPartApples[2].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));				
 				step++; break;
 			case 13: 
 				thirdNumber.setText("3");
-				thirdPartApples[2].startAnimation(getHalfFadeInAnimation(true,false));		
+				thirdPartApples[2].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,this));		
 				step++; break;
 			case 14: 
-				thirdPartApples[3].startAnimation(getHalfFadeInAnimation(true,true));				
+				thirdPartApples[3].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));				
 				step++; break;
 			case 15:
 				thirdNumber.setText("4");
-				thirdPartApples[3].startAnimation(getHalfFadeInAnimation(true,false));				
+				thirdPartApples[3].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,this));				
 				step++; break;
 			case 16:
-				thirdPartApples[4].startAnimation(getHalfFadeInAnimation(true,true));				
+				thirdPartApples[4].startAnimation(ApplicationClass.getHalfFadeInAnimation(true,this));				
 				step++; break;
 			case 17: 
 				thirdNumber.setText("5");
-				thirdPartApples[4].startAnimation(getHalfFadeInAnimation(false,false));		
+				thirdPartApples[4].startAnimation(ApplicationClass.getHalfFadeInAnimation(false,null));		
 				step++; break;
 			default: break;
 		}
@@ -198,34 +199,7 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 	/**
 	 * End aniamtionListener method
 	 * */
-	private final int animationDuration=1000;
-	private Animation getFadeInAnimation(boolean mustContainLister){
-		Animation fadeIn = new AlphaAnimation(0, 1);
-		fadeIn.setDuration(animationDuration);
-		fadeIn.setFillEnabled(true);
-		fadeIn.setFillAfter(true);
-		if(mustContainLister)
-			fadeIn.setAnimationListener(this);
-		return fadeIn;
-	}
-	private Animation getHalfFadeInAnimation(boolean mustContainLister,boolean firstHalf){
-		
-		Animation fadeIn;
-		if(firstHalf){
-			fadeIn= new AlphaAnimation(0, 0.7f);
-			fadeIn.setDuration((int)(animationDuration*0.7));
-		}
-		else{
-			fadeIn= new AlphaAnimation(0.7f, 1);
-			fadeIn.setDuration((int)(animationDuration*0.3));
-		}
-		fadeIn.setFillEnabled(true);
-		fadeIn.setFillAfter(true);
-		if(mustContainLister)
-			fadeIn.setAnimationListener(this);
-		return fadeIn;
-		
-	}
+	
 	/**
 	 * Start title bar listener
 	 * */

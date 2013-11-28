@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.my.math_quiz.adapters.LevelsDisplayedAdapter;
 import com.my.math_quiz.tutorial.TutorialLevel0;
+import com.my.math_quiz.tutorial.TutorialLevel1;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -83,8 +84,8 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				
 				break;
 				case MODE_TUTORIAL_SELECTION:
-					Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
-					intent3.putExtra(TutorialLevel0.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
+					Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
+					intent3.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
 					startActivity(intent3);
 				break;	
 			default:
