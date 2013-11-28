@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.my.math_quiz.adapters.LevelsDisplayedAdapter;
 import com.my.math_quiz.tutorial.TutorialLevel0;
 import com.my.math_quiz.tutorial.TutorialLevel1;
+import com.my.math_quiz.tutorial.TutorialLevelMultiRow;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -84,9 +85,23 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				
 				break;
 				case MODE_TUTORIAL_SELECTION:
-					Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
-					intent3.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
-					startActivity(intent3);
+					if(position==0){
+						Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
+						intent3.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
+						startActivity(intent3);
+					
+					}
+					else if(position==1){
+						Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
+						intent3.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel1.MODE_START_FROM_TUTORIAL);
+						startActivity(intent3);
+					
+					}else if(position>=5){
+						Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevelMultiRow.class);
+						intent3.putExtra(TutorialLevelMultiRow.KEY_FOR_MODE_PARAMATER, TutorialLevelMultiRow.MODE_START_FROM_TUTORIAL);
+						intent3.putExtra(TutorialLevelMultiRow.KEY_FOR_SELECTED_LEVEL, position);
+						startActivity(intent3);
+					}
 				break;	
 			default:
 				break;

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+     <include layout="@layout/p_title_bar"/>
+
+
+
+	<RelativeLayout
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:layout_centerVertical="true"
+         android:layout_centerHorizontal="true"
+	     >
+	    
+<!-- 		        android:layout_centerVertical="true" -->
+     	  <TextView
+		        android:id="@+id/TLMtext1"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:textSize="30sp"
+		        android:text="15 + 17="
+		        android:paddingLeft="5dp"
+		        android:paddingRight="5dp"
+		        android:visibility="invisible"
+		        />
+	       
+	       <View
+	           android:id="@+id/TLMseperator1"
+	           android:layout_below="@+id/TLMtext1"
+	           android:layout_height="10dp"
+		       android:layout_width="10dp"
+		           >
+	       	</View>
+      
+	        <TextView
+		        android:id="@+id/TLMtext2"
+		        android:layout_below="@+id/TLMseperator1"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:textSize="30sp"
+		        android:text="15 + 17="
+		        android:layout_marginLeft="20dp"
+		        android:paddingLeft="5dp"
+		        android:paddingRight="5dp"
+		        android:visibility="invisible"
+	        />
+	       
+	       <View
+	           android:id="@+id/TLMseperator2"
+	           android:layout_below="@+id/TLMtext2"
+	           android:layout_height="10dp"
+		       android:layout_width="10dp"
+		           >
+	       	</View>
+	         <TextView
+		        android:id="@+id/TLMtext3"
+		        android:layout_below="@+id/TLMseperator2"
+		        android:layout_height="wrap_content"
+		       android:layout_marginLeft="20dp"
+		        android:layout_width="wrap_content"
+		        android:textSize="30sp"
+		        android:text="15 + 17="
+		        android:paddingLeft="5dp"
+		        android:paddingRight="5dp"
+		        android:visibility="invisible"
+	        />
+	       
+	       <View
+	           android:id="@+id/TLMseperator3"
+	           android:layout_below="@+id/TLMtext3"
+	           android:layout_height="10dp"
+		       android:layout_width="10dp"
+		           >
+	       	</View>
+	        <TextView
+		        android:id="@+id/TLMtext4"
+		        android:layout_below="@+id/TLMseperator3"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:textSize="30sp"
+		        android:text="15 + 17="
+		        android:paddingLeft="5dp"
+		        android:paddingRight="5dp"
+		        android:visibility="invisible"
+	        />
+	       
+	</RelativeLayout>
+   
+   <Button 
+       android:id="@+id/TL0doneButton"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:text="OK"
+       android:background="@drawable/button_background_normal"
+       android:layout_alignParentBottom="true"
+       /> 
+</RelativeLayout>
