@@ -99,7 +99,7 @@ public class TitleBar extends RelativeLayout{
 			middleText.setText(title);
 	}
 	private void setRightImage(){
-		if(rightImage!=null&&rightButton!=null)
+		if(rightButton!=null)
 			rightButton.setImageBitmap(rightImage);
 	}
 	

@@ -84,6 +84,7 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				break;
 				case MODE_TUTORIAL_SELECTION:
 					Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
+					intent3.putExtra(TutorialLevel0.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
 					startActivity(intent3);
 				break;	
 			default:
