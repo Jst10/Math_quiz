@@ -18,12 +18,26 @@ import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
 
 
-public class TutorialLevel0 extends Activity implements AnimationListener,TitleBarListener{
+public class TutorialGeneral extends Activity implements AnimationListener,TitleBarListener{
 
 	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
 	public static final int MODE_START_BEFORE_GAME=1;
 	public static final int MODE_START_FROM_TUTORIAL=2;
-	
+	//TODO
+	//manifest
+	//xml
+	//all stuff 
+	//etc
+	/**0 level has his own activity with apples :)
+	 * but for other activity we have 3dimension table,
+	 * 1...dimension tell us which level is
+	 * 2...dimension tell us seperatet lines
+	 * 3...dimension tell us parts of one line which we will display them with animation
+	 * 
+	 * no go
+	 * we need collection.....
+	 * */
+//	String[][][] textToDIsplayLevel1=new String()[];
 	
 	ImageView[] firstPartApples=new ImageView[3];
 	ImageView[] secondPartApples=new ImageView[2];
@@ -61,7 +75,7 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 			@Override
 			public void onClick(View v) {
 				if(selectedMode==MODE_START_FROM_TUTORIAL)
-					TutorialLevel0.this.finish();
+					TutorialGeneral.this.finish();
 				else
 					//TODO must change to close or start
 					;
@@ -125,70 +139,50 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 	public void onAnimationEnd(Animation animation) {
 		switch (step){
 			case 0: 
-//				firstPartApples[1].startAnimation(getFadeInAnimation(true));
-				firstPartApples[1].startAnimation(getHalfFadeInAnimation(true,true));
+				firstPartApples[1].startAnimation(getFadeInAnimation(true));
 				step++; break;
 			case 1: 
 				firstNumber.setText("2");
-				firstPartApples[1].startAnimation(getHalfFadeInAnimation(true,false));
+				firstPartApples[2].startAnimation(getFadeInAnimation(true));
 				step++; break;
 			case 2: 
-				firstPartApples[2].startAnimation(getHalfFadeInAnimation(true,true));
-				step++; break;
-			case 3: 
 				firstNumber.setText("3");
-				firstPartApples[2].startAnimation(getHalfFadeInAnimation(true,false));
-				step++; break;
-			case 4: 
 				sumSign[0].startAnimation(getFadeInAnimation(true));
 				sumSign[1].startAnimation(getFadeInAnimation(false));
 				step++; break;
-			case 5: 
+			case 3: 
 				secondPartApples[0].startAnimation(getFadeInAnimation(true));
 				secondNumber.startAnimation(getFadeInAnimation(false));
 				step++; break;
-			case 6: 
-				secondPartApples[1].startAnimation(getHalfFadeInAnimation(true,true));
+			case 4: 
+				secondPartApples[1].startAnimation(getFadeInAnimation(true));
 				step++; break;
-			case 7: 
+			case 5: 
 				secondNumber.setText("2");
-				secondPartApples[1].startAnimation(getHalfFadeInAnimation(true,false));
-				step++; break;
-			case 8: 
 				equalSign[0].startAnimation(getFadeInAnimation(true));
 				equalSign[1].startAnimation(getFadeInAnimation(false));
 				step++; break;
-			case 9: 
+			case 6: 
 				thirdPartApples[0].startAnimation(getFadeInAnimation(true));				
 				thirdNumber.startAnimation(getFadeInAnimation(false));
 				step++; break;
-			case 10: 
-				thirdPartApples[1].startAnimation(getHalfFadeInAnimation(true,true));				
+			case 7: 
+				thirdPartApples[1].startAnimation(getFadeInAnimation(true));				
+				step++; break;
+			case 8: 
+				thirdNumber.setText("2");
+				thirdPartApples[2].startAnimation(getFadeInAnimation(true));				
+				step++; break;
+			case 9: 
+				thirdNumber.setText("3");
+				thirdPartApples[3].startAnimation(getFadeInAnimation(true));				
+				step++; break;
+			case 10:
+				thirdNumber.setText("4");
+				thirdPartApples[4].startAnimation(getFadeInAnimation(true));				
 				step++; break;
 			case 11: 
-				thirdNumber.setText("2");
-				thirdPartApples[1].startAnimation(getHalfFadeInAnimation(true,false));				
-				step++; break;
-			case 12: 
-				thirdPartApples[2].startAnimation(getHalfFadeInAnimation(true,true));				
-				step++; break;
-			case 13: 
-				thirdNumber.setText("3");
-				thirdPartApples[2].startAnimation(getHalfFadeInAnimation(true,false));		
-				step++; break;
-			case 14: 
-				thirdPartApples[3].startAnimation(getHalfFadeInAnimation(true,true));				
-				step++; break;
-			case 15:
-				thirdNumber.setText("4");
-				thirdPartApples[3].startAnimation(getHalfFadeInAnimation(true,false));				
-				step++; break;
-			case 16:
-				thirdPartApples[4].startAnimation(getHalfFadeInAnimation(true,true));				
-				step++; break;
-			case 17: 
 				thirdNumber.setText("5");
-				thirdPartApples[4].startAnimation(getHalfFadeInAnimation(false,false));		
 				step++; break;
 			default: break;
 		}
@@ -198,33 +192,15 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 	/**
 	 * End aniamtionListener method
 	 * */
-	private final int animationDuration=1000;
+	
 	private Animation getFadeInAnimation(boolean mustContainLister){
 		Animation fadeIn = new AlphaAnimation(0, 1);
-		fadeIn.setDuration(animationDuration);
+		fadeIn.setDuration(1000);
 		fadeIn.setFillEnabled(true);
 		fadeIn.setFillAfter(true);
 		if(mustContainLister)
 			fadeIn.setAnimationListener(this);
 		return fadeIn;
-	}
-	private Animation getHalfFadeInAnimation(boolean mustContainLister,boolean firstHalf){
-		
-		Animation fadeIn;
-		if(firstHalf){
-			fadeIn= new AlphaAnimation(0, 0.7f);
-			fadeIn.setDuration((int)(animationDuration*0.7));
-		}
-		else{
-			fadeIn= new AlphaAnimation(0.7f, 1);
-			fadeIn.setDuration((int)(animationDuration*0.3));
-		}
-		fadeIn.setFillEnabled(true);
-		fadeIn.setFillAfter(true);
-		if(mustContainLister)
-			fadeIn.setAnimationListener(this);
-		return fadeIn;
-		
 	}
 	/**
 	 * Start title bar listener
