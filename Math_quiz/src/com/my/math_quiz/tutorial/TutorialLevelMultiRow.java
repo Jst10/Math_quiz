@@ -12,7 +12,9 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.my.math_quiz.R;
 import com.my.math_quiz.utils.OneAnimationStep;
@@ -95,13 +97,14 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 			text1.setText("5 * 3 =");
 			text2.setText("5 + 5 + 5 = 15");
 			text3.setText("5 * 3 = 15");
-			text4.setText("");
+			setNoTextInText4View();
+			
 			break;
 		case 8:
 			text1.setText("15 * 5=");
 			text2.setText("15 + 15 + 15 + 15 + 15 = 75");
 			text3.setText("15 * 5 = 75");
-			text4.setText("");
+			setNoTextInText4View();
 			break;
 		case 9:
 			text1.setText("2 + 5 * 8 =");
@@ -137,13 +140,13 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 			text1.setText(Html.fromHtml("5<sup><small>2</small></sup>="));
 			text2.setText("5 * 5 = 25");
 			text3.setText(Html.fromHtml("5<sup><small>2</small></sup> = 25"));
-			text4.setText("");
+			setNoTextInText4View();
 			break;
 		case 15:
 			text1.setText(Html.fromHtml("16<sup><small>2</small></sup> ="));
 			text2.setText("16 * 16 = 256");
 			text3.setText(Html.fromHtml("16<sup><small>2</small></sup> = 256"));
-			text4.setText("");
+			setNoTextInText4View();
 			break;
 		case 16:
 			text1.setText(Html.fromHtml("\u221a<small>64</small>="));
@@ -216,7 +219,13 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 	/**
 	 * End aniamtionListener method
 	 * */
-	
+	private void setNoTextInText4View(){
+		text4.setText("");
+		RelativeLayout.LayoutParams params=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		params.addRule(RelativeLayout.BELOW,  R.id.TLMseperator2);
+		text3.setLayoutParams(params);
+		
+	}
 	
 	/**
 	 * Start title bar listener

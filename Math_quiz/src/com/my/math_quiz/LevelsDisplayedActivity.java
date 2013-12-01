@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.my.math_quiz.adapters.LevelsDisplayedAdapter;
 import com.my.math_quiz.tutorial.TutorialLevel0;
 import com.my.math_quiz.tutorial.TutorialLevel1;
+import com.my.math_quiz.tutorial.TutorialLevel2;
 import com.my.math_quiz.tutorial.TutorialLevelMultiRow;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.views.TitleBar;
@@ -64,13 +65,14 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
 			LevelDescripction lds=ApplicationClass.getLevelDescription(position);
+			Intent intent;
 			switch (selectedMode) {
 				case MODE_BEFORE_SINGLE_PLAYER_GAME:
 //				TODO you have to count the tutorial if user first time open the level
 //					if(lds.wasAlreadyOpend()==true){
-						Intent intent1 = new Intent(LevelsDisplayedActivity.this, SingelPlayerGameActivity.class);
-						intent1.putExtra("EXTRA_SELECTED_LEVEL", position);
-						startActivityForResult(intent1,55);
+						intent = new Intent(LevelsDisplayedActivity.this, SingelPlayerGameActivity.class);
+						intent.putExtra("EXTRA_SELECTED_LEVEL", position);
+						startActivityForResult(intent,55);
 //					}
 //					else{
 //						//we must show tutorial
@@ -86,21 +88,26 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				break;
 				case MODE_TUTORIAL_SELECTION:
 					if(position==0){
-						Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
-						intent3.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
-						startActivity(intent3);
+						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
+						intent.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
+						startActivity(intent);
 					
 					}
 					else if(position==1){
-						Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
-						intent3.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel1.MODE_START_FROM_TUTORIAL);
-						startActivity(intent3);
+						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
+						intent.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel1.MODE_START_FROM_TUTORIAL);
+						startActivity(intent);
+					
+					}else if(position==2){
+						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel2.class);
+						intent.putExtra(TutorialLevel2.KEY_FOR_MODE_PARAMATER, TutorialLevel2.MODE_START_FROM_TUTORIAL);
+						startActivity(intent);
 					
 					}else if(position>=5){
-						Intent intent3 = new Intent(LevelsDisplayedActivity.this, TutorialLevelMultiRow.class);
-						intent3.putExtra(TutorialLevelMultiRow.KEY_FOR_MODE_PARAMATER, TutorialLevelMultiRow.MODE_START_FROM_TUTORIAL);
-						intent3.putExtra(TutorialLevelMultiRow.KEY_FOR_SELECTED_LEVEL, position);
-						startActivity(intent3);
+						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelMultiRow.class);
+						intent.putExtra(TutorialLevelMultiRow.KEY_FOR_MODE_PARAMATER, TutorialLevelMultiRow.MODE_START_FROM_TUTORIAL);
+						intent.putExtra(TutorialLevelMultiRow.KEY_FOR_SELECTED_LEVEL, position);
+						startActivity(intent);
 					}
 				break;	
 			default:
