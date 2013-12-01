@@ -31,8 +31,7 @@
         <activity android:name="com.my.math_quiz.PreferenceActivity"></activity>
         <activity android:name="com.my.math_quiz.MultiPlayerOneDeviceGameActivity"></activity>
         <activity android:name="com.my.math_quiz.tutorial.TutorialLevel0"></activity>
-        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel1"></activity>
-         <activity android:name="com.my.math_quiz.tutorial.TutorialLevel2"></activity>
+        <activity android:name="com.my.math_quiz.tutorial.TutorialLevelEquationType"></activity>
         <activity android:name="com.my.math_quiz.tutorial.TutorialLevelMultiRow"></activity>
     </application>
 

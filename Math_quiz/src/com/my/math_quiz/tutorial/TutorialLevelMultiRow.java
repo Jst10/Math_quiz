@@ -47,7 +47,7 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tutorial_milti_row);
+		setContentView(R.layout.tutorial_multi_row);
 		
 		Intent myIntent = getIntent();
 		selectedMode = myIntent.getIntExtra(KEY_FOR_MODE_PARAMATER,0);

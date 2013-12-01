@@ -13,8 +13,7 @@ import android.widget.ListView;
 
 import com.my.math_quiz.adapters.LevelsDisplayedAdapter;
 import com.my.math_quiz.tutorial.TutorialLevel0;
-import com.my.math_quiz.tutorial.TutorialLevel1;
-import com.my.math_quiz.tutorial.TutorialLevel2;
+import com.my.math_quiz.tutorial.TutorialLevelEquationType;
 import com.my.math_quiz.tutorial.TutorialLevelMultiRow;
 import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.views.TitleBar;
@@ -89,18 +88,22 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				case MODE_TUTORIAL_SELECTION:
 					if(position==0){
 						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
-						intent.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
+						intent.putExtra(TutorialLevel0.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
 						startActivity(intent);
 					
 					}
-					else if(position==1){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
-						intent.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel1.MODE_START_FROM_TUTORIAL);
-						startActivity(intent);
-					
-					}else if(position==2){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel2.class);
-						intent.putExtra(TutorialLevel2.KEY_FOR_MODE_PARAMATER, TutorialLevel2.MODE_START_FROM_TUTORIAL);
+//					else if(positOion==1){
+//						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
+//						intent.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel1.MODE_START_FROM_TUTORIAL);
+//						startActivity(intent);
+//					
+//					}
+					else if(position==1||position==2){
+//						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel2.class);
+//						intent.putExtra(TutorialLevel2.KEY_FOR_MODE_PARAMATER, TutorialLevel2.MODE_START_FROM_TUTORIAL);
+						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelEquationType.class);
+						intent.putExtra(TutorialLevelEquationType.KEY_FOR_MODE_PARAMATER, TutorialLevelEquationType.MODE_START_FROM_TUTORIAL);
+						intent.putExtra(TutorialLevelEquationType.KEY_FOR_SELECTED_LEVEL, position);
 						startActivity(intent);
 					
 					}else if(position>=5){
