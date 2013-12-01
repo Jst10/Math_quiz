@@ -132,6 +132,19 @@ public class ApplicationClass extends Application{
 		
 		
 	}
+	public static float convertDpToPixel(float dp){
+	    Resources resources = applicationContext.getResources();
+	    DisplayMetrics metrics = resources.getDisplayMetrics();
+	    float px = dp * (metrics.densityDpi / 160f);
+	    return px;
+	}
+
+	public static float convertPixelsToDp(float px){
+	    Resources resources = applicationContext.getResources();
+	    DisplayMetrics metrics = resources.getDisplayMetrics();
+	    float dp = px / (metrics.densityDpi / 160f);
+	    return dp;
+	}
 	
 	private static final int animationDuration=1000;
 	/**
@@ -189,4 +202,29 @@ public class ApplicationClass extends Application{
 		
 	}
 	
+	/**
+	 * Method create new instance of fade out animation which is devided in two parts (which part first or last we wan we chose with @param firstHalf)
+	 * @param firstHalf With this param we chose which part of animation we want, if we set to true we will get first part else it will return the last part
+	 * @param listener is the animation listener which will be set to the animation, if you don't want to set listener just place null to this place
+	 * 
+	 * @return new instance of fade in animation
+	 * */
+	public static Animation getHalfFadeOutAnimation(boolean firstHalf,AnimationListener listener){
+		
+		Animation fadeOut;
+		if(firstHalf){
+			fadeOut= new AlphaAnimation(1, 0.7f);
+			fadeOut.setDuration((int)(animationDuration*0.3));
+		}
+		else{
+			fadeOut= new AlphaAnimation(0.7f, 0);
+			fadeOut.setDuration((int)(animationDuration*0.7));
+		}
+		fadeOut.setFillEnabled(true);
+		fadeOut.setFillAfter(true);
+		if(listener!=null)
+			fadeOut.setAnimationListener(listener);
+		return fadeOut;
+		
+	}
 }
