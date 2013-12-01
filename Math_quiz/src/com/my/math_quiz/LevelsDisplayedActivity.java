@@ -92,15 +92,7 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 						startActivity(intent);
 					
 					}
-//					else if(positOion==1){
-//						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel1.class);
-//						intent.putExtra(TutorialLevel1.KEY_FOR_MODE_PARAMATER, TutorialLevel1.MODE_START_FROM_TUTORIAL);
-//						startActivity(intent);
-//					
-//					}
-					else if(position==1||position==2){
-//						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel2.class);
-//						intent.putExtra(TutorialLevel2.KEY_FOR_MODE_PARAMATER, TutorialLevel2.MODE_START_FROM_TUTORIAL);
+					else if(position==1||position==2||position==4){
 						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelEquationType.class);
 						intent.putExtra(TutorialLevelEquationType.KEY_FOR_MODE_PARAMATER, TutorialLevelEquationType.MODE_START_FROM_TUTORIAL);
 						intent.putExtra(TutorialLevelEquationType.KEY_FOR_SELECTED_LEVEL, position);
