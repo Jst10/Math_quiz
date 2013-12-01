@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.my.math_quiz.adapters.LevelsDisplayedAdapter;
 import com.my.math_quiz.tutorial.TutorialLevel0;
+import com.my.math_quiz.tutorial.TutorialLevel10;
 import com.my.math_quiz.tutorial.TutorialLevel3;
 import com.my.math_quiz.tutorial.TutorialLevelEquationType;
 import com.my.math_quiz.tutorial.TutorialLevelMultiRow;
@@ -96,6 +97,10 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 					else if(position==3){
 						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel3.class);
 						intent.putExtra(TutorialLevel3.KEY_FOR_MODE_PARAMATER, TutorialLevel3.MODE_START_FROM_TUTORIAL);
+						startActivity(intent);
+					}else if(position==10){
+						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel10.class);
+						intent.putExtra(TutorialLevel0.KEY_FOR_MODE_PARAMATER, TutorialLevel10.MODE_START_FROM_TUTORIAL);
 						startActivity(intent);
 					}
 					else if(position==1||position==2||position==4){

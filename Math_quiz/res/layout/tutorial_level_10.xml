@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+     <include layout="@layout/p_title_bar"/>
+	
+	<RelativeLayout
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:layout_centerVertical="true"
+         android:layout_centerHorizontal="true"
+         android:gravity="center_horizontal"
+         
+	     >
+	    
+<!-- 		        android:layout_centerVertical="true" -->
+     	  <TextView
+		        android:id="@+id/TL10text1"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:textSize="30sp"
+		        android:text="12 / 4 ="
+		        android:visibility="invisible"
+		        android:layout_centerHorizontal="true"
+		        />
+	       
+	       <View
+	           android:id="@+id/TL10seperator1"
+	           android:layout_below="@+id/TL10text1"
+	           android:layout_height="20dp"
+		       android:layout_width="10dp"
+		           >
+	       	</View>
+	       	
+	       <RelativeLayout 
+		       android:id="@+id/TL10appelsContainer"
+	            android:layout_height="wrap_content"
+		        android:layout_width="match_parent"
+		        android:layout_centerHorizontal="true"
+		       android:layout_below="@+id/TL10seperator1"
+	        >
+	            <View 
+	                 android:id="@+id/centerSep1"
+	                 android:layout_width="1px"
+	                 android:layout_height="1px"
+	                 android:layout_centerHorizontal="true"/>
+	              <ImageView
+		            android:id="@+id/TL10apple2"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toLeftOf="@id/centerSep1"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+                <ImageView
+		            android:id="@+id/TL10apple1"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toLeftOf="@id/TL10apple2"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+	           	<ImageView
+		            android:id="@+id/TL10apple0"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toLeftOf="@id/TL10apple1"
+		         	android:src="@drawable/apple"
+		         	android:visibility="invisible"/>
+	           
+	           
+	            
+	             <ImageView
+		            android:id="@+id/TL10apple3"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toRightOf="@id/centerSep1"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+	             <ImageView
+		            android:id="@+id/TL10apple4"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toRightOf="@id/TL10apple3"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+             	<ImageView
+		            android:id="@+id/TL10apple5"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toRightOf="@id/TL10apple4"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+	             
+	             
+	             
+	           
+           	 	<ImageView
+		            android:id="@+id/TL10apple8"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toLeftOf="@id/centerSep1"
+		         	android:layout_below="@+id/TL10apple0"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+          	 	<ImageView
+		            android:id="@+id/TL10apple7"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toLeftOf="@id/TL10apple8"
+		         	android:layout_below="@+id/TL10apple0"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+          	 	<ImageView
+		            android:id="@+id/TL10apple6"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_below="@+id/TL10apple0"
+		         	android:layout_toLeftOf="@id/TL10apple7"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+           	 	<ImageView
+		            android:id="@+id/TL10apple9"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toRightOf="@id/centerSep1"
+		         	android:layout_below="@+id/TL10apple0"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+           	 	<ImageView
+		            android:id="@+id/TL10apple10"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toRightOf="@id/TL10apple9"
+		         	android:layout_below="@+id/TL10apple0"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+         	    <ImageView
+		            android:id="@+id/TL10apple11"
+		         	android:layout_width="35dp"
+		         	android:layout_height="35dp"
+		         	android:layout_toRightOf="@id/TL10apple10"
+		         	android:layout_below="@+id/TL10apple0"
+		         	android:src="@drawable/apple"  
+		         	android:visibility="invisible"/>
+           	 	
+	       
+	        <View
+	           android:id="@+id/TLMseperator1"
+	           android:layout_below="@+id/TL10apple11"
+	           android:layout_height="200dp"
+		       android:layout_width="10dp"
+		           >
+	       	</View>
+	   
+	       </RelativeLayout>
+          	<LinearLayout 
+          	    android:id="@+id/TL10numberContainer"
+	       	    android:layout_below="@+id/TL10appelsContainer"
+	       	    android:layout_width="match_parent"
+	       	    android:layout_height="wrap_content"
+	       	    android:orientation="horizontal"
+	       	    android:weightSum="4"
+	       	    android:paddingBottom="13dp">
+	       	    <TextView 
+	       	        android:id="@+id/TL10Tmpt0"
+	       	        android:layout_width="0px"
+	       	        android:layout_height="wrap_content"
+	       	        android:text="1"
+	       	        android:layout_weight="1"
+	       	        android:textAlignment="center"
+	       	        android:gravity="center_horizontal"
+	       	        android:visibility="invisible"
+	       	        />
+	       	     <TextView 
+	       	        android:id="@+id/TL10Tmpt1"
+	       	        android:layout_width="0px"
+	       	        android:layout_height="wrap_content"
+	       	        android:text="1"
+	       	        android:layout_weight="1"
+	       	        android:textAlignment="center"
+	       	        android:gravity="center_horizontal"
+	       	        android:visibility="invisible"
+	       	        />
+	       	      <TextView 
+	       	        android:id="@+id/TL10Tmpt2"
+	       	        android:layout_width="0px"
+	       	        android:layout_height="wrap_content"
+	       	        android:text="1"
+	       	        android:layout_weight="1"
+	       	        android:textAlignment="center"
+	       	        android:gravity="center_horizontal"
+	       	        android:visibility="invisible"
+	       	        />
+	       	       <TextView 
+	       	        android:id="@+id/TL10Tmpt3"
+	       	        android:layout_width="0px"
+	       	        android:layout_height="wrap_content"
+	       	        android:text="1"
+	       	        android:layout_weight="1"
+	       	        android:textAlignment="center"
+	       	        android:gravity="center_horizontal"
+	       	        android:visibility="invisible"
+	       	        />
+	       	       
+	       	</LinearLayout>
+           <TextView
+		        android:id="@+id/TL10text2"
+		        android:layout_below="@+id/TL10numberContainer"
+		        android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:textSize="30sp"
+		        android:text="12 / 4 = 3"
+		        android:layout_centerHorizontal="true"
+		        android:visibility="invisible"
+	        />
+      </RelativeLayout>
+     
+    
+   <Button 
+       android:id="@+id/TL10doneButton"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:text="OK"
+       android:background="@drawable/button_background_normal"
+       android:layout_alignParentBottom="true"
+       /> 
+</RelativeLayout>
