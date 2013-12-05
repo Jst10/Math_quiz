@@ -33,6 +33,7 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 	
 	public static final String KEY_FOR_MODE_PARAMETER="displayingLevelsMode";
 	public static final String KEY_FOR_SINGLE_PLAYER_RESULT="finishdLevel";
+	public static final String KEY_FOR_LEVEL_WHICH_TUTORIAL_WAS_DISPLAYED="keyforlevelwhictwd";
 	
 	private int selectedMode;
 	
@@ -70,14 +71,15 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 			switch (selectedMode) {
 				case MODE_BEFORE_SINGLE_PLAYER_GAME:
 //				TODO you have to count the tutorial if user first time open the level
-//					if(lds.wasAlreadyOpend()==true){
+					if(lds.wasAlreadyOpend()==true){
 						intent = new Intent(LevelsDisplayedActivity.this, SingelPlayerGameActivity.class);
 						intent.putExtra("EXTRA_SELECTED_LEVEL", position);
 						startActivityForResult(intent,55);
-//					}
-//					else{
-//						//we must show tutorial
-//					}
+					}
+					else{
+						//we must show tutorial
+						startTutorial(position,true,MODE_START_BEFORE_GAME);
+					}
 					
 				break;
 				case MODE_MULTIPLAYER_SELECTION_ONE_DEVICE:
@@ -88,33 +90,7 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				
 				break;
 				case MODE_TUTORIAL_SELECTION:
-					if(position==0){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
-						intent.putExtra(TutorialLevel0.KEY_FOR_MODE_PARAMATER, TutorialLevel0.MODE_START_FROM_TUTORIAL);
-						startActivity(intent);
-					
-					}
-					else if(position==3){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel3.class);
-						intent.putExtra(TutorialLevel3.KEY_FOR_MODE_PARAMATER, TutorialLevel3.MODE_START_FROM_TUTORIAL);
-						startActivity(intent);
-					}else if(position==10){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel10.class);
-						intent.putExtra(TutorialLevel0.KEY_FOR_MODE_PARAMATER, TutorialLevel10.MODE_START_FROM_TUTORIAL);
-						startActivity(intent);
-					}
-					else if(position==1||position==2||position==4){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelEquationType.class);
-						intent.putExtra(TutorialLevelEquationType.KEY_FOR_MODE_PARAMATER, TutorialLevelEquationType.MODE_START_FROM_TUTORIAL);
-						intent.putExtra(TutorialLevelEquationType.KEY_FOR_SELECTED_LEVEL, position);
-						startActivity(intent);
-					
-					}else if(position>=5){
-						intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelMultiRow.class);
-						intent.putExtra(TutorialLevelMultiRow.KEY_FOR_MODE_PARAMATER, TutorialLevelMultiRow.MODE_START_FROM_TUTORIAL);
-						intent.putExtra(TutorialLevelMultiRow.KEY_FOR_SELECTED_LEVEL, position);
-						startActivity(intent);
-					}
+					startTutorial(position,false,MODE_START_FROM_TUTORIAL);
 				break;	
 			default:
 				break;
@@ -122,8 +98,45 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 
 		}
 	};
+
+	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
+	public static final String KEY_FOR_SELECTED_LEVEL="selectedlevel";
+	public static final int MODE_START_BEFORE_GAME=1;
+	public static final int MODE_START_FROM_TUTORIAL=2;
+
+	
+	private void startTutorial(int position,boolean beforeGame,int mode){
+		Intent intent=null;
+		if(position==0){
+			intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel0.class);
+			intent.putExtra(KEY_FOR_MODE_PARAMATER,mode);
+		}
+		else if(position==3){
+			intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel3.class);
+			intent.putExtra(KEY_FOR_MODE_PARAMATER,mode);
+		}else if(position==10){
+			intent = new Intent(LevelsDisplayedActivity.this, TutorialLevel10.class);
+			intent.putExtra(KEY_FOR_MODE_PARAMATER, mode);
+		}
+		else if(position==1||position==2||position==4){
+			intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelEquationType.class);
+			intent.putExtra(KEY_FOR_MODE_PARAMATER, mode);
+			intent.putExtra(KEY_FOR_SELECTED_LEVEL, position);
+		}else if(position>=5){
+			intent = new Intent(LevelsDisplayedActivity.this, TutorialLevelMultiRow.class);
+			intent.putExtra(KEY_FOR_MODE_PARAMATER, mode);
+			intent.putExtra(KEY_FOR_SELECTED_LEVEL, position);
+		}
+		if(beforeGame){
+			startActivityForResult(intent,79);
+		}else{
+			startActivity(intent);
+		}
+	
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.d("activiFinish","result coede is: "+resultCode);
 		if (requestCode == 55) {
 		     if(resultCode == RESULT_OK){      
 		         int result=data.getIntExtra(KEY_FOR_SINGLE_PLAYER_RESULT,-1);
@@ -136,6 +149,14 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 		         //Write your code if there's no result
 		     }
 		  }
+		else if(requestCode==79){
+			if(resultCode==RESULT_OK){
+				int finishedLevel=data.getIntExtra(KEY_FOR_LEVEL_WHICH_TUTORIAL_WAS_DISPLAYED, 0);
+				Intent 	intent = new Intent(LevelsDisplayedActivity.this, SingelPlayerGameActivity.class);
+				intent.putExtra("EXTRA_SELECTED_LEVEL", finishedLevel);
+				startActivityForResult(intent,55);
+			}
+		}
 	}
 
 	@Override

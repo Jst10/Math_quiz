@@ -16,6 +16,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.my.math_quiz.ApplicationClass;
+import com.my.math_quiz.LevelsDisplayedActivity;
 import com.my.math_quiz.R;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -24,10 +25,6 @@ import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
 public class TutorialLevel10 extends Activity implements AnimationListener,TitleBarListener{
 
-	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
-	public static final int MODE_START_BEFORE_GAME=1;
-	public static final int MODE_START_FROM_TUTORIAL=2;
-	
 	
 	ImageView[] appels=new ImageView[12];
 	
@@ -52,12 +49,12 @@ public class TutorialLevel10 extends Activity implements AnimationListener,Title
 		setContentView(R.layout.tutorial_level_10);
 		
 		Intent myIntent = getIntent();
-		selectedMode = myIntent.getIntExtra(KEY_FOR_MODE_PARAMATER,0);
+		selectedMode = myIntent.getIntExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMATER,0);
 		
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial 00");
+		titleBar.setTitle("Tutorial 11");
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL10doneButton);
@@ -65,11 +62,7 @@ public class TutorialLevel10 extends Activity implements AnimationListener,Title
 			
 			@Override
 			public void onClick(View v) {
-				if(selectedMode==MODE_START_FROM_TUTORIAL)
-					TutorialLevel10.this.finish();
-				else
-					//TODO must change to close or start
-					;
+				TutorialLevel10.this.finish();
 			}
 		});
 		
@@ -113,7 +106,15 @@ public class TutorialLevel10 extends Activity implements AnimationListener,Title
 	@Override public void onAnimationRepeat(Animation animation) {	}
 	@Override public void onAnimationStart(Animation animation) {	}
 
-	
+	@Override
+	public void finish() {
+		if(selectedMode==LevelsDisplayedActivity.MODE_START_BEFORE_GAME){
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_LEVEL_WHICH_TUTORIAL_WAS_DISPLAYED,10);
+			setResult(RESULT_OK,returnIntent);  
+		}
+		super.finish();
+	}
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		/*

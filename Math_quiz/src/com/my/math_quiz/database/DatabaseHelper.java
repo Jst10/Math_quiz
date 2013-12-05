@@ -13,7 +13,7 @@ import com.my.math_quiz.ApplicationClass;
 
 public class DatabaseHelper  extends SQLiteOpenHelper {
 
-	public static final int DATABASE_VERSION = 10;
+	public static final int DATABASE_VERSION = 11;
 	public static final String DATABASE_NAME = "math_quiz.db";
 
 	private SQLiteDatabase db; 

@@ -6,16 +6,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
+import com.my.math_quiz.LevelsDisplayedActivity;
 import com.my.math_quiz.R;
 import com.my.math_quiz.utils.OneAnimationStep;
 import com.my.math_quiz.views.TitleBar;
@@ -25,10 +25,6 @@ import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
 public class TutorialLevelMultiRow extends Activity implements AnimationListener,TitleBarListener{
 
-	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
-	public static final String KEY_FOR_SELECTED_LEVEL="selectedlevel";
-	public static final int MODE_START_BEFORE_GAME=1;
-	public static final int MODE_START_FROM_TUTORIAL=2;
 	
 	
 	
@@ -44,20 +40,21 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 	TitleBar titleBar;
 	int selectedMode;
 	Button okButton;
+	int level;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tutorial_multi_row);
 		
 		Intent myIntent = getIntent();
-		selectedMode = myIntent.getIntExtra(KEY_FOR_MODE_PARAMATER,0);
-		int level=2;
-		level = myIntent.getIntExtra(KEY_FOR_SELECTED_LEVEL,0);
+		selectedMode = myIntent.getIntExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMATER,0);
+		level=2;
+		level = myIntent.getIntExtra(LevelsDisplayedActivity.KEY_FOR_SELECTED_LEVEL,0);
 
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial 01");
+		titleBar.setTitle("Tutorial "+(level+1));
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL0doneButton);
@@ -65,11 +62,7 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 			
 			@Override
 			public void onClick(View v) {
-				if(selectedMode==MODE_START_FROM_TUTORIAL)
-					TutorialLevelMultiRow.this.finish();
-				else
-					//TODO must change to close or start
-					;
+				TutorialLevelMultiRow.this.finish();
 			}
 		});
 		
@@ -200,6 +193,15 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 		step++;
 	}
 
+	@Override
+	public void finish() {
+		if(selectedMode==LevelsDisplayedActivity.MODE_START_BEFORE_GAME){
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_LEVEL_WHICH_TUTORIAL_WAS_DISPLAYED,level);
+			setResult(RESULT_OK,returnIntent);  
+		}
+		super.finish();
+	}
 
 	/**
 	 * Start aniamtionListener method

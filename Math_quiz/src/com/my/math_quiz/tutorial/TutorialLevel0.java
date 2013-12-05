@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.my.math_quiz.ApplicationClass;
+import com.my.math_quiz.LevelsDisplayedActivity;
 import com.my.math_quiz.R;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -20,11 +20,6 @@ import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
 
 public class TutorialLevel0 extends Activity implements AnimationListener,TitleBarListener{
-
-	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
-	public static final int MODE_START_BEFORE_GAME=1;
-	public static final int MODE_START_FROM_TUTORIAL=2;
-	
 	
 	ImageView[] firstPartApples=new ImageView[3];
 	ImageView[] secondPartApples=new ImageView[2];
@@ -48,12 +43,12 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 		setContentView(R.layout.tutorial_level_0);
 		
 		Intent myIntent = getIntent();
-		selectedMode = myIntent.getIntExtra(KEY_FOR_MODE_PARAMATER,0);
+		selectedMode = myIntent.getIntExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMATER,0);
 		
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial 00");
+		titleBar.setTitle("Tutorial 1");
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL0doneButton);
@@ -61,11 +56,7 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 			
 			@Override
 			public void onClick(View v) {
-				if(selectedMode==MODE_START_FROM_TUTORIAL)
-					TutorialLevel0.this.finish();
-				else
-					//TODO must change to close or start
-					;
+				TutorialLevel0.this.finish();
 			}
 		});
 		
@@ -116,6 +107,17 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 	
 	private int step=0;
 
+	@Override
+	public void finish() {
+		if(selectedMode==LevelsDisplayedActivity.MODE_START_BEFORE_GAME){
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_LEVEL_WHICH_TUTORIAL_WAS_DISPLAYED,0);
+			setResult(RESULT_OK,returnIntent);  
+		}
+		super.finish();
+	}
+
+	
 	/**
 	 * Start aniamtionListener method
 	 * */

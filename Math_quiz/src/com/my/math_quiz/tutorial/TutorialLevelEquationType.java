@@ -13,6 +13,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.my.math_quiz.LevelsDisplayedActivity;
 import com.my.math_quiz.R;
 import com.my.math_quiz.utils.OneAnimationStep;
 import com.my.math_quiz.views.TitleBar;
@@ -21,10 +22,6 @@ import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
 
 public class TutorialLevelEquationType extends Activity implements AnimationListener,TitleBarListener{
-	public static final String KEY_FOR_SELECTED_LEVEL="selectedlevel";
-	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
-	public static final int MODE_START_BEFORE_GAME=1;
-	public static final int MODE_START_FROM_TUTORIAL=2;
 	
 	
 	
@@ -37,18 +34,21 @@ public class TutorialLevelEquationType extends Activity implements AnimationList
 	TitleBar titleBar;
 	int selectedMode;
 	Button okButton;
+	int level;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tutorial_equation_type);
 		
 		Intent myIntent = getIntent();
-		selectedMode = myIntent.getIntExtra(KEY_FOR_MODE_PARAMATER,0);
+		selectedMode = myIntent.getIntExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMATER,0);
 		
+		level=2;
+		level = myIntent.getIntExtra(LevelsDisplayedActivity.KEY_FOR_SELECTED_LEVEL,0);
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial 01");
+		titleBar.setTitle("Tutorial "+(level+1));
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL0doneButton);
@@ -56,11 +56,7 @@ public class TutorialLevelEquationType extends Activity implements AnimationList
 			
 			@Override
 			public void onClick(View v) {
-				if(selectedMode==MODE_START_FROM_TUTORIAL)
-					TutorialLevelEquationType.this.finish();
-				else
-					//TODO must change to close or start
-					;
+				TutorialLevelEquationType.this.finish();
 			}
 		});
 		
@@ -69,9 +65,7 @@ public class TutorialLevelEquationType extends Activity implements AnimationList
 		
 		
 		
-		int level=2;
 		TextView tmp;
-		level = myIntent.getIntExtra(KEY_FOR_SELECTED_LEVEL,0);
 		OneAnimationStep oneStep;
 		
 		switch (level) {
@@ -188,7 +182,15 @@ public class TutorialLevelEquationType extends Activity implements AnimationList
 //	
 //	Animation getFadeInAnimation(true) = new AlphaAnimation(0, 1);
 //	Animation getFadeInAnimation(false) = new AlphaAnimation(0, 1);
-//	
+//	@Override
+	public void finish() {
+		if(selectedMode==LevelsDisplayedActivity.MODE_START_BEFORE_GAME){
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(LevelsDisplayedActivity.KEY_FOR_LEVEL_WHICH_TUTORIAL_WAS_DISPLAYED,level);
+			setResult(RESULT_OK,returnIntent);  
+		}
+		super.finish();
+	}
 	
 
 
