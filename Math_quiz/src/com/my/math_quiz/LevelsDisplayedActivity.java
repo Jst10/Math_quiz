@@ -50,8 +50,23 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Single player");
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
+		switch (selectedMode) {
+			case MODE_BEFORE_SINGLE_PLAYER_GAME:
+				titleBar.setTitle("Single player");
+				break;
+			case MODE_MULTIPLAYER_SELECTION_ONE_DEVICE:
+				titleBar.setTitle("Multi player one device");
+				break;
+			case MODE_MULTIPLAYER_SELECTION_WLAN:
+				titleBar.setTitle("Multi player wlan");
+				break;
+			case MODE_TUTORIAL_SELECTION:
+				titleBar.setTitle("Tutorials");
+				break;
+			default: break;
+		}
+		
 		
 		list=(ListView)findViewById(R.id.SPlistView);
 		
