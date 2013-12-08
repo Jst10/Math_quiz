@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,9 +122,16 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				handler.removeCallbacks(runablePageSwitching);
+//				Log.d("setA","scrol state "+state);
+//				if(state>1){
+//					for(int i=0; i<	pager.getChildCount(); i++){
+//						View v=pager.getChildAt(i);
+//						v.setEnabled(false);
+//					}
+//				}
 			}
 		});
-		
+	
 		
 		
 		taskIndicatorCorrectAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_correct_answer);
@@ -251,6 +259,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				buttoms.seButtontTexts(currentTask.getAnswers());
 				buttoms.setListener(SingelPlayerGameActivity.this);
 				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer());
+				buttoms.setPositionInTasks(position);
 				pager.addView(v);
 				return v;
 			}
@@ -270,13 +279,6 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 					((TextView)resultPage.findViewById(R.id.ESPscoreM)).setText(levelDescripction.levelScores[1]+"");
 					((TextView)resultPage.findViewById(R.id.ESPscoreH)).setText(levelDescripction.levelScores[2]+"");
 					
-					//resultPage=new RelativeLayout(SingelPlayerGameActivity.this);
-					//resultPage.setBackgroundColor(0xF0F0F0);
-					//TextView t=new TextView(SingelPlayerGameActivity.this);
-					//t.setText(levelData.getDurationOfLevel()+"");
-			
-					//((RelativeLayout)resultPage).addView(t);
-//					((Button)resultPage.findViewById(R.id))
 					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).setListener(SingelPlayerGameActivity.this);
 					
 				
@@ -296,9 +298,11 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	/**@param position the position of button on which user clicked*/
 	@Override
 	public void onButtonClick(InGameBottomButtoms buttoms,int position) {
-		Task t=tasks.get( pager.getCurrentItem());
+		Task t=tasks.get( buttoms.getPositionInTasks());
 		levelData.pauseTimingLevel();
+//		Log.d("setA",position+"/"+pager.getCurrentItem());
 		if(t.setSelectedAnswer(position)){
+//			Log.d("setB",position+"");
 			buttoms.setCollors(t.getSelectedAnswer(), t.getCorrectAnswer());
 			if(additionalPage==0&&levelData.getNumberOfUnsolvedTests()==0){
 				//now we finish all tasks in that level so we can calculate results

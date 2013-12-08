@@ -3,6 +3,7 @@ package com.my.math_quiz.views;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ public class InGameBottomButtoms extends LinearLayout{
 	Button[]buttons=null;
 	
 	BottomButtonListener listener=null;
+	int positionInTasks;
 	
 //	int backgroundCorrect;
 //	int backgroundWrong;
@@ -139,6 +141,14 @@ public class InGameBottomButtoms extends LinearLayout{
 		buttons[2].setText(answers[2]+"");
 		buttons[3].setText(answers[3]+"");
 		
+	}
+
+	public int getPositionInTasks() {
+		return positionInTasks;
+	}
+
+	public void setPositionInTasks(int positionInTasks) {
+		this.positionInTasks = positionInTasks;
 	}
 
 	
