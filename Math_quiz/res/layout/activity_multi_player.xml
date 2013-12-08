@@ -32,6 +32,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/button_background_normal"
 	        android:text="Join" />
 	        
 	    </RelativeLayout>
@@ -48,6 +49,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/button_background_normal"
 	        android:text="Host" />
 	        
 	    </RelativeLayout>
@@ -64,6 +66,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/button_background_normal"
 	        android:text="One device" />
 	       </RelativeLayout> 
 	   

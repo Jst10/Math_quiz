@@ -57,6 +57,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/button_background_normal"
 	        android:text="Single player" />
 	        
 	    </RelativeLayout>
@@ -73,6 +74,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
+            android:background="@drawable/button_background_normal"
 	        android:text="Multi player" />
 	        
 	    </RelativeLayout>
@@ -90,6 +92,7 @@
 	        android:layout_height="60dp"
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
+	        android:background="@drawable/button_background_normal"
 	        android:text="Tutorial" />
 	    </RelativeLayout>
 	    <View 
