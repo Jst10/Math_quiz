@@ -34,11 +34,11 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 	
 	public void MultiPlayerActivityButtonClick(View v){
 		if(v.getId()==R.id.MPhost){
-//			Intent intent = new Intent(this, MultiPlayerActivity.class);
-//			startActivity(intent);
+			Intent intent = new Intent(this, MultiPlayerActivityHost.class);
+			startActivity(intent);
 		} else if(v.getId()==R.id.MPJoin){
-//			Intent intent = new Intent(this, SinglePlayerActivity.class);
-//			startActivity(intent);
+			Intent intent = new Intent(this, MultiPlayerActivityJoin.class);
+			startActivity(intent);
 		} else if(v.getId()==R.id.MPOneDevice){
 			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
 			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_MULTIPLAYER_SELECTION_ONE_DEVICE);
@@ -54,8 +54,8 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 
 	@Override
 	public void onRightButtonClick() {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent(MultiPlayerActivity.this, PreferenceActivity.class);
+		startActivity(intent);
 	}
 
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.preference.PreferenceManager;
@@ -87,7 +88,26 @@ public class ApplicationClass extends Application{
 	public static String getNickName(){
 		return MyPreferences.mpNicKName;
 	}
-	
+	public static String getLastIPAdress(){
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+		return sharedPrefs.getString("pref_key_ip_adress","192.168.1.1");
+	}
+	public static int getLastPortNumber(){
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+		return sharedPrefs.getInt("pref_key_port_number",1111);
+	}
+	public static void saveIPAdress(String ipAdress){
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+		Editor edit=sharedPrefs.edit();
+		edit.putString("pref_key_ip_adress", ipAdress);
+		edit.apply();
+	}
+	public static void savePortNumber(int portNumber){
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+		Editor edit=sharedPrefs.edit();
+		edit.putInt("pref_key_port_number", portNumber);
+		edit.apply();	
+	}
 	public static Point getDisplaySize(){
 		if(displaySize==null){
 			DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();

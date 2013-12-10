@@ -25,6 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.my.math_quiz.MultiPlayerActivity"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityHost"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityJoin"></activity>
         <activity android:name="com.my.math_quiz.LevelsDisplayedActivity"></activity>
         <activity android:name="com.my.math_quiz.TutorialActivity"></activity>
         <activity android:name="com.my.math_quiz.SingelPlayerGameActivity"></activity>
