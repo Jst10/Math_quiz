@@ -28,6 +28,7 @@
     <include layout="@layout/p_title_bar"/>
 	
   
+    
     <RelativeLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +42,7 @@
             android:id="@+id/MPWJTextIp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IP naslov strežnika:"
+            android:text="@string/ip_text"
             android:textSize="18sp"
            
             />
@@ -50,7 +51,7 @@
             android:layout_below="@+id/MPWJTextIp"
             android:layout_width="180sp"
             android:layout_height="wrap_content"
-            android:text="192.168.1.10"
+            android:text="@string/yout_ip_value"
             android:layout_marginTop="10dp"
            />
          <TextView 
@@ -58,7 +59,7 @@
             android:layout_below="@+id/MPWJWEditIp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Številka vrat (PORT):"
+            android:text="@string/port_number_text"
             android:textSize="18sp"
             android:layout_marginTop="25dp"
             
@@ -69,7 +70,7 @@
             android:layout_width="80sp"
 	        android:inputType="number"
             android:layout_height="wrap_content"
-            android:text="1024"
+            android:text="@string/port_number_value"
             android:layout_marginTop="10dp"
            />
        
@@ -95,7 +96,7 @@
 		        android:layout_height="match_parent"
 		        android:layout_weight="2"
 		        android:background="@drawable/button_background_normal"
-		        android:text="Poveži" />
+		        android:text="@string/connect" />
 	       
 	        <View android:layout_height="match_parent"
 	           android:layout_width="0px" 

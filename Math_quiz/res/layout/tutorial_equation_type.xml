@@ -46,7 +46,6 @@
 	        android:visibility="invisible"
 	        />
 	       
-	       
        	<RelativeLayout
        	 android:id="@+id/TLETlayout2"
          android:layout_height="wrap_content"
@@ -195,7 +194,7 @@
        android:id="@+id/TL0doneButton"
        android:layout_width="match_parent"
        android:layout_height="50dp"
-       android:text="OK"
+       android:text="@string/ok"
        android:background="@drawable/button_background_normal"
        android:layout_alignParentBottom="true"
        /> 

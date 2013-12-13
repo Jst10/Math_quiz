@@ -21,8 +21,48 @@
 
 <resources>
 
-    <string name="app_name">Math_quiz</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Matematični kviz</string>
+    <string name="button">Gumb</string>
+    <string name="image">Slika</string>
+    <string name="action_settings">Nastavitve</string>
+    
+    <string name="single_player">Eno igralski način</string>
+    <string name="multi_player">Več igralski način</string>
+    <string name="tutorial">Navodila</string>
 
+    
+    <string name="join_game">Pridruži se strežniku</string>
+    <string name="host_game">Postavi strežnik</string>
+     <string name="one_device">Ena naprava</string>
+    
+    
+    <string name="your_ip_text">Vaš IP naslov strežnika:</string>
+     <string name="ip_text">IP naslov strežnika:</string>
+    <string name="yout_ip_value">192.168.1.1</string>
+    <string name="port_number_text">Številka vrat (PORT):</string>
+    <string name="port_number_value">1024</string>
+    <string name="number_of_other_player_text">Število povezanih soigralcev:</string>
+    <string name="number_of_other_player_value">0</string>
+    <string name="start_server">Postavi strežnik</string>
+    <string name="continue_text">Nadaljuj</string>
+     <string name="connect">Poveži</string>
+    
+     
+     <string name="time_wc">Čas:</string>
+    <string name="score_wc">Točke:</string>
+    <string name="number_tasks_wc">Št. nalog:</string> 
+     
+    <string name="time">čas</string>
+    <string name="score">točke</string>
+    <string name="number_tasks">nalog</string>
+    <string name="level">stopnja</string>
+    <string name="until_now">Do sedaj:</string>
+    <string name="current">Trenutni:</string>
+    <string name="scores">Dosežki</string>
+    
+ 	<string name="again">Ponovno</string>
+    <string name="share">Deli</string>
+    <string name="end">Končaj</string>
+    
+    <string name="ok">OK</string>
 </resources>

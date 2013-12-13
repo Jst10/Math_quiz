@@ -23,7 +23,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
- 	
  	<TextView
             android:id="@+id/LPtitle1"
             android:layout_width="wrap_content"
@@ -31,7 +30,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:textSize="30sp" 
-            android:text="Trenutni:"/>
+            android:text="@string/current"/>
     
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -51,7 +50,7 @@
             android:textSize="20sp"
             android:layout_width="105sp"
             
-            android:text="St. naloge:" />
+            android:text="@string/number_tasks_wc" />
  		 <TextView
             android:id="@+id/LPtasks2"
             android:layout_width="wrap_content"
@@ -70,7 +69,7 @@
            	android:layout_height="30sp"
             android:textSize="20sp"
             android:layout_width="105sp"
-            android:text="Čas:" />
+            android:text="@string/time_wc" />
        
         <TextView
             android:id="@+id/LPtime2"
@@ -88,7 +87,7 @@
             android:layout_height="30sp"
             android:textSize="20sp"
             android:layout_width="105sp"
-            android:text="Točke:" />
+            android:text="@string/score_wc" />
           
          <TextView
             android:id="@+id/LPscore2"
@@ -125,17 +124,17 @@
 	        <TextView
 	            android:layout_width="50dp"
 	            android:gravity="center_horizontal"
-	            android:text="nalog" />
+	            android:text="@string/number_tasks" />
 
 	        <TextView
 	            android:layout_width="50dp"
 	            android:gravity="center_horizontal"
-	            android:text="čas" />
+	            android:text="@string/time" />
 
 	        <TextView
 	            android:layout_width="50dp"
 	            android:gravity="center_horizontal"
-	            android:text="točke" />
+	            android:text="@string/score" />
 	    </TableRow>
 
 	    <TableRow
@@ -212,7 +211,7 @@
 	    android:layout_alignParentLeft="true"
 	    android:layout_below="@+id/relativeLayout1"
 	    android:layout_marginTop="40dp"
-	    android:text="Do sedaj:"
+	    android:text="@string/until_now"
 	    android:textSize="30sp" />
 	
 	<include layout="@layout/p_result_bottom_buttons"/>

@@ -69,7 +69,7 @@
 	           android:layout_centerHorizontal="true"
 	           android:layout_marginTop="50dp"
 	           android:textAppearance="?android:attr/textAppearanceLarge"
-	           android:text="TextView" />
+	           />
 	       
 	       
 	       	<include layout="@layout/p_bottom_buttons"
@@ -94,7 +94,7 @@
 	           android:layout_centerHorizontal="true"
 	           android:layout_marginTop="50dp"
 	           android:textAppearance="?android:attr/textAppearanceLarge"
-	           android:text="TextView" />
+	           />
 	       
 	       
 	       	<include layout="@layout/p_result_bottom_buttons"
@@ -156,7 +156,7 @@
 	           android:layout_centerHorizontal="true"
 	           android:layout_marginTop="70dp"
 	           android:textAppearance="?android:attr/textAppearanceLarge"
-	           android:text="TextView" />
+	           />
 	       
 	       
 	       	<include layout="@layout/p_bottom_buttons"
@@ -181,7 +181,7 @@
 	           android:layout_centerHorizontal="true"
 	           android:layout_marginTop="70dp"
 	           android:textAppearance="?android:attr/textAppearanceLarge"
-	           android:text="TextView" />
+	           />
 	       
 	       
 	       	<include layout="@layout/p_result_bottom_buttons"

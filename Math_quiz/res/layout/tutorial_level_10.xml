@@ -240,7 +240,7 @@
        android:id="@+id/TL10doneButton"
        android:layout_width="match_parent"
        android:layout_height="50dp"
-       android:text="OK"
+       android:text="@string/ok"
        android:background="@drawable/button_background_normal"
        android:layout_alignParentBottom="true"
        /> 

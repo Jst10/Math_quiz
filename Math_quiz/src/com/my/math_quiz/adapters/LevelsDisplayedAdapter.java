@@ -20,7 +20,6 @@
 */
 package com.my.math_quiz.adapters;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import android.widget.TextView;
 
 import com.my.math_quiz.LevelsDisplayedActivity;
 import com.my.math_quiz.R;
-import com.my.math_quiz.SingelPlayerGameActivity;
 import com.my.math_quiz.utils.LevelDescripction;
 
 public class LevelsDisplayedAdapter extends ArrayAdapter<LevelDescripction>{

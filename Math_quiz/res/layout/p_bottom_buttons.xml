@@ -27,13 +27,11 @@
     android:weightSum="4"
     android:layout_alignParentBottom="true"
      >
-
     <Button
         android:id="@+id/BBbutton1"
         android:layout_width="0px"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:text="Button"
         android:background="@drawable/button_background_normal" />
 
     <Button
@@ -41,7 +39,6 @@
         android:layout_width="0px"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:text="Button"
         android:background="@drawable/button_background_normal" />
 
     <Button
@@ -49,7 +46,6 @@
         android:layout_width="0px"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:text="Button"
         android:background="@drawable/button_background_normal" />
 
     <Button
@@ -57,7 +53,6 @@
         android:layout_width="0px"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:text="Button" 
         android:background="@drawable/button_background_normal"/>
 
 </com.my.math_quiz.views.InGameBottomButtoms>

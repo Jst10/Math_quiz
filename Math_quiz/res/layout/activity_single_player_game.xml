@@ -33,8 +33,7 @@
 	    android:layout_height="wrap_content">
 	    
 	    
-	</LinearLayout>
-	  
+	</LinearLayout>	  
 	<com.my.math_quiz.views.ViewPagerWithCustomSpeedOfSwitchingPages
 	     android:id="@+id/ASPGViewPager"
 	     android:layout_width="match_parent"

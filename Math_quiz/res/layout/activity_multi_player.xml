@@ -27,6 +27,7 @@
     tools:context=".LaunchActivity" >
     <include layout="@layout/p_title_bar"/>
 	
+    
     <LinearLayout 
          android:layout_height="fill_parent"
 	     android:orientation="vertical"
@@ -53,7 +54,7 @@
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
 	        android:background="@drawable/button_background_normal"
-	        android:text="Join" />
+	        android:text="@string/join_game" />
 	        
 	    </RelativeLayout>
 	       <RelativeLayout 
@@ -70,7 +71,7 @@
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
 	        android:background="@drawable/button_background_normal"
-	        android:text="Host" />
+	        android:text="@string/host_game" />
 	        
 	    </RelativeLayout>
 	       <RelativeLayout 
@@ -87,7 +88,7 @@
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
 	        android:background="@drawable/button_background_normal"
-	        android:text="One device" />
+	        android:text="@string/one_device" />
 	       </RelativeLayout> 
 	   
 	    <View 

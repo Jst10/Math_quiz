@@ -34,7 +34,7 @@
         <TextView
             android:layout_height="wrap_content"
         	android:layout_width="wrap_content"
-        	android:text="Math quiz :)"
+        	android:text="@string/app_name"
         	android:textSize="20sp"
         	android:layout_alignParentLeft="true"
         	android:layout_centerVertical="true"
@@ -45,6 +45,7 @@
             android:layout_height="50dp"
         	android:layout_width="50dp"
         	android:padding="10dp"
+        	android:contentDescription="@string/button"
         	android:scaleType="fitXY"
 			android:src="@drawable/action_settings"
 			android:background="@android:color/transparent"
@@ -78,7 +79,7 @@
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
 	        android:background="@drawable/button_background_normal"
-	        android:text="Single player" />
+	        android:text="@string/single_player" />
 	        
 	    </RelativeLayout>
 	       <RelativeLayout 
@@ -95,7 +96,7 @@
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
             android:background="@drawable/button_background_normal"
-	        android:text="Multi player" />
+	        android:text="@string/multi_player" />
 	        
 	    </RelativeLayout>
 	     
@@ -113,7 +114,7 @@
 	        android:layout_centerVertical="true"
 	        android:layout_centerHorizontal="true"
 	        android:background="@drawable/button_background_normal"
-	        android:text="Tutorial" />
+	        android:text="@string/tutorial" />
 	    </RelativeLayout>
 	    <View 
 	        android:layout_height="0px"

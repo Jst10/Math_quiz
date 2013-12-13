@@ -54,11 +54,11 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 	
 	public void MultiPlayerActivityButtonClick(View v){
 		if(v.getId()==R.id.MPhost){
-//			Intent intent = new Intent(this, MultiPlayerActivityHost.class);
-//			startActivity(intent);
+			Intent intent = new Intent(this, MultiPlayerActivityHost.class);
+			startActivity(intent);
 		} else if(v.getId()==R.id.MPJoin){
-//			Intent intent = new Intent(this, MultiPlayerActivityJoin.class);
-//			startActivity(intent);
+			Intent intent = new Intent(this, MultiPlayerActivityJoin.class);
+			startActivity(intent);
 		} else if(v.getId()==R.id.MPOneDevice){
 			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
 			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_MULTIPLAYER_SELECTION_ONE_DEVICE);
