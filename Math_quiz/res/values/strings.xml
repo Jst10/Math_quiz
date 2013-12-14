@@ -29,11 +29,15 @@
     <string name="single_player">Eno igralski način</string>
     <string name="multi_player">Več igralski način</string>
     <string name="tutorial">Navodila</string>
-
+    <string name="multi_player_join">Več igralski način - klient</string>
+    <string name="multi_player_host">Več igralski način - strežnik</string>
+    <string name="multi_player_one_device">Več igralski način - ena naprava</string>
+    <string name="multi_player_wlan">Več igralski način - wlan</string>
+    <string name="tutorials">Navodila</string>
     
     <string name="join_game">Pridruži se strežniku</string>
     <string name="host_game">Postavi strežnik</string>
-     <string name="one_device">Ena naprava</string>
+    <string name="one_device">Ena naprava</string>
     
     
     <string name="your_ip_text">Vaš IP naslov strežnika:</string>
@@ -45,7 +49,7 @@
     <string name="number_of_other_player_value">0</string>
     <string name="start_server">Postavi strežnik</string>
     <string name="continue_text">Nadaljuj</string>
-     <string name="connect">Poveži</string>
+    <string name="connect">Poveži</string>
     
      
      <string name="time_wc">Čas:</string>
@@ -60,9 +64,27 @@
     <string name="current">Trenutni:</string>
     <string name="scores">Dosežki</string>
     
+    
+    
  	<string name="again">Ponovno</string>
     <string name="share">Deli</string>
     <string name="end">Končaj</string>
     
     <string name="ok">OK</string>
+    
+    
+     <string name="result_text_lose">Žal ste izgubili.\nDosegli ste </string>
+     <string name="result_text_win">Čestitamo, vi ste zamgovalec.\nDosegli ste </string> 
+     <string name="result_text_score"> točk.</string> 
+     <string name="result_text_tie">Odlična borba, vendar pa sta dosagla izenačen rezultat s </string> 
+     <string name="result_text_scores"> točkami.</string> 
+   
+     <string name="space_level"> stopnja</string> 
+    
+    
+    
+    
+    
+    
+    
 </resources>

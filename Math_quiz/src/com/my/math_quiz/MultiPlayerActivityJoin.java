@@ -49,7 +49,7 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Multi player join");
+		titleBar.setTitle(getString(R.string.multi_player_join));
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		
 		

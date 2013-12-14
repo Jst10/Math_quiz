@@ -40,7 +40,7 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Multi player");
+		titleBar.setTitle(getString(R.string.multi_player));
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		
 	}

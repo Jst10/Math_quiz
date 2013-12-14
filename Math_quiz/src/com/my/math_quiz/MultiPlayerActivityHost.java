@@ -54,7 +54,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Multi player host");
+		titleBar.setTitle(getString(R.string.multi_player_host));
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		
 		

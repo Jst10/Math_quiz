@@ -74,7 +74,7 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial "+(level+1));
+		titleBar.setTitle(getString(R.string.tutorial)+" "+(level+1));
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL0doneButton);

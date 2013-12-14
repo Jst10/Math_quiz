@@ -68,7 +68,7 @@ public class TutorialLevelEquationType extends Activity implements AnimationList
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial "+(level+1));
+		titleBar.setTitle(getString(R.string.tutorial)+" "+(level+1));
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL0doneButton);

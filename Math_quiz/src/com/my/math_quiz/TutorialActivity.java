@@ -41,7 +41,7 @@ public class TutorialActivity  extends Activity implements TitleBarListener{
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial");
+		titleBar.setTitle(getString(R.string.tutorial));
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		
 		list=(ListView)findViewById(R.id.SPlistView);

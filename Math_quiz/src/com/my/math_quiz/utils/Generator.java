@@ -194,6 +194,7 @@ public  class Generator {
 			return getPowerTwoEquation(toNumber);
 		}
 	}
+	//TODO set to string file  for multi langus
 	public static final String textAfterLevelNumber=" stopnja";
 	public static String get0levelName(){return "1."+textAfterLevelNumber;}
 	public static String get0levelDescription(){return "Seštevanje do 10";}

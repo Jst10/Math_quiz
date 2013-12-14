@@ -236,16 +236,16 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			}
 			
 			if(tmp0<=tmp1){
-				scoreText1.setText("Žal ste izgubili.\nDosegli ste "+tmp0+" točk.");
-				scoreText2.setText("Čestitamo, vi ste zamgovalec.\nDosegli ste "+tmp1+" točk.");
+				scoreText1.setText(getString(R.string.result_text_lose)+tmp0+getString(R.string.result_text_score));
+				scoreText2.setText(getString(R.string.result_text_win)+tmp1+getString(R.string.result_text_score));
 			}
 			else if(tmp0==tmp1){
-				scoreText1.setText("Odlična borba, vendar pa sta dosagla izenačen rezultat s "+tmp0+" točkami.");
-				scoreText2.setText("Odlična borba, vendar pa sta dosagla izenačen rezultat s "+tmp1+" točkami.");
+				scoreText1.setText(getString(R.string.result_text_tie)+tmp0+getString(R.string.result_text_scores));
+				scoreText2.setText(getString(R.string.result_text_tie)+tmp1+getString(R.string.result_text_scores));
 			}
 			else{
-				scoreText2.setText("Žal ste izgubili.\nDosegli ste "+tmp1+" točk.");
-				scoreText1.setText("Čestitamo, vi ste zamgovalec.\nDosegli ste "+tmp0+" točk.");
+				scoreText2.setText(getString(R.string.result_text_lose)+tmp1+getString(R.string.result_text_score));
+				scoreText1.setText(getString(R.string.result_text_win)+tmp0+getString(R.string.result_text_score));
 			}
 		}
 	}

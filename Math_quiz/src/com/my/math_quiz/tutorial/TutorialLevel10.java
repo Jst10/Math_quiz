@@ -74,7 +74,7 @@ public class TutorialLevel10 extends Activity implements AnimationListener,Title
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
-		titleBar.setTitle("Tutorial 11");
+		titleBar.setTitle(getString(R.string.tutorial)+" 11");
 		titleBar.setRightImage(null);
 		
 		okButton=(Button)findViewById(R.id.TL10doneButton);

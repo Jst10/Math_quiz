@@ -112,7 +112,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 						levelData.resumTimingLevel();
 				}else{
 					//last page
-					titleBar.setTitle("Dosežki");
+					titleBar.setTitle(getString(R.string.scores));
 				}
 				if(position>0){
 					t=tasks.get(position-1);
