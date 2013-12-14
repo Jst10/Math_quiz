@@ -128,15 +128,17 @@ public class InGameBottomButtoms extends LinearLayout{
  * Method set right colors to buttons if we have select one answer before
  * @selectedAnswer the number from 0 to 4 which tell us which button was clicked, -1 mean that no one button was clicked
  * @correctAnswer tell us which answer is correct the value is from 0 to 4, because we have only four options
+ * @showCorrectAnswer boolean value with which you set if appliction color the correct answer if user select wrong answer (in general if you like to tell you which answer is correct if user select wrong answer)
  * @return if this is first time we clicked button it will set, else it won't and will return false, you reset first selected
  * answer with method resetFirstSelectedAnswer
  * */
-	public boolean setCollors(int selectedAnswer, int correctAnswer){
+	public boolean setCollors(int selectedAnswer, int correctAnswer,boolean showCorrectAnswer){
 		if(selectedAnswer!=-1&&firstSelectedAnswer==-1){
 			firstSelectedAnswer=selectedAnswer;
 			if(selectedAnswer!=correctAnswer){
 				buttons[selectedAnswer].setBackgroundDrawable(button_wrong_background);
-				buttons[correctAnswer].setBackgroundDrawable(button_correct_background);
+				if(showCorrectAnswer)
+					buttons[correctAnswer].setBackgroundDrawable(button_correct_background);
 //				buttons[selectedAnswer].setBackgroundColor(backgroundWrong);
 //				buttons[correctAnswer].setBackgroundColor(backgroundCorrect);
 			}else{
@@ -169,6 +171,16 @@ public class InGameBottomButtoms extends LinearLayout{
 
 	public void setPositionInTasks(int positionInTasks) {
 		this.positionInTasks = positionInTasks;
+	}
+
+	/**
+	 * This method color specific button to the green color
+	 * This method is just for multiplayer on one device when user click on answer and if it is wrong we shoudnt display the correct answer
+	 * but at the end we must and this is way to do this 
+	 * @param correctAnswer the position of button which contain correct answer
+	 * */
+	public void setCorrectCollorToSpecificButton(int correctAnswer) {
+		buttons[correctAnswer].setBackgroundDrawable(button_correct_background);
 	}
 
 	

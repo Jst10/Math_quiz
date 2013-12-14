@@ -256,7 +256,7 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			//if I didnt answer yet and other guy isn't answer correct
 			if(score[0][currentTaskPosition]==0&&score[1][currentTaskPosition]!=1){
 				Task t=tasks.get( currentTaskPosition);
-				if(buttoms.setCollors(position, t.getCorrectAnswer())){
+				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
 					onAnswer(0,position==t.getCorrectAnswer());
 				}
 			}
@@ -270,7 +270,7 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			//if I didnt answer yet and other guy isn't answer correct
 			if(score[0][currentTaskPosition]!=1&&score[1][currentTaskPosition]==0){
 				Task t=tasks.get( currentTaskPosition);
-				if(buttoms.setCollors(position, t.getCorrectAnswer())){
+				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
 					onAnswer(1,position==t.getCorrectAnswer());
 				}
 			}
@@ -294,6 +294,8 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		else{
 			//we clicked second and wrong
 			moveDelayToPage(ApplicationClass.getMPDelayOnWrongAnswerInMiliS());
+			bottomButtons1Answer.setCorrectCollorToSpecificButton(tasks.get( currentTaskPosition).getCorrectAnswer());
+			bottomButtons2Answer.setCorrectCollorToSpecificButton(tasks.get( currentTaskPosition).getCorrectAnswer());
 		}
 	
 	}

@@ -278,7 +278,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				buttoms=(InGameBottomButtoms)v.findViewById(R.id.BBBottomBUttons);
 				buttoms.seButtontTexts(currentTask.getAnswers());
 				buttoms.setListener(SingelPlayerGameActivity.this);
-				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer());
+				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer(),true);
 				buttoms.setPositionInTasks(position);
 				pager.addView(v);
 				return v;
@@ -323,7 +323,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 //		Log.d("setA",position+"/"+pager.getCurrentItem());
 		if(t.setSelectedAnswer(position)){
 //			Log.d("setB",position+"");
-			buttoms.setCollors(t.getSelectedAnswer(), t.getCorrectAnswer());
+			buttoms.setCollors(t.getSelectedAnswer(), t.getCorrectAnswer(),true);
 			if(additionalPage==0&&levelData.getNumberOfUnsolvedTests()==0){
 				//now we finish all tasks in that level so we can calculate results
 				levelData.stopTimingLevel();
