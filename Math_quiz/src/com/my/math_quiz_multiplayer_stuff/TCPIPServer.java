@@ -24,12 +24,18 @@ import java.lang.ref.WeakReference;
 import java.net.ServerSocket;
 import java.util.HashMap;
 
+import com.my.math_quiz.utils.Task;
+
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
 
 public class TCPIPServer {
-
+	
+//TODO on start game I must end accepting new clients and on end game I must resume accepting new clients
+	
+	
+	
 	/**
 	 * This is listeners for all action that server activity need
 	 * */
@@ -120,12 +126,30 @@ public class TCPIPServer {
 		@Override
 		public boolean handleMessage(Message msg) {
 			switch(msg.what){
-				case 0:break;
-				case 1:break;
-				case 2:break;
-				case 3:break;
-				case 4:break;
-				case 5:break;
+				case 1:
+					//we receive request data for specific task
+				    //|taskID| request data for specific task
+					break;
+				case 2:
+					//we receive selected answer of one task
+				    //|taskId|answer| {selected answer at one task}
+					break;
+				case 3:
+					//we receive request for number of players
+				    //{request for number of players}
+					break;
+				case 4:
+					//we receive command for leaving game
+				    //{command for leaving game}
+					break;
+				case 5:
+					//we receive request for nickname
+				    // playerId {request for nickname}
+					break;
+				case 6:
+					//we receive request for numberOfGames
+				    //{request for number of games}
+					break;
 				case 1010: //mean that we accept new client 
 					Client cl=(Client)msg.obj;
 					clietns.put(cl.getPlayerId(),cl);
@@ -135,4 +159,54 @@ public class TCPIPServer {
 			return false;
 		}
 	});
+    
+    public static void sendTaskToAllClients(Task task){
+    	// id=1
+	    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
+    }
+    public static void sendSelectdAnswerOfUserToOClients(int taskNumber,int userId,int selectedAnswer){
+    	// id=2
+	    //|taskNumber|userId|selectedAnswer|
+    }
+    public static void sendSignalToDisplayCorrectAnsswer(int taskNumber){
+    	// id=3
+	    // |taskNumber|  {this is signal to display correct result for specific task}
+    }
+    public static void sendSignalToSwitchToOtherTask(int taskNumber){
+    	// id=4
+	    //|taskNumber|  {this is signal to switch to specific task in general to new one}
+    }
+    public static void sendUserDataToClients(int userId,String nickname){
+    	// id=5
+	    //|userID|nickname|
+    }
+    public static void sendUserScoreToClients(int userId,int score){
+    	// id=6
+	    //|userId|score|
+    }
+    public static void sendRequestToDisplayEndScreen(){
+    	// id=7
+	    //{nothing else just command to display end screen}
+    }
+    public static void sendRequestToClearAllDataFromOldTasks(){
+    	// id=8
+	    //{nothing else just command to clear all data from odl tasks}
+    }
+    public static void sendNotifyThatServerStoped(){
+    	// id=9
+	    //{nothing else just command to end server stoped}
+    }
+    public static void requestClientsNickname(){
+    	// id=10
+	    //{request for nickname}
+    }
+    public static void sendNumberOfGames(){
+    	// id=11
+	    //|numberOfGames|
+    }
+    
+    
+    
+    
+    
 }

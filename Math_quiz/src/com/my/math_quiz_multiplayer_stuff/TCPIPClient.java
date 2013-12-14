@@ -115,16 +115,79 @@ public class TCPIPClient {
 			@Override
 			public boolean handleMessage(Message msg) {
 				switch(msg.what){
-					case 0:break;
-					case 1:break;
-					case 2:break;
-					case 3:break;
-					case 4:break;
-					case 5:break;
+					case 1:
+						//we receive data of one task
+					    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
+						break;
+					case 2:
+						//we receive answer of one user
+					    //|taskNumber|userId|selectedAnswer|
+						break;
+					case 3:
+						//we receive signal to display correct answer
+					    // |taskNumber|  {this is signal to display correct result for specific task}
+						break;
+					case 4:
+						//we receive signal to switch to specific task probably next
+					    //|taskNumber|  {this is signal to switch to specific task in general to new one}
+						break;
+					case 5:
+						//we receive nickname of one user
+					    //|userID|nickname|
+						break;
+					case 6:
+						//we receive score of one user
+					    //|userId|score|
+						break;
+					case 7:
+						//we receive command to display end screen
+					    //{nothing else just command to display end screen}
+						break;
+					case 8:
+						//we receive to clear all data of old tasks
+					    //{nothing else just command to clear all data from odl tasks}
+						break;
+					case 9:
+						//we receive command to end server stoped (server has been shutdown)
+					    //{nothing else just command to end server stoped}
+						break;
+					case 10:
+						//we receive request for nickname
+					    //{request for nickname}
+					case 11:
+						//we receive number of games
+					    // |numberOfGames|
+						break;
 					default: break;
 				}
 				return false;
 			}
 
 	  });
+	  
+	  public static void sendRequestForTaskDescription(int taskNumber){
+		// id=1
+		//|taskID| request data for specific task
+	  }
+	  public static void sendSelectedAnswer(int taskNumber,int selectedAnswer){
+		// id=2
+		//|taskId|answer| {selected answer at one task}
+	  }
+	  public static void sendCommandForLeavingGame(){
+		// id=3
+	    //{request for number of players}
+	  }
+	  public static void sendRequestForNumberOfPlayers(){
+		// id=4
+	    //{command for leaving game}
+	  }
+	  public static void sendRequestForPlayerNickname(int playerID){
+		// id=5
+	    // playerId {request for nickname}
+	  }
+	  public static void sendRequestForNumberOfGames(){
+		// id=6
+	    //{request for number of games}
+	  }
+	  
 }
