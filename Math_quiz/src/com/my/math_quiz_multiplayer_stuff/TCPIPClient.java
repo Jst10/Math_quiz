@@ -22,6 +22,7 @@ package com.my.math_quiz_multiplayer_stuff;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.Socket;
 
 import android.os.Handler;
@@ -29,22 +30,39 @@ import android.os.Handler.Callback;
 import android.os.Message;
 
 public class TCPIPClient {
-
-	String ipAdress;
-	int port;
-
-	Socket socket;
-	BufferedWriter out;
-	ServerReadingThread serverReadingRunable;
-	Thread serverReadingThread;
 	
-	public TCPIPClient(String ipAdress,int port){
-		this.ipAdress=ipAdress;
-		this.port=port;
+	/**
+	 * This is listeners for all action that client activity need
+	 * */
+	public interface TCPIPClientListener{
 		
-		reconnectToServer();
 	}
-	  public void killConnection(){
+	
+	
+	static String ipAdress;
+	static int port;
+	static WeakReference<TCPIPClientListener> listener;
+	static Socket socket;
+	static BufferedWriter out;
+	static ServerReadingThread serverReadingRunable;
+	static Thread serverReadingThread;
+	
+/**
+ * This method save port number and ipAdress to use it you must call connectToServer or reconnectToServer method
+ *  @param ipAdresss is ipAdress of server, to which you want to connect
+ *  @param port is the port number of server, to which you want to connect
+ * */
+	public static void setIpAdressAndPort(String ipAdresss,int portt){
+		ipAdress=ipAdresss;
+		port=portt;
+	}
+	
+	/**This method kill connection to server
+     * first is trying to close socket then killing runableFor reading class 
+     * and then the tread whit method stop and also close output stream
+     * 
+     */
+	public static void killConnection(){
 		  try{
 			  serverReadingRunable.kill();
 			}catch(Exception e){}
@@ -58,7 +76,13 @@ public class TCPIPClient {
 				serverReadingThread.stop();
 			}catch(Exception e){}
     }
-	public void reconnectToServer(){
+	
+	/**
+	 * This method reconnect this device to server
+	 * First is trying to kill old connection if is any then is setting socket and thread for reading
+	 * */
+	public static void reconnectToServer(){
+		killConnection();
 		try{
 			 socket = new Socket(ipAdress, port);
 		     out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -67,7 +91,25 @@ public class TCPIPClient {
 		     serverReadingThread=new Thread(serverReadingRunable);
 		}catch(Exception e){}
 	}
-	
+
+	/**
+	 * This method functionality is the same as of method reconnectToServer
+	 * So first is trying to killConnection and the creating new connection to server
+	 */
+	public static void connectToServer(){
+		reconnectToServer();
+	}
+	 /**
+     * This method save TCPIPServerListener as week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void setTCPIPServerListener(TCPIPClientListener list){
+    	listener=new WeakReference<TCPIPClientListener>(list);
+    }
+	/**
+     * This is handler which handle all messages from reading thread from server
+     * This handler tigers the listener methods
+     * */
 	  public static Handler handler=new Handler(new Callback() {
 			
 			@Override

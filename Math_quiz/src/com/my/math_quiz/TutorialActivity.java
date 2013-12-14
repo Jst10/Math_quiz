@@ -53,7 +53,7 @@ public class TutorialActivity  extends Activity implements TitleBarListener{
 //		getMenuInflater().inflate(R.menu.launch, menu);
 		return true;
 	}
-
+	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
 		this.finish();
@@ -63,4 +63,5 @@ public class TutorialActivity  extends Activity implements TitleBarListener{
 	public void onRightButtonClick() {
 		
 	}
+	/**END the title bar listener methods*/
 }

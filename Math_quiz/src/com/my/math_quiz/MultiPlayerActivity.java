@@ -66,7 +66,7 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 		}
 		
 	}
-
+	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
 		this.finish();
@@ -77,5 +77,5 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 		Intent intent = new Intent(MultiPlayerActivity.this, PreferenceActivity.class);
 		startActivity(intent);
 	}
-
+	/**END the title bar listener methods*/
 }

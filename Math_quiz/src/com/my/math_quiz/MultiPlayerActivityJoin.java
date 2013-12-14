@@ -93,7 +93,7 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 	public void MPWJbuttonClicked(View v){
 
 	}
-
+	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
 		this.finish();
@@ -104,5 +104,5 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 		Intent intent = new Intent(MultiPlayerActivityJoin.this, PreferenceActivity.class);
 		startActivity(intent);
 	}
-
+	/**END the title bar listener methods*/
 }

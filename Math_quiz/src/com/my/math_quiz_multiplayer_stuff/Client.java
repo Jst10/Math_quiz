@@ -20,15 +20,18 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-
-import android.widget.TabHost;
 
 public class Client {
 
 	private int playerId;
+	public int getPlayerId() {
+		return playerId;
+	}
+	public String getNickname() {
+		return nickname;
+	}
 	private String nickname;
 	
 	Socket socket;

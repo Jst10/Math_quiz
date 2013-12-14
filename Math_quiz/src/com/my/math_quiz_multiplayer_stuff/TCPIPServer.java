@@ -20,6 +20,7 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
+import java.lang.ref.WeakReference;
 import java.net.ServerSocket;
 import java.util.HashMap;
 
@@ -29,29 +30,40 @@ import android.os.Message;
 
 public class TCPIPServer {
 
-	
+	/**
+	 * This is listeners for all action that server activity need
+	 * */
 	public interface TCPIPServerListener{
 		
 	}
 	
-    int portTCPIP;
-    HashMap<Integer,Client> clietns=null;
-
-    ClientAcceptorThread serverThreadRunable;
-    Thread serverThread;
+	static int portTCPIP;
+    static HashMap<Integer,Client> clietns=null;
+    static WeakReference<TCPIPServerListener> listener;
+    static ClientAcceptorThread serverThreadRunable;
+    static Thread serverThread;
+    static ServerSocket socket;
     private static  int port = 21111;
-    public TCPIPServer(int port){
-    	this.port=port;
-    	
+   
+    /**
+     * This method save port number to use it you must call restart or start server method
+     * @param port is the port number which you want to set
+     * */
+    public static void setPort(int port){
+    	portTCPIP=port;
     }
     
-    
-    
-    public void restartTcpServer() {
+    /**
+     * This method restart server
+     * First try to kill sever then create insance of clients
+     * then create socket and thread in which accept clients 
+     * Time out is set to 10000ms
+     * */
+    public static void restartTcpServer() {
     	killServer();
     	clietns=new HashMap<Integer, Client>();
     	try{
-	    	ServerSocket socket=new ServerSocket(port);
+	    	socket=new ServerSocket(port);
 	    	socket.setSoTimeout(10000);
 	    	serverThreadRunable=new ClientAcceptorThread(socket);
 	    	serverThread=new Thread(serverThreadRunable);
@@ -60,13 +72,28 @@ public class TCPIPServer {
     	
     	}
     }
+    /**
+     * Method to start server,
+     * is the same functionality like restartTcpServer
+     * in booth way method try to kill server first just to avoid memory leaks and others problems
+     * */
+    public static void startTcpServer(){
+    	restartTcpServer();
+    }
 
-    public void killServer(){
-    	for(Client client:clietns.values()){
-    		client.killClient();
+    /**This method kill server
+     * first is trying to kill all clients then server socket
+     * then runable class and at leas the tread whit method stop */
+    public static void killServer(){
+    	if(clietns!=null){
+	    	for(Client client:clietns.values()){
+	    		client.killClient();
+	    	}
     	}
     	clietns=null;
-    	
+    	try{
+			socket.close();
+		}catch(Exception e){}
 		try{
 			serverThreadRunable.kill();
 		}catch(Exception e){}
@@ -75,6 +102,19 @@ public class TCPIPServer {
 		}catch(Exception e){}
     }
     
+    /**
+     * This method save TCPIPServerListener as week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void setTCPIPServerListener(TCPIPServerListener list){
+    	listener=new WeakReference<TCPIPServer.TCPIPServerListener>(list);
+    }
+  
+    /**
+     * This is handler which handle all messages from accepting new clients thread
+     * and form thread which read all data from clients 
+     * This handler tigers the listener methods
+     * */
     public static Handler handler=new Handler(new Callback() {
 		
 		@Override
@@ -88,7 +128,7 @@ public class TCPIPServer {
 				case 5:break;
 				case 1010: //mean that we accept new client 
 					Client cl=(Client)msg.obj;
-					
+					clietns.put(cl.getPlayerId(),cl);
 					break;
 				default: break;
 			}

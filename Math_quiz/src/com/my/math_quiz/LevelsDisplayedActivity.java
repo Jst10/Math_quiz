@@ -200,7 +200,7 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 //		getMenuInflater().inflate(R.menu.launch, menu);
 		return true;
 	}
-
+	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
 		this.finish();
@@ -213,7 +213,7 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 		startActivity(intent);
 		
 	}
-
+	/**END the title bar listener methods*/
 
 
 }

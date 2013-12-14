@@ -36,6 +36,8 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
+import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
+import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
 
 public class MultiPlayerActivityHost extends Activity implements TitleBarListener {
 
@@ -88,9 +90,14 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	 * On click method defined in .xml for booth of the buttons is the same method
 	 * */
 	public void MPWHbuttonClicked(View v){
-
+		if(v.getId()==R.id.MPWHStartServer){
+			TCPIPServer.restartTcpServer();
+		}else{
+			TCPIPClient.connectToServer();
+		}
 	}
 
+	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
 		this.finish();
@@ -101,5 +108,5 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		Intent intent = new Intent(MultiPlayerActivityHost.this, PreferenceActivity.class);
 		startActivity(intent);
 	}
-
+	/**END the title bar listener methods*/
 }
