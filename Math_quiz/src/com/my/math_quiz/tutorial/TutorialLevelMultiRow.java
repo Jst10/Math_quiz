@@ -180,10 +180,10 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 			text4.setText(Html.fromHtml("\u221A(5<sup><small>2</small></sup>) = 5"));
 			break;
 		case 19:
-			text1.setText(Html.fromHtml("\u221a<small>(8 + 2)</small> * 10 ="));
+			text1.setText(Html.fromHtml("\u221a<small>((8 + 2) * 10)</small> ="));
 			text2.setText("(8 + 2) = 10");
 			text3.setText(Html.fromHtml("\u221a<small>(10 * 10)</small> = 10"));
-			text4.setText(Html.fromHtml("\u221a<small>(8 + 2)</small> * 10 = 10"));
+			text4.setText(Html.fromHtml("\u221a<small>((8 + 2) * 10)</small> = 10"));
 			break;
 		default:
 			break;

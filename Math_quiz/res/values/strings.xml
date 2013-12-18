@@ -74,12 +74,33 @@
     
     
      <string name="result_text_lose">Žal ste izgubili.\nDosegli ste </string>
-     <string name="result_text_win">Čestitamo, vi ste zamgovalec.\nDosegli ste </string> 
+     <string name="result_text_win">Čestitamo, vi ste zmagovalec.\nDosegli ste </string> 
      <string name="result_text_score"> točk.</string> 
      <string name="result_text_tie">Odlična borba, vendar pa sta dosagla izenačen rezultat s </string> 
      <string name="result_text_scores"> točkami.</string> 
    
-     <string name="space_level"> stopnja</string> 
+     <string-array name="levelDescriptions">
+         <item >Seštevanje do 10</item>
+         <item >Seštevanje do 50</item>
+         <item >Seštevanje do 100</item>
+         <item >Oštevanje do 20</item>
+         <item >Oštevanje do 50</item>
+         <item >Seštevanje in odštevanje do 50</item>
+         <item >Seštevanje in odštevanje z oklepaji od 50</item>
+         <item >Množenje do 10</item>
+         <item >Množenje do 20</item>
+         <item >Operacije (+,-,*) do 20</item>
+         <item >Celoštevilsko delenje do 100</item>
+         <item >Operacij (*,/) do 10</item>
+         <item >Operacije (+,-,*,/) z oklepaji 20</item>
+         <item >Operacije (+,-,*,/) z oklepaji 50</item>
+         <item >Kvadrati do 10</item>
+         <item >Kvadrati do 20</item>
+         <item >Koreni do 100</item>
+         <item >Koreni do 400</item>
+         <item >Kvadrati in koreni</item>
+         <item >Mešane operacije</item>
+     </string-array> 
     
     
     

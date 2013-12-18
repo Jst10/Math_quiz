@@ -60,7 +60,7 @@
             android:layout_below="@+id/MPWHValueIp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/port_number_value"
+            android:text="@string/port_number_text"
             android:textSize="18sp"
             android:layout_marginTop="25dp"
             

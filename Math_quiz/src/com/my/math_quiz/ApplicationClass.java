@@ -35,6 +35,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 
 import com.my.math_quiz.database.DAOImplementation;
+import com.my.math_quiz.utils.Generator;
 import com.my.math_quiz.utils.LevelDescripction;
 
 public class ApplicationClass extends Application{
@@ -59,7 +60,7 @@ public class ApplicationClass extends Application{
 		applicationContext = getApplicationContext();
 		MyPreferences.reloadPreferences();
 		dao=new DAOImplementation();
-		
+		Generator.inicilizeStringForLanguage(applicationContext);
 		/**We read from DB all indicators if specific level was opened or not*/
 		ArrayList<Boolean> levelsIndicators=dao.getOpendIndicatorsFromAllLevels();
 		for(int i=0; i<NUMBER_OF_LEVELS; i++){
