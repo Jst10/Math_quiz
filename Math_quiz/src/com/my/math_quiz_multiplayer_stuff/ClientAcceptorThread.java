@@ -24,6 +24,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import android.os.Message;
+import android.util.Log;
 
 class ClientAcceptorThread implements Runnable
 {
@@ -48,6 +49,7 @@ class ClientAcceptorThread implements Runnable
 	@Override
 	public void run() {
 		while(work&&serversocketTCPIP!=null){
+			Log.d("srDebuging","while client accepting");
 			try{
 				Socket client=serversocketTCPIP.accept();
 				if(client!=null){
@@ -63,7 +65,7 @@ class ClientAcceptorThread implements Runnable
 					
 				}
 			}catch(Exception e){
-				
+				Log.d("srDebuging","error client accepting "+e);
 			}
 		}
 	}

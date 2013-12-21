@@ -20,7 +20,11 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 public class Client {
@@ -36,6 +40,8 @@ public class Client {
 	
 	Socket socket;
 	OutputStream outputStream;
+//	BufferedReader(new InputStreamReader(inputSream));
+	BufferedWriter writer;
 	ClientReadingThread readingRunable;
 	Thread readingThread;
 	
@@ -44,6 +50,7 @@ public class Client {
 		this.socket=socket;
 		try{
 			this.outputStream=socket.getOutputStream();
+			this.writer=new BufferedWriter(new OutputStreamWriter(outputStream));
 		}catch(Exception e){}
 		this.readingRunable=readingRunable;
 		this.readingThread=readingThread;
@@ -51,6 +58,9 @@ public class Client {
 	public void killClient(){
 		try{
 			readingRunable.kill();
+		}catch(Exception e){}
+		try{
+			writer.close();
 		}catch(Exception e){}
 		try{
 			outputStream.close();
@@ -63,5 +73,13 @@ public class Client {
 		}catch(Exception e){}
 		
 	}
-	
+	public void sendData(String data){
+		if(writer!=null){
+			try{
+				writer.write(data);
+				writer.newLine();
+				writer.flush();
+			}catch(Exception e){}
+		}
+	}
 }

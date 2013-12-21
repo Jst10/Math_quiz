@@ -24,20 +24,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
-import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
 import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
-import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerBeforeGame;
+import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerInGame;
 
-public class MultiPlayerActivityJoin extends Activity implements TitleBarListener,TCPIPServerListenerBeforeGame {
+public class MultiPlayerActivityJoinGame extends Activity implements TitleBarListener,TCPIPServerListenerInGame {
 
 	TitleBar titleBar=null;
 	EditText ipAdress;
@@ -55,58 +50,15 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		
 		
-		ipAdress=(EditText)findViewById(R.id.MPWJWEditIp);
-		portNumber=(EditText)findViewById(R.id.MPWJWEditPort);
-		
-		ipAdress.setText(ApplicationClass.getLastIPAdress());
-		portNumber.setText(ApplicationClass.getLastPortNumber()+"");
-		
-		
-		ipAdress.addTextChangedListener(new TextWatcher() {
-			@Override	public void onTextChanged(CharSequence s, int start, int before, int count) {	}
-			@Override	public void beforeTextChanged(CharSequence s, int start, int count,	int after) {	}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-					ApplicationClass.saveIPAdress(s.toString());
-			}
-		});
-		
-		portNumber.addTextChangedListener(new TextWatcher() {
-			@Override	public void onTextChanged(CharSequence s, int start, int before, int count) {	}
-			@Override	public void beforeTextChanged(CharSequence s, int start, int count,	int after) {	}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				try{
-				ApplicationClass.savePortNumber(Integer.parseInt(s.toString()));
-				}catch(Exception e){}
-			}
-		});
-		
-		
-		
-		
-		connectButton=(Button)findViewById(R.id.MPWJConnect);
 	}
-	
+
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		TCPIPServer.setTCPIPServerListener(this);
 	}
 	
-	
-	/**
-	 * On click method defined in .xml 
-	 * */
-	public void MPWJbuttonClicked(View v){
-			Log.d("clDebuging","connect cliekce");
-			TCPIPClient.setIpAdressAndPort(ipAdress.getText()+"", Integer.parseInt(portNumber.getText()+""));
-			Log.d("clDebuging","connecting to server: "+ipAdress.getText()+":"+ portNumber.getText()+"");
-			TCPIPClient.connectToServer();
-		
-	}
 	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
@@ -115,7 +67,7 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 
 	@Override
 	public void onRightButtonClick() {
-		Intent intent = new Intent(MultiPlayerActivityJoin.this, PreferenceActivity.class);
+		Intent intent = new Intent(MultiPlayerActivityJoinGame.this, PreferenceActivity.class);
 		startActivity(intent);
 	}
 	/**END the title bar listener methods*/

@@ -25,8 +25,10 @@
     android:versionName="1.0" >
     
     
-	<uses-permission android:name="android.permission.INTERNET"/>
-    
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
@@ -50,6 +52,8 @@
         <activity android:name="com.my.math_quiz.MultiPlayerActivity"></activity>
         <activity android:name="com.my.math_quiz.MultiPlayerActivityHost"></activity>
         <activity android:name="com.my.math_quiz.MultiPlayerActivityJoin"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityHostGame"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityJoinGame"></activity>
         <activity android:name="com.my.math_quiz.LevelsDisplayedActivity"></activity>
         <activity android:name="com.my.math_quiz.TutorialActivity"></activity>
         <activity android:name="com.my.math_quiz.SingelPlayerGameActivity"></activity>

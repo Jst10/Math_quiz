@@ -29,6 +29,7 @@ import com.my.math_quiz.utils.Task;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.util.Log;
 
 public class TCPIPServer {
 	
@@ -48,7 +49,6 @@ public class TCPIPServer {
 	public interface TCPIPServerListenerInGame{
 		
 	}
-	static int portTCPIP;
     static HashMap<Integer,Client> clietns=null;
     static WeakReference<TCPIPServerListenerBeforeGame> listenerBG;
     static WeakReference<TCPIPServerListenerInGame> listenerIG;
@@ -59,10 +59,10 @@ public class TCPIPServer {
    
     /**
      * This method save port number to use it you must call restart or start server method
-     * @param port is the port number which you want to set
+     * @param portt is the port number which you want to set
      * */
-    public static void setPort(int port){
-    	portTCPIP=port;
+    public static void setPort(int portt){
+    	port=portt;
     }
     
     /**
@@ -76,12 +76,13 @@ public class TCPIPServer {
     	clietns=new HashMap<Integer, Client>();
     	try{
 	    	socket=new ServerSocket(port);
+	    	Log.d("srDebuging","start server on port: "+port);
 	    	socket.setSoTimeout(10000);
 	    	serverThreadRunable=new ClientAcceptorThread(socket);
 	    	serverThread=new Thread(serverThreadRunable);
 	    	serverThread.start();
     	}catch(Exception e){
-    	
+    		{Log.d("srDebuging","error on trying start server: "+e);}
     	}
     }
     /**
@@ -138,6 +139,7 @@ public class TCPIPServer {
 		
 		@Override
 		public boolean handleMessage(Message msg) {
+			Log.d("reciveServer","I recive: "+msg.obj);
 			switch(msg.what){
 				case 1:
 					//we receive request data for specific task
@@ -164,6 +166,7 @@ public class TCPIPServer {
 				    //{request for number of games}
 					break;
 				case 1010: //mean that we accept new client 
+					Log.d("reciveServer","accepted client");
 					Client cl=(Client)msg.obj;
 					clietns.put(cl.getPlayerId(),cl);
 					break;
@@ -176,6 +179,9 @@ public class TCPIPServer {
     public static void sendTaskToAllClients(Task task){
     	// id=1
 	    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
+    	for(Client cl :clietns.values()){
+    		cl.sendData("bla bla bla");
+    	}
     }
     public static void sendSelectdAnswerOfUserToOClients(int taskNumber,int userId,int selectedAnswer){
     	// id=2

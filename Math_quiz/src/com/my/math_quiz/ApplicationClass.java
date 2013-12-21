@@ -179,7 +179,17 @@ public class ApplicationClass extends Application{
 	    float dp = px / (metrics.densityDpi / 160f);
 	    return dp;
 	}
-	
+	/**
+	 * This method convert the IP address from INT to STRING with DOTS
+	 * @param  ip is IP number in integer
+	 * @return ip number in string in readable format
+	 * */
+	public static  String intToIp(int ip) {
+		   return  (ip & 0xFF) + "." +
+				   ((ip >> 8 ) & 0xFF) + "." +
+				   ((ip >> 16 ) & 0xFF) + "." +
+				   ((ip >> 24 ) & 0xFF )  ;
+		}
 	private static final int animationDuration=1000;
 	/**
 	 * Method create new instance of fade in animation
