@@ -106,6 +106,22 @@
     
     
     
-    
-    
+<!--     settings strings  -->
+     <string name="seSinglePlayer">Eno igralske nastavitv</string>
+     <string name="seMultiPlayer">Več igralske nastavitve</string>
+
+     <string name="seDelayCorrect">Zakasnitve pravilnega</string>
+     <string name="seDelayCorrectInfo">Čas preden se prestavi na naslednji test po pravilnem odgovoru</string>
+     <string name="seDelayInCorrect">Zakasnitev napačnega</string>
+     <string name="seDelayInCorrectInfo">Čas preden se prestavi na naslednji test po napačnem odgovoru</string>
+     <string name="seNumberOfTests">Število testov</string>
+     <string name="seNumberOfTestsInfo">Število testo v enem sklopu igre</string>
+     <string name="seNickname">Vzdevek</string>
+     <string name="seNicknameInfo">Vzdevek pod katerem bote prikazani</string>
+     <string name="seNicknameChose">Izberite si vzdevek</string>
+     <string name="seNicknameDefault">neznan</string>
+     
+     <string name="seTimeForAnswer">Čas za odgovor</string>
+     <string name="seTimeForAnswerInfo">Čas za odgovor, po prvem napačnem odgovoru</string>
+     
 </resources>

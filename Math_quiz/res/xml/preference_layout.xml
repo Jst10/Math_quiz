@@ -23,72 +23,73 @@
     >
      <PreferenceCategory 
         android:key="pref_key_single_player_category"
-        android:title="Eno igralske nastavitve">
+        android:title="@string/seSinglePlayer">
             <ListPreference
             android:key="pref_key_delay_correct"
-            android:title="Zakasnitve pravilnega"
-            android:summary="Čas preden se prestavi na naslednji test po pravilnem odgovoru"
+            android:title="@string/seDelayCorrect"
+            android:summary="@string/seDelayCorrectInfo"
             android:defaultValue="0"
             android:entries="@array/deleyBeforeSwitch"
             android:entryValues="@array/deleyBeforeSwitchValues"
      	   />   
            <ListPreference
             android:key="pref_key_delay_wrong"
-            android:title="Zakasnitve napačnega"
-            android:summary="Čas preden se prestavi na naslednji test po napačnem odgovoru"
+            android:title="@string/seDelayInCorrect"
+            android:summary="@string/seDelayInCorrectInfo"
             android:defaultValue="500"
             android:entries="@array/deleyBeforeSwitch"
             android:entryValues="@array/deleyBeforeSwitchValues"
      	   />
             <ListPreference
             android:key="pref_key_number_of_test"
-            android:title="Število testov"
+            android:title="@string/seNumberOfTests"
             android:defaultValue="10"
-            android:summary="Število testo v enem sklopu igre"
+            android:summary="@string/seNicknameInfo"
             android:entries="@array/numberOfGamesInRound"
             android:entryValues="@array/numberOfGamesInRoundValue"
+            
      	   />
     </PreferenceCategory>
     <PreferenceCategory 
         android:key="pref_key_multi_player_category"
-        android:title="Več igralske nastavitve">
+        android:title="@string/seMultiPlayer">
         
         <EditTextPreference
             android:key="pref_key_mp_nickname"
-            android:title="Vzdevek"
-            android:summary="Vzdevek pod katerem bote prikazani"
-            android:dialogTitle="Vzdevek"
-            android:dialogMessage="Izberite si vzdevek"   
-            android:defaultValue="neznan" />
+            android:title="@string/seNickname"
+            android:summary="@string/seNicknameInfo"
+            android:dialogTitle="@string/seNickname"
+            android:dialogMessage="@string/seNicknameChose"   
+            android:defaultValue="@string/seNicknameDefault" />
      	 <ListPreference
             android:key="pref_key_mp_delay_correct"
-            android:title="Zakasnitve pravilnega"
-            android:summary="Čas preden se prestavi na naslednji test po pravilnem odgovoru"
+            android:title="@string/seDelayCorrect"
+            android:summary="@string/seDelayCorrectInfo"
             android:defaultValue="0"
             android:entries="@array/deleyBeforeSwitch"
             android:entryValues="@array/deleyBeforeSwitchValues"
      	   />   
          <ListPreference
             android:key="pref_key_mp_delay_wrong"
-            android:title="Zakasnitve napačnega"
-            android:summary="Čas preden se prestavi na naslednji test če so vsi odgovori napačni"
+            android:title="@string/seDelayInCorrect"
+            android:summary="@string/seDelayInCorrectInfo"
             android:defaultValue="500"
             android:entries="@array/deleyBeforeSwitch"
             android:entryValues="@array/deleyBeforeSwitchValues"
      	   />
           <ListPreference
             android:key="pref_key_mp_time_remain_to_answer"
-            android:title="Čas za odgovor"
-            android:summary="Čas za odgovor, po prvem napačnem odgovoru"
+            android:title="@string/seTimeForAnswer"
+            android:summary="@string/seTimeForAnswerInfo"
             android:defaultValue="2000"
             android:entries="@array/timeToAnswerAfterWrongAnswer"
             android:entryValues="@array/timeToAnswerAfterWrongAnswerValues"
      	   />
             <ListPreference
             android:key="pref_key_mp_number_of_test"
-            android:title="Število testov"
+            android:title="@string/seNumberOfTests"
             android:defaultValue="10"
-            android:summary="Število testo v enem sklopu igre"
+            android:summary="@string/seNumberOfTestsInfo"
             android:entries="@array/numberOfGamesInRound"
             android:entryValues="@array/numberOfGamesInRoundValue"
      	   />

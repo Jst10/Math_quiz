@@ -102,6 +102,23 @@
          <item >Mix operation</item>
      </string-array> 
     
+    <!--     settings strings  -->
+     <string name="seSinglePlayer">Single player settings</string>
+     <string name="seMultiPlayer">Multi player settings</string>
+
+     <string name="seDelayCorrect">Delay correct</string>
+     <string name="seDelayCorrectInfo">Time before app. switch to next test after correct answer</string>
+     <string name="seDelayInCorrect">Delay incorrect</string>
+     <string name="seDelayInCorrectInfo">Time before app. switch to next test after incorrect answer</string>
+     <string name="seNumberOfTests">Number of tests</string>
+     <string name="seNumberOfTestsInfo">Number of test in one game</string>
+     <string name="seNickname">Nickname</string>
+     <string name="seNicknameInfo">Nickname which one will repesent you</string>
+     <string name="seNicknameChose">Chose a nickname</string>
+     <string name="seNicknameDefault">unknown</string>
+     
+     <string name="seTimeForAnswer">Time for answer</string>
+     <string name="seTimeForAnswerInfo">Time for answer, after first wrong answer</string>
     
     
 </resources>
