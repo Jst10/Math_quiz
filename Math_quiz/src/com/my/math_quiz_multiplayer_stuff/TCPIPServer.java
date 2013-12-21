@@ -37,15 +37,21 @@ public class TCPIPServer {
 	
 	
 	/**
-	 * This is listeners for all action that server activity need
+	 * This is listeners for all action that server activity need before game start
 	 * */
-	public interface TCPIPServerListener{
+	public interface TCPIPServerListenerBeforeGame{
 		
 	}
-	
+	/**
+	 * This is listeners for all action that server activity need when game already run
+	 * */
+	public interface TCPIPServerListenerInGame{
+		
+	}
 	static int portTCPIP;
     static HashMap<Integer,Client> clietns=null;
-    static WeakReference<TCPIPServerListener> listener;
+    static WeakReference<TCPIPServerListenerBeforeGame> listenerBG;
+    static WeakReference<TCPIPServerListenerInGame> listenerIG;
     static ClientAcceptorThread serverThreadRunable;
     static Thread serverThread;
     static ServerSocket socket;
@@ -109,13 +115,20 @@ public class TCPIPServer {
     }
     
     /**
-     * This method save TCPIPServerListener as week reference.
+     * This method save TCPIPServerListener before game as week reference.
      * So user don't need to wory about memory leaks.
      * */
-    public static void setTCPIPServerListener(TCPIPServerListener list){
-    	listener=new WeakReference<TCPIPServer.TCPIPServerListener>(list);
+    public static void setTCPIPServerListener(TCPIPServerListenerBeforeGame list){
+    	listenerBG=new WeakReference<TCPIPServer.TCPIPServerListenerBeforeGame>(list);
     }
-  
+    /**
+     * This method save TCPIPServerListener in game as week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void setTCPIPServerListener(TCPIPServerListenerInGame list){
+    	listenerIG=new WeakReference<TCPIPServer.TCPIPServerListenerInGame>(list);
+    }
+    
     /**
      * This is handler which handle all messages from accepting new clients thread
      * and form thread which read all data from clients 

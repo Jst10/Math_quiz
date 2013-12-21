@@ -32,16 +32,23 @@ import android.os.Message;
 public class TCPIPClient {
 	
 	/**
-	 * This is listeners for all action that client activity need
+	 * This is listeners for all action that client activity need before game
 	 * */
-	public interface TCPIPClientListener{
+	public interface TCPIPClientListenerBeforeGame{
+		
+	}
+	/**
+	 * This is listeners for all action that client activity need in game
+	 * */
+	public interface TCPIPClientListenerInGame{
 		
 	}
 	
-	
 	static String ipAdress;
 	static int port;
-	static WeakReference<TCPIPClientListener> listener;
+	static WeakReference<TCPIPClientListenerBeforeGame> listenerBG;
+	static WeakReference<TCPIPClientListenerInGame> listenerIG;
+
 	static Socket socket;
 	static BufferedWriter out;
 	static ServerReadingThread serverReadingRunable;
@@ -100,11 +107,18 @@ public class TCPIPClient {
 		reconnectToServer();
 	}
 	 /**
-     * This method save TCPIPServerListener as week reference.
+     * This method save TCPIPServerListener before game as week reference.
      * So user don't need to wory about memory leaks.
      * */
-    public static void setTCPIPServerListener(TCPIPClientListener list){
-    	listener=new WeakReference<TCPIPClientListener>(list);
+    public static void setTCPIPServerListener(TCPIPClientListenerBeforeGame list){
+    	listenerBG=new WeakReference<TCPIPClientListenerBeforeGame>(list);
+    }
+    /**
+     * This method save TCPIPServerListener in game as week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void setTCPIPServerListener(TCPIPClientListenerInGame list){
+    	listenerIG=new WeakReference<TCPIPClientListenerInGame>(list);
     }
 	/**
      * This is handler which handle all messages from reading thread from server
