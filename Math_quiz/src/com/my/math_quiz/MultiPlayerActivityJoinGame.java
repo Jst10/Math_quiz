@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.my.math_quiz.utils.Task;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
@@ -72,4 +73,82 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		startActivity(intent);
 	}
 	/**END the title bar listener methods*/
+
+	/**BEGIN the TCPIPClientListenerBeforeGame methods*/
+	@Override
+	public void onRequestingClientNickname() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onNumberOfGames(int numberOfGames) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onRequestToClearAllDataFromOldTasks() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onRequestToDisplayEndScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserScoresRecived(int userId, int score) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onUserDataRecived(int userId, String nickname) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onCommandToDisplaySpecificTask(int taskNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onCommandToDisplayCorrectAnswer(int taskNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onSelectedAnswerOfOtherUser(int task, int userId, int answer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onTaskReciveFromServer(int taskNumber, Task task) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onServerStoped() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**END the TCPIPClientListenerBeforeGame methods*/
 }
