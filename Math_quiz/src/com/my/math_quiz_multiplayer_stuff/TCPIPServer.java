@@ -23,6 +23,7 @@ package com.my.math_quiz_multiplayer_stuff;
 import java.lang.ref.WeakReference;
 import java.net.ServerSocket;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -37,7 +38,7 @@ public class TCPIPServer {
 	
 //TODO on start game I must end accepting new clients and on end game I must resume accepting new clients
 	
-	
+	public static final char speratorCharacter=34;
 	
 	/**
 	 * This is listeners for all action that server activity need before game start
@@ -60,6 +61,12 @@ public class TCPIPServer {
 		 * @accepted boolean value is true if we accept new client, if we lose old client id this valuie false
 		 * */
 		public void onNumberOfClientsChanged(int number,boolean accepted);
+		public void onRequestForNumberOfGame();
+		public void onRequestForPlayerNickname(int playerId);
+		public void onRequestForNumberOfPlayers();
+		public void onSelectedAnswerRecived(int taskNumber,int selectedAnsver,int clientId);
+		public void onRequestForTaskDescription(int taskNumber);
+		
 	}
     static HashMap<Integer,Client> clietns=null;
     static WeakReference<TCPIPServerListenerBeforeGame> listenerBG;
@@ -155,30 +162,38 @@ public class TCPIPServer {
 		@Override
 		public boolean handleMessage(Message msg) {
 			Log.d("reciveServer","I recive: "+msg.obj);
+			
+			String[] data=null;
+			if(msg.what<1000)
+				data=((String)msg.obj).split(Pattern.quote(speratorCharacter+""));
+			
+			
 			switch(msg.what){
 				case 1:
 					//we receive request data for specific task
 				    //|taskID| request data for specific task
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestForTaskDescription(Integer.parseInt(data[0]));
 					break;
 				case 2:
 					//we receive selected answer of one task
 				    //|taskId|answer| {selected answer at one task}
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onSelectedAnswerRecived(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
 					break;
 				case 3:
 					//we receive request for number of players
 				    //{request for number of players}
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestForNumberOfPlayers();
 					break;
-				case 4:
-					//we receive command for leaving game
-				    //{command for leaving game}
-					break;
+					//here was notification that client stoped
 				case 5:
 					//we receive request for nickname
 				    // playerId {request for nickname}
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestForPlayerNickname(Integer.parseInt(data[0]));
 					break;
 				case 6:
 					//we receive request for numberOfGames
 				    //{request for number of games}
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestForNumberOfGame();
 					break;
 				case 1009: //mean that  that client is not accessible any more
 					int clientId=(Integer)msg.obj;
@@ -204,56 +219,90 @@ public class TCPIPServer {
 		}
 	});
     
-    public static void sendTaskToAllClients(Task task){
+    public static void sendTaskToAllClients(Task task,int taskNumber){
     	// id=1
 	    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
-    	if(clietns!=null)
-    	for(Client cl :clietns.values()){
-    		cl.sendData("bla bla bla");
-    	}
+    	String data="001"+
+    			taskNumber+speratorCharacter+
+    			task.getSourceText()+speratorCharacter+
+    			task.getAnswers()[0]+speratorCharacter+
+    			task.getAnswers()[1]+speratorCharacter+
+    			task.getAnswers()[2]+speratorCharacter+
+    			task.getAnswers()[3]+speratorCharacter+
+    			task.getCorrectAnswer();
+    	sendDataToClients(data);
     }
     public static void sendSelectdAnswerOfUserToOClients(int taskNumber,int userId,int selectedAnswer){
     	// id=2
 	    //|taskNumber|userId|selectedAnswer|
+    	String data="002"+
+    			taskNumber+speratorCharacter+
+    			userId+speratorCharacter+
+    			selectedAnswer;
+    	sendDataToClients(data);
     }
     public static void sendSignalToDisplayCorrectAnsswer(int taskNumber){
     	// id=3
 	    // |taskNumber|  {this is signal to display correct result for specific task}
+    	String data="003"+taskNumber;
+    	sendDataToClients(data);
     }
     public static void sendSignalToSwitchToOtherTask(int taskNumber){
     	// id=4
 	    //|taskNumber|  {this is signal to switch to specific task in general to new one}
+    	String data="004"+taskNumber;
+    	sendDataToClients(data);
     }
     public static void sendUserDataToClients(int userId,String nickname){
     	// id=5
 	    //|userID|nickname|
+    	String data="005"+userId+speratorCharacter+nickname;
+    	sendDataToClients(data);
     }
     public static void sendUserScoreToClients(int userId,int score){
     	// id=6
 	    //|userId|score|
+    	String data="006"+userId+speratorCharacter+score;
+    	sendDataToClients(data);
     }
     public static void sendRequestToDisplayEndScreen(){
     	// id=7
 	    //{nothing else just command to display end screen}
+    	String data="007";
+    	sendDataToClients(data);
     }
     public static void sendRequestToClearAllDataFromOldTasks(){
     	// id=8
 	    //{nothing else just command to clear all data from odl tasks}
+    	String data="008";
+    	sendDataToClients(data);
     }
-    public static void sendNotifyThatServerStoped(){
-    	// id=9
-	    //{nothing else just command to end server stoped}
-    }
+  //here was notification that server stoped
     public static void requestClientsNickname(){
     	// id=10
 	    //{request for nickname}
+    	String data="010";
+    	sendDataToClients(data);
     }
-    public static void sendNumberOfGames(){
+    public static void sendNumberOfGames(int numberOfGames){
     	// id=11
 	    //|numberOfGames|
+    	String data="011"+numberOfGames;
+    	sendDataToClients(data);
     }
-    
-    
+  //here server notifiy clients to switch to game
+    public static void sendCommandToStartGame(){
+    	// id=12
+	    //{command for starting game}
+    	String data="012";
+    	sendDataToClients(data);
+    }
+    private static void sendDataToClients(String data){
+    	if(clietns!=null)
+        	for(Client cl :clietns.values()){
+        		cl.sendData(data);
+        	}
+    }
     
     
     

@@ -83,6 +83,37 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onRequestForNumberOfGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRequestForPlayerNickname(int playerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRequestForNumberOfPlayers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSelectedAnswerRecived(int taskNumber, int selectedAnsver,
+			int clientId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRequestForTaskDescription(int taskNumber) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/**END the TCPIPServerListenerInGame methods*/
 
