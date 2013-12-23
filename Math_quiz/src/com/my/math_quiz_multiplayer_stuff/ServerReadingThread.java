@@ -20,11 +20,14 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
-import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.my.math_quiz.ApplicationClass;
 
 class ServerReadingThread implements Runnable{
 
@@ -36,36 +39,56 @@ class ServerReadingThread implements Runnable{
 	 * first 3 is type
 	 * then is message text
 	 * */
+	
+	
 	private boolean work;
 //	private InputStream inputSream;
-	BufferedReader inputBuffer;
+	DataInputStream dataInputStream;
 	public ServerReadingThread(InputStream inputSream){
 		work=true;
-		inputBuffer= new BufferedReader(new InputStreamReader(inputSream));
+		dataInputStream= new DataInputStream(inputSream);
 	}
 	
 	public void kill(){
 		work=false;
 		try{
-			inputBuffer.close();
+			dataInputStream.close();
 		}catch(Exception e){
-			inputBuffer=null;
+			dataInputStream=null;
 		}
 	}
 	@Override
 	public void run() {
-		while(work==true&&inputBuffer!=null){
+		while(work==true&&dataInputStream!=null){
 			try{
-				String line=inputBuffer.readLine();
-				if(line!=null){
-					Message tmp=TCPIPServer.handler.obtainMessage();
-					tmp.what=Integer.parseInt(line.substring(0,3));
-					tmp.obj=line.substring(3);
+				byte[] info=new byte[1024];
+				Log.d("clDebuging","STARTreading");
+				int number= dataInputStream.read(info);
+				Log.d("clDebuging","number on reading:"+number);
+				if(number==-1){
+					work=false;
+					dataInputStream.close();
+//					Log.d("clDebuging","before toast:"+number);
+//					Toast.makeText(ApplicationClass.applicationContext, "Connection to servere lose", Toast.LENGTH_SHORT).show();
+
+					Message tmp=TCPIPClient.handler.obtainMessage();
+					tmp.what=1009;
 					TCPIPClient.handler.sendMessage(tmp);
+				
+				}else{
+					String line=new String(info);
+					if(line!=null){
+						Message tmp=TCPIPServer.handler.obtainMessage();
+						tmp.what=Integer.parseInt(line.substring(0,3));
+						tmp.obj=line.substring(3);
+						TCPIPClient.handler.sendMessage(tmp);
+					}
 				}
 			}catch(Exception e){
-				
+				Log.d("clDebuging","exception while reading"+e);
 			}
+			Log.d("clDebuging","ENDreading");
+
 		}
 	}
 

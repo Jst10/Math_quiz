@@ -20,20 +20,24 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
+import java.io.DataOutputStream;
 import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
+import java.nio.charset.Charset;
 
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.my.math_quiz.ApplicationClass;
 
 public class TCPIPClient {
-	
+	public static final Charset charset = Charset.forName("UTF-8");
+	private static final byte [] endBytes={10,11,12,13};
+	public static String endCharacters=new String(endBytes);
 	/**
 	 * This is listeners for all action that client activity need before game
 	 * */
@@ -53,7 +57,7 @@ public class TCPIPClient {
 	static WeakReference<TCPIPClientListenerInGame> listenerIG;
 
 	static Socket socket=new Socket();;
-	static BufferedWriter out;
+	static DataOutputStream dataOutputStream;
 	static ServerReadingThread serverReadingRunable;
 	static Thread serverReadingThread;
 	
@@ -82,7 +86,7 @@ public class TCPIPClient {
 			  serverReadingRunable.kill();
 			}catch(Exception e){}
 			try{
-				out.close();
+				dataOutputStream.close();
 			}catch(Exception e){}
 			try{
 				socket.close();
@@ -128,10 +132,10 @@ public class TCPIPClient {
 //            	socket=new Socket();//adrr,Integer.parseInt(IpPort));
 //            	socket.connect(sockaddr,5000);
             	
-   		     out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-   			
+   		     dataOutputStream = new DataOutputStream(socket.getOutputStream());
    		     serverReadingRunable=new ServerReadingThread(socket.getInputStream());
    		     serverReadingThread=new Thread(serverReadingRunable);
+   		     serverReadingThread.start();
         	}catch(Exception e){Log.d("clDebuging","error on trying connecting2: "+e);}
         }
      }
@@ -217,6 +221,12 @@ public class TCPIPClient {
 						//we receive number of games
 					    // |numberOfGames|
 						break;
+					case 1009://mean that we lose connection with server
+						killConnection();//just to be sure to kill all stuff from old server
+						//we receive number of games
+					    // |numberOfGames|
+						Toast.makeText(ApplicationClass.applicationContext, "Connection to servere lose", Toast.LENGTH_SHORT).show();
+						break;
 					default: break;
 				}
 				return false;
@@ -249,4 +259,14 @@ public class TCPIPClient {
 	    //{request for number of games}
 	  }
 	  
+	  
+	  public void sendData(String data){
+			if(dataOutputStream!=null){
+				try{
+					data+=endCharacters;
+					dataOutputStream.write(data.getBytes(charset));
+					dataOutputStream.flush();
+				}catch(Exception e){}
+			}
+		}
 }
