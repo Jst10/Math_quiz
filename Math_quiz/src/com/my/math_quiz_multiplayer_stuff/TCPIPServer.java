@@ -185,18 +185,18 @@ public class TCPIPServer {
 					Client cli=clietns.get(clientId);
 					if(cli!=null){
 						cli.killClient();
-						clietns.remove(cli);
+						clietns.remove(clientId);
 					}
 					Toast.makeText(ApplicationClass.applicationContext, "Connection to client "+clientId+" lose", Toast.LENGTH_SHORT).show();
-					if(listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),false);
-					if(listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),false);
+					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),false);
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),false);
 					break;
 				case 1010: //mean that we accept new client 
 					Log.d("reciveServer","accepted client");
 					Client cl=(Client)msg.obj;
 					clietns.put(cl.getPlayerId(),cl);
-					if(listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),true);
-					if(listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),true);
+					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),true);
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),true);
 					break;
 				default: break;
 			}
@@ -207,6 +207,7 @@ public class TCPIPServer {
     public static void sendTaskToAllClients(Task task){
     	// id=1
 	    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
+    	if(clietns!=null)
     	for(Client cl :clietns.values()){
     		cl.sendData("bla bla bla");
     	}

@@ -87,6 +87,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		
 		serverButton=(Button)findViewById(R.id.MPWHStartServer);
 		nextButton=(Button)findViewById(R.id.MPWJStartGame);
+		nextButton.setEnabled(false);
 	}
 
 	
@@ -105,7 +106,9 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	public void MPWHbuttonClicked(View v){
 		Log.d("srDebuging","bitton clicekd");
 		if(v.getId()==R.id.MPWHStartServer){
-			Log.d("srDebuging","restart server");
+			numberOfPlayers.setText("0");
+			serverButton.setText("Restart server");
+			nextButton.setEnabled(false);
 			TCPIPServer.setPort(Integer.parseInt(portNumber.getText()+""));
 			TCPIPServer.restartTcpServer();
 		}else{
@@ -130,7 +133,13 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	/**BEGIN the TCPIPServerListenerBeforeGame methods*/
 	@Override
 	public void onNumberOfClientsChanged(int number, boolean accepted) {
-		// TODO Auto-generated method stub
+		numberOfPlayers.setText(number+"");
+		if(number>0){
+			nextButton.setEnabled(true);
+		}
+		else{
+			nextButton.setEnabled(false);
+		}
 		
 	}
 	/**END the TCPIPServerListenerBeforeGame methods*/
