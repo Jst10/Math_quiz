@@ -62,7 +62,12 @@ public class Task {
 	public Spanned getText(){
 		return Html.fromHtml(equation.getText());
 	}
-	
+	/**
+	 * @return This method return source text, html tags not applayed yet 
+	 * */
+	public String getSourceText(){
+		return equation.getText();
+	}
 	public int getCorrectAnswer(){
 		return correctAnswer;
 	}

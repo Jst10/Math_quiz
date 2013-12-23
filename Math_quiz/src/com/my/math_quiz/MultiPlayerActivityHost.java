@@ -112,7 +112,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 			TCPIPServer.setPort(Integer.parseInt(portNumber.getText()+""));
 			TCPIPServer.restartTcpServer();
 		}else{
-			TCPIPServer.sendTaskToAllClients(null);//connectToServer();
+			//TCPIPServer.sendTaskToAllClients(null);//connectToServer();
 		}
 	}
 
