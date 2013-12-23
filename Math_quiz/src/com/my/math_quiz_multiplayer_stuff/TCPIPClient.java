@@ -35,9 +35,7 @@ import android.widget.Toast;
 import com.my.math_quiz.ApplicationClass;
 
 public class TCPIPClient {
-	public static final Charset charset = Charset.forName("UTF-8");
-	private static final byte [] endBytes={10,11,12,13};
-	public static String endCharacters=new String(endBytes);
+	
 	/**
 	 * This is listeners for all action that client activity need before game
 	 * */
@@ -263,8 +261,8 @@ public class TCPIPClient {
 	  public void sendData(String data){
 			if(dataOutputStream!=null){
 				try{
-					data+=endCharacters;
-					dataOutputStream.write(data.getBytes(charset));
+					data+=ApplicationClass.endCharacters;
+					dataOutputStream.write(data.getBytes(ApplicationClass.charset));
 					dataOutputStream.flush();
 				}catch(Exception e){}
 			}

@@ -44,6 +44,7 @@ class ServerReadingThread implements Runnable{
 	private boolean work;
 //	private InputStream inputSream;
 	DataInputStream dataInputStream;
+	String readingBuffer="";
 	public ServerReadingThread(InputStream inputSream){
 		work=true;
 		dataInputStream= new DataInputStream(inputSream);
@@ -76,12 +77,18 @@ class ServerReadingThread implements Runnable{
 					TCPIPClient.handler.sendMessage(tmp);
 				
 				}else{
-					String line=new String(info);
-					if(line!=null){
-						Message tmp=TCPIPServer.handler.obtainMessage();
-						tmp.what=Integer.parseInt(line.substring(0,3));
-						tmp.obj=line.substring(3);
-						TCPIPClient.handler.sendMessage(tmp);
+					readingBuffer+=new String(info);
+					int possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
+					if(possition>-1){
+						String line=readingBuffer.substring(0,possition);
+						Log.d("clDebuging","readed: "+line);
+						readingBuffer=readingBuffer.substring(possition+ApplicationClass.endCharacters.length());
+						if(line!=null){
+							Message tmp=TCPIPServer.handler.obtainMessage();
+							tmp.what=Integer.parseInt(line.substring(0,3));
+							tmp.obj=line.substring(3);
+							TCPIPClient.handler.sendMessage(tmp);
+						}
 					}
 				}
 			}catch(Exception e){
