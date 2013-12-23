@@ -23,6 +23,7 @@ package com.my.math_quiz_multiplayer_stuff;
 import java.io.DataInputStream;
 import java.io.InputStream;
 
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ class ServerReadingThread implements Runnable{
 	
 	public void kill(){
 		work=false;
+		
 		try{
 			dataInputStream.close();
 		}catch(Exception e){
@@ -60,6 +62,9 @@ class ServerReadingThread implements Runnable{
 	}
 	@Override
 	public void run() {
+		//TODO this looper stuff is not good yet
+//		Looper.prepare();
+		Looper.prepare();
 		while(work==true&&dataInputStream!=null){
 			try{
 				byte[] info=new byte[1024];
@@ -77,12 +82,13 @@ class ServerReadingThread implements Runnable{
 					TCPIPClient.handler.sendMessage(tmp);
 				
 				}else{
-					readingBuffer+=new String(info);
+					readingBuffer+=new String(info).substring(0,number);
+//					Log.d("bufferr",readingBuffer);
 					int possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
 					if(possition>-1){
 						String line=readingBuffer.substring(0,possition);
-						Log.d("clDebuging","readed: "+line);
 						readingBuffer=readingBuffer.substring(possition+ApplicationClass.endCharacters.length());
+//						Log.d("line",line);
 						if(line!=null){
 							Message tmp=TCPIPServer.handler.obtainMessage();
 							tmp.what=Integer.parseInt(line.substring(0,3));
@@ -95,7 +101,7 @@ class ServerReadingThread implements Runnable{
 				Log.d("clDebuging","exception while reading"+e);
 			}
 			Log.d("clDebuging","ENDreading");
-
+//			Looper.loop();
 		}
 	}
 
