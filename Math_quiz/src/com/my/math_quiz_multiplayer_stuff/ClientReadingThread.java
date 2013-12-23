@@ -20,11 +20,14 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
-import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.my.math_quiz.ApplicationClass;
 
 class ClientReadingThread implements Runnable{
 
@@ -39,38 +42,66 @@ class ClientReadingThread implements Runnable{
 	 * */
 	private boolean work;
 //	private InputStream inputSream;
-	BufferedReader inputBuffer;
+	DataInputStream dataInputStream;
+	String readingBuffer="";
+	
 	int clientId;
 	public ClientReadingThread(InputStream inputSream,int clientId){
 		work=true;
 //		this.inputSream=inputSream;
-		inputBuffer= new BufferedReader(new InputStreamReader(inputSream));
+		dataInputStream= new DataInputStream(inputSream);
 		this.clientId=clientId;
 	}
 	
 	public void kill(){
+//		Log.d("srDebuging","killing input buffer");
 		work=false;
 		try{
-			inputBuffer.close();
+			dataInputStream.close();
 		}catch(Exception e){
-			inputBuffer=null;
+			dataInputStream=null;
+			Log.d("srDebuging","killing input buffer error: "+e);
 		}
+		Log.d("srDebuging","killing input buffer end method");
 	}
 	@Override
 	public void run() {
-		while(work==true&&inputBuffer!=null){
-			try{
-				String line=inputBuffer.readLine();
-				if(line!=null){
+		while(work==true&&dataInputStream!=null){
+			try{ 
+				byte[] info=new byte[1024];
+				Log.d("srDebuging","start reading");
+				int number= dataInputStream.read(info);
+				Log.d("srDebuging","number on reading:"+number);
+				if(number==-1){
+					work=false;
+					dataInputStream.close();
+					
+					//message mean that client is not accessible
 					Message tmp=TCPIPServer.handler.obtainMessage();
-					tmp.what=Integer.parseInt(line.substring(0,3));
-					//we append id of client to message
-					tmp.obj=new ObjectForMessageFromClient(clientId,line.substring(3));
-					TCPIPServer.handler.sendMessage(tmp);
+					tmp.what=1009;
+					tmp.obj=clientId;
+					TCPIPServer.handler.sendMessage(tmp); 
+					
+				}else{
+					readingBuffer+=new String(info);
+					int possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
+					if(possition>-1){
+						String line=readingBuffer.substring(0,possition);
+						readingBuffer=readingBuffer.substring(possition+4);
+						if(line!=null){
+							Message tmp=TCPIPServer.handler.obtainMessage();
+							tmp.what=Integer.parseInt(line.substring(0,3));
+							//we append id of client to message
+							tmp.obj=new ObjectForMessageFromClient(clientId,line.substring(3));
+							TCPIPServer.handler.sendMessage(tmp);
+						}
+					}
 				}
-			}catch(Exception e){
 				
+			}catch(Exception e){
+				Log.d("srDebuging","error while reading from client: "+e);
 			}
+			Log.d("srDebuging","end reading");
 		}
 	}
 	class ObjectForMessageFromClient{

@@ -24,12 +24,14 @@ import java.lang.ref.WeakReference;
 import java.net.ServerSocket;
 import java.util.HashMap;
 
-import com.my.math_quiz.utils.Task;
-
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.my.math_quiz.ApplicationClass;
+import com.my.math_quiz.utils.Task;
 
 public class TCPIPServer {
 	
@@ -72,7 +74,9 @@ public class TCPIPServer {
      * Time out is set to 10000ms
      * */
     public static void restartTcpServer() {
+    	Log.d("srDebuging","killing server");
     	killServer();
+    	Log.d("srDebuging","server kiled");
     	clietns=new HashMap<Integer, Client>();
     	try{
 	    	socket=new ServerSocket(port);
@@ -103,6 +107,7 @@ public class TCPIPServer {
 	    		client.killClient();
 	    	}
     	}
+    	Log.d("srDebuging","klientsss killed");
     	clietns=null;
     	try{
 			socket.close();
@@ -164,6 +169,15 @@ public class TCPIPServer {
 				case 6:
 					//we receive request for numberOfGames
 				    //{request for number of games}
+					break;
+				case 1009: //mean that  that client is not accessible any more
+					int clientId=(Integer)msg.obj;
+					Client cli=clietns.get(clientId);
+					if(cli!=null){
+						cli.killClient();
+						clietns.remove(cli);
+					}
+					Toast.makeText(ApplicationClass.applicationContext, "Connection to client "+clientId+" lose", Toast.LENGTH_SHORT).show();
 					break;
 				case 1010: //mean that we accept new client 
 					Log.d("reciveServer","accepted client");

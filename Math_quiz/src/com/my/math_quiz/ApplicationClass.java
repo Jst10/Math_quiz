@@ -20,6 +20,7 @@
 */
 package com.my.math_quiz;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import android.app.Application;
@@ -49,6 +50,11 @@ public class ApplicationClass extends Application{
 	public static final int NUMBER_TASK_LEVEL_MINIMUM=10;
 	public static final int NUMBER_TASK_LEVEL_MEDINUM=20;
 	public static final int NUMBER_TASK_LEVEL_MAXIMUM=30;
+	
+	
+	public static final Charset charset = Charset.forName("UTF-8");
+	private static final byte [] endBytes={10,11,12,13};
+	public static String endCharacters=new String(endBytes);
 	
 	public static Context applicationContext;
 

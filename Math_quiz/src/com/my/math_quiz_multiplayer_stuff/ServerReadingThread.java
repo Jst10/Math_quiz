@@ -46,11 +46,11 @@ class ServerReadingThread implements Runnable{
 	
 	public void kill(){
 		work=false;
-		try{
-			inputBuffer.close();
-		}catch(Exception e){
+//		try{
+//			inputBuffer.close();
+//		}catch(Exception e){
 			inputBuffer=null;
-		}
+//		}
 	}
 	@Override
 	public void run() {

@@ -20,15 +20,18 @@
 */
 package com.my.math_quiz_multiplayer_stuff;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
+import java.io.DataOutputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.nio.charset.Charset;
+
+import com.my.math_quiz.ApplicationClass;
+
+import android.util.Log;
 
 public class Client {
 
+	
 	private int playerId;
 	public int getPlayerId() {
 		return playerId;
@@ -41,7 +44,7 @@ public class Client {
 	Socket socket;
 	OutputStream outputStream;
 //	BufferedReader(new InputStreamReader(inputSream));
-	BufferedWriter writer;
+	DataOutputStream dataOutputStream;
 	ClientReadingThread readingRunable;
 	Thread readingThread;
 	
@@ -50,35 +53,40 @@ public class Client {
 		this.socket=socket;
 		try{
 			this.outputStream=socket.getOutputStream();
-			this.writer=new BufferedWriter(new OutputStreamWriter(outputStream));
+			this.dataOutputStream=new DataOutputStream(outputStream);
 		}catch(Exception e){}
 		this.readingRunable=readingRunable;
 		this.readingThread=readingThread;
 	}
 	public void killClient(){
+		Log.d("srDebuging","klients killed1");
 		try{
 			readingRunable.kill();
 		}catch(Exception e){}
+		Log.d("srDebuging","klients killed2");
 		try{
-			writer.close();
+			dataOutputStream.close();
 		}catch(Exception e){}
+		Log.d("srDebuging","klients killed3");
 		try{
 			outputStream.close();
 		}catch(Exception e){}
+		Log.d("srDebuging","klients killed4");
 		try{
 			socket.close();
 		}catch(Exception e){}
+		Log.d("srDebuging","klients killed5");
 		try{
 			readingThread.stop();
 		}catch(Exception e){}
-		
+		Log.d("srDebuging","klients killed6");
 	}
 	public void sendData(String data){
-		if(writer!=null){
+		if(dataOutputStream!=null){
 			try{
-				writer.write(data);
-				writer.newLine();
-				writer.flush();
+				data+=ApplicationClass.endCharacters;
+				dataOutputStream.write(data.getBytes(ApplicationClass.charset));
+				dataOutputStream.flush();
 			}catch(Exception e){}
 		}
 	}
