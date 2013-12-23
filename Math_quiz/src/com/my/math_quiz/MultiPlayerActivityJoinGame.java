@@ -29,10 +29,11 @@ import android.widget.EditText;
 
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
+import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
+import com.my.math_quiz_multiplayer_stuff.TCPIPClient.TCPIPClientListenerInGame;
 import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
-import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerInGame;
 
-public class MultiPlayerActivityJoinGame extends Activity implements TitleBarListener,TCPIPServerListenerInGame {
+public class MultiPlayerActivityJoinGame extends Activity implements TitleBarListener,TCPIPClientListenerInGame {
 
 	TitleBar titleBar=null;
 	EditText ipAdress;
@@ -56,7 +57,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	@Override
 	protected void onResume() {
 		super.onResume();
-		TCPIPServer.setTCPIPServerListener(this);
+		TCPIPClient.setTCPIPClientListener(this);
 	}
 	
 	/**BEGIN the title bar listener methods*/

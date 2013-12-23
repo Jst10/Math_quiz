@@ -43,13 +43,23 @@ public class TCPIPServer {
 	 * This is listeners for all action that server activity need before game start
 	 * */
 	public interface TCPIPServerListenerBeforeGame{
-		
+		/**
+		 * This method tigger when we accept new client or when old client leave
+		 * @param number the new number of clients
+		 * @accepted boolean value is true if we accept new client, if we lose old client id this valuie false
+		 * */
+		public void onNumberOfClientsChanged(int number,boolean accepted);
 	}
 	/**
 	 * This is listeners for all action that server activity need when game already run
 	 * */
 	public interface TCPIPServerListenerInGame{
-		
+		/**
+		 * This method tigger when we accept new client or when old client leave
+		 * @param number the new number of clients
+		 * @accepted boolean value is true if we accept new client, if we lose old client id this valuie false
+		 * */
+		public void onNumberOfClientsChanged(int number,boolean accepted);
 	}
     static HashMap<Integer,Client> clietns=null;
     static WeakReference<TCPIPServerListenerBeforeGame> listenerBG;
@@ -178,11 +188,15 @@ public class TCPIPServer {
 						clietns.remove(cli);
 					}
 					Toast.makeText(ApplicationClass.applicationContext, "Connection to client "+clientId+" lose", Toast.LENGTH_SHORT).show();
+					if(listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),false);
+					if(listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),false);
 					break;
 				case 1010: //mean that we accept new client 
 					Log.d("reciveServer","accepted client");
 					Client cl=(Client)msg.obj;
 					clietns.put(cl.getPlayerId(),cl);
+					if(listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),true);
+					if(listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),true);
 					break;
 				default: break;
 			}

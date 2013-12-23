@@ -87,7 +87,7 @@ class ClientReadingThread implements Runnable{
 					int possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
 					if(possition>-1){
 						String line=readingBuffer.substring(0,possition);
-						readingBuffer=readingBuffer.substring(possition+4);
+						readingBuffer=readingBuffer.substring(possition+ApplicationClass.endCharacters.length());
 						if(line!=null){
 							Message tmp=TCPIPServer.handler.obtainMessage();
 							tmp.what=Integer.parseInt(line.substring(0,3));

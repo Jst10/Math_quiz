@@ -30,10 +30,10 @@ import android.widget.TextView;
 
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
-import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
-import com.my.math_quiz_multiplayer_stuff.TCPIPClient.TCPIPClientListenerInGame;
+import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
+import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerInGame;
 
-public class MultiPlayerActivityHostGame extends Activity implements TitleBarListener,TCPIPClientListenerInGame {
+public class MultiPlayerActivityHostGame extends Activity implements TitleBarListener,TCPIPServerListenerInGame {
 
 	TitleBar titleBar=null;
 	TextView ipAdress;
@@ -60,7 +60,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	@Override
 	protected void onResume() {
 		super.onResume();
-		TCPIPClient.setTCPIPClientListener(this);
+		TCPIPServer.setTCPIPServerListener(this);
 	}
 
 	/**BEGIN the title bar listener methods*/
@@ -75,4 +75,15 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		startActivity(intent);
 	}
 	/**END the title bar listener methods*/
+
+	
+	/**BEGIN the TCPIPServerListenerInGame methods*/
+	@Override
+	public void onNumberOfClientsChanged(int number, boolean accepted) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**END the TCPIPServerListenerInGame methods*/
+
 }
