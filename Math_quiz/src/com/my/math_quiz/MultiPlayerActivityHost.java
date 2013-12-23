@@ -27,7 +27,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +36,10 @@ import android.widget.TextView;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
-import com.my.math_quiz_multiplayer_stuff.TCPIPClient.TCPIPClientListenerBeforeGame;
 import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
+import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerBeforeGame;
 
-public class MultiPlayerActivityHost extends Activity implements TitleBarListener, TCPIPClientListenerBeforeGame{
+public class MultiPlayerActivityHost extends Activity implements TitleBarListener, TCPIPServerListenerBeforeGame{
 
 	TitleBar titleBar=null;
 	TextView ipAdress;
@@ -95,7 +94,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	@Override
 	protected void onResume() {
 		super.onResume();
-		TCPIPClient.setTCPIPClientListener(this);
+		TCPIPServer.setTCPIPServerListener(this);
 	}
 
 
@@ -126,4 +125,13 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		startActivity(intent);
 	}
 	/**END the title bar listener methods*/
+
+
+	/**BEGIN the TCPIPServerListenerBeforeGame methods*/
+	@Override
+	public void onNumberOfClientsChanged(int number, boolean accepted) {
+		// TODO Auto-generated method stub
+		
+	}
+	/**END the TCPIPServerListenerBeforeGame methods*/
 }

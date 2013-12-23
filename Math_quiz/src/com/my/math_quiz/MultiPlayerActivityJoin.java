@@ -34,10 +34,10 @@ import android.widget.EditText;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
+import com.my.math_quiz_multiplayer_stuff.TCPIPClient.TCPIPClientListenerBeforeGame;
 import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
-import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerBeforeGame;
 
-public class MultiPlayerActivityJoin extends Activity implements TitleBarListener,TCPIPServerListenerBeforeGame {
+public class MultiPlayerActivityJoin extends Activity implements TitleBarListener,TCPIPClientListenerBeforeGame {
 
 	TitleBar titleBar=null;
 	EditText ipAdress;
@@ -93,7 +93,7 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 	@Override
 	protected void onResume() {
 		super.onResume();
-		TCPIPServer.setTCPIPServerListener(this);
+		TCPIPClient.setTCPIPClientListener(this);
 	}
 	
 	
