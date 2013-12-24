@@ -119,10 +119,12 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 				break;
 				case MODE_MULTIPLAYER_SELECTION_ONE_DEVICE:
 					Intent intent2 = new Intent(LevelsDisplayedActivity.this, MultiPlayerOneDeviceGameActivity.class);
+					intent2.putExtra("EXTRA_SELECTED_LEVEL", position);
 					startActivity(intent2);
 				break;
 				case MODE_MULTIPLAYER_SELECTION_WLAN:
 					Intent intent3 = new Intent(LevelsDisplayedActivity.this, MultiPlayerActivityHostGame.class);
+					intent3.putExtra("EXTRA_SELECTED_LEVEL", position);
 					startActivity(intent3);
 				break;
 				case MODE_TUTORIAL_SELECTION:
