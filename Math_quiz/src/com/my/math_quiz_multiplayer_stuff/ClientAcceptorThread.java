@@ -52,22 +52,35 @@ class ClientAcceptorThread implements Runnable
 			Log.d("srDebuging","while client accepting");
 			try{
 				Socket client=serversocketTCPIP.accept();
-				if(client!=null){
-					clientID++;
-					ClientReadingThread clR=new ClientReadingThread(client.getInputStream(),clientID);
-					Thread thredTCPIP=new Thread(clR);
-					Message tmp=TCPIPServer.handler.obtainMessage();
-					tmp.what=1010;
-					//we append id of client to message
-					tmp.obj=new Client(clientID,client,clR,thredTCPIP);
-					TCPIPServer.handler.sendMessage(tmp); 
-					thredTCPIP.start();
-					
+				if(acceptNewClient){
+					if(client!=null){
+						clientID++;
+						ClientReadingThread clR=new ClientReadingThread(client.getInputStream(),clientID);
+						Thread thredTCPIP=new Thread(clR);
+						Message tmp=TCPIPServer.handler.obtainMessage();
+						tmp.what=1010;
+						//we append id of client to message
+						tmp.obj=new Client(clientID,client,clR,thredTCPIP);
+						TCPIPServer.handler.sendMessage(tmp); 
+						thredTCPIP.start();
+					}
+				}else {
+					client.close();
 				}
+				
 			}catch(Exception e){
 				Log.d("srDebuging","error client accepting "+e);
 			}
 		}
+	}
+	boolean acceptNewClient=true;
+	public void stopAcepptingNewClients() {
+		acceptNewClient=false;
+		
+	}
+
+	public void startAcepptinNewClients() {
+		acceptNewClient=true;
 	}
 	
 

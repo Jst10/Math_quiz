@@ -24,5 +24,7 @@
           android:state_pressed="true" />
     <item android:drawable="@drawable/button_background_normal_n"
           android:state_focused="true" />
+    <item android:drawable="@drawable/button_background_normal_d" 
+          android:state_enabled="false" /> 
     <item android:drawable="@drawable/button_background_normal_n" />
 </selector>

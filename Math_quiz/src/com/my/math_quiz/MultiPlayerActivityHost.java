@@ -112,10 +112,19 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 			TCPIPServer.setPort(Integer.parseInt(portNumber.getText()+""));
 			TCPIPServer.restartTcpServer();
 		}else{
-			//TCPIPServer.sendTaskToAllClients(null);//connectToServer();
+			TCPIPServer.stopAcepptingNewClients();
+			TCPIPServer.removeTCPIPServerListener(this);
+			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
+			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_MULTIPLAYER_SELECTION_WLAN);
+			startActivity(intent);
 		}
 	}
 
+	@Override
+	public void finish() {
+		TCPIPServer.removeTCPIPServerListener(this);
+		super.finish();
+	}
 	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {
