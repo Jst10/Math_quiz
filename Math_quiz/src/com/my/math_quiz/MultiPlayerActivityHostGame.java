@@ -53,9 +53,6 @@ import com.my.math_quiz_multiplayer_stuff.TCPIPServer.TCPIPServerListenerInGame;
 public class MultiPlayerActivityHostGame extends Activity implements TitleBarListener,TCPIPServerListenerInGame,ResultBottomButtonListener,BottomButtonListener {
 
 	TitleBar titleBar=null;
-	TextView ipAdress;
-	EditText portNumber;
-	TextView numberOfPlayers;
 	
 	LevelDescripction levelDescripction;
 	LevelDataIN levelData;
@@ -111,7 +108,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView1);
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
 		bottomButtonsAnswer.setListener(this);
-		
+		restartGame();
 	}
 
 	@Override
@@ -291,7 +288,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	/**START the ResultBottomButtonListener methods*/
 	@Override
 	public void onAgainButtonClicked() {
-		// TODO Auto-generated method stub
+		restartGame();
 		
 	}
 
