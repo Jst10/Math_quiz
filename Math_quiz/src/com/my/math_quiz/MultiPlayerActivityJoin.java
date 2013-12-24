@@ -129,8 +129,8 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 	/**BEGIN the TCPIPClientListenerBeforeGame methods*/
 	@Override
 	public void onCommandToStartGame() {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent(MultiPlayerActivityJoin.this, MultiPlayerActivityJoinGame.class);
+		startActivity(intent);
 	}
 
 	@Override

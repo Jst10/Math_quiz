@@ -53,7 +53,8 @@ public class TCPIPClient {
 		public void onRequestingClientNickname();
 		public void onNumberOfGames(int numberOfGames);
 		public void onRequestToClearAllDataFromOldTasks();
-		public void onRequestToDisplayEndScreen();
+		public void onRequestToDisplayEndScreen(String text);
+		public void onRequestToDisplayGameScreen();
 		public void onUserScoresRecived(int userId,int score);
 		public void onUserDataRecived(int userId,String nickname);
 		public void onCommandToDisplaySpecificTask(int taskNumber);
@@ -248,7 +249,7 @@ public class TCPIPClient {
 					case 7:
 						//we receive command to display end screen
 					    //{nothing else just command to display end screen}
-						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestToDisplayEndScreen();
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestToDisplayEndScreen(data [0]);
 						break;
 					case 8:
 						//we receive to clear all data of old tasks
@@ -269,6 +270,10 @@ public class TCPIPClient {
 					case 12:
 						//we receive command for starting game
 						if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onCommandToStartGame();
+						break;
+					case 13:
+						//we receive command for starting game
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestToDisplayGameScreen();
 						break;
 					case 1009://mean that we lose connection with server
 						killConnection();//just to be sure to kill all stuff from old server

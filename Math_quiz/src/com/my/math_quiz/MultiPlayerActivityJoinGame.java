@@ -20,37 +20,85 @@
 */
 package com.my.math_quiz;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.my.math_quiz.interfaces.LevelDataIN;
+import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.utils.Task;
+import com.my.math_quiz.views.InGameBottomButtoms;
+import com.my.math_quiz.views.InGameBottomButtoms.BottomButtonListener;
+import com.my.math_quiz.views.ResultBottomButtoms;
+import com.my.math_quiz.views.ResultBottomButtoms.ResultBottomButtonListener;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
 import com.my.math_quiz_multiplayer_stuff.TCPIPClient.TCPIPClientListenerInGame;
-import com.my.math_quiz_multiplayer_stuff.TCPIPServer;
 
-public class MultiPlayerActivityJoinGame extends Activity implements TitleBarListener,TCPIPClientListenerInGame {
+public class MultiPlayerActivityJoinGame extends Activity implements TitleBarListener,TCPIPClientListenerInGame,ResultBottomButtonListener,BottomButtonListener  {
 
 	TitleBar titleBar=null;
-	EditText ipAdress;
+	TextView ipAdress;
 	EditText portNumber;
+	TextView numberOfPlayers;
 	
-	Button connectButton;
+	LevelDescripction levelDescripction;
+	LevelDataIN levelData;
+	ArrayList<Task> tasks;
+
+	int numberOfTasksInRound;
+	int selectedLevel;
+	
+	int currentTaskPosition;
+	
+	Bitmap taskIndicatorCorrectAnswer;
+	Bitmap taskIndicatorWrongAnswer;
+	Bitmap taskIndicatorNotSelectedAnswer;
+	Bitmap taskIndicatorCurrent;
+	
+	
+	TextView texViewForTaskText=null;
+	InGameBottomButtoms bottomButtonsAnswer=null;
+	LinearLayout layoutForIndicators;
+	ImageView[] imageViews;
+	RelativeLayout gameViewContainer;
+	RelativeLayout scoreViewContainer;
+	TextView scoreText;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_multi_player_w_join);
+		setContentView(R.layout.activity_multi_player_wlan_game);
 		
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
 		titleBar.setTitle(getString(R.string.multi_player_join));
 		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
 		
+		taskIndicatorCorrectAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_correct_answer);
+		taskIndicatorWrongAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_wrong_answer);
+		taskIndicatorNotSelectedAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_not_selected);
+		taskIndicatorCurrent=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_current);
+		
+		
+		bottomButtonsAnswer=(InGameBottomButtoms)this.findViewById(R.id.MPODGVbootomButtons);
+		texViewForTaskText=(TextView)this.findViewById(R.id.MPODGVtextView);
+		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
+		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
+		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
+		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView1);
+		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
+		bottomButtonsAnswer.setListener(this);
 		
 	}
 
@@ -100,12 +148,6 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	}
 
 
-	@Override
-	public void onRequestToDisplayEndScreen() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public void onUserScoresRecived(int userId, int score) {
@@ -151,8 +193,51 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onServerStoped() {
+		this.finish();
+		
+	}
+
+	@Override
+	public void onRequestToDisplayEndScreen(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onRequestToDisplayGameScreen() {
 		// TODO Auto-generated method stub
 		
 	}
 	/**END the TCPIPClientListenerBeforeGame methods*/
+	/**START the ResultBottomButtonListener methods*/
+	@Override
+	public void onAgainButtonClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFinishButtonClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onShareButtonClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**END the ResultBottomButtonListener methods*/
+
+	
+	/**START the BottomButtonListener methods*/
+	@Override
+	public void onButtonClick(InGameBottomButtoms buttoms, int position) {
+		// TODO Auto-generated method stub
+		
+	}
+	/**END the BottomButtonListener methods*/
+
+
 }
