@@ -23,10 +23,11 @@ package com.my.math_quiz;
 import java.util.HashMap;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -76,7 +77,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		titleBar=(TitleBar)findViewById(R.id.TBtitleBar);
 		titleBar.setTitleBarListener(this);
 		titleBar.setTitle(getString(R.string.multi_player_join));
-		titleBar.setRightImage(BitmapFactory.decodeResource(getResources(), R.drawable.action_settings));
+		titleBar.setRightImage(null);
 		
 		taskIndicatorCorrectAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_correct_answer);
 		taskIndicatorWrongAnswer=BitmapFactory.decodeResource(getResources(), R.drawable.task_indicator_wrong_answer);
@@ -89,10 +90,12 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
 		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
 		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
-		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView1);
+		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView);
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
+		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).disableAgainButton();
 		bottomButtonsAnswer.setListener(this);
 		
+		texViewForTaskText.setText("Waiting server to start game");
 	}
 
 	int[] myScores;
@@ -123,29 +126,30 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onRightButtonClick() {
-		Intent intent = new Intent(MultiPlayerActivityJoinGame.this, PreferenceActivity.class);
-		startActivity(intent);
+		
 	}
 	/**END the title bar listener methods*/
 
 	/**BEGIN the TCPIPClientListenerBeforeGame methods*/
 	@Override
 	public void onRequestingClientNickname() {
-		// TODO Auto-generated method stub
-		
+		TCPIPClient.sendNickname(ApplicationClass.getNickName());
 	}
 
 
 	HashMap<Integer, Task> tasks;
 	@Override
 	public void onNumberOfGames(int numberOfGames) {
+		Log.d("clientRecive","number of games "+numberOfGames);
 		this.numberOfTasksInRound=numberOfGames;
 	}
 
 
 	@Override
 	public void onRequestToClearAllDataFromOldTasks() {
+		Log.d("clientRecive","request to clear all data");
 		tasks=new HashMap<Integer, Task>();
+		texViewForTaskText.setText("Waiting server to start game");
 		
 	}
 
@@ -153,20 +157,22 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	@Override
 	public void onUserScoresRecived(int userId, int score) {
 		// TODO Auto-generated method stub
+		Log.d("clientRecive","user score");
 		
 	}
 
 	@Override
 	public void onUserDataRecived(int userId, String nickname) {
 		// TODO Auto-generated method stub
-		
+		Log.d("clientRecive","ruser data");
 	}
 
 	@Override
 	public void onCommandToDisplaySpecificTask(int taskNumber) {
+		Log.d("clientRecive","command to display specific task");
 		wasDisplyedCorrectAnswer=false;
 		if(taskNumber>0){
-			imageViews[taskNumber-1].setImageBitmap(myScores[taskNumber]==-1?taskIndicatorWrongAnswer:(myScores[taskNumber-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
+			imageViews[taskNumber-1].setImageBitmap(myScores[taskNumber-1]==-1?taskIndicatorWrongAnswer:(myScores[taskNumber-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
 		}
 		currentTaskPosition=taskNumber;
 		Task currentTask=tasks.get(currentTaskPosition);
@@ -181,6 +187,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onCommandToDisplayCorrectAnswer(int taskNumber) {
+		Log.d("clientRecive","command to display correct answer");
 		bottomButtonsAnswer.setCorrectCollorToSpecificButton(tasks.get(taskNumber).getCorrectAnswer());
 		wasDisplyedCorrectAnswer=true;
 	}
@@ -189,12 +196,13 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	@Override
 	public void onSelectedAnswerOfOtherUser(int task, int userId, int answer) {
 		// TODO Auto-generated method stub
-		
+		Log.d("clientRecive","selected answer from other users");
 	}
 
 
 	@Override
 	public void onTaskReciveFromServer(int taskNumber, Task task) {
+		Log.d("clientRecive","task recvive");
 		tasks.put(taskNumber,task);
 		
 	}
@@ -208,19 +216,22 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onRequestToDisplayEndScreen(String text) {
+		Log.d("clientRecive","request to display end screen");
 		gameViewContainer.setVisibility(View.INVISIBLE);
 		scoreViewContainer.setVisibility(View.VISIBLE);
-		
+		scoreText.setText("You ahived: "+getSumScore()+"\n\n"+Html.fromHtml(text));
 	}
 
 
 	@Override
 	public void onRequestToDisplayGameScreen() {
+		Log.d("clientRecive","request to diasplay game screen");
 		gameViewContainer.setVisibility(View.VISIBLE);
 		scoreViewContainer.setVisibility(View.INVISIBLE);
 		
 		layoutForIndicators.removeAllViews();
 		imageViews=new ImageView[numberOfTasksInRound];
+		myScores=new int[numberOfTasksInRound];
 		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/numberOfTasksInRound;
 		int oneIndicatorHeight=ApplicationClass.getDisplaySize().x/ApplicationClass.getMaximumNumberOfGamesInOneRound();
 		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(oneIndicatorWidth,oneIndicatorHeight);
@@ -264,8 +275,10 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		if(wasDisplyedCorrectAnswer==false){
 			if(myScores[currentTaskPosition]==0){
 				Task t=tasks.get( currentTaskPosition);
+				Log.d("onClickButton","posisiton: "+position+" correct position; "+t.getCorrectAnswer());
 				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
 					TCPIPClient.sendSelectedAnswer(currentTaskPosition, position);
+					myScores[currentTaskPosition]=(position==t.getCorrectAnswer())?1:-1;
 				}
 			}
 		}

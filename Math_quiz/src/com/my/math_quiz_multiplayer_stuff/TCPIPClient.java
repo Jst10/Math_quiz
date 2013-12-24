@@ -215,7 +215,7 @@ public class TCPIPClient {
 					case 1:
 						//we receive data of one task
 					    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
-						
+						Log.d("reciveTask","her correct valueIS "+Integer.parseInt(data[6]));
 						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onTaskReciveFromServer(
 								Integer.parseInt(data[0]),
 								new Task(new Equations(data[1],Integer.parseInt(data[6])),
@@ -262,10 +262,12 @@ public class TCPIPClient {
 					    //{request for nickname}
 						if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onRequestingClientNickname();
 						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestingClientNickname();
+						break;
 					case 11:
 						//we receive number of games
 					    // |numberOfGames|
-						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfGames(Integer.parseInt(data [0]));
+						Log.d("iget",data[0]+"dd");
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfGames(Integer.parseInt(data[0]));
 						break;
 					case 12:
 						//we receive command for starting game
@@ -299,7 +301,7 @@ public class TCPIPClient {
 	  public static void sendSelectedAnswer(int taskNumber,int selectedAnswer){
 		// id=2
 		//|taskId|answer| {selected answer at one task}
-		  String data="002";
+		  String data="002"+taskNumber+speratorCharacter+selectedAnswer;
 	      sendData(data);
 	  }
 	  public static void sendRequestForNumberOfPlayers(){
@@ -321,7 +323,12 @@ public class TCPIPClient {
 		  String data="006";
 	      sendData(data);
 	  }
-	  
+	  public static void sendNickname(String nickname){
+			// id=7
+		    //{sending my nickname}
+			  String data="007"+nickname;
+		      sendData(data);
+		  }
 	  
 	  private static void sendData(String data){
 			if(dataOutputStream!=null){

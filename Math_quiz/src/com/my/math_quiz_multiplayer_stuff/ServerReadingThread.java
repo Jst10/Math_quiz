@@ -83,18 +83,20 @@ class ServerReadingThread implements Runnable{
 				
 				}else{
 					readingBuffer+=new String(info).substring(0,number);
-//					Log.d("bufferr",readingBuffer);
+					Log.d("bufferr",readingBuffer);
 					int possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
-					if(possition>-1){
+					while(possition>-1){
 						String line=readingBuffer.substring(0,possition);
 						readingBuffer=readingBuffer.substring(possition+ApplicationClass.endCharacters.length());
-//						Log.d("line",line);
+						
 						if(line!=null){
 							Message tmp=TCPIPServer.handler.obtainMessage();
 							tmp.what=Integer.parseInt(line.substring(0,3));
 							tmp.obj=line.substring(3);
+							Log.d("line","what: "+tmp.what+"obj: "+tmp.obj);
 							TCPIPClient.handler.sendMessage(tmp);
 						}
+						possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
 					}
 				}
 			}catch(Exception e){

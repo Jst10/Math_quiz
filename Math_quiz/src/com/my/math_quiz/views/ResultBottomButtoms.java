@@ -68,8 +68,10 @@ public class ResultBottomButtoms extends LinearLayout{
 			shareButton=(Button)findViewById(R.id.LPbuttonShare);
 			endButton=(Button)findViewById(R.id.LPbuttonFinish);
 
-			
-			againButton.setOnClickListener(onClickListener);
+			if(mustDisableAgain)
+				againButton.setVisibility(View.INVISIBLE);
+			else
+				againButton.setOnClickListener(onClickListener);
 			shareButton.setOnClickListener(onClickListener);
 			endButton.setOnClickListener(onClickListener);
 
@@ -105,6 +107,13 @@ public class ResultBottomButtoms extends LinearLayout{
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	}
+	private boolean mustDisableAgain=false;
+	public void disableAgainButton() {
+		mustDisableAgain=true;
+		if(againButton!=null)
+			againButton.setVisibility(View.INVISIBLE);
+		
 	}
 
 }
