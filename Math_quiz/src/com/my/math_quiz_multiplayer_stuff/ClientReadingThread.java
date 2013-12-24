@@ -23,9 +23,9 @@ package com.my.math_quiz_multiplayer_stuff;
 import java.io.DataInputStream;
 import java.io.InputStream;
 
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.my.math_quiz.ApplicationClass;
 
@@ -66,6 +66,7 @@ class ClientReadingThread implements Runnable{
 	}
 	@Override
 	public void run() {
+		Looper.prepare();
 		while(work==true&&dataInputStream!=null){
 			try{ 
 				byte[] info=new byte[1024];
@@ -85,7 +86,7 @@ class ClientReadingThread implements Runnable{
 				}else{
 					readingBuffer+=new String(info).substring(0,number);;
 					int possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
-					if(possition>-1){
+					while(possition>-1){
 						String line=readingBuffer.substring(0,possition);
 						readingBuffer=readingBuffer.substring(possition+ApplicationClass.endCharacters.length());
 						if(line!=null){
@@ -95,6 +96,7 @@ class ClientReadingThread implements Runnable{
 							tmp.obj=new ObjectForMessageFromClient(clientId,line.substring(3));
 							TCPIPServer.handler.sendMessage(tmp);
 						}
+						possition=readingBuffer.indexOf(ApplicationClass.endCharacters);
 					}
 				}
 				
@@ -104,12 +106,5 @@ class ClientReadingThread implements Runnable{
 			Log.d("srDebuging","end reading");
 		}
 	}
-	class ObjectForMessageFromClient{
-		int clientId;
-		String text;
-		public ObjectForMessageFromClient(int clientId,String text){
-			this.clientId=clientId;
-			this.text=text;
-		}
-	}
+
 }

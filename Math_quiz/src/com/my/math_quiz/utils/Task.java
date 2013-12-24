@@ -87,4 +87,8 @@ public class Task {
 	public int getSelectedAnswer(){
 		return selectedAnswer;
 	}
+
+	public int getCorrectAnswerValue() {
+		return equation.getValue();
+	}
 }

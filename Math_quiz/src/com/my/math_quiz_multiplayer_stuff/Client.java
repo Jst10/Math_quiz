@@ -111,6 +111,29 @@ public class Client {
 	}
 	public void setScores(int currentTaskPosition, int i) {
 		scores[currentTaskPosition]=i;
+	}
+	/**
+	 * @return in score i have wrong answer|not answer|correct answer|and player id
+	 * it is 1dimensional table four fields 1*4
+	 * */
+	public int[] getScoresTable(){
+		int []scorT=new int[4];
+		scorT[0]=0;
+		scorT[1]=0;
+		scorT[2]=0;
+		scorT[3]=playerId;
+		for(int i=0; i<scores.length; i++){
+			if(scores[i]==-1)
+				scorT[0]++;
+			else if(scores[i]==0)
+				scorT[1]++;
+			else if(scores[i]==1)
+				scorT[2]++;
+		}
 		
+		return scorT;
+	}
+	public void setNickname(String nickname) {
+		this.nickname=nickname;
 	}
 }

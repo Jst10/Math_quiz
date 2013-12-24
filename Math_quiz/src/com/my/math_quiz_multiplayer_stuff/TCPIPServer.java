@@ -66,6 +66,7 @@ public class TCPIPServer {
 		public void onRequestForNumberOfPlayers();
 		public void onSelectedAnswerRecived(int taskNumber,int selectedAnsver,int clientId);
 		public void onRequestForTaskDescription(int taskNumber);
+		public void onPlayerNickname(String string, int playerId);
 		
 	}
     static HashMap<Integer,Client> clients=null;
@@ -178,9 +179,12 @@ public class TCPIPServer {
 			Log.d("reciveServer","I recive: "+msg.obj);
 			
 			String[] data=null;
-			if(msg.what<1000)
-				data=((String)msg.obj).split(Pattern.quote(speratorCharacter+""));
-			
+			int playerId=-8;
+			Log.d("messageFromClient","messg: "+msg.obj);
+			if(msg.what<1000){
+				data=((ObjectForMessageFromClient)msg.obj).getText().split(Pattern.quote(speratorCharacter+""));
+				playerId=((ObjectForMessageFromClient)msg.obj).clientId;
+			}
 			
 			switch(msg.what){
 				case 1:
@@ -191,7 +195,7 @@ public class TCPIPServer {
 				case 2:
 					//we receive selected answer of one task
 				    //|taskId|answer| {selected answer at one task}
-					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onSelectedAnswerRecived(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onSelectedAnswerRecived(Integer.parseInt(data[0]),Integer.parseInt(data[1]),playerId);
 					break;
 				case 3:
 					//we receive request for number of players
@@ -208,6 +212,11 @@ public class TCPIPServer {
 					//we receive request for numberOfGames
 				    //{request for number of games}
 					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestForNumberOfGame();
+					break;
+				case 7:
+					//we receive player nickname
+				    //
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onPlayerNickname(data[0],playerId);
 					break;
 				case 1009: //mean that  that client is not accessible any more
 					int clientId=(Integer)msg.obj;
@@ -252,7 +261,7 @@ public class TCPIPServer {
     			task.getAnswers()[1]+speratorCharacter+
     			task.getAnswers()[2]+speratorCharacter+
     			task.getAnswers()[3]+speratorCharacter+
-    			task.getCorrectAnswer();
+    			task.getCorrectAnswerValue();
     	sendDataToClients(data,-1);
     }
     public static void sendSelectdAnswerOfUserToOClients(int taskNumber,int userId,int selectedAnswer){
