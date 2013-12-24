@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
@@ -65,7 +66,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	ImageView[] imageViews;
 	RelativeLayout gameViewContainer;
 	RelativeLayout scoreViewContainer;
-	TextView scoreText;
+	WebView scoreText;
 	
 	boolean wasDisplyedCorrectAnswer=false;
 	
@@ -90,7 +91,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
 		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
 		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
-		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView);
+		scoreText=(WebView)this.findViewById(R.id.MPODGScoretextView);
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).disableAgainButton();
 		bottomButtonsAnswer.setListener(this);
@@ -216,10 +217,10 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onRequestToDisplayEndScreen(String text) {
-		Log.d("clientRecive","request to display end screen");
+		Log.d("clientRecive","request to display end screen" +text);
 		gameViewContainer.setVisibility(View.INVISIBLE);
 		scoreViewContainer.setVisibility(View.VISIBLE);
-		scoreText.setText("You ahived: "+getSumScore()+"\n\n"+Html.fromHtml(text));
+		scoreText.loadData("<html><body>You achived: "+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");
 	}
 
 
@@ -257,7 +258,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onFinishButtonClicked() {
-		// TODO Auto-generated method stub
+		this.finish();
 		
 	}
 

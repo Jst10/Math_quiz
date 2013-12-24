@@ -37,7 +37,7 @@ import com.my.math_quiz.utils.Equations;
 import com.my.math_quiz.utils.Task;
 
 public class TCPIPClient {
-	public static final char speratorCharacter=34;
+	public static final char speratorCharacter=5;
 	/**
 	 * This is listeners for all action that client activity need before game
 	 * */
@@ -210,7 +210,11 @@ public class TCPIPClient {
 				if(msg.what!=1009)
 					data=((String)msg.obj).split(Pattern.quote(speratorCharacter+""));
 				
+				try{
+					Log.d("afterSplit","-->"+data[0]);
+				}catch(Exception e){}
 				
+			
 				switch(msg.what){
 					case 1:
 						//we receive data of one task
@@ -248,7 +252,7 @@ public class TCPIPClient {
 						break;
 					case 7:
 						//we receive command to display end screen
-					    //{nothing else just command to display end screen}
+					    //{text to display}
 						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestToDisplayEndScreen(data [0]);
 						break;
 					case 8:
