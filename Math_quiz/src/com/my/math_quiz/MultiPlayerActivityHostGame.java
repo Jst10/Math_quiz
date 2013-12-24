@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
@@ -75,7 +76,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	ImageView[] imageViews;
 	RelativeLayout gameViewContainer;
 	RelativeLayout scoreViewContainer;
-	TextView scoreText;
+	WebView scoreText;
 	
 	
 	@Override
@@ -105,7 +106,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
 		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
 		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
-		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView);
+		scoreText=(WebView)this.findViewById(R.id.MPODGScoretextView);
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
 		bottomButtonsAnswer.setListener(this);
 		
@@ -251,25 +252,25 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			
 			
 			//convertin table to html text
-			String text="<table>";
-			text+="<tr><td>Pl</td><td>Inc</td><td>Not ans</td><td>Cor</td></tr>";
+			String text="<table border=\"1\" align=\"center\">";
+			text+="<tr align=\"center\"><td>Player</td><td>Wrong</td><td>Not answerd</td><td>Correct</td></tr>";
 			for(i=0; i<scores.length; i++){
-				text+="<tr>";
+				text+="<tr align=\"center\">";
 				if(scores[i][3]==-1){
-					text+="<td>"+ApplicationClass.getNickName()+"/<td>";
+					text+="<td>"+ApplicationClass.getNickName()+"</td>";
 				}else{
-					text+="<td>"+clients.get(scores[i][3]).getNickname()+"/<td>";
+					text+="<td>"+clients.get(scores[i][3]).getNickname()+"</td>";
 				}
-				text+="<td>"+scores[i][0]+"/<td>";
-				text+="<td>"+scores[i][1]+"/<td>";
-				text+="<td>"+scores[i][2]+"/<td>";
-				text+="/<tr>";
+				text+="<td>"+scores[i][0]+"</td>";
+				text+="<td>"+scores[i][1]+"</td>";
+				text+="<td>"+scores[i][2]+"</td>";
+				text+="</tr>";
 				
 			}
-			text+="/<table>";
+			text+="</table>";
 			
 			TCPIPServer.sendRequestToDisplayEndScreen(text);
-			scoreText.setText("You ahived: "+getSumScore()+"\n\n"+Html.fromHtml(text));
+			scoreText.loadData("<html><body>You ahived: "+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");
 		}
 	}
 	/**BEGIN the title bar listener methods*/
