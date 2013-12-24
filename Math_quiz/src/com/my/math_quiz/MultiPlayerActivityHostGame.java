@@ -337,7 +337,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onFinishButtonClicked() {
-		// TODO Auto-generated method stub
+		this.finish();
 		
 	}
 

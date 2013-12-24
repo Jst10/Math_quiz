@@ -38,7 +38,7 @@ public class TCPIPServer {
 	
 //TODO on start game I must end accepting new clients and on end game I must resume accepting new clients
 	
-	public static final char speratorCharacter=34;
+	public static final char speratorCharacter=5;
 	
 	/**
 	 * This is listeners for all action that server activity need before game start
@@ -300,7 +300,7 @@ public class TCPIPServer {
     public static void sendRequestToDisplayEndScreen(String textToDisplay){
     	// id=7
 	    //{nothing else just command to display end screen}
-    	String data="007"+speratorCharacter+textToDisplay;
+    	String data="007"+textToDisplay;
     	sendDataToClients(data,-1);
     }
     public static void sendRequestToClearAllDataFromOldTasks(){
