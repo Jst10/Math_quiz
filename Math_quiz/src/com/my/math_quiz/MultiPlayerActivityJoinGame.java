@@ -60,7 +60,11 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		super.onResume();
 		TCPIPClient.setTCPIPClientListener(this);
 	}
-	
+	@Override
+	public void finish() {
+		TCPIPClient.removeTCPIPClientListener(this);
+		super.finish();
+	}
 	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {

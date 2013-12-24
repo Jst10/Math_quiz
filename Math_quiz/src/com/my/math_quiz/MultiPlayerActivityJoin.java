@@ -107,6 +107,11 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 			TCPIPClient.connectToServer();
 		
 	}
+	@Override
+	public void finish() {
+		TCPIPClient.removeTCPIPClientListener(this);
+		super.finish();
+	}
 	/**BEGIN the title bar listener methods*/
 	@Override
 	public void onLeftButtonClick() {

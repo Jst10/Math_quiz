@@ -181,6 +181,20 @@ public class TCPIPClient {
     public static void setTCPIPClientListener(TCPIPClientListenerInGame list){
     	listenerIG=new WeakReference<TCPIPClientListenerInGame>(list);
     }
+    /**
+     * This method remove TCPIPServerListener before game from week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void removeTCPIPClientListener(TCPIPClientListenerBeforeGame list){
+    	listenerBG=null;
+    }
+    /**
+     * This method remove TCPIPServerListener in game from week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void removeTCPIPClientListener(TCPIPClientListenerInGame list){
+    	listenerIG=null;
+    }
 	/**
      * This is handler which handle all messages from reading thread from server
      * This handler tigers the listener methods
