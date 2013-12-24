@@ -151,6 +151,20 @@ public class TCPIPServer {
     public static void setTCPIPServerListener(TCPIPServerListenerInGame list){
     	listenerIG=new WeakReference<TCPIPServer.TCPIPServerListenerInGame>(list);
     }
+    /**
+     * This method remove TCPIPServerListener before game from week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void removeTCPIPServerListener(TCPIPServerListenerBeforeGame list){
+    	listenerBG=null;
+    }
+    /**
+     * This method remove TCPIPServerListener in game from week reference.
+     * So user don't need to wory about memory leaks.
+     * */
+    public static void removeTCPIPServerListener(TCPIPServerListenerInGame list){
+    	listenerIG=null;
+    }
     
     /**
      * This is handler which handle all messages from accepting new clients thread
@@ -218,6 +232,13 @@ public class TCPIPServer {
 			return false;
 		}
 	});
+    public static void stopAcepptingNewClients(){
+    	if(serverThreadRunable!=null)serverThreadRunable.stopAcepptingNewClients();
+    }
+    public static void startAcepptinNewClients(){
+    	if(serverThreadRunable!=null)serverThreadRunable.startAcepptinNewClients();
+    }
+    
     
     public static void sendTaskToAllClients(Task task,int taskNumber){
     	// id=1
