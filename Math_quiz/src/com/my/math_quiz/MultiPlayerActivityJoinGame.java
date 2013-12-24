@@ -20,21 +20,20 @@
 */
 package com.my.math_quiz;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.EditText;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.my.math_quiz.interfaces.LevelDataIN;
-import com.my.math_quiz.utils.LevelDescripction;
 import com.my.math_quiz.utils.Task;
 import com.my.math_quiz.views.InGameBottomButtoms;
 import com.my.math_quiz.views.InGameBottomButtoms.BottomButtonListener;
@@ -48,17 +47,9 @@ import com.my.math_quiz_multiplayer_stuff.TCPIPClient.TCPIPClientListenerInGame;
 public class MultiPlayerActivityJoinGame extends Activity implements TitleBarListener,TCPIPClientListenerInGame,ResultBottomButtonListener,BottomButtonListener  {
 
 	TitleBar titleBar=null;
-	TextView ipAdress;
-	EditText portNumber;
-	TextView numberOfPlayers;
 	
-	LevelDescripction levelDescripction;
-	LevelDataIN levelData;
-	ArrayList<Task> tasks;
 
 	int numberOfTasksInRound;
-	int selectedLevel;
-	
 	int currentTaskPosition;
 	
 	Bitmap taskIndicatorCorrectAnswer;
@@ -74,6 +65,8 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	RelativeLayout gameViewContainer;
 	RelativeLayout scoreViewContainer;
 	TextView scoreText;
+	
+	boolean wasDisplyedCorrectAnswer=false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +95,16 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		
 	}
 
-
+	int[] myScores;
+	private int getSumScore() {
+		int tmp=0;
+		for(int i=0; i<myScores.length; i++){
+			if(myScores[i]>0)
+				tmp+=myScores[i];
+		}
+		return tmp;
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -134,19 +136,18 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	}
 
 
+	HashMap<Integer, Task> tasks;
 	@Override
 	public void onNumberOfGames(int numberOfGames) {
-		// TODO Auto-generated method stub
-		
+		this.numberOfTasksInRound=numberOfGames;
 	}
 
 
 	@Override
 	public void onRequestToClearAllDataFromOldTasks() {
-		// TODO Auto-generated method stub
+		tasks=new HashMap<Integer, Task>();
 		
 	}
-
 
 
 	@Override
@@ -155,25 +156,33 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		
 	}
 
-
 	@Override
 	public void onUserDataRecived(int userId, String nickname) {
 		// TODO Auto-generated method stub
 		
 	}
 
-
 	@Override
 	public void onCommandToDisplaySpecificTask(int taskNumber) {
-		// TODO Auto-generated method stub
+		wasDisplyedCorrectAnswer=false;
+		if(taskNumber>0){
+			imageViews[taskNumber-1].setImageBitmap(myScores[taskNumber]==-1?taskIndicatorWrongAnswer:(myScores[taskNumber-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
+		}
+		currentTaskPosition=taskNumber;
+		Task currentTask=tasks.get(currentTaskPosition);
+
+		texViewForTaskText.setText(currentTask.getText());
+		bottomButtonsAnswer.seButtontTexts(currentTask.getAnswers());
+		bottomButtonsAnswer.resetFirstSelectedAnswer();
 		
+		imageViews[currentTaskPosition].setImageBitmap(taskIndicatorCurrent);
 	}
 
 
 	@Override
 	public void onCommandToDisplayCorrectAnswer(int taskNumber) {
-		// TODO Auto-generated method stub
-		
+		bottomButtonsAnswer.setCorrectCollorToSpecificButton(tasks.get(taskNumber).getCorrectAnswer());
+		wasDisplyedCorrectAnswer=true;
 	}
 
 
@@ -186,7 +195,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onTaskReciveFromServer(int taskNumber, Task task) {
-		// TODO Auto-generated method stub
+		tasks.put(taskNumber,task);
 		
 	}
 
@@ -199,14 +208,32 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onRequestToDisplayEndScreen(String text) {
-		// TODO Auto-generated method stub
+		gameViewContainer.setVisibility(View.INVISIBLE);
+		scoreViewContainer.setVisibility(View.VISIBLE);
 		
 	}
 
 
 	@Override
 	public void onRequestToDisplayGameScreen() {
-		// TODO Auto-generated method stub
+		gameViewContainer.setVisibility(View.VISIBLE);
+		scoreViewContainer.setVisibility(View.INVISIBLE);
+		
+		layoutForIndicators.removeAllViews();
+		imageViews=new ImageView[numberOfTasksInRound];
+		int oneIndicatorWidth=ApplicationClass.getDisplaySize().x/numberOfTasksInRound;
+		int oneIndicatorHeight=ApplicationClass.getDisplaySize().x/ApplicationClass.getMaximumNumberOfGamesInOneRound();
+		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(oneIndicatorWidth,oneIndicatorHeight);
+		
+		for(int i=0; i<imageViews.length; i++){
+			imageViews[i]=new ImageView(this);
+			imageViews[i].setLayoutParams(layoutParams);
+			imageViews[i].setImageBitmap(taskIndicatorNotSelectedAnswer);
+			imageViews[i].setScaleType(ScaleType.CENTER_INSIDE);
+			layoutForIndicators.addView(imageViews[i]);
+			
+		}
+		imageViews[0].setImageBitmap(taskIndicatorCurrent);
 		
 	}
 	/**END the TCPIPClientListenerBeforeGame methods*/
@@ -234,8 +261,14 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	/**START the BottomButtonListener methods*/
 	@Override
 	public void onButtonClick(InGameBottomButtoms buttoms, int position) {
-		// TODO Auto-generated method stub
-		
+		if(wasDisplyedCorrectAnswer==false){
+			if(myScores[currentTaskPosition]==0){
+				Task t=tasks.get( currentTaskPosition);
+				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
+					TCPIPClient.sendSelectedAnswer(currentTaskPosition, position);
+				}
+			}
+		}
 	}
 	/**END the BottomButtonListener methods*/
 
