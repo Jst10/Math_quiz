@@ -119,4 +119,25 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 		startActivity(intent);
 	}
 	/**END the title bar listener methods*/
+
+	
+	/**BEGIN the TCPIPClientListenerBeforeGame methods*/
+	@Override
+	public void onCommandToStartGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRequestingClientNickname() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onServerStoped() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**END the TCPIPClientListenerBeforeGame methods*/
 }

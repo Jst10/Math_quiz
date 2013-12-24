@@ -24,7 +24,7 @@ import java.io.DataOutputStream;
 import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.charset.Charset;
+import java.util.regex.Pattern;
 
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -33,19 +33,34 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.my.math_quiz.ApplicationClass;
+import com.my.math_quiz.utils.Equations;
+import com.my.math_quiz.utils.Task;
 
 public class TCPIPClient {
-	
+	public static final char speratorCharacter=34;
 	/**
 	 * This is listeners for all action that client activity need before game
 	 * */
 	public interface TCPIPClientListenerBeforeGame{
-		
+		public void onCommandToStartGame();
+		public void onRequestingClientNickname();
+		public void onServerStoped();
 	}
 	/**
 	 * This is listeners for all action that client activity need in game
 	 * */
 	public interface TCPIPClientListenerInGame{
+		public void onRequestingClientNickname();
+		public void onNumberOfGames(int numberOfGames);
+		public void onRequestToClearAllDataFromOldTasks();
+		public void onRequestToDisplayEndScreen();
+		public void onUserScoresRecived(int userId,int score);
+		public void onUserDataRecived(int userId,String nickname);
+		public void onCommandToDisplaySpecificTask(int taskNumber);
+		public void onCommandToDisplayCorrectAnswer(int taskNumber);
+		public void onSelectedAnswerOfOtherUser(int task, int userId,int answer);
+		public void onTaskReciveFromServer(int taskNumber,Task task);
+		public void onServerStoped();
 		
 	}
 	
@@ -175,54 +190,78 @@ public class TCPIPClient {
 			@Override
 			public boolean handleMessage(Message msg) {
 				Log.d("reciveClient","I recive: "+msg.obj);
+				
+				String[] data=null;
+				if(msg.what!=1009)
+					data=((String)msg.obj).split(Pattern.quote(speratorCharacter+""));
+				
+				
 				switch(msg.what){
 					case 1:
 						//we receive data of one task
 					    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
+						
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onTaskReciveFromServer(
+								Integer.parseInt(data[0]),
+								new Task(new Equations(data[1],Integer.parseInt(data[6])),
+										new int[]{Integer.parseInt(data[2]),Integer.parseInt(data[3]),Integer.parseInt(data[4]),Integer.parseInt(data[5])} ));
 						break;
 					case 2:
 						//we receive answer of one user
 					    //|taskNumber|userId|selectedAnswer|
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onSelectedAnswerOfOtherUser(Integer.parseInt(data [0]),Integer.parseInt(data [1]),Integer.parseInt(data [2]));
 						break;
 					case 3:
 						//we receive signal to display correct answer
 					    // |taskNumber|  {this is signal to display correct result for specific task}
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onCommandToDisplayCorrectAnswer(Integer.parseInt(data [0]));
 						break;
 					case 4:
 						//we receive signal to switch to specific task probably next
 					    //|taskNumber|  {this is signal to switch to specific task in general to new one}
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onCommandToDisplaySpecificTask(Integer.parseInt(data [0]));
 						break;
 					case 5:
 						//we receive nickname of one user
 					    //|userID|nickname|
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onUserDataRecived(Integer.parseInt(data [0]),data [1]);
 						break;
 					case 6:
 						//we receive score of one user
 					    //|userId|score|
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onUserScoresRecived(Integer.parseInt(data [0]),Integer.parseInt(data [1]));
 						break;
 					case 7:
 						//we receive command to display end screen
 					    //{nothing else just command to display end screen}
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestToDisplayEndScreen();
 						break;
 					case 8:
 						//we receive to clear all data of old tasks
 					    //{nothing else just command to clear all data from odl tasks}
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestToClearAllDataFromOldTasks();
 						break;
-					case 9:
-						//we receive command to end server stoped (server has been shutdown)
-					    //{nothing else just command to end server stoped}
-						break;
+				//here was notification that server stoped
 					case 10:
 						//we receive request for nickname
 					    //{request for nickname}
+						if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onRequestingClientNickname();
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onRequestingClientNickname();
 					case 11:
 						//we receive number of games
 					    // |numberOfGames|
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfGames(Integer.parseInt(data [0]));
+						break;
+					case 12:
+						//we receive command for starting game
+						if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onCommandToStartGame();
 						break;
 					case 1009://mean that we lose connection with server
 						killConnection();//just to be sure to kill all stuff from old server
 						//we receive number of games
 					    // |numberOfGames|
+						if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onServerStoped();
+						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onServerStoped();
 						Toast.makeText(ApplicationClass.applicationContext, "Connection to servere lose", Toast.LENGTH_SHORT).show();
 						break;
 					default: break;
@@ -234,31 +273,38 @@ public class TCPIPClient {
 	  
 	  public static void sendRequestForTaskDescription(int taskNumber){
 		// id=1
-		//|taskID| request data for specific task
+		//|taskID| request data for specific taskc
+		  String data="001"+taskNumber;
+	      sendData(data);
 	  }
 	  public static void sendSelectedAnswer(int taskNumber,int selectedAnswer){
 		// id=2
 		//|taskId|answer| {selected answer at one task}
-	  }
-	  public static void sendCommandForLeavingGame(){
-		// id=3
-	    //{request for number of players}
+		  String data="002";
+	      sendData(data);
 	  }
 	  public static void sendRequestForNumberOfPlayers(){
-		// id=4
-	    //{command for leaving game}
+		// id=3
+	    //{request for numbet of players}
+		  String data="003";
+	      sendData(data);
 	  }
+	  //here was notification that client stoped
 	  public static void sendRequestForPlayerNickname(int playerID){
 		// id=5
 	    // playerId {request for nickname}
+		  String data="005"+playerID;
+	      sendData(data);
 	  }
 	  public static void sendRequestForNumberOfGames(){
 		// id=6
 	    //{request for number of games}
+		  String data="006";
+	      sendData(data);
 	  }
 	  
 	  
-	  public void sendData(String data){
+	  private static void sendData(String data){
 			if(dataOutputStream!=null){
 				try{
 					data+=ApplicationClass.endCharacters;
