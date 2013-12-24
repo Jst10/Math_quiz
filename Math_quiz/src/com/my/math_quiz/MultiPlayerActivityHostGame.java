@@ -29,8 +29,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
@@ -105,9 +105,11 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
 		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
 		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
-		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView1);
+		scoreText=(TextView)this.findViewById(R.id.MPODGScoretextView);
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
 		bottomButtonsAnswer.setListener(this);
+		
+		TCPIPServer.requestClientsNickname();
 		restartGame();
 	}
 
@@ -138,7 +140,29 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		}
 		return tmp;
 	}
+	/**
+	 * @return in score i have wrong answer|not answer|correct answer|and player id
+	 * it is 1dimensional table four fields 1*4
+	 * */
+	public int[] getScoresTable(){
+		int []scorT=new int[4];
+		scorT[0]=0;
+		scorT[1]=0;
+		scorT[2]=0;
+		scorT[3]=-1;
+		for(int i=0; i<myScores.length; i++){
+			if(myScores[i]==-1)
+				scorT[0]++;
+			else if(myScores[i]==0)
+				scorT[1]++;
+			else if(myScores[i]==1)
+				scorT[2]++;
+		}
+		return scorT;
+	}
+		
 	private void restartGame(){
+		currentTaskPosition=0;
 		gameViewContainer.setVisibility(View.VISIBLE);
 		scoreViewContainer.setVisibility(View.INVISIBLE);
 		numberOfTasksInRound=ApplicationClass.getMPCurrentNumberOfGamesInOneRound();
@@ -206,33 +230,46 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			gameViewContainer.setVisibility(View.INVISIBLE);
 			scoreViewContainer.setVisibility(View.VISIBLE);
 
-			//TODO
-			//all scores I must send to clients and create xml format to displayed them
+			int[][] scores=new int[clients.size()+1][4];
+			scores[0]=getScoresTable();
+			int i=1;
+			for(Client cl:clients.values()){
+				scores[i]=cl.getScoresTable();
+				i++;
+			}
+			//in score i have wrong answer|not answer|correct answer|and player id
+			//sorting the table
+			for(i=0; i<scores.length; i++){
+				for(int j=i+1; j<scores.length; j++){
+					if(scores[i][2]>scores[j][2]){
+						int[]tmp=scores[i];
+						scores[i]=scores[j];
+						scores[j]=tmp;
+					}
+				}
+			}
 			
-			TCPIPServer.sendRequestToDisplayEndScreen("tuki mora pridi score v xml formatu enkrat");
-//			int tmp0=0;
-//			for(int i=0; i<score[0].length; i++){
-//				if(score[0][i]>0)
-//					tmp0+=score[0][i];
-//			}
-//			int tmp1=0;
-//			for(int i=0; i<score[0].length; i++){
-//				if(score[1][i]>0)
-//					tmp1+=score[1][i];
-//			}
-//			
-//			if(tmp0<=tmp1){
-//				scoreText1.setText(getString(R.string.result_text_lose)+tmp0+getString(R.string.result_text_score));
-//				scoreText2.setText(getString(R.string.result_text_win)+tmp1+getString(R.string.result_text_score));
-//			}
-//			else if(tmp0==tmp1){
-//				scoreText1.setText(getString(R.string.result_text_tie)+tmp0+getString(R.string.result_text_scores));
-//				scoreText2.setText(getString(R.string.result_text_tie)+tmp1+getString(R.string.result_text_scores));
-//			}
-//			else{
-//				scoreText2.setText(getString(R.string.result_text_lose)+tmp1+getString(R.string.result_text_score));
-//				scoreText1.setText(getString(R.string.result_text_win)+tmp0+getString(R.string.result_text_score));
-//			}
+			
+			//convertin table to html text
+			String text="<table>";
+			text+="<tr><td>Pl</td><td>Inc</td><td>Not ans</td><td>Cor</td></tr>";
+			for(i=0; i<scores.length; i++){
+				text+="<tr>";
+				if(scores[i][3]==-1){
+					text+="<td>"+ApplicationClass.getNickName()+"/<td>";
+				}else{
+					text+="<td>"+clients.get(scores[i][3]).getNickname()+"/<td>";
+				}
+				text+="<td>"+scores[i][0]+"/<td>";
+				text+="<td>"+scores[i][1]+"/<td>";
+				text+="<td>"+scores[i][2]+"/<td>";
+				text+="/<tr>";
+				
+			}
+			text+="/<table>";
+			
+			TCPIPServer.sendRequestToDisplayEndScreen(text);
+			scoreText.setText("You ahived: "+getSumScore()+"\n\n"+Html.fromHtml(text));
 		}
 	}
 	/**BEGIN the title bar listener methods*/
@@ -280,6 +317,11 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	@Override
 	public void onRequestForTaskDescription(int taskNumber) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onPlayerNickname(String nickname, int playerId) {
+		clients.get(playerId).setNickname(nickname);
 		
 	}
 	/**END the TCPIPServerListenerInGame methods*/
@@ -339,7 +381,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			moveDelayToPage(ApplicationClass.getMPDelayOnCorrectAnswerInMiliS());
 			TCPIPServer.sendSignalToDisplayCorrectAnsswer(currentTaskPosition);
 			hasAnyoneAnswerCorrect=true;
-		}else if(hasAnyoneAnswerToThisTaskYet){
+		}else if(hasAnyoneAnswerToThisTaskYet==false){
 			//we clicked first and wrong
 			startTimingBeforeSwitchingToNextpage();
 		}
@@ -358,16 +400,19 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	
 	final Handler beforeMovindToNextPage=new Handler();
 	private void startTimingBeforeSwitchingToNextpage(){
-		handlerToNextPage.postDelayed(runablePageSwitching, ApplicationClass.getMPRemainTimeToAnswer());
+		beforeMovindToNextPage.postDelayed(runableBeforePageSwitching, ApplicationClass.getMPRemainTimeToAnswer());
 	}
 	final Runnable runableBeforePageSwitching=new Runnable() {
 		  @Override
 		  public void run() {
 			  	handlerToNextPage.removeCallbacks(runablePageSwitching);
-				moveDelayToPage(ApplicationClass.getMPDelayOnCorrectAnswerInMiliS());
+				moveDelayToPage(ApplicationClass.getMPDelayOnWrongAnswerInMiliS());
 				TCPIPServer.sendSignalToDisplayCorrectAnsswer(currentTaskPosition);
 				bottomButtonsAnswer.setCorrectCollorToSpecificButton(tasks.get(currentTaskPosition).getCorrectAnswer());
 				hasAnyoneAnswerCorrect=true;
 		  }
 	};
+
+
+	
 }
