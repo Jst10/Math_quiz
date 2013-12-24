@@ -68,7 +68,7 @@ public class TCPIPServer {
 		public void onRequestForTaskDescription(int taskNumber);
 		
 	}
-    static HashMap<Integer,Client> clietns=null;
+    static HashMap<Integer,Client> clients=null;
     static WeakReference<TCPIPServerListenerBeforeGame> listenerBG;
     static WeakReference<TCPIPServerListenerInGame> listenerIG;
     static ClientAcceptorThread serverThreadRunable;
@@ -94,7 +94,7 @@ public class TCPIPServer {
     	Log.d("srDebuging","killing server");
     	killServer();
     	Log.d("srDebuging","server kiled");
-    	clietns=new HashMap<Integer, Client>();
+    	clients=new HashMap<Integer, Client>();
     	try{
 	    	socket=new ServerSocket(port);
 	    	Log.d("srDebuging","start server on port: "+port);
@@ -119,13 +119,13 @@ public class TCPIPServer {
      * first is trying to kill all clients then server socket
      * then runable class and at leas the tread whit method stop */
     public static void killServer(){
-    	if(clietns!=null){
-	    	for(Client client:clietns.values()){
+    	if(clients!=null){
+	    	for(Client client:clients.values()){
 	    		client.killClient();
 	    	}
     	}
     	Log.d("srDebuging","klientsss killed");
-    	clietns=null;
+    	clients=null;
     	try{
 			socket.close();
 		}catch(Exception e){}
@@ -211,21 +211,21 @@ public class TCPIPServer {
 					break;
 				case 1009: //mean that  that client is not accessible any more
 					int clientId=(Integer)msg.obj;
-					Client cli=clietns.get(clientId);
+					Client cli=clients.get(clientId);
 					if(cli!=null){
 						cli.killClient();
-						clietns.remove(clientId);
+						clients.remove(clientId);
 					}
 					Toast.makeText(ApplicationClass.applicationContext, "Connection to client "+clientId+" lose", Toast.LENGTH_SHORT).show();
-					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),false);
-					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),false);
+					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clients.size(),false);
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clients.size(),false);
 					break;
 				case 1010: //mean that we accept new client 
 					Log.d("reciveServer","accepted client");
 					Client cl=(Client)msg.obj;
-					clietns.put(cl.getPlayerId(),cl);
-					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clietns.size(),true);
-					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clietns.size(),true);
+					clients.put(cl.getPlayerId(),cl);
+					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clients.size(),true);
+					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clients.size(),true);
 					break;
 				default: break;
 			}
@@ -239,7 +239,9 @@ public class TCPIPServer {
     	if(serverThreadRunable!=null)serverThreadRunable.startAcepptinNewClients();
     }
     
-    
+    public static HashMap<Integer,Client> getClients(){
+    	return clients;
+    }
     public static void sendTaskToAllClients(Task task,int taskNumber){
     	// id=1
 	    //|taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
@@ -251,7 +253,7 @@ public class TCPIPServer {
     			task.getAnswers()[2]+speratorCharacter+
     			task.getAnswers()[3]+speratorCharacter+
     			task.getCorrectAnswer();
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
     public static void sendSelectdAnswerOfUserToOClients(int taskNumber,int userId,int selectedAnswer){
     	// id=2
@@ -260,68 +262,75 @@ public class TCPIPServer {
     			taskNumber+speratorCharacter+
     			userId+speratorCharacter+
     			selectedAnswer;
-    	sendDataToClients(data);
+    	sendDataToClients(data,userId);
     }
     public static void sendSignalToDisplayCorrectAnsswer(int taskNumber){
     	// id=3
 	    // |taskNumber|  {this is signal to display correct result for specific task}
     	String data="003"+taskNumber;
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
     public static void sendSignalToSwitchToOtherTask(int taskNumber){
     	// id=4
 	    //|taskNumber|  {this is signal to switch to specific task in general to new one}
     	String data="004"+taskNumber;
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
     public static void sendUserDataToClients(int userId,String nickname){
     	// id=5
 	    //|userID|nickname|
     	String data="005"+userId+speratorCharacter+nickname;
-    	sendDataToClients(data);
+    	sendDataToClients(data,userId);
     }
     public static void sendUserScoreToClients(int userId,int score){
     	// id=6
 	    //|userId|score|
     	String data="006"+userId+speratorCharacter+score;
-    	sendDataToClients(data);
+    	sendDataToClients(data,userId);
     }
-    public static void sendRequestToDisplayEndScreen(){
+    public static void sendRequestToDisplayEndScreen(String textToDisplay){
     	// id=7
 	    //{nothing else just command to display end screen}
-    	String data="007";
-    	sendDataToClients(data);
+    	String data="007"+speratorCharacter+textToDisplay;
+    	sendDataToClients(data,-1);
     }
     public static void sendRequestToClearAllDataFromOldTasks(){
     	// id=8
 	    //{nothing else just command to clear all data from odl tasks}
     	String data="008";
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
   //here was notification that server stoped
     public static void requestClientsNickname(){
     	// id=10
 	    //{request for nickname}
     	String data="010";
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
     public static void sendNumberOfGames(int numberOfGames){
     	// id=11
 	    //|numberOfGames|
     	String data="011"+numberOfGames;
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
   //here server notifiy clients to switch to game
     public static void sendCommandToStartGame(){
     	// id=12
 	    //{command for starting game}
     	String data="012";
-    	sendDataToClients(data);
+    	sendDataToClients(data,-1);
     }
-    private static void sendDataToClients(String data){
-    	if(clietns!=null)
-        	for(Client cl :clietns.values()){
-        		cl.sendData(data);
+    public static void sendRequestToDisplayGameScreen(){
+    	// id=13
+	    //{nothing else just command to display end screen}
+    	String data="013";
+    	sendDataToClients(data,-1);
+    }
+    private static void sendDataToClients(String data,int userId){
+    	if(clients!=null)
+        	for(Client cl :clients.values()){
+        		if(cl.getPlayerId()!=userId)
+        			cl.sendData(data);
         	}
     }
     

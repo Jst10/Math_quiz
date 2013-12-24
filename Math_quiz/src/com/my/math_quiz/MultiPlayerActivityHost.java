@@ -114,6 +114,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		}else{
 			TCPIPServer.stopAcepptingNewClients();
 			TCPIPServer.removeTCPIPServerListener(this);
+			TCPIPServer.sendCommandToStartGame();
 			Intent intent = new Intent(this, LevelsDisplayedActivity.class);
 			intent.putExtra(LevelsDisplayedActivity.KEY_FOR_MODE_PARAMETER, LevelsDisplayedActivity.MODE_MULTIPLAYER_SELECTION_WLAN);
 			startActivity(intent);

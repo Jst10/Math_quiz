@@ -90,4 +90,27 @@ public class Client {
 			}catch(Exception e){}
 		}
 	}
+	int[]scores;
+	public void resetScore(int numberOfTasksInRound) {
+		/**
+		 * score two dimension table for two player 
+		 * -1 wrong
+		 * 0 not answered yet
+		 * 1 correct answer
+		 * */
+		scores=new int[numberOfTasksInRound];
+		
+	}
+	public int getSumScore() {
+		int tmp=0;
+		for(int i=0; i<scores.length; i++){
+			if(scores[i]>0)
+				tmp+=scores[i];
+		}
+		return tmp;
+	}
+	public void setScores(int currentTaskPosition, int i) {
+		scores[currentTaskPosition]=i;
+		
+	}
 }
