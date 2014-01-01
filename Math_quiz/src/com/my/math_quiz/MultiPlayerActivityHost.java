@@ -96,6 +96,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	protected void onResume() {
 		super.onResume();
 		TCPIPServer.setTCPIPServerListener(this);
+		onNumberOfClientsChanged(TCPIPServer.getNumberOfClients(),false);
 	}
 
 
@@ -107,7 +108,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		Log.d("srDebuging","bitton clicekd");
 		if(v.getId()==R.id.MPWHStartServer){
 			numberOfPlayers.setText("0");
-			serverButton.setText("Restart server");
+			serverButton.setText(getString(R.string.muRestartServer));
 			nextButton.setEnabled(false);
 			TCPIPServer.setPort(Integer.parseInt(portNumber.getText()+""));
 			TCPIPServer.restartTcpServer();
@@ -124,6 +125,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	@Override
 	public void finish() {
 		TCPIPServer.removeTCPIPServerListener(this);
+		TCPIPServer.killServer();
 		super.finish();
 	}
 	/**BEGIN the title bar listener methods*/

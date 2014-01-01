@@ -96,7 +96,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).disableAgainButton();
 		bottomButtonsAnswer.setListener(this);
 		
-		texViewForTaskText.setText("Waiting server to start game");
+		texViewForTaskText.setText(getString(R.string.muWaitingServerToStartGame));
 	}
 
 	int[] myScores;
@@ -117,6 +117,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	@Override
 	public void finish() {
 		TCPIPClient.removeTCPIPClientListener(this);
+		TCPIPClient.killConnection();
 		super.finish();
 	}
 	/**BEGIN the title bar listener methods*/
@@ -150,7 +151,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	public void onRequestToClearAllDataFromOldTasks() {
 		Log.d("clientRecive","request to clear all data");
 		tasks=new HashMap<Integer, Task>();
-		texViewForTaskText.setText("Waiting server to start game");
+		texViewForTaskText.setText(getString(R.string.muWaitingServerToStartGame));
 		
 	}
 
@@ -220,7 +221,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		Log.d("clientRecive","request to display end screen" +text);
 		gameViewContainer.setVisibility(View.INVISIBLE);
 		scoreViewContainer.setVisibility(View.VISIBLE);
-		scoreText.loadData("<html><body>You achived: "+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");
+		scoreText.loadData("<html><body>"+getString(R.string.muYouAchived)+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");
 	}
 
 

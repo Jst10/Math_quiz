@@ -33,6 +33,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.my.math_quiz.ApplicationClass;
+import com.my.math_quiz.R;
 import com.my.math_quiz.utils.Equations;
 import com.my.math_quiz.utils.Task;
 
@@ -287,7 +288,7 @@ public class TCPIPClient {
 					    // |numberOfGames|
 						if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onServerStoped();
 						if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onServerStoped();
-						Toast.makeText(ApplicationClass.applicationContext, "Connection to servere lose", Toast.LENGTH_SHORT).show();
+						Toast.makeText(ApplicationClass.applicationContext, ApplicationClass.applicationContext.getString(R.string.muConTOServerLose), Toast.LENGTH_SHORT).show();
 						break;
 					default: break;
 				}

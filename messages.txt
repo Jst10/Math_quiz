@@ -1,0 +1,27 @@
+From client to server:
+id  meaning of other data
+1 |taskID| request data for specific task
+2 |taskId|answer| {selected answer at one task}
+3 {request for number of players}
+4 {command for leaving game}
+5  playerId {request for nickname}
+6 {request for number of games}
+7
+8
+9
+10
+11
+
+
+From server to clients:
+1 |taskNumber|expressiont|answer1|answer2|answer3|answer4|correctNumber
+2 |taskNumber|userId|selectedAnswer|
+3 |taskNumber|  {this is signal to display correct result for specific task}
+4 |taskNumber|  {this is signal to switch to specific task in general to new one}
+5 |userID|nickname|
+6 |userId|score|
+7 {nothing else just command to display end screen}
+8 {nothing else just command to clear all data from odl tasks}
+9 {nothing else just command to end server stoped}
+10 {request for nickname}
+11 |numberOfGames|

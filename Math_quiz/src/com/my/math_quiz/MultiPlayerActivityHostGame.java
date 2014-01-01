@@ -37,6 +37,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.my.math_quiz.interfaces.LevelDataIN;
 import com.my.math_quiz.utils.LevelDescripction;
@@ -253,9 +254,15 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			
 			//convertin table to html text
 			String text="<table border=\"1\" align=\"center\">";
-			text+="<tr align=\"center\"><td>Player</td><td>Wrong</td><td>Not answerd</td><td>Correct</td></tr>";
+			text+="<tr align=\"center\"><td>"+
+				getString(R.string.muPlace)+"</td><td>"+
+				getString(R.string.muPlayer)+"</td><td>"+
+				getString(R.string.muWrong)+"</td><td>"+
+				getString(R.string.muNotanswerd)+"</td><td>"+
+				getString(R.string.muCorrect)+"</td></tr>";
 			for(i=0; i<scores.length; i++){
 				text+="<tr align=\"center\">";
+				text+="<td>"+(i+1)+"</td>";
 				if(scores[i][3]==-1){
 					text+="<td>"+ApplicationClass.getNickName()+"</td>";
 				}else{
@@ -270,7 +277,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			text+="</table>";
 			
 			TCPIPServer.sendRequestToDisplayEndScreen(text);
-			scoreText.loadData("<html><body>You ahived: "+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");
+			scoreText.loadData("<html><body>"+getString(R.string.muYouAchived)+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");
 		}
 	}
 	/**BEGIN the title bar listener methods*/
@@ -290,7 +297,10 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	/**BEGIN the TCPIPServerListenerInGame methods*/
 	@Override
 	public void onNumberOfClientsChanged(int number, boolean accepted) {
-		// TODO Auto-generated method stub
+		if(number==0){
+			Toast.makeText(this,getString(R.string.muNoMoreClients),Toast.LENGTH_LONG).show();
+			this.finish();
+		}
 	}
 
 	@Override

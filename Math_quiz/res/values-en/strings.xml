@@ -120,5 +120,19 @@
      <string name="seTimeForAnswer">Time for answer</string>
      <string name="seTimeForAnswerInfo">Time for answer, after first wrong answer</string>
     
+    <!--      multiplayer strings -->
+	 <string name="muConnectionToClient">Connection to client</string>
+	 <string name="muLose">lose</string> 
+     <string name="muConTOServerLose">Connection to server lose</string> 
+     <string name="muWaitingServerToStartGame">Waiting server to start game</string> 
+     <string name="muRestartServer">Restart server</string> 
     
+      <string name="muPlace">Place</string> 
+      <string name="muPlayer">Player</string> 
+	  <string name="muWrong">Wrong</string> 
+	  <string name="muNotanswerd">Not nnswerd</string> 
+	  <string name="muCorrect">Correct</string> 
+	  
+	  <string name="muYouAchived">You achieved: </string>
+	  <string name="muNoMoreClients">All other players left game</string>  
 </resources>

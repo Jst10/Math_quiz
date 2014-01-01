@@ -110,6 +110,7 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 	@Override
 	public void finish() {
 		TCPIPClient.removeTCPIPClientListener(this);
+		TCPIPClient.killConnection();
 		super.finish();
 	}
 	/**BEGIN the title bar listener methods*/

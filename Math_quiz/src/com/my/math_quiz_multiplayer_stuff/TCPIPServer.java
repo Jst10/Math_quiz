@@ -32,6 +32,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.my.math_quiz.ApplicationClass;
+import com.my.math_quiz.R;
 import com.my.math_quiz.utils.Task;
 
 public class TCPIPServer {
@@ -225,7 +226,7 @@ public class TCPIPServer {
 						cli.killClient();
 						clients.remove(clientId);
 					}
-					Toast.makeText(ApplicationClass.applicationContext, "Connection to client "+clientId+" lose", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ApplicationClass.applicationContext,ApplicationClass.applicationContext.getString(R.string.muConnectionToClient)+ " "+clientId+" "+ApplicationClass.applicationContext.getString(R.string.muLose), Toast.LENGTH_SHORT).show();
 					if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onNumberOfClientsChanged(clients.size(),false);
 					if(listenerIG!=null&&listenerIG.get()!=null)listenerIG.get().onNumberOfClientsChanged(clients.size(),false);
 					break;
@@ -342,6 +343,11 @@ public class TCPIPServer {
         			cl.sendData(data);
         	}
     }
+
+	public static int getNumberOfClients() {
+		if(clients==null)return 0;
+		return clients.values().size();
+	}
     
     
     

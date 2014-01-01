@@ -124,4 +124,20 @@
      <string name="seTimeForAnswer">Čas za odgovor</string>
      <string name="seTimeForAnswerInfo">Čas za odgovor, po prvem napačnem odgovoru</string>
      
+<!--      multiplayer strings -->
+	 <string name="muConnectionToClient">Povezava do klieneta</string>
+	 <string name="muLose">se je izgubila</string> 
+	 <string name="muConTOServerLose">Povezava s strežnikom je prekinjena</string> 
+	 <string name="muWaitingServerToStartGame">Čakam strežnik, da prične z igro</string> 
+	  <string name="muRestartServer">Ponovno postavi </string> 
+	 
+	  <string name="muPlace">Mesto</string> 
+	  <string name="muPlayer">Igralec</string> 
+	  <string name="muWrong">Napačnih</string> 
+	  <string name="muNotanswerd">Ne odgovorjenih</string> 
+	  <string name="muCorrect">Pravilnih</string> 
+	 
+	  <string name="muYouAchived">Vi ste dosegli: </string> 
+	  <string name="muNoMoreClients">Vsi soigralci so odšli </string> 
+	   
 </resources>
