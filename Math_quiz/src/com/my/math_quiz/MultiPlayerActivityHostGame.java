@@ -199,6 +199,11 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			
 		}
 		imageViews[0].setImageBitmap(taskIndicatorCurrent);
+		
+		for(int i=0; i<numberOfTasksInRound; i++){
+			TCPIPServer.sendTaskToAllClients(tasks.get(i), i);
+		}
+		
 		displayDataFromSpecificTest(0);
 	}
 	
@@ -216,7 +221,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			hasAnyoneAnswerToThisTaskYet=false;
 			Task currentTask=tasks.get(currentTaskPosition);
 
-			TCPIPServer.sendTaskToAllClients(currentTask, position);
+			
 			TCPIPServer.sendSignalToSwitchToOtherTask(position);
 			
 			currentTaskPosition=position;
