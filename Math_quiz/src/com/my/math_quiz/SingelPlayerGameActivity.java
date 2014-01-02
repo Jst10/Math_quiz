@@ -299,6 +299,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 					((TextView)resultPage.findViewById(R.id.ESPscoreM)).setText(levelDescripction.levelScores[1]+"");
 					((TextView)resultPage.findViewById(R.id.ESPscoreH)).setText(levelDescripction.levelScores[2]+"");
 					
+//					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).enableShaeButton();
 					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).setListener(SingelPlayerGameActivity.this);
 					
 				

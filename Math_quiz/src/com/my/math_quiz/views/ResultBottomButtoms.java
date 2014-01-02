@@ -22,6 +22,7 @@ package com.my.math_quiz.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -68,11 +69,20 @@ public class ResultBottomButtoms extends LinearLayout{
 			shareButton=(Button)findViewById(R.id.LPbuttonShare);
 			endButton=(Button)findViewById(R.id.LPbuttonFinish);
 
-			if(mustDisableAgain)
+			if(mustDisableAgain){
 				againButton.setVisibility(View.INVISIBLE);
-			else
+			}
+			else{
 				againButton.setOnClickListener(onClickListener);
-			shareButton.setOnClickListener(onClickListener);
+			}
+			
+//			if(mustEnableShareButton){
+//				shareButton.setVisibility(View.VISIBLE);
+//				shareButton.setOnClickListener(onClickListener);
+//			}else{
+//				shareButton.setVisibility(View.GONE);
+//			}
+			
 			endButton.setOnClickListener(onClickListener);
 
 
@@ -115,5 +125,12 @@ public class ResultBottomButtoms extends LinearLayout{
 			againButton.setVisibility(View.INVISIBLE);
 		
 	}
+//	private boolean mustEnableShareButton=false;
+//	public void enableShaeButton(){
+//		Log.d("enableShare","enable share button");
+//		mustEnableShareButton=true;
+//		if(shareButton!=null)
+//			shareButton.setVisibility(View.VISIBLE);
+//	}
 
 }

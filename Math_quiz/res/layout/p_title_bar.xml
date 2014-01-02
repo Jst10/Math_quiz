@@ -24,6 +24,7 @@
 	    android:layout_height="50dp"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
+        android:background="@drawable/titleb"
         >
         <ImageButton 
             android:id="@+id/TBleftButton"

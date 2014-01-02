@@ -18,35 +18,40 @@
     along with Math-quiz.  If not, see http://www.gnu.org/licenses
 
 -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:minHeight="80dp"
+    android:layout_height="wrap_content"
      >
-           <TextView 
-               android:id="@+id/ESPtitle"
-               android:layout_width="wrap_content"
-   			   android:layout_height="wrap_content"
-               android:layout_centerVertical="true"
-   			   android:textSize="30sp"
-            />
-           <TextView 
-                android:id="@+id/ESPdescription"
-                android:layout_width="wrap_content"
-   	 		 	android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-   	        />
-       
-        <ImageView 
-            android:layout_height="40dp"
-            android:layout_width="40dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/action_help"
-			android:contentDescription="@string/image"            
-            android:layout_marginRight="20dp"
-            />
-         
-        
+	<RelativeLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="80dp"
+	    android:background="@drawable/list_item_background_tutorial"
+	    
+	     >
+	           <TextView 
+	               android:id="@+id/ESPtitle"
+	               android:layout_width="wrap_content"
+	   			   android:layout_height="wrap_content"
+	               android:layout_centerVertical="true"
+	   			   android:textSize="30sp"
+	            />
+	           <TextView 
+	                android:id="@+id/ESPdescription"
+	                android:layout_width="wrap_content"
+	   	 		 	android:layout_height="wrap_content"
+	                android:layout_alignParentBottom="true"
+	   	        />
+	       
+	        <ImageView 
+	            android:layout_height="40dp"
+	            android:layout_width="40dp"
+	            android:layout_centerVertical="true"
+	            android:layout_alignParentRight="true"
+	            android:src="@drawable/action_help"
+				android:contentDescription="@string/image"            
+	            android:layout_marginRight="20dp"
+	            />
+	         
+	        
+	</RelativeLayout>
 </RelativeLayout>
