@@ -22,6 +22,7 @@ package com.my.math_quiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
@@ -136,7 +137,10 @@ public class LevelsDisplayedActivity extends Activity implements TitleBarListene
 
 		}
 	};
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	public static final String KEY_FOR_MODE_PARAMATER="keyformodeinonetutorial";
 	public static final String KEY_FOR_SELECTED_LEVEL="selectedlevel";
 	public static final int MODE_START_BEFORE_GAME=1;

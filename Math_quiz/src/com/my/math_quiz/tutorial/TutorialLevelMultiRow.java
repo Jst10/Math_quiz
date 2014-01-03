@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -212,7 +213,10 @@ public class TutorialLevelMultiRow extends Activity implements AnimationListener
 		animationsProcedure.get(step).executeAnimation();
 		step++;
 	}
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	@Override
 	public void finish() {
 		if(selectedMode==LevelsDisplayedActivity.MODE_START_BEFORE_GAME){

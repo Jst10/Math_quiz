@@ -22,6 +22,7 @@ package com.my.math_quiz.tutorial;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -123,7 +124,10 @@ public class TutorialLevel0 extends Activity implements AnimationListener,TitleB
 //	
 //	Animation getFadeInAnimation(true) = new AlphaAnimation(0, 1);
 //	Animation getFadeInAnimation(false) = new AlphaAnimation(0, 1);
-//	
+//		@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	
 	private int step=0;
 

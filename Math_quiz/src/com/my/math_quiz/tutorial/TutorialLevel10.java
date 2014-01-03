@@ -23,6 +23,7 @@ package com.my.math_quiz.tutorial;
 import android.R.layout;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -117,7 +118,10 @@ public class TutorialLevel10 extends Activity implements AnimationListener,Title
 		step=0;
 		firstText.startAnimation(ApplicationClass.getFadeInAnimation(this));
 	}
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	private int step=0;
 
 	/**

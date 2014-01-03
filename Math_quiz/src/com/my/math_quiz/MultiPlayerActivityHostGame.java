@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -114,7 +115,10 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		TCPIPServer.requestClientsNickname();
 		restartGame();
 	}
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -248,7 +252,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			//sorting the table
 			for(i=0; i<scores.length; i++){
 				for(int j=i+1; j<scores.length; j++){
-					if(scores[i][2]>scores[j][2]){
+					if(scores[i][2]<scores[j][2]){
 						int[]tmp=scores[i];
 						scores[i]=scores[j];
 						scores[j]=tmp;

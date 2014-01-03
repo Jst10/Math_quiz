@@ -22,6 +22,7 @@ package com.my.math_quiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
@@ -51,7 +52,10 @@ public class MultiPlayerActivity extends Activity implements TitleBarListener {
 //		getMenuInflater().inflate(R.menu.launch, menu);
 		return true;
 	}
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	public void MultiPlayerActivityButtonClick(View v){
 		if(v.getId()==R.id.MPhost){
 			Intent intent = new Intent(this, MultiPlayerActivityHost.class);

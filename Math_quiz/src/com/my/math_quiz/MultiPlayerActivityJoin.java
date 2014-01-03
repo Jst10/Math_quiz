@@ -22,6 +22,7 @@ package com.my.math_quiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
@@ -30,7 +31,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.my.math_quiz.R.string;
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 import com.my.math_quiz_multiplayer_stuff.TCPIPClient;
@@ -42,7 +45,7 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 	TitleBar titleBar=null;
 	EditText ipAdress;
 	EditText portNumber;
-	
+	Toast toast;
 	Button connectButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,13 +86,17 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 				}catch(Exception e){}
 			}
 		});
+		toast= Toast.makeText(this,getString(R.string.successfulConnectionToServer),Toast.LENGTH_LONG);
 		
 		
 		
 		
 		connectButton=(Button)findViewById(R.id.MPWJConnect);
 	}
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -102,9 +109,14 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 	 * */
 	public void MPWJbuttonClicked(View v){
 			Log.d("clDebuging","connect cliekce");
+			toast.setText(string.connectiongToServer);
+			toast.show();
+			
 			TCPIPClient.setIpAdressAndPort(ipAdress.getText()+"", Integer.parseInt(portNumber.getText()+""));
 			Log.d("clDebuging","connecting to server: "+ipAdress.getText()+":"+ portNumber.getText()+"");
 			TCPIPClient.connectToServer();
+				
+			
 		
 	}
 	@Override
@@ -145,5 +157,17 @@ public class MultiPlayerActivityJoin extends Activity implements TitleBarListene
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void onConnection(boolean wasSuccsessful) {
+		if(wasSuccsessful){
+			toast.setText(string.successfulConnectionToServer);
+			toast.show();
+		}else{
+			toast.setText(string.unSuccessfulConnectionToServer);
+			toast.show();
+		}
+		
+	}
 	/**END the TCPIPClientListenerBeforeGame methods*/
+
 }

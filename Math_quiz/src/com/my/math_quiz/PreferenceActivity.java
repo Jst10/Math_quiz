@@ -23,6 +23,7 @@ package com.my.math_quiz;
 import com.my.math_quiz.views.PreferenceFragmentm;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 public class PreferenceActivity extends Activity {
@@ -35,7 +36,10 @@ public class PreferenceActivity extends Activity {
                 .replace(android.R.id.content, new PreferenceFragmentm())
                 .commit();
     }
-
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	@Override
 	public void finish() {
 		ApplicationClass.settingsChanged();

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -200,6 +201,10 @@ public class TutorialLevelEquationType extends Activity implements AnimationList
 		step++;
 	}
 //	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 //	Animation getFadeInAnimation(true) = new AlphaAnimation(0, 1);
 //	Animation getFadeInAnimation(false) = new AlphaAnimation(0, 1);
 //	@Override

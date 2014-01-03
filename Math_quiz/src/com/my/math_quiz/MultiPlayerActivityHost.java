@@ -22,6 +22,7 @@ package com.my.math_quiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
@@ -48,7 +50,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 	
 	Button serverButton;
 	Button nextButton;
-	
+	Toast toast;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,7 +73,7 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		
 		numberOfPlayers=(TextView)findViewById(R.id.MPWHValueNumPlayers);
 		numberOfPlayers.setText("0");
-		
+		toast= Toast.makeText(this,getString(R.string.successfulStartedServer),Toast.LENGTH_SHORT);
 		
 		portNumber.addTextChangedListener(new TextWatcher() {
 			@Override	public void onTextChanged(CharSequence s, int start, int before, int count) {	}
@@ -90,7 +92,10 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 		nextButton.setEnabled(false);
 	}
 
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 
 	@Override
 	protected void onResume() {
@@ -153,6 +158,18 @@ public class MultiPlayerActivityHost extends Activity implements TitleBarListene
 			nextButton.setEnabled(false);
 		}
 		
+	}
+
+
+
+	@Override
+	public void onSuccessfulStartedServer(boolean wasSuccessful) {
+		if(wasSuccessful){
+			toast.setText(R.string.successfulStartedServer);
+		}else{
+			toast.setText(R.string.unSuccessfulStartedServer);
+		}
+		toast.show();
 	}
 	/**END the TCPIPServerListenerBeforeGame methods*/
 }

@@ -23,6 +23,7 @@ package com.my.math_quiz;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -108,7 +109,10 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		}
 		return tmp;
 	}
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -219,6 +223,9 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	@Override
 	public void onRequestToDisplayEndScreen(String text) {
 		Log.d("clientRecive","request to display end screen" +text);
+		try{
+		imageViews[numberOfTasksInRound-1].setImageBitmap(myScores[numberOfTasksInRound-1]==-1?taskIndicatorWrongAnswer:(myScores[numberOfTasksInRound-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
+		}catch(Exception e){}
 		gameViewContainer.setVisibility(View.INVISIBLE);
 		scoreViewContainer.setVisibility(View.VISIBLE);
 		scoreText.loadData("<html><body>"+getString(R.string.muYouAchived)+getSumScore()+"</br></br>"+text+"</body></html>","text/html","utf-8");

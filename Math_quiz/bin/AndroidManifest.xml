@@ -49,21 +49,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerActivity"></activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerActivityHost"></activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerActivityJoin"></activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerActivityHostGame"></activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerActivityJoinGame"></activity>
-        <activity android:name="com.my.math_quiz.LevelsDisplayedActivity"></activity>
-        <activity android:name="com.my.math_quiz.TutorialActivity"></activity>
-        <activity android:name="com.my.math_quiz.SingelPlayerGameActivity"></activity>
-        <activity android:name="com.my.math_quiz.PreferenceActivity"></activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerOneDeviceGameActivity"></activity>
-        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel0"></activity>
-        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel3"></activity>
-        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel10"></activity>
-        <activity android:name="com.my.math_quiz.tutorial.TutorialLevelEquationType"></activity>
-        <activity android:name="com.my.math_quiz.tutorial.TutorialLevelMultiRow"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivity"  android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityHost" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityJoin" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityHostGame" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivityJoinGame" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.LevelsDisplayedActivity" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.TutorialActivity" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.SingelPlayerGameActivity" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.PreferenceActivity" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerOneDeviceGameActivity" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel0" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel3" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.tutorial.TutorialLevel10" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.tutorial.TutorialLevelEquationType" android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.tutorial.TutorialLevelMultiRow" android:configChanges="orientation"></activity>
     </application>
 
 </manifest>

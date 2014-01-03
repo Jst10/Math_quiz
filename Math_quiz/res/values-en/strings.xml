@@ -135,4 +135,11 @@
 	  
 	  <string name="muYouAchived">You achieved: </string>
 	  <string name="muNoMoreClients">All other players left game</string>  
+	  
+	   <string name="successfulConnectionToServer">You successfully connect to server</string>
+	  <string name="unSuccessfulConnectionToServer">The connection to the server failed</string> 
+	  <string name="connectiongToServer">Connecting to server...</string> 
+	  
+	   <string name="successfulStartedServer">Server successfuly start</string>
+	  <string name="unSuccessfulStartedServer">Error while startitng server</string> 
 </resources>

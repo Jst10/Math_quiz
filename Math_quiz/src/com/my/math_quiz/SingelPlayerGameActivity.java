@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -162,6 +163,10 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 		layoutForIndicators=(LinearLayout)findViewById(R.id.ASPGRlayoutBelowTitleBar);
 		
 		restartLevel();
+	}
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
 	}
 	private void restartLevel(){
 		additionalPage=0;

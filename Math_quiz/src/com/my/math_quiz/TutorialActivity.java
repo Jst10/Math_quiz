@@ -24,6 +24,7 @@ import com.my.math_quiz.views.TitleBar;
 import com.my.math_quiz.views.TitleBar.TitleBarListener;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
@@ -52,6 +53,10 @@ public class TutorialActivity  extends Activity implements TitleBarListener{
 		// Inflate the menu; this adds items to the action bar if it is present.
 //		getMenuInflater().inflate(R.menu.launch, menu);
 		return true;
+	}
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
 	}
 	/**BEGIN the title bar listener methods*/
 	@Override

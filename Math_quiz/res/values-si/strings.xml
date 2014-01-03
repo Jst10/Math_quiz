@@ -139,5 +139,12 @@
 	 
 	  <string name="muYouAchived">Vi ste dosegli: </string> 
 	  <string name="muNoMoreClients">Vsi soigralci so odšli </string> 
-	   
+	  
+	  
+	  <string name="successfulConnectionToServer">Uspešno ste se povezali s strežnikom</string>
+	  <string name="unSuccessfulConnectionToServer">Povezava s strežnikom ni uspela</string> 
+	  <string name="connectiongToServer">Povezujem se na strežnik....</string> 
+	  
+	   <string name="successfulStartedServer">Strežnik se je uspešno postavil</string>
+	  <string name="unSuccessfulStartedServer">Napaka pri postavljanju strežnika</string> 
 </resources>

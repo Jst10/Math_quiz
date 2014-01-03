@@ -51,6 +51,7 @@ public class TCPIPServer {
 		 * @accepted boolean value is true if we accept new client, if we lose old client id this valuie false
 		 * */
 		public void onNumberOfClientsChanged(int number,boolean accepted);
+		public void onSuccessfulStartedServer(boolean wasSuccessful);
 	}
 	/**
 	 * This is listeners for all action that server activity need when game already run
@@ -104,8 +105,10 @@ public class TCPIPServer {
 	    	serverThreadRunable=new ClientAcceptorThread(socket);
 	    	serverThread=new Thread(serverThreadRunable);
 	    	serverThread.start();
+	    	if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onSuccessfulStartedServer(true);
     	}catch(Exception e){
-    		{Log.d("srDebuging","error on trying start server: "+e);}
+    		Log.d("srDebuging","error on trying start server: "+e);
+    		if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onSuccessfulStartedServer(false);
     	}
     }
     /**

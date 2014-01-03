@@ -26,8 +26,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Handler.Callback;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ public class TCPIPClient {
 		public void onCommandToStartGame();
 		public void onRequestingClientNickname();
 		public void onServerStoped();
+		public void onConnection(boolean wasSuccsessful);
 	}
 	/**
 	 * This is listeners for all action that client activity need in game
@@ -75,9 +78,8 @@ public class TCPIPClient {
 	static DataOutputStream dataOutputStream;
 	static ServerReadingThread serverReadingRunable;
 	static Thread serverReadingThread;
-	
 	static Thread threadForOpeningConnection;
-	static RunableForOpeningConnection runableForConnectionOpening;
+//	static RunableForOpeningConnection runableForConnectionOpening;
 /**
  * This method save port number and ipAdress to use it you must call connectToServer or reconnectToServer method
  *  @param ipAdresss is ipAdress of server, to which you want to connect
@@ -117,46 +119,81 @@ public class TCPIPClient {
 	 * */
 	public static void reconnectToServer(){
 		killConnection();
-		try{
-			  runableForConnectionOpening=new RunableForOpeningConnection();
-			  threadForOpeningConnection=new Thread(runableForConnectionOpening);
-			  threadForOpeningConnection.start();
-	          
-		}catch(Exception e){Log.d("clDebuging","error on trying connecting1: "+e);}
-		
+		new OpeningConnection().execute();
+//		try{
+//			  runableForConnectionOpening=new RunableForOpeningConnection();
+//			  threadForOpeningConnection=new Thread(runableForConnectionOpening);
+//			  threadForOpeningConnection.start();
+//		}catch(Exception e){Log.d("clDebuging","error on trying connecting1: "+e);}
 	}
 
 	
 	
+//	//I must add this to background because android don't allow to do this in main thread
+//	 private static class RunableForOpeningConnection implements Runnable
+//	 {
+//		
+//		 public RunableForOpeningConnection()
+//		 {		 }
+//        public  void run()
+//        {
+//        	Looper.prepare();
+//        	try{
+//        		socket=new Socket();
+////        		socket.bind(null);
+//        	 socket.connect(new InetSocketAddress(ipAdress, port));
+////   			 socket = new Socket(ipAdress, port);
+//        	
+//        		
+////        		SocketAddress sockaddr = new InetSocketAddress("192.168.1.10", 1234);
+////            	socket=new Socket();//adrr,Integer.parseInt(IpPort));
+////            	socket.connect(sockaddr,5000);
+//            	
+//   		     dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//   		     serverReadingRunable=new ServerReadingThread(socket.getInputStream());
+//   		     serverReadingThread=new Thread(serverReadingRunable);
+//   		     serverReadingThread.start();
+//   		     
+//   		
+//   		     if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onConnection(true);
+//   			
+//        	}catch(Exception e){
+//        		  if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onConnection(false);
+//        		Log.d("clDebuging","error on trying connecting2: "+e);
+//        	}
+//        }
+//     }
+//	
+//	
 	//I must add this to background because android don't allow to do this in main thread
-	 private static class RunableForOpeningConnection implements Runnable
-	 {
-		
-		 public RunableForOpeningConnection()
-		 {		 }
-        public  void run()
-        {
-        	try{
-        		socket=new Socket();
-//        		socket.bind(null);
-        	 socket.connect(new InetSocketAddress(ipAdress, port));
-//   			 socket = new Socket(ipAdress, port);
-        	
-        		
-//        		SocketAddress sockaddr = new InetSocketAddress("192.168.1.10", 1234);
-//            	socket=new Socket();//adrr,Integer.parseInt(IpPort));
-//            	socket.connect(sockaddr,5000);
-            	
-   		     dataOutputStream = new DataOutputStream(socket.getOutputStream());
-   		     serverReadingRunable=new ServerReadingThread(socket.getInputStream());
-   		     serverReadingThread=new Thread(serverReadingRunable);
-   		     serverReadingThread.start();
-        	}catch(Exception e){Log.d("clDebuging","error on trying connecting2: "+e);}
-        }
-     }
-	
-	
-	
+	 private static class OpeningConnection extends AsyncTask<Void, Void, Boolean> {
+	        @Override
+	        protected Boolean doInBackground(Void... args) {
+	        	try{
+		        	 socket=new Socket();
+  	        	     socket.connect(new InetSocketAddress(ipAdress, port));
+		   		     dataOutputStream = new DataOutputStream(socket.getOutputStream());
+		   		     serverReadingRunable=new ServerReadingThread(socket.getInputStream());
+		   		     serverReadingThread=new Thread(serverReadingRunable);
+		   		     serverReadingThread.start();
+		   		     return true;
+	        	}catch(Exception e){
+	        		Log.d("clDebuging","error on trying connecting2: "+e);
+	        	}
+	        	return false;
+	 		}
+	          
+	        @Override
+	        protected void onPostExecute(Boolean result) {
+	        	  if(listenerBG!=null&&listenerBG.get()!=null)listenerBG.get().onConnection(result);
+	        }
+
+	        @Override
+	        protected void onPreExecute() {}
+
+	        @Override
+	        protected void onProgressUpdate(Void... values) {}
+	    }
 	
 	
 	
@@ -167,7 +204,7 @@ public class TCPIPClient {
 	 * So first is trying to killConnection and the creating new connection to server
 	 */
 	public static void connectToServer(){
-		reconnectToServer();
+		 reconnectToServer();
 	}
 	 /**
      * This method save TCPIPServerListener before game as week reference.

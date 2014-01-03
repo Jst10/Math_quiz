@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -115,7 +116,10 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		
 		restartGame();
 	}
-	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+	}
 	TextView texView1ForTaskText=null;
 	TextView texView2ForTaskText=null;
 	
