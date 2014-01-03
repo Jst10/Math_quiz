@@ -51,6 +51,7 @@ public class LaunchActivity extends Activity {
 	
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
+		Log.d("conCh","configng changfe");
 //		super.onConfigurationChanged(newConfig);
 	}
 

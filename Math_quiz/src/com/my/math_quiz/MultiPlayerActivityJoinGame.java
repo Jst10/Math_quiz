@@ -282,7 +282,7 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	@Override
 	public void onButtonClick(InGameBottomButtoms buttoms, int position) {
 		if(wasDisplyedCorrectAnswer==false){
-			if(myScores[currentTaskPosition]==0){
+			if(currentTaskPosition<myScores.length&&myScores[currentTaskPosition]==0){
 				Task t=tasks.get( currentTaskPosition);
 				Log.d("onClickButton","posisiton: "+position+" correct position; "+t.getCorrectAnswer());
 				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){

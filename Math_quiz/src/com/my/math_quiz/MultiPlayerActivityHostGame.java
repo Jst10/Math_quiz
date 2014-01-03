@@ -375,7 +375,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	@Override
 	public void onButtonClick(InGameBottomButtoms buttoms, int position) {
 		//if I didnt answer yet and other guy isn't answer correct
-		if(myScores[currentTaskPosition]==0&&hasAnyoneAnswerCorrect==false){
+		if(currentTaskPosition<myScores.length&&myScores[currentTaskPosition]==0&&hasAnyoneAnswerCorrect==false){
 			Task t=tasks.get( currentTaskPosition);
 			if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
 				onAnswer(-1,position==t.getCorrectAnswer());

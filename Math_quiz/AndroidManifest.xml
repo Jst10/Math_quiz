@@ -49,7 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.my.math_quiz.MultiPlayerActivity"  android:configChanges="orientation"></activity>
+        <activity android:name="com.my.math_quiz.MultiPlayerActivity"  android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name="com.my.math_quiz.MultiPlayerActivityHost" android:configChanges="orientation"></activity>
         <activity android:name="com.my.math_quiz.MultiPlayerActivityJoin" android:configChanges="orientation"></activity>
         <activity android:name="com.my.math_quiz.MultiPlayerActivityHostGame" android:configChanges="orientation"></activity>
