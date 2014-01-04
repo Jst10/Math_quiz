@@ -94,7 +94,24 @@
             android:entryValues="@array/numberOfGamesInRoundValue"
      	   />
 	</PreferenceCategory>
-	
+    <PreferenceCategory 
+        android:title="@string/aboutTitle">
+             <ListPreference
+          	    android:title="@string/aboutAuthor"
+            	android:summary="Jože Kulovic"
+            	android:enabled="false"	
+     	  	 /> 
+     	  	   <ListPreference
+          	    android:title="@string/aboutFeedback"
+            	android:summary="made.by.jst@gmail.com"
+            	android:enabled="false"	
+     	  	 />   
+     	  	 <ListPreference
+          	    android:title="@string/aboutReason"
+            	android:summary="@string/aboutReasonInfo"
+            	android:enabled="false"	
+     	  	 />   
+     </PreferenceCategory>
 <!--      <PreferenceCategory  -->
 <!--         android:key="pref_key_" -->
 <!--         android:title="Več igralske nastavitve"> -->

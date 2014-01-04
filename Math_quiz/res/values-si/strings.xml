@@ -147,4 +147,14 @@
 	  
 	   <string name="successfulStartedServer">Strežnik se je uspešno postavil</string>
 	  <string name="unSuccessfulStartedServer">Napaka pri postavljanju strežnika</string> 
+	  
+	  
+	  
+	  
+	  <string name="aboutTitle">O aplikaciji</string> 
+	  <string name="aboutFeedback">Povratne informacije:</string> 
+	  <string name="aboutAuthor">Avtor:</string> 
+	  <string name="aboutReason">Nastanek:</string> 
+	  <string name="aboutReasonInfo">Aplikacija se je razvila v okviru predmeta e-izobraževanje fakultete za računalništvo in informatiko Ljubljana.</string> 
+	    
 </resources>

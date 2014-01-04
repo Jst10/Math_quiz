@@ -142,4 +142,13 @@
 	  
 	   <string name="successfulStartedServer">Server successfuly start</string>
 	  <string name="unSuccessfulStartedServer">Error while startitng server</string> 
+	  
+	  
+	  
+	  
+	  <string name="aboutTitle">About application</string> 
+	   <string name="aboutFeedback">Feedback:</string> 
+	  <string name="aboutAuthor">Author:</string> 
+	  <string name="aboutReason">Reason:</string> 
+	  <string name="aboutReasonInfo">The application was developed in the course of e-Learning Faculty of Computer and Information Science, Ljubljana.</string> 
 </resources>
