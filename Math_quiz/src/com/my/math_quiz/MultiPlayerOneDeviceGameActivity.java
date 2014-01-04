@@ -240,16 +240,16 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			}
 			
 			if(tmp0<=tmp1){
-				scoreText1.setText(getString(R.string.result_text_lose)+tmp0+getString(R.string.result_text_score));
-				scoreText2.setText(getString(R.string.result_text_win)+tmp1+getString(R.string.result_text_score));
+				scoreText1.setText(getString(R.string.result_text_lose)+" "+tmp0+" "+getString(R.string.result_text_score));
+				scoreText2.setText(getString(R.string.result_text_win)+" "+tmp1+" "+getString(R.string.result_text_score));
 			}
 			else if(tmp0==tmp1){
-				scoreText1.setText(getString(R.string.result_text_tie)+tmp0+getString(R.string.result_text_scores));
-				scoreText2.setText(getString(R.string.result_text_tie)+tmp1+getString(R.string.result_text_scores));
+				scoreText1.setText(getString(R.string.result_text_tie)+" "+tmp0+" "+getString(R.string.result_text_scores));
+				scoreText2.setText(getString(R.string.result_text_tie)+" "+tmp1+" "+getString(R.string.result_text_scores));
 			}
 			else{
-				scoreText2.setText(getString(R.string.result_text_lose)+tmp1+getString(R.string.result_text_score));
-				scoreText1.setText(getString(R.string.result_text_win)+tmp0+getString(R.string.result_text_score));
+				scoreText2.setText(getString(R.string.result_text_lose)+" "+tmp1+" "+getString(R.string.result_text_score));
+				scoreText1.setText(getString(R.string.result_text_win)+" "+tmp0+" "+getString(R.string.result_text_score));
 			}
 		}
 	}
@@ -258,7 +258,7 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		@Override
 		public void onButtonClick(InGameBottomButtoms buttoms, int position) {
 			//if I didnt answer yet and other guy isn't answer correct
-			if(score[0][currentTaskPosition]==0&&score[1][currentTaskPosition]!=1){
+			if(currentTaskPosition<score[0].length&&score[0][currentTaskPosition]==0&&score[1][currentTaskPosition]!=1){
 				Task t=tasks.get( currentTaskPosition);
 				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
 					onAnswer(0,position==t.getCorrectAnswer());
@@ -272,7 +272,7 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		@Override
 		public void onButtonClick(InGameBottomButtoms buttoms, int position) {
 			//if I didnt answer yet and other guy isn't answer correct
-			if(score[0][currentTaskPosition]!=1&&score[1][currentTaskPosition]==0){
+			if(currentTaskPosition<score[0].length&&score[0][currentTaskPosition]!=1&&score[1][currentTaskPosition]==0){
 				Task t=tasks.get( currentTaskPosition);
 				if(buttoms.setCollors(position, t.getCorrectAnswer(),false)){
 					onAnswer(1,position==t.getCorrectAnswer());
