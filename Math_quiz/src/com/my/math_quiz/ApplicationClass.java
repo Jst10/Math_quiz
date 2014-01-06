@@ -166,7 +166,7 @@ public class ApplicationClass extends Application{
 				mpDellayWrong=Integer.parseInt(sharedPrefs.getString("pref_key_mp_delay_wrong","500"));
 				mpNumberOfGames=Integer.parseInt(sharedPrefs.getString("pref_key_mp_number_of_test","10"));
 				mpRemainTimeToAnswer=Integer.parseInt(sharedPrefs.getString("pref_key_mp_time_remain_to_answer","2000"));
-				mpNicKName=sharedPrefs.getString("pref_key_nickname", "neznano");
+				mpNicKName=sharedPrefs.getString("pref_key_mp_nickname",applicationContext.getString(R.string.seNicknameDefault));
 			}
 		}
 		
