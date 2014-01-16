@@ -3,11 +3,29 @@ Math_quiz
 
 Android application that contains math tasks.....
 
+##About application
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
+
+##Single player
+![alt left](https://github.com/Jst10/Math_quiz/blob/master/screens/2.png?raw=true)
+![alt center](https://github.com/Jst10/Math_quiz/blob/master/screens/3.png?raw=true)
+![alt right](https://github.com/Jst10/Math_quiz/blob/master/screens/4.png?raw=true)
+
+##Multiplayer one device
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/5.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/6.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/7.png?raw=true)
 
 
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
+##Multiplayer over WiFi connection
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/8.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/9.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/10.png?raw=true)
+
+##Tutorials
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/11.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/12.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/13.png?raw=true)
 
  Copyright 2014 Jože Kulovic
 
