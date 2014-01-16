@@ -5,6 +5,10 @@ Android application that contains math tasks.....
 
 
 
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
+![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
+
  Copyright 2014 Jože Kulovic
 
     Math-quiz is free software: you can redistribute it and/or modify
