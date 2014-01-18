@@ -1,7 +1,6 @@
 
 
 
-
 Math_quiz
 =========
 
@@ -39,7 +38,7 @@ Tasks are divided into 20 levels by the type of mathematical operations. Student
 ![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/11.png?raw=true)
 ![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/12.png?raw=true)
 ![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/13.png?raw=true)
->>>>>>> 230c83e06909eb81aa7aa832e3f6abc74d607678
+
 
  Copyright 2014 Jože Kulovic
 
