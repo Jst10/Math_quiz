@@ -1,15 +1,23 @@
+
+
+
+
 Math_quiz
 =========
 
-Android application that contains math tasks.....
 
-<<<<<<< HEAD
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
-=======
 ##About application
-![alt tag](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
+
+
+Math quiz is application for Android devices. The purpose of the application is to encourage students in solving mathematical expressions. The application allows students a fun way to solve mathematical expressions. It is intended for students that are 7 years old and older. 
+Tasks are divided into 20 levels by the type of mathematical operations. Students can play alone but the application allows also playing/solving mathematical expressions in the group. So can more students simultaneously solves the same cases and thus compete with each other, which makes the application mor interesting and fun.
+
+ <div id="main">
+    <div id="div1"></div>
+    <div id="div2"></div>
+ </div>
+
+![alt right](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
 
 ##Single player
 ![alt left](https://github.com/Jst10/Math_quiz/blob/master/screens/2.png?raw=true)
