@@ -1,0 +1,13 @@
+#div1{
+  height: 30px;
+  width: 10%;
+  border: solid 1px #000000;
+  background-color: #0066CC;
+  float: left;
+}
+#div2{
+  height: 30px;
+  width: 90%;
+  border: solid 1px #000000;
+  background-color: #66CC00;
+}
