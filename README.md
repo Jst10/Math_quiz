@@ -16,7 +16,9 @@ Tasks are divided into 20 levels by the type of mathematical operations. Student
     <div id="div1"></div>
     <div id="div2"></div>
  </div>
-
+ 
+ 
+<img style"float: right" src="https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true"/>
 
 ##Single player
 ![alt left](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
@@ -24,8 +26,7 @@ Tasks are divided into 20 levels by the type of mathematical operations. Student
 ![alt right](https://github.com/Jst10/Math_quiz/blob/master/screens/3.png?raw=true)
 
 ##Multiplayer one device
-![alt right](https://github.com/Jst10/Math_quiz/blob/master/screens/5.png?raw=true)
-![alt center](https://github.com/Jst10/Math_quiz/blob/master/screens/6.png?raw=true)
+![alt left](https://github.com/Jst10/Math_quiz/blob/master/screens/6.png?raw=true)
 ![alt right](https://github.com/Jst10/Math_quiz/blob/master/screens/7.png?raw=true)
 
 
