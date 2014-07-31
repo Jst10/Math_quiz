@@ -17,9 +17,9 @@ Tasks are divided into 20 levels by the type of mathematical operations. Student
     <div id="div2"></div>
  </div>
  
- 
-<img style"float: right" src="https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true"/>
-
+ <div style="float:left;margin:550px 325pxpx 10px 0" markdown="1">
+      <img  src="https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true"/>
+<div style="float:left;margin:0 10px 10px 0" markdown="1">
 ##Single player
 ![alt left](https://github.com/Jst10/Math_quiz/blob/master/screens/1.png?raw=true)
 ![alt center](https://github.com/Jst10/Math_quiz/blob/master/screens/2.png?raw=true)
