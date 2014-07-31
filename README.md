@@ -4,7 +4,7 @@
 Math_quiz
 =========
 
-[link to google play](https://play.google.com/store/apps/details?id=com.my.math_quiz)
+[Link to google play](https://play.google.com/store/apps/details?id=com.my.math_quiz)
 
 ##About application
 
