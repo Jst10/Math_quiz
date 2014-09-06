@@ -22,7 +22,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.my.math_quiz"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.1" >
     
     
 	<uses-permission android:name="android.permission.INTERNET" />
