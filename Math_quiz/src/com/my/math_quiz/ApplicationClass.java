@@ -198,7 +198,7 @@ public class ApplicationClass extends Application{
 			
 				
 				pauseAfterOnFinish=Integer.parseInt(sharedPrefs.getString("pause_on_finish","1000"));
-				textSizeEquasion=sharedPrefs.getString("pref_key_ge_text_size_equasion",textMedium);
+				textSizeEquasion=sharedPrefs.getString("pref_key_ge_text_size_equasion",textLarge);
 				textSizeButton=sharedPrefs.getString("pref_key_ge_text_size_button",textMedium);
 				
 				if(textSizeEquasion.equals(textSmall)){

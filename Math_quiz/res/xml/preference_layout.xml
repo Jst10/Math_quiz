@@ -36,7 +36,7 @@
             android:key="pref_key_ge_text_size_equasion"
             android:title="@string/text_size_for_equasions"
             android:summary="@string/text_size_for_equasions_info"
-            android:defaultValue="medium"
+            android:defaultValue="large"
             android:entries="@array/textSize"
             android:entryValues="@array/textSizeValues"
      	   />
