@@ -151,4 +151,19 @@
 	  <string name="aboutAuthor">Author:</string> 
 	  <string name="aboutReason">Reason:</string> 
 	  <string name="aboutReasonInfo">The application was developed in the course of e-Learning Faculty of Computer and Information Science, Ljubljana.</string> 
+
+	  
+	  
+	  <string name="text_general">General</string>
+	  <string name="pause_on_end_game">Pause on end game</string>
+	  <string name="pause_on_end_gameInfo">Time that are game button disabled after last solved equation. To prevent accidental existing score view.</string>
+  	  <string name="text_size_for_buttons">Text size for buttons</string>
+  	  <string name="text_size_for_buttons_info">Text size for game buttons at bottom of the screen</string>
+	  <string name="text_size_for_equasions">Text size for equasions</string>
+	  <string name="text_size_for_equasions_info">Text size for equations that appear on middle of screen</string>
+	  <string name="text_size_smalll">Small</string>
+	  <string name="text_size_medium">Medium</string>
+	  <string name="text_size_large">Large</string>
+	  <string name="text_size_extra_large">Very large</string>
+
 </resources>

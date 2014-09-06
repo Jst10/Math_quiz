@@ -157,4 +157,17 @@
 	  <string name="aboutReason">Nastanek:</string> 
 	  <string name="aboutReasonInfo">Aplikacija se je razvila v okviru predmeta e-izobraževanje fakultete za računalništvo in informatiko Ljubljana.</string> 
 	    
+	  
+	  
+	   <string name="text_general">Splošno</string>
+	   <string name="pause_on_end_game">Premor na koncu igre</string>
+	  <string name="pause_on_end_gameInfo">Čas v katerem so igranlni gumbi onemogočeni po rešeni zadnji enačbi. Da nebi ponesreči zaprli zaslon s rezultati.</string>
+	  <string name="text_size_for_buttons">Velikost teksta v gumbih</string>
+  	  <string name="text_size_for_buttons_info">Velikost teksta v spodnjih igranih gubih (podanih rezultatov za enačbe).</string>
+	  <string name="text_size_for_equasions">Velikost teksta enačb</string>
+	  <string name="text_size_for_equasions_info">Velikost teksta reševanih enačb, ki so prikazane na sredini zaslona</string>
+	  <string name="text_size_smalll">Majhna</string>
+	  <string name="text_size_medium">Srednja</string>
+	  <string name="text_size_large">Velika</string>
+	  <string name="text_size_extra_large">Zelo velika</string>
 </resources>

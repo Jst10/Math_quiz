@@ -73,6 +73,7 @@
 	        android:layout_gravity="center"
 	     >
 	     <Button
+	         style="@style/MyMenuButtonsStyle"
 	        android:id="@+id/ALsinglePLayer"
 	        android:onClick="launcherActivityButtonClick"
 	        android:layout_width="200dp"
@@ -91,6 +92,7 @@
 	        android:layout_gravity="center"
 	     >
 	     <Button
+	         style="@style/MyMenuButtonsStyle"
 	        android:id="@+id/ALmultiPLayer"
 	        android:onClick="launcherActivityButtonClick"
 	        android:layout_width="200dp"
@@ -109,6 +111,7 @@
 	        android:layout_gravity="center"
 	     >
 	     <Button
+	         style="@style/MyMenuButtonsStyle"
 	        android:id="@+id/ALtutorial"
 	        android:onClick="launcherActivityButtonClick"
 	        android:layout_width="200dp"

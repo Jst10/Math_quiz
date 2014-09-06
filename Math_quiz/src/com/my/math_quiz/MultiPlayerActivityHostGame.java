@@ -80,6 +80,7 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 	RelativeLayout scoreViewContainer;
 	WebView scoreText;
 	
+	ResultBottomButtoms resultBottomButtons;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +105,17 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 		
 		
 		bottomButtonsAnswer=(InGameBottomButtoms)this.findViewById(R.id.MPODGVbootomButtons);
+		bottomButtonsAnswer.setTextSize(ApplicationClass.getTextSizeButtonNumber());
 		texViewForTaskText=(TextView)this.findViewById(R.id.MPODGVtextView);
+		texViewForTaskText.setTextSize(ApplicationClass.getTextSizeEquasionNumber());
 		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
 		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
 		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
 		scoreText=(WebView)this.findViewById(R.id.MPODGScoretextView);
-		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
+		
+		resultBottomButtons=((ResultBottomButtoms)findViewById(R.id.MPODGVscoreButtons));
+		resultBottomButtons.setListener(this);
+		
 		bottomButtonsAnswer.setListener(this);
 		
 		TCPIPServer.requestClientsNickname();
@@ -237,7 +243,8 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 			imageViews[position].setImageBitmap(taskIndicatorCurrent);
 		}
 		else{
-			
+			resultBottomButtons.disableButtons();
+			handlerButtonsEnabling.postDelayed(runableButtonsEnabling, ApplicationClass.getPauseAfterOnFinish());
 			gameViewContainer.setVisibility(View.INVISIBLE);
 			scoreViewContainer.setVisibility(View.VISIBLE);
 
@@ -431,6 +438,16 @@ public class MultiPlayerActivityHostGame extends Activity implements TitleBarLis
 				bottomButtonsAnswer.setCorrectCollorToSpecificButton(tasks.get(currentTaskPosition).getCorrectAnswer());
 				hasAnyoneAnswerCorrect=true;
 		  }
+	};
+	
+	
+	final Handler handlerButtonsEnabling=new Handler();
+	final Runnable runableButtonsEnabling = new Runnable(){
+	    public void run()   {
+	    	if(resultBottomButtons!=null){
+	    		resultBottomButtons.enableButtons();
+	    	}
+	    }
 	};
 
 

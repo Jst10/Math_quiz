@@ -73,6 +73,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 	Bitmap taskIndicatorNotSelectedAnswer;
 	Bitmap taskIndicatorCurrent;
 	
+	ResultBottomButtoms resultBottomButtons;
 
 	LevelEntity levelEntiyFromThesGame=null;
 	MyAdapterForSingelPLayerGameActivity adapterForViewPager;
@@ -276,11 +277,14 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			if(position<numberOfTasksInRound){
 				View v = inflater.inflate(R.layout.view_single_player_game_one_page, null);
 				TextView text=(TextView)v.findViewById(R.id.VSPGOPtextView);
+				text.setTextSize(ApplicationClass.getTextSizeEquasionNumber());
 				Task currentTask=tasks.get(position);
 				
 				text.setText(currentTask.getText());
+				
 				InGameBottomButtoms buttoms;
 				buttoms=(InGameBottomButtoms)v.findViewById(R.id.BBBottomBUttons);
+				buttoms.setTextSize(ApplicationClass.getTextSizeButtonNumber());
 				buttoms.seButtontTexts(currentTask.getAnswers());
 				buttoms.setListener(SingelPlayerGameActivity.this);
 				buttoms.setCollors(currentTask.getSelectedAnswer(), currentTask.getCorrectAnswer(),true);
@@ -305,9 +309,10 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 					((TextView)resultPage.findViewById(R.id.ESPscoreH)).setText(levelDescripction.levelScores[2]+"");
 					
 //					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).enableShaeButton();
-					((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons)).setListener(SingelPlayerGameActivity.this);
-					
-				
+					resultBottomButtons=((ResultBottomButtoms)resultPage.findViewById(R.id.BBResultBottomButtons));
+					resultBottomButtons.disableButtons();
+					resultBottomButtons.setListener(SingelPlayerGameActivity.this);
+					handlerButtonsEnabling.postDelayed(runableButtonsEnabling, ApplicationClass.getPauseAfterOnFinish());
 				}
 				pager.addView(resultPage);
 				return resultPage;
@@ -335,6 +340,7 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 				levelData.stopTimingLevel();
 				levelEntiyFromThesGame=new LevelEntity(selectedLevel,numberOfTasksInRound, (int)levelData.getDurationOfLevel(),levelData.getScoreAchived());
 				levelEntiyFromThesGame.saveToDB();
+				levelDescripction.updateMaximumScores();
 				additionalPage=1;
 				adapterForViewPager.notifyDataSetChanged();
 				pager.setCurrentItem(numberOfTasksInRound,true);
@@ -364,16 +370,21 @@ public class SingelPlayerGameActivity extends Activity implements BottomButtonLi
 			pager.setCurrentItem(levelData.getNextNotSolvedTestPosition(pager.getCurrentItem()),true);
 		  }
 	};
-//	CountDownTimer timer=new CountDownTimer(5000,5000) {
-//		@Override
-//		public void onTick(long millisUntilFinished) {}
-//		
-//		@Override
-//		public void onFinish() {
-//			
-//			
-//		}
-//	};
+
+
+	
+	final Handler handlerButtonsEnabling=new Handler();
+	final Runnable runableButtonsEnabling = new Runnable(){
+	    public void run()   {
+	    	if(resultBottomButtons!=null){
+	    		resultBottomButtons.enableButtons();
+	    	}
+	    }
+	};
+
+	
+	
+	
 	@Override
 	public void finish() {
 		levelData.clearLevelData();

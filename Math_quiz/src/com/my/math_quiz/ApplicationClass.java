@@ -144,6 +144,18 @@ public class ApplicationClass extends Application{
 	}
 	
 	
+	public static int getTextSizeEquasionNumber() {
+		return MyPreferences.textSizeEquasionNumber;
+	}
+
+	public static int getTextSizeButtonNumber() {
+		return MyPreferences.textSizeButtonNumber;
+	}
+
+	public static int getPauseAfterOnFinish() {
+		return MyPreferences.pauseAfterOnFinish;
+	}
+
 	static class MyPreferences{
 		public static int spDellayCorrect;
 		public static int spDellayWrong;
@@ -155,9 +167,25 @@ public class ApplicationClass extends Application{
 		public static int mpRemainTimeToAnswer;
 		public static String mpNicKName="";
 		
+		
+		public static String textSizeEquasion;
+		public static int textSizeEquasionNumber;
+		
+		public static String textSizeButton;
+		public static int textSizeButtonNumber;
+		public static int pauseAfterOnFinish;
+		
+		
+		private static final String textSmall="small";
+		private static final String textMedium="medium";
+		private static final String textLarge="large";
+		private static final String textExtraLarge="extralarge";
+		
 		public static void reloadPreferences(){
 			if(applicationContext!=null){
 				SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+				
+				
 				spDellayCorrect=Integer.parseInt(sharedPrefs.getString("pref_key_delay_correct","0"));
 				spDellayWrong=Integer.parseInt(sharedPrefs.getString("pref_key_delay_wrong","500"));
 				spNumberOfGames=Integer.parseInt(sharedPrefs.getString("pref_key_number_of_test","10"));
@@ -167,6 +195,32 @@ public class ApplicationClass extends Application{
 				mpNumberOfGames=Integer.parseInt(sharedPrefs.getString("pref_key_mp_number_of_test","10"));
 				mpRemainTimeToAnswer=Integer.parseInt(sharedPrefs.getString("pref_key_mp_time_remain_to_answer","2000"));
 				mpNicKName=sharedPrefs.getString("pref_key_mp_nickname",applicationContext.getString(R.string.seNicknameDefault));
+			
+				
+				pauseAfterOnFinish=Integer.parseInt(sharedPrefs.getString("pause_on_finish","1000"));
+				textSizeEquasion=sharedPrefs.getString("pref_key_ge_text_size_equasion",textMedium);
+				textSizeButton=sharedPrefs.getString("pref_key_ge_text_size_button",textMedium);
+				
+				if(textSizeEquasion.equals(textSmall)){
+					textSizeEquasionNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_small);
+				}else if(textSizeEquasion.equals(textMedium)){
+					textSizeEquasionNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_medium);
+				}else if(textSizeEquasion.equals(textLarge)){
+					textSizeEquasionNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_large);
+				}else if(textSizeEquasion.equals(textExtraLarge)){
+					textSizeEquasionNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_extra_large);
+				}
+				
+				if(textSizeButton.equals(textSmall)){
+					textSizeButtonNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_small);
+				}else if(textSizeButton.equals(textMedium)){
+					textSizeButtonNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_medium);
+				}else if(textSizeButton.equals(textLarge)){
+					textSizeButtonNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_large);
+				}else if(textSizeButton.equals(textExtraLarge)){
+					textSizeButtonNumber=(int) applicationContext.getResources().getDimension(R.dimen.text_size_extra_large);
+				}
+				
 			}
 		}
 		

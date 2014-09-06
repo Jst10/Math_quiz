@@ -74,7 +74,6 @@
 	       
 	       	<include layout="@layout/p_bottom_buttons"
 	       	    android:id="@+id/MPODGVbootomButtons1"
-	       	    android:layout_alignParentBottom="true"
 	       	  /> 
        	  
        </RelativeLayout>
@@ -99,7 +98,6 @@
 	       
 	       	<include layout="@layout/p_result_bottom_buttons"
 	       	    android:id="@+id/MPODGVscoreButtons1"
-	       	    android:layout_alignParentBottom="true"
 	       	  /> 
        	  
        </RelativeLayout>
@@ -161,7 +159,6 @@
 	       
 	       	<include layout="@layout/p_bottom_buttons"
 	       	    android:id="@+id/MPODGVbootomButtons2"
-	       	    android:layout_alignParentBottom="true"
 	       	  /> 
        	  
        </RelativeLayout>
@@ -186,7 +183,6 @@
 	       
 	       	<include layout="@layout/p_result_bottom_buttons"
 	       	    android:id="@+id/MPODGVscoreButtons2"
-	       	    android:layout_alignParentBottom="true"
 	       	  /> 
        	  
        </RelativeLayout>

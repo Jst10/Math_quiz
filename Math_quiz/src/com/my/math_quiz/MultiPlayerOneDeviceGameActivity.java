@@ -66,6 +66,9 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 	Bitmap taskIndicatorNotSelectedAnswer;
 	Bitmap taskIndicatorCurrent;
 	
+	ResultBottomButtoms resultBottomButtons1;
+	ResultBottomButtoms resultBottomButtons2;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,7 +111,12 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 		scoreText2=(TextView)this.findViewById(R.id.MPODGScoretextView2);
 		
 		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons1)).setListener(this);
-		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons2)).setListener(this);
+		
+		resultBottomButtons1=((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons1));
+		resultBottomButtons1.setListener(this);
+		resultBottomButtons2=((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons2));
+		resultBottomButtons2.setListener(this);
+		
 	
 		bottomButtons1Answer.setListener(bottomButtonListener1);
 		bottomButtons2Answer.setListener(bottomButtonListener2);
@@ -205,11 +213,15 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			
 			Task currentTask=tasks.get(currentTaskPosition);
 			texView1ForTaskText.setText(currentTask.getText());
+			texView1ForTaskText.setTextSize(ApplicationClass.getTextSizeEquasionNumber());
 			texView2ForTaskText.setText(currentTask.getText());
+			texView2ForTaskText.setTextSize(ApplicationClass.getTextSizeEquasionNumber());
 			
 			bottomButtons1Answer.seButtontTexts(currentTask.getAnswers());
+			bottomButtons1Answer.setTextSize(ApplicationClass.getTextSizeButtonNumber());
 			bottomButtons2Answer.seButtontTexts(currentTask.getAnswers());
-	
+			bottomButtons2Answer.setTextSize(ApplicationClass.getTextSizeButtonNumber());
+			
 			bottomButtons1Answer.resetFirstSelectedAnswer();
 			bottomButtons2Answer.resetFirstSelectedAnswer();
 			
@@ -223,6 +235,11 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 //			wasAnswerAnswerCorrectAnswer=false;
 		}
 		else{
+			
+			resultBottomButtons1.disableButtons();
+			resultBottomButtons2.disableButtons();
+			handlerButtonsEnabling.postDelayed(runableButtonsEnabling, ApplicationClass.getPauseAfterOnFinish());
+			
 			gameViewContainer1.setVisibility(View.INVISIBLE);
 			gameViewContainer2.setVisibility(View.INVISIBLE);
 			scoreViewContainer1.setVisibility(View.VISIBLE);
@@ -253,6 +270,19 @@ public class MultiPlayerOneDeviceGameActivity extends Activity  implements Resul
 			}
 		}
 	}
+	
+	
+	
+	final Handler handlerButtonsEnabling=new Handler();
+	final Runnable runableButtonsEnabling = new Runnable(){
+	    public void run()   {
+	    	if(resultBottomButtons1!=null){
+	    		resultBottomButtons1.enableButtons();
+				resultBottomButtons2.enableButtons();
+	    	}
+	    }
+	};
+	
 	private BottomButtonListener bottomButtonListener1=new BottomButtonListener() {
 		/**@param position the position of button on which user clicked*/
 		@Override

@@ -27,6 +27,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -71,6 +72,8 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	
 	boolean wasDisplyedCorrectAnswer=false;
 	
+	ResultBottomButtoms resultBottomButtons;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,13 +91,18 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 		
 		
 		bottomButtonsAnswer=(InGameBottomButtoms)this.findViewById(R.id.MPODGVbootomButtons);
+		bottomButtonsAnswer.setTextSize(ApplicationClass.getTextSizeButtonNumber());
 		texViewForTaskText=(TextView)this.findViewById(R.id.MPODGVtextView);
+		texViewForTaskText.setTextSize(ApplicationClass.getTextSizeEquasionNumber());
 		layoutForIndicators=(LinearLayout)this.findViewById(R.id.MPODGlayoutForIndicator);
 		gameViewContainer=(RelativeLayout)this.findViewById(R.id.MPODGgameModeStuff);
 		scoreViewContainer=(RelativeLayout)this.findViewById(R.id.MPODScoreModeStuff);
 		scoreText=(WebView)this.findViewById(R.id.MPODGScoretextView);
-		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).setListener(this);
-		((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons)).disableAgainButton();
+		
+		resultBottomButtons=((ResultBottomButtoms)this.findViewById(R.id.MPODGVscoreButtons));
+		resultBottomButtons.setListener(this);
+		resultBottomButtons.disableAgainButton();
+		
 		bottomButtonsAnswer.setListener(this);
 		
 		texViewForTaskText.setText(getString(R.string.muWaitingServerToStartGame));
@@ -222,9 +230,12 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 
 	@Override
 	public void onRequestToDisplayEndScreen(String text) {
-		Log.d("clientRecive","request to display end screen" +text);
+
+		resultBottomButtons.disableButtons();
+		handlerButtonsEnabling.postDelayed(runableButtonsEnabling, ApplicationClass.getPauseAfterOnFinish());
+		
 		try{
-		imageViews[numberOfTasksInRound-1].setImageBitmap(myScores[numberOfTasksInRound-1]==-1?taskIndicatorWrongAnswer:(myScores[numberOfTasksInRound-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
+			imageViews[numberOfTasksInRound-1].setImageBitmap(myScores[numberOfTasksInRound-1]==-1?taskIndicatorWrongAnswer:(myScores[numberOfTasksInRound-1]==0?taskIndicatorNotSelectedAnswer:taskIndicatorCorrectAnswer));
 		}catch(Exception e){}
 		gameViewContainer.setVisibility(View.INVISIBLE);
 		scoreViewContainer.setVisibility(View.VISIBLE);
@@ -232,6 +243,16 @@ public class MultiPlayerActivityJoinGame extends Activity implements TitleBarLis
 	}
 
 
+	
+	final Handler handlerButtonsEnabling=new Handler();
+	final Runnable runableButtonsEnabling = new Runnable(){
+	    public void run()   {
+	    	if(resultBottomButtons!=null){
+	    		resultBottomButtons.enableButtons();
+	    	}
+	    }
+	};
+	
 	@Override
 	public void onRequestToDisplayGameScreen() {
 		Log.d("clientRecive","request to diasplay game screen");

@@ -37,7 +37,7 @@ public class ResultBottomButtoms extends LinearLayout{
 	}
 	
 	
-	
+	boolean enabledButton=true;
 	Button againButton=null;
 	Button shareButton=null;
 	Button endButton=null;
@@ -102,7 +102,7 @@ public class ResultBottomButtoms extends LinearLayout{
 		
 		@Override
 		public void onClick(View v) {
-			if(listener!=null){
+			if(listener!=null&&enabledButton){
 				if(v.getId()==R.id.LPbuttonAgain){
 					listener.onAgainButtonClicked();
 				}else if(v.getId()==R.id.LPbuttonShare){
@@ -132,5 +132,13 @@ public class ResultBottomButtoms extends LinearLayout{
 //		if(shareButton!=null)
 //			shareButton.setVisibility(View.VISIBLE);
 //	}
+
+	public void disableButtons() {
+		enabledButton=false;
+	}
+
+	public void enableButtons() {
+		enabledButton=true;
+	}
 
 }

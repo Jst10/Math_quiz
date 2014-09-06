@@ -21,7 +21,38 @@
 -->
 
 <resources>
-
+    <string-array name="textSize">
+        <item name="0">@string/text_size_smalll</item>
+        <item name="1">@string/text_size_medium</item>
+        <item name="2">@string/text_size_large</item>
+        <item name="3">@string/text_size_extra_large</item>
+    </string-array>
+    
+    <string-array name="textSizeValues">
+        <item name="0">small</item>
+        <item name="1">medium</item>
+        <item name="2">large</item>
+         <item name="3">extralarge</item>
+    </string-array>
+    
+    
+     <string-array name="pauseOnEnd">
+        <item name="0">0s</item>
+        <item name="500">0.5s</item>
+        <item name="1000">1s</item>
+        <item name="3000">3s</item>
+        <item name="5000">5s</item>
+    </string-array>
+    
+    <string-array name="pauseOnEndValues">
+        <item name="0">0</item>
+        <item name="500">500</item>
+        <item name="1000">1000</item>
+        <item name="3000">3000</item>
+        <item name="5000">5000</item>
+    </string-array>
+    
+    
     <string-array name="deleyBeforeSwitch">
         <item name="0">0s</item>
         <item name="100">0.1s</item>

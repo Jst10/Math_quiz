@@ -183,6 +183,14 @@ public class InGameBottomButtoms extends LinearLayout{
 		buttons[correctAnswer].setBackgroundDrawable(button_correct_background);
 	}
 
+	public void setTextSize(int textSizeButtonNumber) {
+		initViews();
+		for(int i=0; i<buttons.length; i++){
+			buttons[i].setTextSize(textSizeButtonNumber);
+		}
+		
+	}
+
 	
 	
 	
